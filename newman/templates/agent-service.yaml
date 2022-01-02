@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: xap-newman-agent
+  labels:
+    {{- include "newman.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: 443
+      targetPort: 443
+      protocol: TCP
+      name: https
+  selector:
+    {{- include "newman.selectorLabels" . | nindent 4 }}

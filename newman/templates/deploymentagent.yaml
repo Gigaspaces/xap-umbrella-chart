@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: newman-agent
+  labels:
+    app: newman
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: newman
+  template:
+    metadata:
+      labels:
+        app: newman
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "newman.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: newman-agent
+          securityContext:  
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: gigaops12/newman-agent:1.0.1
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+          - containerPort: 80
+          env:
+          - name: NEWMAN_PASSWORD
+            value: root
+          - name: NEWMAN_SERVER_HOST
+            value: newman-server
+          - name: NEWMAN_SERVER_PORT
+            value: '8443'
+          - name: NEWMAN_AGENT_HOME
+            value: /home/xap-agent
+          - name: NEWMAN_AGENT_CAPABILITIES
+            value: DOCKER,LINUX,MVN
+          - name: NEWMAN_AGENT_WORKERS
+            value: '3'
+          - name: NEWMAN_AGENT_GROUPNAME
+            value: DOCKER,Undefined 
+          - name: NEWMAN_NEWMAN_SRV_SERVICE_HOST
+            value: xap-newman-agent
+          - name: XAP_NEWMAN_AGENT_PORT_443_TCP_ADDR
+            value: xap-newman-agent 
+          - name: NEWMAN_NEWMAN_SRV_PORT_8443_TCP
+            value: '8443'
+            
+          # command: ['mkdir', '-p', '/home/xap-agent']
+          volumeMounts:
+          - name: agent-dir
+            mountPath: /home/xap-agent
+
+      volumes:
+        - name: agent-dir
+          emptyDir: {}    

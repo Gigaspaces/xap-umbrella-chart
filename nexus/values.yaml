@@ -1,0 +1,142 @@
+
+nexus:
+  
+  properties:
+    override: true
+    data:
+      nexus.scripts.allowCreation: true
+  env:
+    - name: NEXUS_SECURITY_RANDOMPASSWORD
+      value: "false"
+deployment:
+  
+  initContainers:
+  - name: fmp-volume-permission
+    image: busybox
+    imagePullPolicy: IfNotPresent
+    command: ['cp','/sonatype-nexus-conf/postStart.sh', '/scripts/postStart.sh']
+    volumeMounts:
+    - mountPath: /nexus-data
+      name: nexus-repository-manager-data
+    - mountPath: /sonatype-nexus-conf
+      name:  nexus-repository-manager-conf
+    - mountPath: /scripts  
+      name: scripts
+  - name: run-script
+    image: busybox
+    imagePullPolicy: IfNotPresent
+    command: ['chmod','777','/scripts/postStart.sh']
+    volumeMounts:
+    - mountPath: /nexus-data
+      name: nexus-repository-manager-data
+    - mountPath: /sonatype-nexus-conf
+      name:  nexus-repository-manager-conf
+    - mountPath: /scripts  
+      name: scripts
+  # Uncomment and modify this to run a command after starting the nexus container.
+  
+  additionalVolumes:
+  - name: scripts
+    emptyDir: {}
+  additionalVolumeMounts: 
+  - name : scripts
+    mountPath:  /scripts
+
+      
+  # preStart:
+  #   command:
+      
+  #     - ['chown','-R', '777', '/nexus-data']
+  #   - '["/bin/rm", "-f", "/nexus-data/lock"]'
+    
+  # postStart:
+  #   command:  
+
+  #   - /script/postStart.sh
+
+config:
+  enabled: true
+  data:
+    maven.json: |-
+      {
+          "name": "maven-jenkinsci",
+          "online": true,
+          "storage": {
+            "blobStoreName": "default",
+            "strictContentTypeValidation": true
+          },
+          "proxy": {
+            "remoteUrl": "https://repo.jenkins-ci.org/releases/",
+            "contentMaxAge": -1,
+            "metadataMaxAge": 1440
+          },
+          "negativeCache": {
+            "enabled": true,
+            "timeToLive": 1440
+          },
+          "httpClient": {
+            "blocked": false,
+            "autoBlock": true
+          },
+          "maven": {
+            "versionPolicy": "RELEASE",
+            "layoutPolicy": "STRICT"
+          }
+        }
+    group.json: |-
+      {
+          "name": "maven-group",
+          "online": true,
+          "storage": {
+            "blobStoreName": "default",
+            "strictContentTypeValidation": true
+          },
+          "group": {
+            "memberNames": ["maven-public","maven-central", "maven-releases", "maven-jenkinsci"]
+          }
+      }
+    postStart.sh: |-
+      #!/bin/bash
+      set -eu
+      HOST="localhost:8081"
+      until curl --output /dev/null --silent --head --fail http://${HOST}/; do
+      printf ‘.’
+      sleep 5
+      done
+      NEXUS_BASE_DIR="/sonatype-nexus-conf"
+      USERNAME="admin"
+      PASSWORD=$(cat /nexus-data/admin.password)
+      function die() {
+        echo "ERROR: $*" 1>&2
+        exit 1
+      }
+      # Call the Nexus API for the specified repository
+      function runCurlFromJsonFile() {
+      local jsonFile
+      local service
+      local body
+      local method
+      jsonFile="${1}"
+      service="${2}"
+      method="${3}"
+      body="$(cat "${jsonFile}")"
+      if  ! curl --fail -X "${method}" -u "${USERNAME}":"${PASSWORD}" "http://${HOST}/${service}" -H "accept:application/json" -H "Content-Type:application/json" -d "${body//[$‘\t\r\n’]}"; then
+          echo "Error calling Nexus API for http://${HOST}/${service} to add repository from ${jsonFile}"
+      fi
+      }
+      # For each maven repository proxy json file, create the repo proxy via the Nexus API.
+      echo "Creating maven proxy repositories from json"
+      mapfile -t REPOS < <(find "${NEXUS_BASE_DIR}" -maxdepth 1 -type f -name "*maven.json*")
+      for repo in "${REPOS[@]}"; do
+          runCurlFromJsonFile "${repo}" "service/rest/beta/repositories/maven/proxy" POST
+      done
+      # For each maven group repository json file, create the repo via the Nexus API.
+      
+      echo "Creating maven group repositories from json"
+      
+      mapfile -t REPOS < <(find "${NEXUS_BASE_DIR}" -maxdepth 1 -type f -name "*group.json*")
+      
+      for repo in "${REPOS[@]}"; do
+          runCurlFromJsonFile "${repo}" "service/rest/beta/repositories/maven/group" POST
+      done
+      sleep 3000

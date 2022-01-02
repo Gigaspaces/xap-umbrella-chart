@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  .dockerconfigjson: ewoJImF1dGhzIjogewoJCSJodHRwczovL2luZGV4LmRvY2tlci5pby92MS8iOiB7CgkJCSJhdXRoIjogIloybG5ZVzl3Y3pFeU9tOXlaVzV6YVhSdk1RPT0iCgkJfQoJfQp9Cg==
+kind: Secret
+metadata:
+  name: dockerhubcred
+  namespace: {{.Release.Namespace}}
+type: kubernetes.io/dockerconfigjson
