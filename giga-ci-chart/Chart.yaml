@@ -20,7 +20,10 @@ dependencies:
     version: 10.29.0
   - name: newman-srv
     repository: "s3://xap-test-sultan/newman-chart/"
-    version: 0.1.0    
+    version: 0.1.0
+  - name: nexus-repository-manager
+    repository: "https://sonatype.github.io/helm3-charts/"
+    version: 37.3.0          
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)

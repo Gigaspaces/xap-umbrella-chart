@@ -7,7 +7,7 @@ nexus:
       nexus.scripts.allowCreation: true
   env:
     - name: NEXUS_SECURITY_RANDOMPASSWORD
-      value: "false"
+      value: "true"
 deployment:
   
   initContainers:
@@ -41,7 +41,7 @@ deployment:
   additionalVolumeMounts: 
   - name : scripts
     mountPath:  /scripts
-
+  
       
   # preStart:
   #   command:
@@ -49,51 +49,147 @@ deployment:
   #     - ['chown','-R', '777', '/nexus-data']
   #   - '["/bin/rm", "-f", "/nexus-data/lock"]'
     
-  # postStart:
-  #   command:  
+  postStart:
+    command:  
 
-  #   - /script/postStart.sh
+    -  /scripts/postStart.sh
+secret:
+  enabled: true
+  mountPath: '/nexus-data/config/'
+  readOnly: true
+  data: 
+    password : |
+      R2lnYVNwYWNlcw==
+
+service:
+  name: nexus3
+  enabled: true
+  labels: {}
+  annotations: {}
+  type: ClusterIP
+
 
 config:
   enabled: true
   data:
-    maven.json: |-
+    OpenSpacesmaven.json: |-
       {
-          "name": "maven-jenkinsci",
-          "online": true,
-          "storage": {
-            "blobStoreName": "default",
-            "strictContentTypeValidation": true
+        "name": "OpenSpaces",
+        "online": true,
+        "storage": {
+          "blobStoreName": "default",
+          "strictContentTypeValidation": true
+        },
+        "cleanup": {
+          "policyNames": [
+            "string"
+          ]
+        },
+        "proxy": {
+          "remoteUrl": "http://maven-repository.openspaces.org",
+          "contentMaxAge": 1440,
+          "metadataMaxAge": 1440
+        },
+        "negativeCache": {
+          "enabled": true,
+          "timeToLive": 1440
+        },
+        "httpClient": {
+          "blocked": false,
+          "autoBlock": true,
+          "connection": {
+            "retries": 0,
+            "userAgentSuffix": "string",
+            "timeout": 60,
+            "enableCircularRedirects": false,
+            "enableCookies": false,
+            "useTrustStore": false
           },
-          "proxy": {
-            "remoteUrl": "https://repo.jenkins-ci.org/releases/",
-            "contentMaxAge": -1,
-            "metadataMaxAge": 1440
-          },
-          "negativeCache": {
-            "enabled": true,
-            "timeToLive": 1440
-          },
-          "httpClient": {
-            "blocked": false,
-            "autoBlock": true
-          },
-          "maven": {
-            "versionPolicy": "RELEASE",
-            "layoutPolicy": "STRICT"
+          "authentication": {
+            "type": "username",
+            "username": "string",
+            "password": "string",
+            "ntlmHost": "string",
+            "ntlmDomain": "string",
+            "preemptive": false
           }
+        },
+        "routingRule": "string",
+        "maven": {
+          "versionPolicy": "MIXED",
+          "layoutPolicy": "STRICT",
+          "contentDisposition": "ATTACHMENT"
         }
+      }
+    muledepsmaven.json: |-
+      {
+        "name": "mule-deps",
+        "online": true,
+        "storage": {
+          "blobStoreName": "default",
+          "strictContentTypeValidation": true
+        },
+        "cleanup": {
+          "policyNames": [
+            "string"
+          ]
+        },
+        "proxy": {
+          "remoteUrl": "https://repository.mulesoft.org/nexus/content/repositories/public",
+          "contentMaxAge": 1440,
+          "metadataMaxAge": 1440
+        },
+        "negativeCache": {
+          "enabled": true,
+          "timeToLive": 1440
+        },
+        "httpClient": {
+          "blocked": false,
+          "autoBlock": true,
+          "connection": {
+            "retries": 0,
+            "userAgentSuffix": "string",
+            "timeout": 60,
+            "enableCircularRedirects": false,
+            "enableCookies": false,
+            "useTrustStore": false
+          },
+          "authentication": {
+            "type": "username",
+            "username": "string",
+            "password": "string",
+            "ntlmHost": "string",
+            "ntlmDomain": "string",
+            "preemptive": false
+          }
+        },
+        "routingRule": "string",
+        "maven": {
+          "versionPolicy": "MIXED",
+          "layoutPolicy": "STRICT",
+          "contentDisposition": "ATTACHMENT"
+        }
+      }
     group.json: |-
       {
-          "name": "maven-group",
-          "online": true,
-          "storage": {
-            "blobStoreName": "default",
-            "strictContentTypeValidation": true
-          },
-          "group": {
-            "memberNames": ["maven-public","maven-central", "maven-releases", "maven-jenkinsci"]
-          }
+        "name": "maven-public",
+        "format": "maven2",
+        "url": "http://localhost:8081/repository/maven-public",
+        "online": true,
+        "storage": {
+          "blobStoreName": "default",
+          "strictContentTypeValidation": true
+        },
+        "group": {
+          "memberNames": [
+            "mule-deps",
+            "OpenSpaces",
+            "maven-central",
+            "maven-releases",
+            "maven-snapshots"
+          ]
+        },
+        "type": "group"
       }
     postStart.sh: |-
       #!/bin/bash
@@ -105,7 +201,8 @@ config:
       done
       NEXUS_BASE_DIR="/sonatype-nexus-conf"
       USERNAME="admin"
-      PASSWORD=$(cat /nexus-data/admin.password)
+      PASSWORD=admin123
+      PASSWORD_FROM_FILE="$(cat /nexus-data/config/password || true)"
       function die() {
         echo "ERROR: $*" 1>&2
         exit 1
@@ -121,22 +218,51 @@ config:
       method="${3}"
       body="$(cat "${jsonFile}")"
       if  ! curl --fail -X "${method}" -u "${USERNAME}":"${PASSWORD}" "http://${HOST}/${service}" -H "accept:application/json" -H "Content-Type:application/json" -d "${body//[$‘\t\r\n’]}"; then
-          echo "Error calling Nexus API for http://${HOST}/${service} to add repository from ${jsonFile}"
+      echo "Error calling Nexus API for http://${HOST}/${service} to add repository from ${jsonFile}"
       fi
       }
+      
+      
+      function setPasswordFromFile() {
+      if [ -n "${PASSWORD_FROM_FILE}" ]; then
+          echo "Updating PASSWORD variable from password file."
+          PASSWORD="${PASSWORD_FROM_FILE}"
+      else
+          echo "Not updating PASSWORD var. Password file either non-existent or not readable."
+      fi
+      }
+
+      if curl --fail --silent -u "${USERNAME}":"${PASSWORD}" http://"${HOST}"/service/metrics/ping; then
+          echo "Login to nexus succeeded. Default password worked. Updating password if available..."
+          curl --fail -X PUT -u "${USERNAME}":"${PASSWORD}" "http://${HOST}/service/rest/beta/security/users/admin/change-password" --header "Content-Type: text/plain" -d "${PASSWORD_FROM_FILE}"
+          setPasswordFromFile
+      elif [ -n "${PASSWORD_FROM_FILE}" ]; then
+          setPasswordFromFile
+          echo "Default password failed. Checking password file..."
+          if curl --fail --silent -u "${USERNAME}":"${PASSWORD}" http://"${HOST}"/service/metrics/ping; then
+              echo "Login to nexus succeeded. Password from secret file worked."
+          else
+              die "Login to nexus failed. Tried both the default password and the provided password secret file."
+          fi
+      else
+          die "Login to nexus failed. Tried the default password only since no password secret file was provided."
+      fi 
+
       # For each maven repository proxy json file, create the repo proxy via the Nexus API.
       echo "Creating maven proxy repositories from json"
-      mapfile -t REPOS < <(find "${NEXUS_BASE_DIR}" -maxdepth 1 -type f -name "*maven.json*")
+      mapfile -t REPOS < <(find "${NEXUS_BASE_DIR}"   -type f -name "*maven.json*")
       for repo in "${REPOS[@]}"; do
-          runCurlFromJsonFile "${repo}" "service/rest/beta/repositories/maven/proxy" POST
+          runCurlFromJsonFile "${repo}" "service/rest/v1/repositories/maven/proxy" POST
+         
       done
+
       # For each maven group repository json file, create the repo via the Nexus API.
-      
+
       echo "Creating maven group repositories from json"
-      
-      mapfile -t REPOS < <(find "${NEXUS_BASE_DIR}" -maxdepth 1 -type f -name "*group.json*")
-      
+
+      mapfile -t REPOS < <(find "${NEXUS_BASE_DIR}"   -type f -name "*group.json*")
+
       for repo in "${REPOS[@]}"; do
-          runCurlFromJsonFile "${repo}" "service/rest/beta/repositories/maven/group" POST
+      runCurlFromJsonFile "${repo}" "service/rest/v1/repositories/maven/group/" POST
+      
       done
-      sleep 3000
