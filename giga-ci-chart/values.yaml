@@ -237,7 +237,7 @@ jenkins:
     # List of plugins to be install during Jenkins controller start
     installPlugins:
       - kubernetes:1.31.1
-      - pipeline-stage-step:2.5
+      - pipeline-stage-step:291.vf0a8a7aeeb50
       - m2release:0.14.0
       - build-timeout:1.17.1
       - ssh-credentials:1.19
@@ -245,26 +245,26 @@ jenkins:
       - conditional-buildstep:1.3.5
       - maven-plugin:3.0
       - icon-shim:2.0.3
-      - workflow-api:2.47
+      - workflow-api:1108.v57edf648f5d4
       - Parameterized-Remote-Trigger:2.2.2
       - github-branch-source:2.0.1
-      - workflow-basic-steps:2.11
+      - workflow-basic-steps:2.20
       - antisamy-markup-formatter:1.5
       - ace-editor:1.1
       - role-strategy:3.2.0
       - cvs:2.11
       - next-build-number:1.4
       - branch-api:2.6.4
-      - pipeline-rest-api:2.10
-      - pipeline-milestone-step:1.3.1
+      - pipeline-rest-api:2.20
+      - pipeline-milestone-step:1.3.2
       - slack:2.0.1
-      - caffeine-api:2.9.2-29.v717aac953ff3
+      - caffeine-api
       - workflow-cps:2.94
       - mapdb-api:1.0.9.0
       - ssh-slaves:1.9
       - sshd:3.1.0
       - workflow-durable-task-step:2.35
-      - cloudbees-folder:6.17
+      - cloudbees-folder:6.16
       - pipeline-model-api:1.9.3
       - workflow-aggregator:2.6
       - m2-repo-reaper:1.0
@@ -280,7 +280,7 @@ jenkins:
       - workflow-step-api:2.24
       - translation:1.10
       - custom-tools-plugin:0.4.4
-      - git-client:3.5.1
+      - git-client:3.6.0
       - disk-usage:0.28
       - mail-watcher-plugin:1.16
       - pipeline-build-step:2.7
@@ -289,41 +289,41 @@ jenkins:
       - flexible-publish:0.15.2
       - docker-commons:1.15
       - timestamper:1.8.8
-      - github-api:1.301-378.v9807bd746da5
+      - github-api:1.84
       - windows-slaves:1.0
       - github-organization-folder:1.6
       - handlebars:1.1.1
       - project-inheritance:2.0.0
-      - display-url-api:2.3.5
+      - display-url-api:2.3.4
       - durable-task:493.v195aefbb0ff2
-      - workflow-cps-global-lib:2.11
+      - workflow-cps-global-lib:2.19
       - javadoc:1.1
       - subversion:2.15.1
-      - pipeline-graph-analysis:1.1
-      - pipeline-model-definition:1.3.2 
+      - pipeline-graph-analysis:1.4
+      - pipeline-model-definition:1.9.3
       - ws-cleanup:0.29
-      - pipeline-input-step:2.8
+      - pipeline-input-step:427.va6441fa17010
       - external-monitor-job:1.4
       - credentials-binding:1.27
-      - parameterized-trigger:2.36
+      - parameterized-trigger:2.35.2
       - docker-workflow:1.14
-      - token-macro:267.vcdaea6462991
+      - token-macro:2.3
       - s3:0.10.6
-      - git:4.5.0
+      - git:3.7.0
       - apache-httpcomponents-client-4-api:4.5.10-2.0
       - URLSCM:1.6
       - thinBackup:1.9
       - multiple-scms:0.6
       - build-user-vars-plugin:1.5
-      - scm-api:2.6.5
+      - scm-api:2.6.4
       - plain-credentials:1.7
       - pipeline-github-lib:1.0
       - copyartifact:1.38
-      - pipeline-stage-tags-metadata:1.3.2
+      - pipeline-stage-tags-metadata:1.9.3
       - blame-upstream-commiters:1.2
       - uno-choice:2.0
       - jquery:1.11.2-0
-      - github:1.34.1
+      - github:1.25.1
       - junit:1.29
       - envinject:1.93.1
       - workflow-scm-step:2.13
@@ -334,11 +334,10 @@ jenkins:
       - bouncycastle-api:2.25
       - global-variable-string-parameter:1.2
       - script-security:1.78
-      - strict-crumb-issuer:2.1.0
       - jenkins-multijob-plugin:1.21
       - jobConfigHistory:2.14
       - ant:1.2
-      - credentials:1055.v1346ba467ba1
+      - credentials:2.6.1
       - momentjs:1.1.1
       - aws-java-sdk:1.10.50
       - dependency-check-jenkins-plugin:3.1.0
@@ -363,9 +362,7 @@ jenkins:
       - command-launcher:1.6
       - jdk-tool:1.5
       - jaxb:2.3.0.1
-      - configuration-as-code-support:1.17
-      
-      
+      - strict-crumb-issuer:2.1.0
     # Set to false to download the minimum required version of all dependencies.
     installLatestPlugins: true
 
