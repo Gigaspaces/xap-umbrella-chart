@@ -1,5 +1,6 @@
-
 nexus:
+  readinessProbe:
+    initialDelaySeconds: 90
   
   properties:
     override: true
@@ -7,7 +8,7 @@ nexus:
       nexus.scripts.allowCreation: true
   env:
     - name: NEXUS_SECURITY_RANDOMPASSWORD
-      value: "true"
+      value: "false"
 deployment:
   
   initContainers:
@@ -36,8 +37,12 @@ deployment:
   # Uncomment and modify this to run a command after starting the nexus container.
   
   additionalVolumes:
-  - name: scripts
-    emptyDir: {}
+    - name: {{ .Release.Name }}-postinstall-nexus-configmap
+        configMap:
+          name: log-config
+          items:
+            - key: log_level
+              path: log_level
   additionalVolumeMounts: 
   - name : scripts
     mountPath:  /scripts
@@ -49,10 +54,9 @@ deployment:
   #     - ['chown','-R', '777', '/nexus-data']
   #   - '["/bin/rm", "-f", "/nexus-data/lock"]'
     
-  postStart:
-    command:  
-
-    -  /scripts/postStart.sh
+  # postStart:
+  #   command:
+  #   - /scripts/postStart.sh
 secret:
   enabled: true
   mountPath: '/nexus-data/config/'
@@ -68,6 +72,18 @@ service:
   annotations: {}
   type: ClusterIP
 
+resources:
+  requests:
+      ## Based on https://support.sonatype.com/hc/en-us/articles/115006448847#mem
+      ## and https://twitter.com/analytically/status/894592422382063616:
+      ##   Xms == Xmx
+      ##   Xmx <= 4G
+      ##   MaxDirectMemory >= 2G
+      ##   Xmx + MaxDirectMemory <= RAM * 2/3 (hence the request for 4800Mi)
+      ##   MaxRAMFraction=1 is not being set as it would allow the heap
+      ##     to use all the available memory.
+    cpu: 1Gi
+    memory: 4800Mi
 
 config:
   enabled: true
@@ -193,15 +209,16 @@ config:
       }
     postStart.sh: |-
       #!/bin/bash
+      echo 'in script'
       set -eu
       HOST="localhost:8081"
       until curl --output /dev/null --silent --head --fail http://${HOST}/; do
-      printf ‘.’
+      printf '.'
       sleep 5
       done
       NEXUS_BASE_DIR="/sonatype-nexus-conf"
       USERNAME="admin"
-      PASSWORD=admin123
+      PASSWORD="admin123"
       PASSWORD_FROM_FILE="$(cat /nexus-data/config/password || true)"
       function die() {
         echo "ERROR: $*" 1>&2
@@ -217,7 +234,7 @@ config:
       service="${2}"
       method="${3}"
       body="$(cat "${jsonFile}")"
-      if  ! curl --fail -X "${method}" -u "${USERNAME}":"${PASSWORD}" "http://${HOST}/${service}" -H "accept:application/json" -H "Content-Type:application/json" -d "${body//[$‘\t\r\n’]}"; then
+      if  ! curl --fail -X "${method}" -u "${USERNAME}":"${PASSWORD}" "http://${HOST}/${service}" -H "accept:application/json" -H "Content-Type:application/json" -d "${body//[$'\t\r\n']}"; then
       echo "Error calling Nexus API for http://${HOST}/${service} to add repository from ${jsonFile}"
       fi
       }
@@ -261,8 +278,7 @@ config:
       echo "Creating maven group repositories from json"
 
       mapfile -t REPOS < <(find "${NEXUS_BASE_DIR}"   -type f -name "*group.json*")
-
       for repo in "${REPOS[@]}"; do
-      runCurlFromJsonFile "${repo}" "service/rest/v1/repositories/maven/group/" POST
-      
+        runCurlFromJsonFile "${repo}" "service/rest/v1/repositories/maven/group/maven-public" PUT
       done
+      
