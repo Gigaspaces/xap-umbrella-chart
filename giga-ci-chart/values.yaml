@@ -1427,88 +1427,11 @@ jenkins:
         securityGroupIds: []
         podSelector: {}
 
-nexus-repository-manager:
-  nexus:
-    readinessProbe:
-      initialDelaySeconds: 90
-    
-    properties:
-      override: true
-      data:
-        nexus.scripts.allowCreation: true
-    env:
-      - name: NEXUS_SECURITY_RANDOMPASSWORD
-        value: "false"
-  deployment:
-    
-    initContainers:
-    - name: fmp-volume-permission
-      image: busybox
-      imagePullPolicy: IfNotPresent
-      command: ['cp','/sonatype-nexus-conf/postStart.sh', '/scripts/postStart.sh']
-      volumeMounts:
-      - mountPath: /nexus-data
-        name: nexus-repository-manager-data
-      - mountPath: /sonatype-nexus-conf
-        name:  nexus-repository-manager-conf
-      - mountPath: /scripts  
-        name: scripts
-    - name: run-script
-      image: busybox
-      imagePullPolicy: IfNotPresent
-      command: ['chmod','777','/scripts/postStart.sh']
-      volumeMounts:
-      - mountPath: /nexus-data
-        name: nexus-repository-manager-data
-      - mountPath: /sonatype-nexus-conf
-        name:  nexus-repository-manager-conf
-      - mountPath: /scripts  
-        name: scripts
-    # Uncomment and modify this to run a command after starting the nexus container.
-    
-    additionalVolumes:
-    - name: scripts
-      emptyDir: {}
-    additionalVolumeMounts: 
-    - name : scripts
-      mountPath:  /scripts
-    
-        
-    # preStart:
-    #   command:
-        
-    #     - ['chown','-R', '777', '/nexus-data']
-    #   - '["/bin/rm", "-f", "/nexus-data/lock"]'
-      
-    postStart:
-      command:
-      - /scripts/postStart.sh
-  secret:
-    enabled: true
-    mountPath: '/nexus-data/config/'
-    readOnly: true
-    data: 
-      password : |
-        R2lnYVNwYWNlcw==
 
-  service:
-    name: nexus3
-    enabled: true
-    labels: {}
-    annotations: {}
-    type: ClusterIP
-
-  resources:
-    requests:
-        ## Based on https://support.sonatype.com/hc/en-us/articles/115006448847#mem
-        ## and https://twitter.com/analytically/status/894592422382063616:
-        ##   Xms == Xmx
-        ##   Xmx <= 4G
-        ##   MaxDirectMemory >= 2G
-        ##   Xmx + MaxDirectMemory <= RAM * 2/3 (hence the request for 4800Mi)
-        ##   MaxRAMFraction=1 is not being set as it would allow the heap
-        ##     to use all the available memory.
-      cpu: 1Gi
-      memory: 4800Mi
-
+mongodb:
+  auth:
+    enabled: false
   
+newman-srv:
+  newman:
+    mongodbHost: "gigaci-mongodb"

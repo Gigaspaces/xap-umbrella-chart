@@ -7,9 +7,9 @@ dependencies:
   version: 10.29.0
 - name: newman-srv
   repository: s3://xap-test-sultan/newman-chart/
-  version: 0.1.0
+  version: 0.1.2
 - name: nexus-repository-manager
   repository: https://sonatype.github.io/helm3-charts/
   version: 37.3.0
-digest: sha256:152c5e9cdda9e76a7d5712a1e14261695309e327576c2eb03ea3da17053dfc54
-generated: "2022-01-03T10:11:50.572633+02:00"
+digest: sha256:c5303dc759203e0b52c1f8494916956ed0ce661a884650d7858a56eb85f349bc
+generated: "2022-01-10T13:30:14.121898+02:00"
