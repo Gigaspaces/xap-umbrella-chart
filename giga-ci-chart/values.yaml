@@ -753,43 +753,107 @@ jenkins:
                         }
                     }
               - script: >
-                  pipelineJob('escrow') {
-                        parameters {
-                            stringParam('BRANCH_NAME', 'master')
-                            stringParam('XAP_VERSION', '16.0.2')
-                        }
-                        definition {
-                            cpsScm {
-                                scm {
-                                    git {
-                                        remote {
-                                            url('git@github.com:Gigaspaces/xap-premium.git')
-                                            credentials('git_credentials_id')
-                                        }
-                                        branches('master')
-                                        // extensions {
-                                        //     cleanBeforeCheckout()
-                                        // }
-                                    }
-                                    scriptPath("build/escrowjob")
-                                }
-                            }
-                        }
-                    }
+                  pipelineJob('xap-insightedge/escrow') {
+                      parameters {
+                          stringParam('BRANCH_NAME', 'master')
+                          stringParam('XAP_VERSION', '16.0.2')
+                      }
+                      definition {
+                          cpsScm {
+                              scm {
+                                  git {
+                                      remote {
+                                          url('git@github.com:Gigaspaces/xap-premium.git')
+                                          credentials('git_credentials_id')
+                                      }
+                                      branches('master')
+                                      // extensions {
+                                      //     cleanBeforeCheckout()
+                                      // }
+                                  }
+                                  scriptPath("build/escrowjob")
+                              }
+                          }
+                      }
+                  }
               - script: >
-                  pipelineJob('SpaceshipBuild') {
+                  folder('xap-insightedge'){
+                      description('Folder containing release /continuous')
+                      folder('xap-insightedge/latest'){
+                          description('latest')
+                          pipelineJob('xap-insightedge/latest/release') {
+                              parameters{
+                                  choiceParam('MODE', [ 'NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
+                                  stringParam('BRANCH_NAME', 'master')
+                                  stringParam('XAP_VERSION', '16.2.0')
+                                  stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
+                                  stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
+                                  booleanParam('InsightEdge', true)
+                                  parameterSeparatorDefinition{
+                                    name('2')
+                                    separatorStyle('')
+                                    sectionHeader('RELEASE Build parameters')
+                                    sectionHeaderStyle("""
+                                      background-color: #55216e;
+                                      text-align: center;
+                                      padding: 4px;
+                                      color: #c2db1a;
+                                      font-size: 22px;
+                                      font-weight: normal;
+                                      text-transform: uppercase;
+                                      font-family: 'Orienta', sans-serif;
+                                      letter-spacing: 1px;
+                                      font-style: italic;
+                                  """)
+                                  }
+                                  booleanParam('DotNet', false ,'Enable/Disable XAP.NET build')
+                                  booleanParam('PERFORM_FULL_M2_CLEAN', true)
+                                  booleanParam('OVERRIDE_EXISTING_TAG', true, 'Override git tag if exists')
+                                  booleanParam('DEPLOY_MVN_ARTIFACTS', true, 'Deploy build maven artifacts to S3')
+                                  booleanParam('PUBLISH_DOCKER', true, 'Trigger automated docker build in Docker Hub')
+                                  stringParam('GS_PATCH_IDNAME', 'a', "Patch identifier (usually a letter a, b, c).")
+                                  booleanParam('JAVA_DOCS',true, 'Create and upload java api docs')
+                                  booleanParam('GEN_SMART_ZIPS',true, 'Generate and upload the smart-cache & smart-augmented-transactions zip files')
+                                  booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
+                              } 
+                              definition {
+                                  cpsScm {
+                                      scm {
+                                          git {
+                                              remote {
+                                                  url('git@github.com:Gigaspaces/xap-premium.git')
+                                                  credentials('git_credentials_id')
+                                                  
+                                  
+                                              }
+                                              branches('master')
+                                              // extensions {
+                                              //     cleanBeforeCheckout()
+                                              // }
+                                              
+                                          }
+                                          scriptPath("build/jenkinsfile")
+                                      }
+                                      
+                                  }
+                              }
+                          }
+                      }
+                  }          
+              - script: >
+                  pipelineJob('xap-insightedge/latest/continuous') {
                       parameters{
-                          choiceParam('MODE', ['CONTINUOUS', 'NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
+                          choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
                           stringParam('BRANCH_NAME', 'master')
                           stringParam('XAP_VERSION', '16.2.0')
                           stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
                           stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
                           booleanParam('InsightEdge', true)
                           parameterSeparatorDefinition {
-                             name('1')
-                             separatorStyle('')
-                             sectionHeader('CONTINUOUS Build parameters')
-                             sectionHeaderStyle("""
+                            name('1')
+                            separatorStyle('')
+                            sectionHeader('CONTINUOUS Build parameters')
+                            sectionHeaderStyle("""
                               background-color: #55216e;
                               text-align: center;
                               padding: 4px;
@@ -829,32 +893,6 @@ jenkins:
                           2- high 
                           3- release-default    
                           4- urgent""")   
-                          parameterSeparatorDefinition{
-                             name('2')
-                             separatorStyle('')
-                             sectionHeader('RELEASE Build parameters')
-                             sectionHeaderStyle("""
-                              background-color: #55216e;
-                              text-align: center;
-                              padding: 4px;
-                              color: #c2db1a;
-                              font-size: 22px;
-                              font-weight: normal;
-                              text-transform: uppercase;
-                              font-family: 'Orienta', sans-serif;
-                              letter-spacing: 1px;
-                              font-style: italic;
-                          """)
-                          }
-                          booleanParam('DotNet', false ,'Enable/Disable XAP.NET build')
-                          booleanParam('PERFORM_FULL_M2_CLEAN', true)
-                          booleanParam('OVERRIDE_EXISTING_TAG', true, 'Override git tag if exists')
-                          booleanParam('DEPLOY_MVN_ARTIFACTS', true, 'Deploy build maven artifacts to S3')
-                          booleanParam('PUBLISH_DOCKER', true, 'Trigger automated docker build in Docker Hub')
-                          stringParam('GS_PATCH_IDNAME', 'a', "Patch identifier (usually a letter a, b, c).")
-                          booleanParam('JAVA_DOCS',true, 'Create and upload java api docs')
-                          booleanParam('GEN_SMART_ZIPS',true, 'Generate and upload the smart-cache & smart-augmented-transactions zip files')
-                          booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
                       } 
                       definition {
                           cpsScm {
@@ -877,7 +915,8 @@ jenkins:
                               
                           }
                       }
-                  }
+                  }    
+                      
     customInitContainers: []
     sidecars:
       configAutoReload:
