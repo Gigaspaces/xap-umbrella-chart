@@ -37,12 +37,8 @@ deployment:
   # Uncomment and modify this to run a command after starting the nexus container.
   
   additionalVolumes:
-    - name: {{ .Release.Name }}-postinstall-nexus-configmap
-        configMap:
-          name: log-config
-          items:
-            - key: log_level
-              path: log_level
+  - name: scripts
+    emptyDir: {}
   additionalVolumeMounts: 
   - name : scripts
     mountPath:  /scripts
@@ -54,9 +50,9 @@ deployment:
   #     - ['chown','-R', '777', '/nexus-data']
   #   - '["/bin/rm", "-f", "/nexus-data/lock"]'
     
-  # postStart:
-  #   command:
-  #   - /scripts/postStart.sh
+  postStart:
+    command:
+    - /scripts/postStart.sh
 secret:
   enabled: true
   mountPath: '/nexus-data/config/'
@@ -281,4 +277,3 @@ config:
       for repo in "${REPOS[@]}"; do
         runCurlFromJsonFile "${repo}" "service/rest/v1/repositories/maven/group/maven-public" PUT
       done
-      

@@ -34,7 +34,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           env:
           - name: NEWMAN_MONGO_DB_HOST
-            value: gigaci-mongodb.neptun.svc.cluster.local
+            value: {{ .Release.Name }}-mongodb
           - name: NEWMAN_MONGO_DB_NAME
             value: newman-db  
           - name: NEWMAN_SERVER_SPOTINST_TOKEN

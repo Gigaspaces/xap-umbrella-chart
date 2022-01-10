@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ .Release.Name }}"
+  labels:
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion }}
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  annotations:
+    # This is what defines this resource as a hook. Without this line, the
+    # job is considered part of the release.
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: post-install-nexus-job
+        image: alpine:3.3
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - name: config-volume
+            mountPath: /var/nexus/
+          - name : scripts
+            mountPath:  /scripts
+        command: 
+          - sh 
+          - -c
+          - >
+            cat /var/nexus/postStart.sh
+            ls -la /scripts
+            sudo chmod +x /scripts/postStart.sh;
+            ls -la /scripts;
+            ./scripts/postStart.sh
+            sleep
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ .Release.Name }}-postinstall-nexus-configmap
+            defaultMode: 0777
+        - name: scripts
+          emptyDir: {}  
+      restartPolicy: Never
+      terminationGracePeriodSeconds: 0
+  

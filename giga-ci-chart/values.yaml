@@ -1439,40 +1439,11 @@ nexus-repository-manager:
     env:
       - name: NEXUS_SECURITY_RANDOMPASSWORD
         value: "false"
-  deployment:
+  
     
-    initContainers:
-    - name: fmp-volume-permission
-      image: busybox
-      imagePullPolicy: IfNotPresent
-      command: ['cp','/sonatype-nexus-conf/postStart.sh', '/scripts/postStart.sh']
-      volumeMounts:
-      - mountPath: /nexus-data
-        name: nexus-repository-manager-data
-      - mountPath: /sonatype-nexus-conf
-        name:  nexus-repository-manager-conf
-      - mountPath: /scripts  
-        name: scripts
-    - name: run-script
-      image: busybox
-      imagePullPolicy: IfNotPresent
-      command: ['chmod','777','/scripts/postStart.sh']
-      volumeMounts:
-      - mountPath: /nexus-data
-        name: nexus-repository-manager-data
-      - mountPath: /sonatype-nexus-conf
-        name:  nexus-repository-manager-conf
-      - mountPath: /scripts  
-        name: scripts
     # Uncomment and modify this to run a command after starting the nexus container.
     
-    additionalVolumes:
-    - name: scripts
-      emptyDir: {}
-    additionalVolumeMounts: 
-    - name : scripts
-      mountPath:  /scripts
-    
+  
         
     # preStart:
     #   command:
@@ -1480,9 +1451,7 @@ nexus-repository-manager:
     #     - ['chown','-R', '777', '/nexus-data']
     #   - '["/bin/rm", "-f", "/nexus-data/lock"]'
       
-    postStart:
-      command:
-      - /scripts/postStart.sh
+    # 
   secret:
     enabled: true
     mountPath: '/nexus-data/config/'
@@ -1512,3 +1481,6 @@ nexus-repository-manager:
       memory: 4800Mi
 
   
+mongodb:
+  auth:
+    enabled: false
