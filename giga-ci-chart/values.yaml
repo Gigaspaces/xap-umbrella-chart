@@ -729,34 +729,10 @@ jenkins:
                       }
                   }
               - script: >
-                    pipelineJob('Dependency-check') {
-                        parameters {
-                            stringParam('GS_VERSION', '16.2.0-m1')
-                            stringParam('GS_PRODUCT', 'xap')
-                        }
-                        definition {
-                            cpsScm {
-                                scm {
-                                    git {
-                                        remote {
-                                            url('git@github.com:Gigaspaces/xap-premium.git')
-                                            credentials('git_credentials_id')
-                                        }
-                                        branches('master')
-                                        // extensions {
-                                        //     cleanBeforeCheckout()
-                                        // }
-                                    }
-                                    scriptPath("build/jenkinsdependency")
-                                }
-                            }
-                        }
-                    }
-              - script: >
-                  pipelineJob('xap-insightedge/escrow') {
+                  pipelineJob('Dependency-check') {
                       parameters {
-                          stringParam('BRANCH_NAME', 'master')
-                          stringParam('XAP_VERSION', '16.0.2')
+                          stringParam('GS_VERSION', '16.2.0-m1')
+                          stringParam('GS_PRODUCT', 'xap')
                       }
                       definition {
                           cpsScm {
@@ -771,15 +747,42 @@ jenkins:
                                       //     cleanBeforeCheckout()
                                       // }
                                   }
-                                  scriptPath("build/escrowjob")
+                                  scriptPath("build/jenkinsdependency")
                               }
                           }
                       }
                   }
               - script: >
-                  folder('xap-insightedge'){
+                  folder('xap-insightedge') {
+                      description('folder')
+                      pipelineJob('xap-insightedge/escrow') {
+                          parameters {
+                              stringParam('BRANCH_NAME', 'master')
+                              stringParam('XAP_VERSION', '16.0.2')
+                          }
+                          definition {
+                              cpsScm {
+                                  scm {
+                                      git {
+                                          remote {
+                                              url('git@github.com:Gigaspaces/xap-premium.git')
+                                              credentials('git_credentials_id')
+                                          }
+                                          branches('master')
+                                          // extensions {
+                                          //     cleanBeforeCheckout()
+                                          // }
+                                      }
+                                      scriptPath("build/escrowjob")
+                                  }
+                              }
+                          }
+                      }
+                  }
+              - script: >
+                  folder('xap-insightedge') {
                       description('Folder containing release /continuous')
-                      folder('xap-insightedge/latest'){
+                      folder('xap-insightedge/latest') {
                           description('latest')
                           pipelineJob('xap-insightedge/latest/release') {
                               parameters{
@@ -833,90 +836,93 @@ jenkins:
                                               
                                           }
                                           scriptPath("build/jenkinsfile")
-                                      }
-                                      
+                                      }   
                                   }
                               }
                           }
                       }
                   }          
               - script: >
-                  pipelineJob('xap-insightedge/latest/continuous') {
-                      parameters{
-                          choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
-                          stringParam('BRANCH_NAME', 'master')
-                          stringParam('XAP_VERSION', '16.2.0')
-                          stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
-                          stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
-                          booleanParam('InsightEdge', true)
-                          parameterSeparatorDefinition {
-                            name('1')
-                            separatorStyle('')
-                            sectionHeader('CONTINUOUS Build parameters')
-                            sectionHeaderStyle("""
-                              background-color: #55216e;
-                              text-align: center;
-                              padding: 4px;
-                              color: #c2db1a;
-                              font-size: 22px;
-                              font-weight: normal;
-                              text-transform: uppercase;
-                              font-family: 'Orienta', sans-serif;
-                              letter-spacing: 1px;
-                              font-style: italic;
-                          """)
-                          }
-                          choiceParam('ELM_VERSION', ['0.19.0', '0.18.0'])
-                          stringParam('NEWMAN_SUITES', '',"""comma separated list of suite ids to submit future jobs  
-                          5c88ea4bb38594355214b205 - manager         
-                          59f25d19b3859424cac590bf - xap-core         
-                          59f25af7b3859424cac590b5 - service-grid    
-                          59f25af5b3859424cac590ad - disconnect
-                          59f25e0f6d98c14e1daa2008 - web-ui            
-                          59f25d5ab3859424cac590c1 - rocksdb           
-                          59f25d5bb3859424cac590c2 - off-heap 
-                          5a96b14268c479caafb1162f - mx-off-heap  
-                          59f59592b3859424cac690fa - i9e-sgtest 
-                          59f25af6b3859424cac590b0 - insightedge-premium  
-                          59f25af7b3859424cac590b9 - wan  
-                          5b6c24e7b385941b3b8ce4bf - dev-demote 
-                          59f25e0f6d98c14e1daa5000 - performance  
-                          607420ac4cedfd0009ec8b20 - v3driver""") 
-                          stringParam('NEWMAN_CONFIG_ID', '5b4c9342b3859411ee82c265', """Applicable only when submitting future jobs 
-                          5b4c9342b3859411ee82c265 - ORACLE_8   
-                          5b4c9825b3859411ee82c2f3  - ORACLE_9  
-                          5bf160bb1f31eb789fc0fa65 - OPENJDK_11 
-                          5bf160bb1f31eb789fc0fb78 - OPENJDK_17""") 
-                          stringParam('NEWMAN_AGENT_GROUPS', 'imc-srv01,imc-srv02,DotNet,Bynet')
-                          stringParam('NEWMAN_JOB_PRIORITY', '1', """0- daily-default  
-                          1- low  
-                          2- high 
-                          3- release-default    
-                          4- urgent""")   
-                      } 
-                      definition {
-                          cpsScm {
-                              scm {
-                                  git {
-                                      remote {
-                                          url('git@github.com:Gigaspaces/xap-premium.git')
-                                          credentials('git_credentials_id')
-                                          
-                          
-                                      }
-                                      branches('master')
-                                      // extensions {
-                                      //     cleanBeforeCheckout()
-                                      // }
-                                      
+                  folder('xap-insightedge') {
+                      description('Folder containing release /continuous')
+                      folder('xap-insightedge/latest') {
+                          description('latest')
+                          pipelineJob('xap-insightedge/latest/continuous') {
+                              parameters{
+                                  choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
+                                  stringParam('BRANCH_NAME', 'master')
+                                  stringParam('XAP_VERSION', '16.2.0')
+                                  stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
+                                  stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
+                                  booleanParam('InsightEdge', true)
+                                  parameterSeparatorDefinition {
+                                    name('1')
+                                    separatorStyle('')
+                                    sectionHeader('CONTINUOUS Build parameters')
+                                    sectionHeaderStyle("""
+                                      background-color: #55216e;
+                                      text-align: center;
+                                      padding: 4px;
+                                      color: #c2db1a;
+                                      font-size: 22px;
+                                      font-weight: normal;
+                                      text-transform: uppercase;
+                                      font-family: 'Orienta', sans-serif;
+                                      letter-spacing: 1px;
+                                      font-style: italic;
+                                  """)
                                   }
-                                  scriptPath("build/jenkinsfile")
+                                  choiceParam('ELM_VERSION', ['0.19.0', '0.18.0'])
+                                  stringParam('NEWMAN_SUITES', '',"""comma separated list of suite ids to submit future jobs  
+                                  5c88ea4bb38594355214b205 - manager         
+                                  59f25d19b3859424cac590bf - xap-core         
+                                  59f25af7b3859424cac590b5 - service-grid    
+                                  59f25af5b3859424cac590ad - disconnect
+                                  59f25e0f6d98c14e1daa2008 - web-ui            
+                                  59f25d5ab3859424cac590c1 - rocksdb           
+                                  59f25d5bb3859424cac590c2 - off-heap 
+                                  5a96b14268c479caafb1162f - mx-off-heap  
+                                  59f59592b3859424cac690fa - i9e-sgtest 
+                                  59f25af6b3859424cac590b0 - insightedge-premium  
+                                  59f25af7b3859424cac590b9 - wan  
+                                  5b6c24e7b385941b3b8ce4bf - dev-demote 
+                                  59f25e0f6d98c14e1daa5000 - performance  
+                                  607420ac4cedfd0009ec8b20 - v3driver""") 
+                                  stringParam('NEWMAN_CONFIG_ID', '5b4c9342b3859411ee82c265', """Applicable only when submitting future jobs 
+                                  5b4c9342b3859411ee82c265 - ORACLE_8   
+                                  5b4c9825b3859411ee82c2f3  - ORACLE_9  
+                                  5bf160bb1f31eb789fc0fa65 - OPENJDK_11 
+                                  5bf160bb1f31eb789fc0fb78 - OPENJDK_17""") 
+                                  stringParam('NEWMAN_AGENT_GROUPS', 'imc-srv01,imc-srv02,DotNet,Bynet')
+                                  stringParam('NEWMAN_JOB_PRIORITY', '1', """0- daily-default  
+                                  1- low  
+                                  2- high 
+                                  3- release-default    
+                                  4- urgent""")   
+                              } 
+                              definition {
+                                  cpsScm {
+                                      scm {
+                                          git {
+                                              remote {
+                                                  url('git@github.com:Gigaspaces/xap-premium.git')
+                                                  credentials('git_credentials_id')
+                                                  
+                                  
+                                              }
+                                              branches('master')
+                                              // extensions {
+                                              //     cleanBeforeCheckout()
+                                              // }
+                                              
+                                          }
+                                          scriptPath("build/jenkinsfile")
+                                      }
+                                  }
                               }
-                              
-                          }
+                          }    
                       }
-                  }    
-                      
+                  }        
     customInitContainers: []
     sidecars:
       configAutoReload:
