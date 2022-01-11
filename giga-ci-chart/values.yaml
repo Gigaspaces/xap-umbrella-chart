@@ -236,7 +236,7 @@ jenkins:
 
     # List of plugins to be install during Jenkins controller start
     installPlugins:
-      - kubernetes:1.31.1
+      - kubernetes:1.31.2
       - pipeline-stage-step:291.vf0a8a7aeeb50
       - m2release:0.14.0
       - build-timeout:1.17.1
@@ -259,12 +259,12 @@ jenkins:
       - pipeline-milestone-step:1.3.2
       - slack:2.0.1
       - caffeine-api
-      - workflow-cps:2.94
+      - workflow-cps:2648.va9433432b33c
       - mapdb-api:1.0.9.0
       - ssh-slaves:1.9
       - sshd:3.1.0
       - workflow-durable-task-step:2.35
-      - cloudbees-folder:6.16
+      - cloudbees-folder:6.17
       - pipeline-model-api:1.9.3
       - workflow-aggregator:2.6
       - m2-repo-reaper:1.0
@@ -277,7 +277,7 @@ jenkins:
       - matrix-auth:3.0
       - extended-choice-parameter:0.75
       - pam-auth:1.6.1
-      - workflow-step-api:2.24
+      - workflow-step-api:615.vb09dac339255
       - translation:1.10
       - custom-tools-plugin:0.4.4
       - git-client:3.6.0
@@ -341,7 +341,7 @@ jenkins:
       - momentjs:1.1.1
       - aws-java-sdk:1.10.50
       - dependency-check-jenkins-plugin:3.1.0
-      - structs:1.23
+      - structs:308.v852b473a2b8c
       - mailer:1.34
       - http_request:1.8.11
       - build-blocker-plugin:1.7.3
@@ -352,7 +352,7 @@ jenkins:
       - run-condition:1.0
       - authorize-project:1.4.0
       - email-ext:2.44
-      - jackson2-api:2.13.0-230.v59243c64b0a5
+      - jackson2-api:2.13.1-244.v773c36c5b330
       - git-parameter:0.9.1
       - configuration-as-code:1.55
       - matrix-auth:3.0
@@ -362,6 +362,7 @@ jenkins:
       - command-launcher:1.6
       - jdk-tool:1.5
       - jaxb:2.3.0.1
+      - batch-task:1.19
       - strict-crumb-issuer:2.1.0
     # Set to false to download the minimum required version of all dependencies.
     installLatestPlugins: true
@@ -464,10 +465,15 @@ jenkins:
                 domainCredentials:
                   - credentials:
                       - usernamePassword:
+                            scope: GLOBAL
+                            id: "${chart-admin-username}"
+                            username: "Jenkins Admin"
+                            password: GigaSpaces
+                      - usernamePassword:
                             scope: SYSTEM
                             id: oren
-                            username: admin
-                            password: GigaSpaces
+                            username: oren
+                            password: Giga
                       - basicSSHUserPrivateKey:
                             scope: GLOBAL
                             id: git_credentials_id
@@ -560,7 +566,30 @@ jenkins:
                   xorMasking: false
               agentProtocols:
               - "JNLP4-connect"
-              - "Ping"        
+              - "Ping"  
+              nodes:
+                - permanent:
+                    labelString: 'DocsNode'
+                    mode: NORMAL
+                    name: 'DocsNode'
+                    remoteFS: 'c:\jenkins'
+                    launcher:
+                      jnlp:
+                        workDirSettings:
+                          disabled: true
+                          failIfWorkDirIsMissing: false
+                          internalDir: 'remoting'
+                - permanent:
+                    labelString: 'DotNet-slave'
+                    mode: NORMAL
+                    name: 'DotNet'
+                    remoteFS: 'c:\jenkins'
+                    launcher:
+                      jnlp:
+                        workDirSettings:
+                          disabled: true
+                          failIfWorkDirIsMissing: false
+                          internalDir: 'remoting'
               clouds:
               - kubernetes:
                   containerCap: 10
@@ -637,85 +666,74 @@ jenkins:
                         timeoutSeconds: 0
             jobs:
               - script: >
-                  pipelineJob('SpaceshipBuild') {
-                      parameters{
-                          choiceParam('MODE', ['CONTINUOUS', 'NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
-                          stringParam('BRANCH_NAME', 'master')
-                          stringParam('XAP_VERSION', '16.2.0')
-                          stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
-                          stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
-                          booleanParam('InsightEdge', true)
-                          parameterSeparatorDefinition {
-                             name('1')
-                             separatorStyle('')
-                             sectionHeader('CONTINUOUS Build parameters')
-                             sectionHeaderStyle("""
-                              background-color: #55216e;
-                              text-align: center;
-                              padding: 4px;
-                              color: #c2db1a;
-                              font-size: 22px;
-                              font-weight: normal;
-                              text-transform: uppercase;
-                              font-family: 'Orienta', sans-serif;
-                              letter-spacing: 1px;
-                              font-style: italic;
-                          """)
+                  folder('Docs'){
+                      description('Folder containing all Docs jobs')
+                      job('Docs/Docs-newwebsite') {
+                          label('Docs-agent')
+                          logRotator(5, 10)
+                          parameters {
+                              choiceParam('destination', ['staging', 'prod'], '''
+                              Determines the publish destination
+                              * staging: https://docs-staging.gigaspaces.com
+                              * production: https://docs.gigaspaces.com''')
+                              choiceParam('profile', ['default','full'], "Determines which flare profile should be built (when Destination is 'production', this is ignored and 'full' is used)")
+                              choiceParam('sites', ['all','flare','hugo'], "Determines which sites to build (when Destination is 'production', this is ignored and 'all' is used)")
+                              stringParam('BRANCH_NAME', 'master')
                           }
-                          choiceParam('ELM_VERSION', ['0.19.0', '0.18.0'])
-                          stringParam('NEWMAN_SUITES', '',"""comma separated list of suite ids to submit future jobs  
-                          5c88ea4bb38594355214b205 - manager         
-                          59f25d19b3859424cac590bf - xap-core         
-                          59f25af7b3859424cac590b5 - service-grid    
-                          59f25af5b3859424cac590ad - disconnect
-                          59f25e0f6d98c14e1daa2008 - web-ui            
-                          59f25d5ab3859424cac590c1 - rocksdb           
-                          59f25d5bb3859424cac590c2 - off-heap 
-                          5a96b14268c479caafb1162f - mx-off-heap  
-                          59f59592b3859424cac690fa - i9e-sgtest 
-                          59f25af6b3859424cac590b0 - insightedge-premium  
-                          59f25af7b3859424cac590b9 - wan  
-                          5b6c24e7b385941b3b8ce4bf - dev-demote 
-                          59f25e0f6d98c14e1daa5000 - performance  
-                          607420ac4cedfd0009ec8b20 - v3driver""") 
-                          stringParam('NEWMAN_CONFIG_ID', '5b4c9342b3859411ee82c265', """Applicable only when submitting future jobs 
-                          5b4c9342b3859411ee82c265 - ORACLE_8   
-                          5b4c9825b3859411ee82c2f3  - ORACLE_9  
-                          5bf160bb1f31eb789fc0fa65 - OPENJDK_11 
-                          5bf160bb1f31eb789fc0fb78 - OPENJDK_17""") 
-                          stringParam('NEWMAN_AGENT_GROUPS', 'imc-srv01,imc-srv02,DotNet,Bynet')
-                          stringParam('NEWMAN_JOB_PRIORITY', '1', """0- daily-default  
-                          1- low  
-                          2- high 
-                          3- release-default    
-                          4- urgent""")   
-                          parameterSeparatorDefinition{
-                             name('2')
-                             separatorStyle('')
-                             sectionHeader('RELEASE Build parameters')
-                             sectionHeaderStyle("""
-                              background-color: #55216e;
-                              text-align: center;
-                              padding: 4px;
-                              color: #c2db1a;
-                              font-size: 22px;
-                              font-weight: normal;
-                              text-transform: uppercase;
-                              font-family: 'Orienta', sans-serif;
-                              letter-spacing: 1px;
-                              font-style: italic;
-                          """)
+                          scm {
+                            git {
+                                remote {
+                                    name('origin')
+                                    url('https://github.com/Gigaspaces/xap-docs.git')
+                                    credentials('git_credentials_id')
+                                }
+                                branches('*/$BRANCH_NAME')
+                            }
                           }
-                          booleanParam('DotNet', false ,'Enable/Disable XAP.NET build')
-                          booleanParam('PERFORM_FULL_M2_CLEAN', true)
-                          booleanParam('OVERRIDE_EXISTING_TAG', true, 'Override git tag if exists')
-                          booleanParam('DEPLOY_MVN_ARTIFACTS', true, 'Deploy build maven artifacts to S3')
-                          booleanParam('PUBLISH_DOCKER', true, 'Trigger automated docker build in Docker Hub')
-                          stringParam('GS_PATCH_IDNAME', 'a', "Patch identifier (usually a letter a, b, c).")
-                          booleanParam('JAVA_DOCS',true, 'Create and upload java api docs')
-                          booleanParam('GEN_SMART_ZIPS',true, 'Generate and upload the smart-cache & smart-augmented-transactions zip files')
-                          booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
-                      } 
+                          triggers {
+                              scm('* * * * *')
+                          }
+                          wrappers {
+                              timestamps()
+                          }    
+                      }
+                  }
+              - script: >
+                  folder('Docs'){
+                      description('Folder containing all Docs jobs')
+                      job('Docs/Docs-build'){
+                          label('Docs-agent')
+                          logRotator(5, 10)
+                          parameters {
+                              choiceParam('destination', ['staging', 'prod'], 'https://docs-staging.gigaspaces.com * production: https://docs.gigaspaces.comDetermines * stagin ') 
+                              choiceParam('profile', ['default','full'], "Determines which flare profile should be built (when Destination is 'production', this is ignored and 'full' is used)")
+                              choiceParam('sites', ['all','flare','hugo'], "Determines which sites to build (when Destination is 'production', this is ignored and 'all' is used)")
+                              stringParam('BRANCH_NAME', 'master')
+                          }
+                          scm {
+                              git {
+                                  remote {
+                                      name('origin')
+                                      url('https://github.com/Gigaspaces/xap-docs.git')
+                                      credentials('git_credentials_id')
+                                  }
+                                  branches('*/$BRANCH_NAME')
+                              }
+                          }        
+                          triggers {
+                              scm('* * * * *')
+                          }
+                          wrappers {
+                              timestamps()
+                          }
+                      }
+                  }
+              - script: >
+                  pipelineJob('Dependency-check') {
+                      parameters {
+                          stringParam('GS_VERSION', '16.2.0-m1')
+                          stringParam('GS_PRODUCT', 'xap')
+                      }
                       definition {
                           cpsScm {
                               scm {
@@ -723,25 +741,188 @@ jenkins:
                                       remote {
                                           url('git@github.com:Gigaspaces/xap-premium.git')
                                           credentials('git_credentials_id')
-                                          
-                          
                                       }
                                       branches('master')
                                       // extensions {
                                       //     cleanBeforeCheckout()
                                       // }
-                                      
                                   }
-                                  scriptPath("build/jenkinsfile")
+                                  scriptPath("build/jenkinsdependency")
                               }
-                              
                           }
                       }
                   }
-                  
-                      
-                
-                    
+              - script: >
+                  folder('xap-insightedge') {
+                      description('folder')
+                      pipelineJob('xap-insightedge/escrow') {
+                          parameters {
+                              stringParam('BRANCH_NAME', 'master')
+                              stringParam('XAP_VERSION', '16.0.2')
+                          }
+                          definition {
+                              cpsScm {
+                                  scm {
+                                      git {
+                                          remote {
+                                              url('git@github.com:Gigaspaces/xap-premium.git')
+                                              credentials('git_credentials_id')
+                                          }
+                                          branches('master')
+                                          // extensions {
+                                          //     cleanBeforeCheckout()
+                                          // }
+                                      }
+                                      scriptPath("build/escrowjob")
+                                  }
+                              }
+                          }
+                      }
+                  }
+              - script: >
+                  folder('xap-insightedge') {
+                      description('Folder containing release /continuous')
+                      folder('xap-insightedge/latest') {
+                          description('latest')
+                          pipelineJob('xap-insightedge/latest/release') {
+                              parameters{
+                                  choiceParam('MODE', [ 'NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
+                                  stringParam('BRANCH_NAME', 'master')
+                                  stringParam('XAP_VERSION', '16.2.0')
+                                  stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
+                                  stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
+                                  booleanParam('InsightEdge', true)
+                                  parameterSeparatorDefinition{
+                                    name('2')
+                                    separatorStyle('')
+                                    sectionHeader('RELEASE Build parameters')
+                                    sectionHeaderStyle("""
+                                      background-color: #55216e;
+                                      text-align: center;
+                                      padding: 4px;
+                                      color: #c2db1a;
+                                      font-size: 22px;
+                                      font-weight: normal;
+                                      text-transform: uppercase;
+                                      font-family: 'Orienta', sans-serif;
+                                      letter-spacing: 1px;
+                                      font-style: italic;
+                                  """)
+                                  }
+                                  booleanParam('DotNet', false ,'Enable/Disable XAP.NET build')
+                                  booleanParam('PERFORM_FULL_M2_CLEAN', true)
+                                  booleanParam('OVERRIDE_EXISTING_TAG', true, 'Override git tag if exists')
+                                  booleanParam('DEPLOY_MVN_ARTIFACTS', true, 'Deploy build maven artifacts to S3')
+                                  booleanParam('PUBLISH_DOCKER', true, 'Trigger automated docker build in Docker Hub')
+                                  stringParam('GS_PATCH_IDNAME', 'a', "Patch identifier (usually a letter a, b, c).")
+                                  booleanParam('JAVA_DOCS',true, 'Create and upload java api docs')
+                                  booleanParam('GEN_SMART_ZIPS',true, 'Generate and upload the smart-cache & smart-augmented-transactions zip files')
+                                  booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
+                              } 
+                              definition {
+                                  cpsScm {
+                                      scm {
+                                          git {
+                                              remote {
+                                                  url('git@github.com:Gigaspaces/xap-premium.git')
+                                                  credentials('git_credentials_id')
+                                                  
+                                  
+                                              }
+                                              branches('master')
+                                              // extensions {
+                                              //     cleanBeforeCheckout()
+                                              // }
+                                              
+                                          }
+                                          scriptPath("build/jenkinsfile")
+                                      }   
+                                  }
+                              }
+                          }
+                      }
+                  }          
+              - script: >
+                  folder('xap-insightedge') {
+                      description('Folder containing release /continuous')
+                      folder('xap-insightedge/latest') {
+                          description('latest')
+                          pipelineJob('xap-insightedge/latest/continuous') {
+                              parameters{
+                                  choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
+                                  stringParam('BRANCH_NAME', 'master')
+                                  stringParam('XAP_VERSION', '16.2.0')
+                                  stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
+                                  stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
+                                  booleanParam('InsightEdge', true)
+                                  parameterSeparatorDefinition {
+                                    name('1')
+                                    separatorStyle('')
+                                    sectionHeader('CONTINUOUS Build parameters')
+                                    sectionHeaderStyle("""
+                                      background-color: #55216e;
+                                      text-align: center;
+                                      padding: 4px;
+                                      color: #c2db1a;
+                                      font-size: 22px;
+                                      font-weight: normal;
+                                      text-transform: uppercase;
+                                      font-family: 'Orienta', sans-serif;
+                                      letter-spacing: 1px;
+                                      font-style: italic;
+                                  """)
+                                  }
+                                  choiceParam('ELM_VERSION', ['0.19.0', '0.18.0'])
+                                  stringParam('NEWMAN_SUITES', '',"""comma separated list of suite ids to submit future jobs  
+                                  5c88ea4bb38594355214b205 - manager         
+                                  59f25d19b3859424cac590bf - xap-core         
+                                  59f25af7b3859424cac590b5 - service-grid    
+                                  59f25af5b3859424cac590ad - disconnect
+                                  59f25e0f6d98c14e1daa2008 - web-ui            
+                                  59f25d5ab3859424cac590c1 - rocksdb           
+                                  59f25d5bb3859424cac590c2 - off-heap 
+                                  5a96b14268c479caafb1162f - mx-off-heap  
+                                  59f59592b3859424cac690fa - i9e-sgtest 
+                                  59f25af6b3859424cac590b0 - insightedge-premium  
+                                  59f25af7b3859424cac590b9 - wan  
+                                  5b6c24e7b385941b3b8ce4bf - dev-demote 
+                                  59f25e0f6d98c14e1daa5000 - performance  
+                                  607420ac4cedfd0009ec8b20 - v3driver""") 
+                                  stringParam('NEWMAN_CONFIG_ID', '5b4c9342b3859411ee82c265', """Applicable only when submitting future jobs 
+                                  5b4c9342b3859411ee82c265 - ORACLE_8   
+                                  5b4c9825b3859411ee82c2f3  - ORACLE_9  
+                                  5bf160bb1f31eb789fc0fa65 - OPENJDK_11 
+                                  5bf160bb1f31eb789fc0fb78 - OPENJDK_17""") 
+                                  stringParam('NEWMAN_AGENT_GROUPS', 'imc-srv01,imc-srv02,DotNet,Bynet')
+                                  stringParam('NEWMAN_JOB_PRIORITY', '1', """0- daily-default  
+                                  1- low  
+                                  2- high 
+                                  3- release-default    
+                                  4- urgent""")   
+                              } 
+                              definition {
+                                  cpsScm {
+                                      scm {
+                                          git {
+                                              remote {
+                                                  url('git@github.com:Gigaspaces/xap-premium.git')
+                                                  credentials('git_credentials_id')
+                                                  
+                                  
+                                              }
+                                              branches('master')
+                                              // extensions {
+                                              //     cleanBeforeCheckout()
+                                              // }
+                                              
+                                          }
+                                          scriptPath("build/jenkinsfile")
+                                      }
+                                  }
+                              }
+                          }    
+                      }
+                  }        
     customInitContainers: []
     sidecars:
       configAutoReload:
@@ -1293,63 +1474,52 @@ jenkins:
 
 nexus-repository-manager:
   nexus:
+    readinessProbe:
+      initialDelaySeconds: 90
     
     properties:
-      override: true
+      override: false
       data:
         nexus.scripts.allowCreation: true
     env:
-      - name: ENABLE_ANONYMOUS_ACCESS
-        value : "false"
+      - name: install4jAddVmParams
+        value: "-Xms1200M -Xmx1200M -XX:MaxDirectMemorySize=2G -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
       - name: NEXUS_SECURITY_RANDOMPASSWORD
         value: "false"
-  deployment:
+    securityContext:
+      fsGroup: 1001
     
+    # Uncomment and modify this to run a command after starting the nexus container.
+  deployment:
+  
     initContainers:
     - name: fmp-volume-permission
       image: busybox
       imagePullPolicy: IfNotPresent
-      command: ['cp','/sonatype-nexus-conf/postStart.sh', '/scripts/postStart.sh']
+      command: ['chown','-R', '200', '/nexus-data']
       volumeMounts:
       - mountPath: /nexus-data
         name: nexus-repository-manager-data
-      - mountPath: /sonatype-nexus-conf
-        name:  nexus-repository-manager-conf
-      - mountPath: /scripts  
-        name: scripts
     - name: run-script
       image: busybox
       imagePullPolicy: IfNotPresent
-      command: ['chmod','777','/scripts/postStart.sh']
+      command: ['chown','-R', '200', '/nexus-data']
       volumeMounts:
       - mountPath: /nexus-data
         name: nexus-repository-manager-data
-      - mountPath: /sonatype-nexus-conf
-        name:  nexus-repository-manager-conf
-      - mountPath: /scripts  
-        name: scripts
+  
+      
+      
     # Uncomment and modify this to run a command after starting the nexus container.
     
-    additionalVolumes:
-    - name: scripts
-      emptyDir: {}
-    additionalVolumeMounts: 
-    - name : scripts
-      mountPath:  /scripts
     
-        
-    # preStart:
+    # postStart:
     #   command:
-        
-    #     - ['chown','-R', '777', '/nexus-data']
-    #   - '["/bin/rm", "-f", "/nexus-data/lock"]'
-      
-    postStart:
-      command:
-      -   /scripts/postStart.sh
+    #   - /bin/bash
+    #   - /scripts/postStart.sh
   secret:
     enabled: true
-    mountPath: '/nexus-data/config'
+    mountPath: /etc/secret-volume/
     readOnly: true
     data: 
       password : |
@@ -1362,143 +1532,62 @@ nexus-repository-manager:
     annotations: {}
     type: ClusterIP
 
+  resources:
+    requests:
+        ## Based on https://support.sonatype.com/hc/en-us/articles/115006448847#mem
+        ## and https://twitter.com/analytically/status/894592422382063616:
+        ##   Xms == Xmx
+        ##   Xmx <= 4G
+        ##   MaxDirectMemory >= 2G
+        ##   Xmx + MaxDirectMemory <= RAM * 2/3 (hence the request for 4800Mi)
+        ##   MaxRAMFraction=1 is not being set as it would allow the heap
+        ##     to use all the available memory.
+      cpu: 1Gi
+      memory: 4800Mi
 
   config:
     enabled: true
     data:
-      OpenSpacesmaven.json: |-
-        {
-          "name": "OpenSpaces",
-          "online": true,
-          "storage": {
-            "blobStoreName": "default",
-            "strictContentTypeValidation": true
-          },
-          "cleanup": {
-            "policyNames": [
-              "string"
-            ]
-          },
-          "proxy": {
-            "remoteUrl": "http://maven-repository.openspaces.org",
-            "contentMaxAge": 1440,
-            "metadataMaxAge": 1440
-          },
-          "negativeCache": {
-            "enabled": true,
-            "timeToLive": 1440
-          },
-          "httpClient": {
-            "blocked": false,
-            "autoBlock": true,
-            "connection": {
-              "retries": 0,
-              "userAgentSuffix": "string",
-              "timeout": 60,
-              "enableCircularRedirects": false,
-              "enableCookies": false,
-              "useTrustStore": false
-            },
-            "authentication": {
-              "type": "username",
-              "username": "string",
-              "password": "string",
-              "ntlmHost": "string",
-              "ntlmDomain": "string",
-              "preemptive": false
-            }
-          },
-          "routingRule": "string",
-          "maven": {
-            "versionPolicy": "MIXED",
-            "layoutPolicy": "STRICT",
-            "contentDisposition": "ATTACHMENT"
-          }
-        }
-      muledepsmaven.json: |-
-        {
-          "name": "mule-deps",
-          "online": true,
-          "storage": {
-            "blobStoreName": "default",
-            "strictContentTypeValidation": true
-          },
-          "proxy": {
-            "remoteUrl": "https://repository.mulesoft.org/nexus/content/repositories/public",
-            "contentMaxAge": -1,
-            "metadataMaxAge": 1440
-          },
-          "negativeCache": {
-            "enabled": true,
-            "timeToLive": 1440
-          },
-          "httpClient": {
-            "blocked": false,
-            "autoBlock": true
-          },
-          "maven": {
-            "versionPolicy": "RELEASE",
-            "layoutPolicy": "STRICT"
-          }
-        }
-      group.json: |-
-        {
-          "name": "maven-public",
-          "format": "maven2",
-          "url": "http://localhost:8081/repository/maven-public",
-          "online": true,
-          "storage": {
-            "blobStoreName": "default",
-            "strictContentTypeValidation": true
-          },
-          "group": {
-            "memberNames": [
-              "mule-deps",
-              "OpenSpaces",
-              "maven-central",
-              "maven-releases",
-              "maven-snapshots"
-            ]
-          },
-          "type": "group"
-        }
       postStart.sh: |-
         #!/bin/bash
+        echo 'in script'
         set -eu
         HOST="localhost:8081"
         until curl --output /dev/null --silent --head --fail http://${HOST}/; do
-        printf ‘.’
+        printf '.'
         sleep 5
         done
         NEXUS_BASE_DIR="/sonatype-nexus-conf"
         USERNAME="admin"
-        PASSWORD=admin123
-        PASSWORD_FROM_FILE="$(cat /nexus-data/config/password   || true)"
+        PASSWORD="admin123"
+        PASSWORD_FROM_FILE="$(cat /nexus-data/config/password || true)"
         function die() {
           echo "ERROR: $*" 1>&2
           exit 1
         }
         # Call the Nexus API for the specified repository
         function runCurlFromJsonFile() {
-            local jsonFile
-            local service
-            local body
-            local method
-            jsonFile="${1}"
-            service="${2}"
-            method="${3}"
-            body="$(cat "${jsonFile}")"
-            if  ! curl --fail -X "${method}" -u "${USERNAME}":"${PASSWORD}" "http://${HOST}/${service}" -H "accept:application/json" -H "Content-Type:application/json" -d "${body//[$‘\t\r\n’]}"; then
-                echo "Error calling Nexus API for http://${HOST}/${service} to add repository from ${jsonFile}"
-            fi
+        local jsonFile
+        local service
+        local body
+        local method
+        jsonFile="${1}"
+        service="${2}"
+        method="${3}"
+        body="$(cat "${jsonFile}")"
+        if  ! curl --fail -X "${method}" -u "${USERNAME}":"${PASSWORD}" "http://${HOST}/${service}" -H "accept:application/json" -H "Content-Type:application/json" -d "${body//[$'\t\r\n']}"; then
+        echo "Error calling Nexus API for http://${HOST}/${service} to add repository from ${jsonFile}"
+        fi
         }
+        
+        
         function setPasswordFromFile() {
-            if [ -n "${PASSWORD_FROM_FILE}" ]; then
-                echo "Updating PASSWORD variable from password file."
-                PASSWORD="${PASSWORD_FROM_FILE}"
-            else
-                echo "Not updating PASSWORD var. Password file either non-existent or not readable."
-            fi
+        if [ -n "${PASSWORD_FROM_FILE}" ]; then
+            echo "Updating PASSWORD variable from password file."
+            PASSWORD="${PASSWORD_FROM_FILE}"
+        else
+            echo "Not updating PASSWORD var. Password file either non-existent or not readable."
+        fi
         }
 
         if curl --fail --silent -u "${USERNAME}":"${PASSWORD}" http://"${HOST}"/service/metrics/ping; then
@@ -1515,21 +1604,8 @@ nexus-repository-manager:
             fi
         else
             die "Login to nexus failed. Tried the default password only since no password secret file was provided."
-        fi
-        # For each maven repository proxy json file, create the repo proxy via the Nexus API.
-        echo "Creating maven proxy repositories from json"
-        mapfile -t REPOS < <(find "${NEXUS_BASE_DIR}"  -type f -name "*maven.json*")
-        for repo in "${REPOS[@]}"; do
-            runCurlFromJsonFile "${repo}" "service/rest/v1/repositories/maven/proxy" POST
-        done
-        # For each maven group repository json file, create the repo via the Nexus API.
+        fi 
 
-        echo "Creating maven group repositories from json"
-
-        mapfile -t REPOS < <(find "${NEXUS_BASE_DIR}"  -type f -name "*group.json*")
-
-        for repo in "${REPOS[@]}"; do
-            runCurlFromJsonFile "${repo}" "service/rest/v1/repositories/maven/group/" POST
-        
-        
-        done
+mongodb:
+  auth:
+    enabled: false
