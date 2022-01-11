@@ -729,133 +729,11 @@ jenkins:
                       }
                   }
               - script: >
-                    pipelineJob('Dependency-check') {
-                        parameters {
-                            stringParam('GS_VERSION', '16.2.0-m1')
-                            stringParam('GS_PRODUCT', 'xap')
-                        }
-                        definition {
-                            cpsScm {
-                                scm {
-                                    git {
-                                        remote {
-                                            url('git@github.com:Gigaspaces/xap-premium.git')
-                                            credentials('git_credentials_id')
-                                        }
-                                        branches('master')
-                                        // extensions {
-                                        //     cleanBeforeCheckout()
-                                        // }
-                                    }
-                                    scriptPath("build/jenkinsdependency")
-                                }
-                            }
-                        }
-                    }
-              - script: >
-                  pipelineJob('escrow') {
-                        parameters {
-                            stringParam('BRANCH_NAME', 'master')
-                            stringParam('XAP_VERSION', '16.0.2')
-                        }
-                        definition {
-                            cpsScm {
-                                scm {
-                                    git {
-                                        remote {
-                                            url('git@github.com:Gigaspaces/xap-premium.git')
-                                            credentials('git_credentials_id')
-                                        }
-                                        branches('master')
-                                        // extensions {
-                                        //     cleanBeforeCheckout()
-                                        // }
-                                    }
-                                    scriptPath("build/escrowjob")
-                                }
-                            }
-                        }
-                    }
-              - script: >
-                  pipelineJob('SpaceshipBuild') {
-                      parameters{
-                          choiceParam('MODE', ['CONTINUOUS', 'NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
-                          stringParam('BRANCH_NAME', 'master')
-                          stringParam('XAP_VERSION', '16.2.0')
-                          stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
-                          stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
-                          booleanParam('InsightEdge', true)
-                          parameterSeparatorDefinition {
-                             name('1')
-                             separatorStyle('')
-                             sectionHeader('CONTINUOUS Build parameters')
-                             sectionHeaderStyle("""
-                              background-color: #55216e;
-                              text-align: center;
-                              padding: 4px;
-                              color: #c2db1a;
-                              font-size: 22px;
-                              font-weight: normal;
-                              text-transform: uppercase;
-                              font-family: 'Orienta', sans-serif;
-                              letter-spacing: 1px;
-                              font-style: italic;
-                          """)
-                          }
-                          choiceParam('ELM_VERSION', ['0.19.0', '0.18.0'])
-                          stringParam('NEWMAN_SUITES', '',"""comma separated list of suite ids to submit future jobs  
-                          5c88ea4bb38594355214b205 - manager         
-                          59f25d19b3859424cac590bf - xap-core         
-                          59f25af7b3859424cac590b5 - service-grid    
-                          59f25af5b3859424cac590ad - disconnect
-                          59f25e0f6d98c14e1daa2008 - web-ui            
-                          59f25d5ab3859424cac590c1 - rocksdb           
-                          59f25d5bb3859424cac590c2 - off-heap 
-                          5a96b14268c479caafb1162f - mx-off-heap  
-                          59f59592b3859424cac690fa - i9e-sgtest 
-                          59f25af6b3859424cac590b0 - insightedge-premium  
-                          59f25af7b3859424cac590b9 - wan  
-                          5b6c24e7b385941b3b8ce4bf - dev-demote 
-                          59f25e0f6d98c14e1daa5000 - performance  
-                          607420ac4cedfd0009ec8b20 - v3driver""") 
-                          stringParam('NEWMAN_CONFIG_ID', '5b4c9342b3859411ee82c265', """Applicable only when submitting future jobs 
-                          5b4c9342b3859411ee82c265 - ORACLE_8   
-                          5b4c9825b3859411ee82c2f3  - ORACLE_9  
-                          5bf160bb1f31eb789fc0fa65 - OPENJDK_11 
-                          5bf160bb1f31eb789fc0fb78 - OPENJDK_17""") 
-                          stringParam('NEWMAN_AGENT_GROUPS', 'imc-srv01,imc-srv02,DotNet,Bynet')
-                          stringParam('NEWMAN_JOB_PRIORITY', '1', """0- daily-default  
-                          1- low  
-                          2- high 
-                          3- release-default    
-                          4- urgent""")   
-                          parameterSeparatorDefinition{
-                             name('2')
-                             separatorStyle('')
-                             sectionHeader('RELEASE Build parameters')
-                             sectionHeaderStyle("""
-                              background-color: #55216e;
-                              text-align: center;
-                              padding: 4px;
-                              color: #c2db1a;
-                              font-size: 22px;
-                              font-weight: normal;
-                              text-transform: uppercase;
-                              font-family: 'Orienta', sans-serif;
-                              letter-spacing: 1px;
-                              font-style: italic;
-                          """)
-                          }
-                          booleanParam('DotNet', false ,'Enable/Disable XAP.NET build')
-                          booleanParam('PERFORM_FULL_M2_CLEAN', true)
-                          booleanParam('OVERRIDE_EXISTING_TAG', true, 'Override git tag if exists')
-                          booleanParam('DEPLOY_MVN_ARTIFACTS', true, 'Deploy build maven artifacts to S3')
-                          booleanParam('PUBLISH_DOCKER', true, 'Trigger automated docker build in Docker Hub')
-                          stringParam('GS_PATCH_IDNAME', 'a', "Patch identifier (usually a letter a, b, c).")
-                          booleanParam('JAVA_DOCS',true, 'Create and upload java api docs')
-                          booleanParam('GEN_SMART_ZIPS',true, 'Generate and upload the smart-cache & smart-augmented-transactions zip files')
-                          booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
-                      } 
+                  pipelineJob('Dependency-check') {
+                      parameters {
+                          stringParam('GS_VERSION', '16.2.0-m1')
+                          stringParam('GS_PRODUCT', 'xap')
+                      }
                       definition {
                           cpsScm {
                               scm {
@@ -863,21 +741,188 @@ jenkins:
                                       remote {
                                           url('git@github.com:Gigaspaces/xap-premium.git')
                                           credentials('git_credentials_id')
-                                          
-                          
                                       }
                                       branches('master')
                                       // extensions {
                                       //     cleanBeforeCheckout()
                                       // }
-                                      
                                   }
-                                  scriptPath("build/jenkinsfile")
+                                  scriptPath("build/jenkinsdependency")
                               }
-                              
                           }
                       }
                   }
+              - script: >
+                  folder('xap-insightedge') {
+                      description('folder')
+                      pipelineJob('xap-insightedge/escrow') {
+                          parameters {
+                              stringParam('BRANCH_NAME', 'master')
+                              stringParam('XAP_VERSION', '16.0.2')
+                          }
+                          definition {
+                              cpsScm {
+                                  scm {
+                                      git {
+                                          remote {
+                                              url('git@github.com:Gigaspaces/xap-premium.git')
+                                              credentials('git_credentials_id')
+                                          }
+                                          branches('master')
+                                          // extensions {
+                                          //     cleanBeforeCheckout()
+                                          // }
+                                      }
+                                      scriptPath("build/escrowjob")
+                                  }
+                              }
+                          }
+                      }
+                  }
+              - script: >
+                  folder('xap-insightedge') {
+                      description('Folder containing release /continuous')
+                      folder('xap-insightedge/latest') {
+                          description('latest')
+                          pipelineJob('xap-insightedge/latest/release') {
+                              parameters{
+                                  choiceParam('MODE', [ 'NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
+                                  stringParam('BRANCH_NAME', 'master')
+                                  stringParam('XAP_VERSION', '16.2.0')
+                                  stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
+                                  stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
+                                  booleanParam('InsightEdge', true)
+                                  parameterSeparatorDefinition{
+                                    name('2')
+                                    separatorStyle('')
+                                    sectionHeader('RELEASE Build parameters')
+                                    sectionHeaderStyle("""
+                                      background-color: #55216e;
+                                      text-align: center;
+                                      padding: 4px;
+                                      color: #c2db1a;
+                                      font-size: 22px;
+                                      font-weight: normal;
+                                      text-transform: uppercase;
+                                      font-family: 'Orienta', sans-serif;
+                                      letter-spacing: 1px;
+                                      font-style: italic;
+                                  """)
+                                  }
+                                  booleanParam('DotNet', false ,'Enable/Disable XAP.NET build')
+                                  booleanParam('PERFORM_FULL_M2_CLEAN', true)
+                                  booleanParam('OVERRIDE_EXISTING_TAG', true, 'Override git tag if exists')
+                                  booleanParam('DEPLOY_MVN_ARTIFACTS', true, 'Deploy build maven artifacts to S3')
+                                  booleanParam('PUBLISH_DOCKER', true, 'Trigger automated docker build in Docker Hub')
+                                  stringParam('GS_PATCH_IDNAME', 'a', "Patch identifier (usually a letter a, b, c).")
+                                  booleanParam('JAVA_DOCS',true, 'Create and upload java api docs')
+                                  booleanParam('GEN_SMART_ZIPS',true, 'Generate and upload the smart-cache & smart-augmented-transactions zip files')
+                                  booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
+                              } 
+                              definition {
+                                  cpsScm {
+                                      scm {
+                                          git {
+                                              remote {
+                                                  url('git@github.com:Gigaspaces/xap-premium.git')
+                                                  credentials('git_credentials_id')
+                                                  
+                                  
+                                              }
+                                              branches('master')
+                                              // extensions {
+                                              //     cleanBeforeCheckout()
+                                              // }
+                                              
+                                          }
+                                          scriptPath("build/jenkinsfile")
+                                      }   
+                                  }
+                              }
+                          }
+                      }
+                  }          
+              - script: >
+                  folder('xap-insightedge') {
+                      description('Folder containing release /continuous')
+                      folder('xap-insightedge/latest') {
+                          description('latest')
+                          pipelineJob('xap-insightedge/latest/continuous') {
+                              parameters{
+                                  choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
+                                  stringParam('BRANCH_NAME', 'master')
+                                  stringParam('XAP_VERSION', '16.2.0')
+                                  stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
+                                  stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
+                                  booleanParam('InsightEdge', true)
+                                  parameterSeparatorDefinition {
+                                    name('1')
+                                    separatorStyle('')
+                                    sectionHeader('CONTINUOUS Build parameters')
+                                    sectionHeaderStyle("""
+                                      background-color: #55216e;
+                                      text-align: center;
+                                      padding: 4px;
+                                      color: #c2db1a;
+                                      font-size: 22px;
+                                      font-weight: normal;
+                                      text-transform: uppercase;
+                                      font-family: 'Orienta', sans-serif;
+                                      letter-spacing: 1px;
+                                      font-style: italic;
+                                  """)
+                                  }
+                                  choiceParam('ELM_VERSION', ['0.19.0', '0.18.0'])
+                                  stringParam('NEWMAN_SUITES', '',"""comma separated list of suite ids to submit future jobs  
+                                  5c88ea4bb38594355214b205 - manager         
+                                  59f25d19b3859424cac590bf - xap-core         
+                                  59f25af7b3859424cac590b5 - service-grid    
+                                  59f25af5b3859424cac590ad - disconnect
+                                  59f25e0f6d98c14e1daa2008 - web-ui            
+                                  59f25d5ab3859424cac590c1 - rocksdb           
+                                  59f25d5bb3859424cac590c2 - off-heap 
+                                  5a96b14268c479caafb1162f - mx-off-heap  
+                                  59f59592b3859424cac690fa - i9e-sgtest 
+                                  59f25af6b3859424cac590b0 - insightedge-premium  
+                                  59f25af7b3859424cac590b9 - wan  
+                                  5b6c24e7b385941b3b8ce4bf - dev-demote 
+                                  59f25e0f6d98c14e1daa5000 - performance  
+                                  607420ac4cedfd0009ec8b20 - v3driver""") 
+                                  stringParam('NEWMAN_CONFIG_ID', '5b4c9342b3859411ee82c265', """Applicable only when submitting future jobs 
+                                  5b4c9342b3859411ee82c265 - ORACLE_8   
+                                  5b4c9825b3859411ee82c2f3  - ORACLE_9  
+                                  5bf160bb1f31eb789fc0fa65 - OPENJDK_11 
+                                  5bf160bb1f31eb789fc0fb78 - OPENJDK_17""") 
+                                  stringParam('NEWMAN_AGENT_GROUPS', 'imc-srv01,imc-srv02,DotNet,Bynet')
+                                  stringParam('NEWMAN_JOB_PRIORITY', '1', """0- daily-default  
+                                  1- low  
+                                  2- high 
+                                  3- release-default    
+                                  4- urgent""")   
+                              } 
+                              definition {
+                                  cpsScm {
+                                      scm {
+                                          git {
+                                              remote {
+                                                  url('git@github.com:Gigaspaces/xap-premium.git')
+                                                  credentials('git_credentials_id')
+                                                  
+                                  
+                                              }
+                                              branches('master')
+                                              // extensions {
+                                              //     cleanBeforeCheckout()
+                                              // }
+                                              
+                                          }
+                                          scriptPath("build/jenkinsfile")
+                                      }
+                                  }
+                              }
+                          }    
+                      }
+                  }        
     customInitContainers: []
     sidecars:
       configAutoReload:
@@ -1427,11 +1472,140 @@ jenkins:
         securityGroupIds: []
         podSelector: {}
 
+nexus-repository-manager:
+  nexus:
+    readinessProbe:
+      initialDelaySeconds: 90
+    
+    properties:
+      override: false
+      data:
+        nexus.scripts.allowCreation: true
+    env:
+      - name: install4jAddVmParams
+        value: "-Xms1200M -Xmx1200M -XX:MaxDirectMemorySize=2G -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+      - name: NEXUS_SECURITY_RANDOMPASSWORD
+        value: "false"
+    securityContext:
+      fsGroup: 1001
+    
+    # Uncomment and modify this to run a command after starting the nexus container.
+  deployment:
+  
+    initContainers:
+    - name: fmp-volume-permission
+      image: busybox
+      imagePullPolicy: IfNotPresent
+      command: ['chown','-R', '200', '/nexus-data']
+      volumeMounts:
+      - mountPath: /nexus-data
+        name: nexus-repository-manager-data
+    - name: run-script
+      image: busybox
+      imagePullPolicy: IfNotPresent
+      command: ['chown','-R', '200', '/nexus-data']
+      volumeMounts:
+      - mountPath: /nexus-data
+        name: nexus-repository-manager-data
+  
+      
+      
+    # Uncomment and modify this to run a command after starting the nexus container.
+    
+    
+    # postStart:
+    #   command:
+    #   - /bin/bash
+    #   - /scripts/postStart.sh
+  secret:
+    enabled: true
+    mountPath: /etc/secret-volume/
+    readOnly: true
+    data: 
+      password : |
+        R2lnYVNwYWNlcw==
+
+  service:
+    name: nexus3
+    enabled: true
+    labels: {}
+    annotations: {}
+    type: ClusterIP
+
+  resources:
+    requests:
+        ## Based on https://support.sonatype.com/hc/en-us/articles/115006448847#mem
+        ## and https://twitter.com/analytically/status/894592422382063616:
+        ##   Xms == Xmx
+        ##   Xmx <= 4G
+        ##   MaxDirectMemory >= 2G
+        ##   Xmx + MaxDirectMemory <= RAM * 2/3 (hence the request for 4800Mi)
+        ##   MaxRAMFraction=1 is not being set as it would allow the heap
+        ##     to use all the available memory.
+      cpu: 1Gi
+      memory: 4800Mi
+
+  config:
+    enabled: true
+    data:
+      postStart.sh: |-
+        #!/bin/bash
+        echo 'in script'
+        set -eu
+        HOST="localhost:8081"
+        until curl --output /dev/null --silent --head --fail http://${HOST}/; do
+        printf '.'
+        sleep 5
+        done
+        NEXUS_BASE_DIR="/sonatype-nexus-conf"
+        USERNAME="admin"
+        PASSWORD="admin123"
+        PASSWORD_FROM_FILE="$(cat /nexus-data/config/password || true)"
+        function die() {
+          echo "ERROR: $*" 1>&2
+          exit 1
+        }
+        # Call the Nexus API for the specified repository
+        function runCurlFromJsonFile() {
+        local jsonFile
+        local service
+        local body
+        local method
+        jsonFile="${1}"
+        service="${2}"
+        method="${3}"
+        body="$(cat "${jsonFile}")"
+        if  ! curl --fail -X "${method}" -u "${USERNAME}":"${PASSWORD}" "http://${HOST}/${service}" -H "accept:application/json" -H "Content-Type:application/json" -d "${body//[$'\t\r\n']}"; then
+        echo "Error calling Nexus API for http://${HOST}/${service} to add repository from ${jsonFile}"
+        fi
+        }
+        
+        
+        function setPasswordFromFile() {
+        if [ -n "${PASSWORD_FROM_FILE}" ]; then
+            echo "Updating PASSWORD variable from password file."
+            PASSWORD="${PASSWORD_FROM_FILE}"
+        else
+            echo "Not updating PASSWORD var. Password file either non-existent or not readable."
+        fi
+        }
+
+        if curl --fail --silent -u "${USERNAME}":"${PASSWORD}" http://"${HOST}"/service/metrics/ping; then
+            echo "Login to nexus succeeded. Default password worked. Updating password if available..."
+            curl --fail -X PUT -u "${USERNAME}":"${PASSWORD}" "http://${HOST}/service/rest/beta/security/users/admin/change-password" --header "Content-Type: text/plain" -d "${PASSWORD_FROM_FILE}"
+            setPasswordFromFile
+        elif [ -n "${PASSWORD_FROM_FILE}" ]; then
+            setPasswordFromFile
+            echo "Default password failed. Checking password file..."
+            if curl --fail --silent -u "${USERNAME}":"${PASSWORD}" http://"${HOST}"/service/metrics/ping; then
+                echo "Login to nexus succeeded. Password from secret file worked."
+            else
+                die "Login to nexus failed. Tried both the default password and the provided password secret file."
+            fi
+        else
+            die "Login to nexus failed. Tried the default password only since no password secret file was provided."
+        fi 
 
 mongodb:
   auth:
     enabled: false
-  
-newman-srv:
-  newman:
-    mongodbHost: "gigaci-mongodb"

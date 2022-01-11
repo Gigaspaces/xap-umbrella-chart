@@ -1,0 +1,124 @@
+ multiJob('docs-build') {
+                      steps{
+                          logRotator(10, 20, null,null )
+                          label('docs-agent')
+                          parameters {
+                              choiceParam('destination', ['staging', 'prod'], '''
+                              Determines the publish destination
+                              * staging: https://docs-staging.gigaspaces.com
+                              * production: https://docs.gigaspaces.com''')
+                              choiceParam('profile', ['default','full'], "Determines which flare profile should be built (when Destination is 'production', this is ignored and 'full' is used)")
+                              choiceParam('sites', ['all','flare','hugo'], "Determines which sites to build (when Destination is 'production', this is ignored and 'all' is used)")
+                              stringParam('BRANCH_NAME', 'master')
+                          }
+                          scm {
+                            git {
+                                remote {
+                                    name('origin')
+                                    url('git@serverA:account/repo1.git')
+                                }
+                                branches('*/$BRANCH_NAME')
+                            }
+                          }
+                          triggers {
+                              scm('@hourly')
+                          }
+                          wrappers {
+                              timestamps()
+                          }
+                          batchFile('welcome to docs wizard!')
+                          batchFile('cd "%WORKSPACE%" & call build-site.bat %Destination% %Profile% %Sites%')
+                          }
+                      }
+                  multiJob('docs-new-website') {
+                      label('docs-agent')
+                      steps {
+                          logRotator(10, 20, null,null )
+                          parameters{
+                          choiceParam('Destination', ['new-website'], '''Determines the publish Destination staging: https://docs-staging.gigaspaces.com
+                          * production: https://docs.gigaspaces.com''')
+                          }
+                          scm {
+                              git {
+                                  remote {
+                                      name('origin')
+                                      url('git@serverA:account/repo1.git')
+                                  }
+                                  branches('*/new-website')
+                              }
+                          }
+                          triggers {
+                                scm('@hourly')
+                          }
+                          wrappers {
+                              timestamps()
+                          }
+                          batchFile('welcome to docs wizard!')
+                          batchFile('cd "%WORKSPACE%" & call build-site.bat %Destination% %Profile% %Sites%')  
+                      }  
+                  }
+
+                  Job('docs-build') {
+                      steps{
+                          logRotator(10, 20, null,null )
+                          label('docs-agent')
+                          parameters {
+                              choiceParam('destination', ['staging', 'prod'], '''
+                              Determines the publish destination
+                              * staging: https://docs-staging.gigaspaces.com
+                              * production: https://docs.gigaspaces.com''')
+                              choiceParam('profile', ['default','full'], "Determines which flare profile should be built (when Destination is 'production', this is ignored and 'full' is used)")
+                              choiceParam('sites', ['all','flare','hugo'], "Determines which sites to build (when Destination is 'production', this is ignored and 'all' is used)")
+                              stringParam('BRANCH_NAME', 'master')
+                          }
+                          scm {
+                            git {
+                                remote {
+                                    name('origin')
+                                    url('git@serverA:account/repo1.git')
+                                }
+                                branches('*/$BRANCH_NAME')
+                            }
+                          }
+                          triggers {
+                              scm('* * * * *')
+                          }
+                          wrappers {
+                              timestamps()
+                          }
+                          batchFile('welcome to docs wizard!')
+                          batchFile('cd "%WORKSPACE%" & call build-site.bat %Destination% %Profile% %Sites%')
+                          }
+                      }    
+
+                      Job('Docs/Docs-build') {
+                          label('Docs-agent')
+                          logRotator(5, 10)
+                          parameters {
+                              choiceParam('destination', ['staging', 'prod'], '''
+                              Determines the publish destination
+                              * staging: https://docs-staging.gigaspaces.com
+                              * production: https://docs.gigaspaces.com''')
+                              choiceParam('profile', ['default','full'], "Determines which flare profile should be built (when Destination is 'production', this is ignored and 'full' is used)")
+                              choiceParam('sites', ['all','flare','hugo'], "Determines which sites to build (when Destination is 'production', this is ignored and 'all' is used)")
+                              stringParam('BRANCH_NAME', 'master')
+                          }
+                          scm {
+                              git {
+                                  remote {
+                                      name('origin')
+                                      url('git@serverA:account/repo1.git')
+                                  }
+                                  branches('*/$BRANCH_NAME')
+                              }
+                          }        
+                          triggers {
+                              scm('* * * * *')
+                          }
+                          wrappers {
+                              timestamps()
+                          }
+                          batchTask('cd "%WORKSPACE%" & call build-site.bat %Destination% %Profile% %Sites%')
+                          }
+                      }
+                  }

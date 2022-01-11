@@ -3,63 +3,48 @@ nexus:
     initialDelaySeconds: 90
   
   properties:
-    override: true
+    override: false
     data:
       nexus.scripts.allowCreation: true
   env:
+    - name: install4jAddVmParams
+      value: "-Xms1200M -Xmx1200M -XX:MaxDirectMemorySize=2G -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
     - name: NEXUS_SECURITY_RANDOMPASSWORD
       value: "false"
-deployment:
+  securityContext:
+    fsGroup: 1001
   
+  # Uncomment and modify this to run a command after starting the nexus container.
+deployment:
+
   initContainers:
   - name: fmp-volume-permission
     image: busybox
     imagePullPolicy: IfNotPresent
-    command: ['cp','/sonatype-nexus-conf/postStart.sh', '/scripts/postStart.sh']
+    command: ['chown','-R', '200', '/nexus-data']
     volumeMounts:
     - mountPath: /nexus-data
       name: nexus-repository-manager-data
-    - mountPath: /sonatype-nexus-conf
-      name:  nexus-repository-manager-conf
-    - mountPath: /scripts  
-      name: scripts
   - name: run-script
     image: busybox
     imagePullPolicy: IfNotPresent
-    command: ['chmod','777','/scripts/postStart.sh']
+    command: ['chown','-R', '200', '/nexus-data']
     volumeMounts:
     - mountPath: /nexus-data
       name: nexus-repository-manager-data
-    - mountPath: /sonatype-nexus-conf
-      name:  nexus-repository-manager-conf
-    - mountPath: /scripts  
-      name: scripts
+
+    
+    
   # Uncomment and modify this to run a command after starting the nexus container.
   
-  additionalVolumes:
-    - name: {{ .Release.Name }}-postinstall-nexus-configmap
-        configMap:
-          name: log-config
-          items:
-            - key: log_level
-              path: log_level
-  additionalVolumeMounts: 
-  - name : scripts
-    mountPath:  /scripts
   
-      
-  # preStart:
-  #   command:
-      
-  #     - ['chown','-R', '777', '/nexus-data']
-  #   - '["/bin/rm", "-f", "/nexus-data/lock"]'
-    
   # postStart:
   #   command:
+  #   - /bin/bash
   #   - /scripts/postStart.sh
 secret:
   enabled: true
-  mountPath: '/nexus-data/config/'
+  mountPath: /etc/secret-volume/
   readOnly: true
   data: 
     password : |
@@ -88,125 +73,6 @@ resources:
 config:
   enabled: true
   data:
-    OpenSpacesmaven.json: |-
-      {
-        "name": "OpenSpaces",
-        "online": true,
-        "storage": {
-          "blobStoreName": "default",
-          "strictContentTypeValidation": true
-        },
-        "cleanup": {
-          "policyNames": [
-            "string"
-          ]
-        },
-        "proxy": {
-          "remoteUrl": "http://maven-repository.openspaces.org",
-          "contentMaxAge": 1440,
-          "metadataMaxAge": 1440
-        },
-        "negativeCache": {
-          "enabled": true,
-          "timeToLive": 1440
-        },
-        "httpClient": {
-          "blocked": false,
-          "autoBlock": true,
-          "connection": {
-            "retries": 0,
-            "userAgentSuffix": "string",
-            "timeout": 60,
-            "enableCircularRedirects": false,
-            "enableCookies": false,
-            "useTrustStore": false
-          },
-          "authentication": {
-            "type": "username",
-            "username": "string",
-            "password": "string",
-            "ntlmHost": "string",
-            "ntlmDomain": "string",
-            "preemptive": false
-          }
-        },
-        "routingRule": "string",
-        "maven": {
-          "versionPolicy": "MIXED",
-          "layoutPolicy": "STRICT",
-          "contentDisposition": "ATTACHMENT"
-        }
-      }
-    muledepsmaven.json: |-
-      {
-        "name": "mule-deps",
-        "online": true,
-        "storage": {
-          "blobStoreName": "default",
-          "strictContentTypeValidation": true
-        },
-        "cleanup": {
-          "policyNames": [
-            "string"
-          ]
-        },
-        "proxy": {
-          "remoteUrl": "https://repository.mulesoft.org/nexus/content/repositories/public",
-          "contentMaxAge": 1440,
-          "metadataMaxAge": 1440
-        },
-        "negativeCache": {
-          "enabled": true,
-          "timeToLive": 1440
-        },
-        "httpClient": {
-          "blocked": false,
-          "autoBlock": true,
-          "connection": {
-            "retries": 0,
-            "userAgentSuffix": "string",
-            "timeout": 60,
-            "enableCircularRedirects": false,
-            "enableCookies": false,
-            "useTrustStore": false
-          },
-          "authentication": {
-            "type": "username",
-            "username": "string",
-            "password": "string",
-            "ntlmHost": "string",
-            "ntlmDomain": "string",
-            "preemptive": false
-          }
-        },
-        "routingRule": "string",
-        "maven": {
-          "versionPolicy": "MIXED",
-          "layoutPolicy": "STRICT",
-          "contentDisposition": "ATTACHMENT"
-        }
-      }
-    group.json: |-
-      {
-        "name": "maven-public",
-        "format": "maven2",
-        "url": "http://localhost:8081/repository/maven-public",
-        "online": true,
-        "storage": {
-          "blobStoreName": "default",
-          "strictContentTypeValidation": true
-        },
-        "group": {
-          "memberNames": [
-            "mule-deps",
-            "OpenSpaces",
-            "maven-central",
-            "maven-releases",
-            "maven-snapshots"
-          ]
-        },
-        "type": "group"
-      }
     postStart.sh: |-
       #!/bin/bash
       echo 'in script'
@@ -265,20 +131,3 @@ config:
           die "Login to nexus failed. Tried the default password only since no password secret file was provided."
       fi 
 
-      # For each maven repository proxy json file, create the repo proxy via the Nexus API.
-      echo "Creating maven proxy repositories from json"
-      mapfile -t REPOS < <(find "${NEXUS_BASE_DIR}"   -type f -name "*maven.json*")
-      for repo in "${REPOS[@]}"; do
-          runCurlFromJsonFile "${repo}" "service/rest/v1/repositories/maven/proxy" POST
-         
-      done
-
-      # For each maven group repository json file, create the repo via the Nexus API.
-
-      echo "Creating maven group repositories from json"
-
-      mapfile -t REPOS < <(find "${NEXUS_BASE_DIR}"   -type f -name "*group.json*")
-      for repo in "${REPOS[@]}"; do
-        runCurlFromJsonFile "${repo}" "service/rest/v1/repositories/maven/group/maven-public" PUT
-      done
-      
