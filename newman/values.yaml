@@ -5,12 +5,18 @@
 replicaCount: 1
 
 image:
+
   registry: docker.io
   repository: gigaops12/newman
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "1.0.4"
-
+  agent:
+    registry: docker.io
+    repository: gigaops12/newman-agent
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "1.0.1"
 
 imagePullSecrets:
   - name: dockerhubcred

@@ -25,7 +25,7 @@ spec:
         - name: newman-agent
           securityContext:  
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: gigaops12/newman-agent:1.0.1
+          image: {{ .Values.image.agent.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
           - containerPort: 80
