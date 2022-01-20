@@ -8,15 +8,15 @@ image:
 
   registry: docker.io
   repository: gigaops12/newman
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "1.0.4"
   agent:
     registry: docker.io
     repository: gigaops12/newman-agent
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "1.0.1"
+    tag: "1.0.8"
 
 imagePullSecrets:
   - name: dockerhubcred
@@ -46,8 +46,14 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
+  listener:
+    type: ClusterIP
+    port: 8443
+  agent:
+    type: ClusterIP
+    port: 443  
   type: LoadBalancer
-  port: 8443
+  port: 8080
 
 ingress:
   enabled: false

@@ -1605,7 +1605,10 @@ nexus-repository-manager:
         else
             die "Login to nexus failed. Tried the default password only since no password secret file was provided."
         fi 
-
+newman-srv:
+  image:
+    agent: 
+      tag: "2.0.7"
 mongodb:
   auth:
     enabled: false

@@ -25,7 +25,7 @@ spec:
         - name: newman-agent
           securityContext:  
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: {{ .Values.image.agent.tag }}
+          image: "{{ .Values.image.agent.repository }}:{{ .Values.image.agent.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
           - containerPort: 80
@@ -45,17 +45,16 @@ spec:
           - name: NEWMAN_AGENT_GROUPNAME
             value: DOCKER,Undefined 
           - name: NEWMAN_NEWMAN_SRV_SERVICE_HOST
-            value: xap-newman-agent
+            value: newman-server
           - name: XAP_NEWMAN_AGENT_PORT_443_TCP_ADDR
-            value: xap-newman-agent 
+            value: '443' 
           - name: NEWMAN_NEWMAN_SRV_PORT_8443_TCP
             value: '8443'
-            
-          # command: ['mkdir', '-p', '/home/xap-agent']
           volumeMounts:
-          - name: agent-dir
-            mountPath: /home/xap-agent
-
+            - mountPath: /home/xap-agent
+              name: newman-data
+          # command: ['mkdir', '-p', '/home/xap-agent']
       volumes:
-        - name: agent-dir
-          emptyDir: {}    
+        - name: newman-data
+          persistentVolumeClaim:
+            claimName: "{{  .Release.Name  }}-data"
