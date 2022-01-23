@@ -12,6 +12,10 @@
 # For FQDN resolving of the controller service. Change this value to match your existing configuration.
 # ref: https://github.com/kubernetes/dns/blob/master/docs/specification.md
 
+global: 
+  om: 
+    newman: 
+      enabled: false
 jenkins:
   clusterZone: "cluster.local"
 
@@ -402,11 +406,10 @@ jenkins:
     # an existing secret "secret-credentials" and a key inside it named "github-password" should be used in Jcasc as ${secret-credentials-github-password}
     # 'name' and 'keyName' must be lowercase RFC 1123 label must consist of lower case alphanumeric characters or '-',
     # and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc')
-    additionalExistingSecrets: []
-    #  - name: secret-name-1
-    #    keyName: username
-    #  - name: secret-name-1
-    #    keyName: password
+    additionalExistingSecrets: 
+    - name: git-credentials-id-secret
+      keyName: privatekey
+      
 
     additionalSecrets: []
     #  - name: nameOfSecret
@@ -481,58 +484,7 @@ jenkins:
                             description: "Private key access to xap-premium-GitHub"
                             privateKeySource:
                               directEntry:
-                                privateKey: |-
-                                  -----BEGIN RSA PRIVATE KEY-----
-                                  MIIJKQIBAAKCAgEAwzSOCWpuELV3k4v7xpMVrtLwS9z2rV7gM5pYNZPA86We1p59
-                                  WjUWN2+TBmGg2EWdmo2VvIL92z/H+pyYm7TetkEH+ip9I5YHdfprs4wNuTjzr9Qj
-                                  v5JgjyTAA2AEG+eTRCCDIjNuTwW0sfIoIyFPinYKesF9PUthZ4nxhGx2qJ/aX6eY
-                                  PN9prgexGnjLse2qVwqtLsficdOzkcFOjQSD7lh70QrgBTM91ad4SkvjlJ9EUK1W
-                                  pmVDnO8BiBcmTRC/WVrftvXlo7uUE5qnm/RXeIsWOgtNKFh4Kxo5Epsw6Z7dZj7H
-                                  4FoX9vbmbu1pm8Lm7D7VrykV1sLDiiv5uJ6W6WJPevqbI1AiIkYhCkbxNK8iPB8J
-                                  EgnOpPlvU1qa0B3nVkkg2pUEcKqU/VGwLJZwL3hyuTYX265UzHXV044b6jyaogms
-                                  tApMn8yPxigODqwx6/ufJw887grEh3qaps08GBLkqIhJEzB555POYaPpNx1xBv/S
-                                  /dWPp+vFqBof2rvr88Fo+/SQIfnwaRufWiSVpF8OW8mhhqnchyF65reqdI589FwE
-                                  Ph1k9EQ4mPiJfzqG9nCLCPi0lW/FSP2fvCe59gw/F5Iyjak1yKlOSa561nVhIzfy
-                                  DD42+1ti9SGGJ61+wLdad5vEmtWKnm2iLd3r/G0LdsmgiL91uYvSjJMa1NcCAwEA
-                                  AQKCAgEAkIc53tjRM0fYiALt4GGIfU8qoVCxxz1mzG4rf0etZfgrOYZRE1gY4eSX
-                                  O/NOzrIEdaj8w31NDWcU3oXRK//noZNWn6+TxaRQU9acpWw9wPTc4EM2UKHFIla4
-                                  YAdYI3z6+UcFMG5Z7uIvnkzH0PLZ3I93RNo7qwVD0hA9JKnV1RW97nK88d0MdtC1
-                                  HP9w+YUZSKbcALX4AAUZgAJa8Wf1cqRK0ES4BsGgt67uDjxP/PtK7lzYugxh2jDP
-                                  tn5FWmva8QKqfuFjLC42/ajVDlAD73kzdLhnYUbXejpJJXCH74EzNX+oJ4EtGypF
-                                  BL59IdlVdnczaSQHSmIbuxLCKyIoYsrjCH5SpyvwhPopX6wHHITgbnAqOUNWQ+XB
-                                  YVauDb0ckbOmBANYRYm6NHFBwKTXeumsLZvKeOhc2STZ+6TU46+G3rTxlzQN0Cac
-                                  FZ/s+eOd21VxkCOy88+aPCpZEZOIY4VmfTGg42eCR5aZzNfdUk7rYRmm6lShnUDS
-                                  K6WkxXLN8Au26W02FecOL/RhwcRVKtJv0pdsfkWIFE4nyBfJJWJHFD053Hg94zLz
-                                  8H228i9iIvmtDNzmHN15zjkRXffXdYQb1lwtdI0/Vlp9e0nXoYk3hU2USD+RPQEC
-                                  IGu9AMSQoDPSBDhxr4SKp6XSukullYFlXv1Wy+ZfkNk3jHBsG6ECggEBAOAmA8uB
-                                  ZPGyNMzShlaliLP1ScC/FCSbwpOCzwZfEYyXQO6580eirWaWJp+5ki/T2CWh6ByQ
-                                  j5LbPvp5LfUOSthgjwhkyvBX3UbcaxsA6L3kdQZ3pH3vtT3NpHbZZsdZqS28MvCq
-                                  4GjeFY6amP3tU4AYRDI2rwpIAtd83ttEHnqlF3C7b5hyBFY760OCAcMZHP1h72xh
-                                  dmiaMzvH8m2Pd9L6G/58NFDaQHSFEb2Og6SMXHZLdtN92DC8X9NCd0+NFADeoSwO
-                                  6wq64w4aNe8yZ9hlqgmcvnXPfsEU5sR5j3GLO/qaQEdcJT4Rz/TfIa9SudjqOMHn
-                                  yiJyUDv0SnIHBNECggEBAN7xp9dcx/6DbB30GqLIsit3NpT25RiKYLe5dkd1XstV
-                                  wYTM2GKzOPQ3JvRHmTXrU77kFoZXqyRdrCLahU4s8U6yzjbVn9UQYLoWqsDP6urZ
-                                  J1Eudz6F6dg6ZHnDiksPxgbi8Q6ajs89PV+5Jk0+SOYrwKk3uqaPbGH2s7Xjy9+t
-                                  RVk8ToVd5nK1MByzwkb0XRepGBYoYb7b/4u2tZf0X1X5l1wqF8TWUZzg2G7MJ6SJ
-                                  3trPNVKF33kLZFzMX3G0nj3T8BNngVMi4cxKcVAKxsoNuEOHSx0x8x48w8+o1Lq2
-                                  RGKre1lLQfoTnAbdamgd2hXU+7AZ+4RPMUdBg8FxyScCggEAFdyfUiH0rn4rGC8Q
-                                  WzMZ+jNaVipM1KU8fRatCnoLRCMceiw4xivfrbnHWpzG3VNUKZd5BBA1cKVhpxxa
-                                  lyQluKTyTmdGQ9rOAjNNXvzftmWp5E+XA5F1o+mCuPTLSXY9QfCxJzgDWzcN8zKw
-                                  6VNUaZH0VNFwkRgk7s+HDOu/7UZc2untIHk+YwrFD3iGo3i3kx8SMwfufJVNme8O
-                                  fhEYJsOuJ0wF7jzbPIIeENbtkAcAnakOleIYS+iTkA9Tg7bG1K7iGWH7GrjPnHiB
-                                  +ip4ZmrEAtv+1469Vieruk4A55ok53RUAKHEICGsnr2Ek40GA1oU3xS0aler660P
-                                  9b8pgQKCAQAJ2EX/Hpu+Q3NsxzC963rirHr+jQCE2ud2dXwhn681722CPcF4ak2j
-                                  iyPvOZIsbV3fWhcci5aFHpXRXDDyyM1HGmI8zaYnNHfw/7s+lG/dOwWfchvV6Pfw
-                                  knOJZPcgZWvrNe5LJMwVnrCtH3Hvi0aQ03HIhyt423B/yvMYnxyLng0n6Z/WB9V7
-                                  T0D2o4F6vKO3vcHQiKv4T6KzOrg+I45qL4FdkoZGLOihstQb4GwHugbbRrcmE79Q
-                                  iw49gtDcJouuU0OQt8tgLnQmH0ttq2wn0/9FDB5nBaOkvC4xZ1UtgYr3iHcD9GzP
-                                  bDpBm1lti5PrzuHmXt9aclzMtrnouuuVAoIBAQCM2Uw6QxVL46JzArPja1j6yP4g
-                                  4DF3d1E9Ju14NVklWITtDEijdzxqnKbpMikqBIIgBUsgWNDgzLZOk06eQKhElL5b
-                                  uWjN7cqVJxpNempTXSlb5Zt5nxZqlMjEFBCgJITzk5WC792zLsPkzjZzfvyaQSB/
-                                  2JCfdYugkrObT/bHJFqhy7U2hdOxHEEAiqEzYXG2/U0K1uFwozpZZs0e8Ztcpc0K
-                                  wkjKyWWUWXOVCbSYJpQK62ZfEMgJxI2aDkfWMxElayE5gkUkNwPerzLQDlP57CnW
-                                  hB708s34YSBPb6y2mtZ9PHfEDixOrxXV7VpbYj5uP3lCUgisdf4RIxQ2hJuU
-                                  -----END RSA PRIVATE KEY-----
+                                privateKey: "{$git-credentials-id-secret-privatekey}"
             jenkins:
               authorizationStrategy:
                 roleBased:
@@ -590,80 +542,6 @@ jenkins:
                           disabled: true
                           failIfWorkDirIsMissing: false
                           internalDir: 'remoting'
-              clouds:
-              - kubernetes:
-                  containerCap: 10
-                  containerCapStr: "10"
-                  jenkinsTunnel: "gigaci-jenkins-agent.neptun.svc.cluster.local:50000"
-                  jenkinsUrl: "http://gigaci-jenkins.neptun.svc.cluster.local:8080"
-                  name: "kubernetes"
-                  namespace: "neptun"
-                  podLabels:
-                  - key: "type"
-                    value: "jenkins-slave"
-                  podRetention: "always"
-                  serverUrl: "https://A162466E0885FDDC365B0B98FCE592BB.gr7.eu-central-1.eks.amazonaws.com"
-                  templates:
-                  - containers:
-                    - args: "9999999"
-                      command: "sleep"
-                      envVars:
-                      - envVar:
-                          key: "WORKSPACE"
-                          value: "/home/jenkins/agent/workspace/"
-                      image: "gigaops12/jenkins:1.0.1"
-                      livenessProbe:
-                        failureThreshold: 0
-                        initialDelaySeconds: 0
-                        periodSeconds: 0
-                        successThreshold: 0
-                        timeoutSeconds: 0
-                      name: "xap"
-                      resourceLimitCpu: "4"
-                      resourceLimitMemory: "10G"
-                      resourceRequestCpu: "3"
-                      resourceRequestMemory: "10G"
-                      workingDir: "/home/jenkins/agent"
-                    workspaceVolume:
-                      dynamicPVC:
-                        storageClassName: gp2
-                        requestsSize: 10G
-                        accessModes: ReadWriteOnce
-                    envVars:
-                    - envVar:
-                        key: "JENKINS_URL"
-                        value: "http://gigaci-jenkins.neptun.svc.cluster.local:8080/"
-                    id: "76891704-e0dc-44a7-b20f-5c033d2cedc8"
-                    inheritFrom: "yaml: '''     apiVersion: v1     kind: Pod     spec:       containers:\
-                      \       - name: maven         image: jenkins/inbound-agent:4.3-4-jdk11 \
-                      \        command:         - sleep         args:         - 99d '''"
-                    label: "jenkins-slave"
-                    name: "jenkins-slave"
-                    namespace: "neptun"
-                    nodeUsageMode: "NORMAL"
-                    podRetention: "Never"
-                    volumes:
-                    - hostPathVolume:
-                        hostPath: "/var/run/docker.sock"
-                        mountPath: "/var/run/docker.sock"
-                    - emptyDirVolume:
-                        memory: false
-                        mountPath: "/home/jenkins/agent"
-                    - secretVolume:
-                        mountPath: "/data/jenkins/xap-jenkins/m2"
-                        optional: false
-                        secretName: "mvn-settings-secret"    
-                    yamlMergeStrategy: "override"
-                  - containers:
-                    - args: "9999999"
-                      command: "sleep"
-                      image: "mcr.microsoft.com/dotnet/core/sdk:2.1"
-                      livenessProbe:
-                        failureThreshold: 0
-                        initialDelaySeconds: 0
-                        periodSeconds: 0
-                        successThreshold: 0
-                        timeoutSeconds: 0
             jobs:
               - script: >
                   folder('Docs'){

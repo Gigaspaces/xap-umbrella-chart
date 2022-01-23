@@ -11,5 +11,5 @@ dependencies:
 - name: nexus-repository-manager
   repository: https://sonatype.github.io/helm3-charts/
   version: 37.3.0
-digest: sha256:0cb7ec20ed2371e49c33bbeb419618a39163726075e423c2ee50c9f5c9f2c40e
-generated: "2022-01-18T15:01:41.450544+02:00"
+digest: sha256:febbbc884232d4a31b480e9940213c37005ff60266d49331bbdb3efb8166edac
+generated: "2022-01-20T16:46:15.08024+02:00"

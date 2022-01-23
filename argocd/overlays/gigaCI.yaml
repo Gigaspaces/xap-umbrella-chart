@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pocoz-umbrella-stack
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:Gigaspaces/xap-umbrella-chart.git'
+    path: giga-ci-chart
+    targetRevision: master
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: pocoz
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
