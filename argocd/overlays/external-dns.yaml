@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-dns
+  namespace: argocd
+spec:
+  project: GigaSpaces-dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: external-dns
+  source:
+    chart: external-dns
+    repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: 5.4.0
+    helm:
+      values: |-
+        aws: 
+          preferCNAME: true
+          region: us-east-2
+        serviceAccount:
+          create: true
+          name: external-dns
+          annotations:
+            "arn:aws:iam::573366771204:role/xap-op-dev-external-dns"
+        podAnnotation:
+            arn:aws:iam::573366771204:role/xap-op-dev-external-dns
+        txtOwnerId: external-dns
+        txtPrefix: Giga-
+        publishInternalServices: true
+        provider: aws
+        serviceTypeFilter:
+          - LoadBalancer
+        logLevel: debug
+        podSecurityContext:
+          fsGroup: 65534
+          runAsUser: 0
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true 
+    automated:
+      prune: true

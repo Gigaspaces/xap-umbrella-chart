@@ -4,7 +4,7 @@ metadata:
   name: pocoz-umbrella-stack
   namespace: argocd
 spec:
-  project: default
+  project:  GigaSpaces-dev
   source:
     repoURL: 'git@github.com:Gigaspaces/xap-umbrella-chart.git'
     path: giga-ci-chart
