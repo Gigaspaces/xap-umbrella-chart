@@ -4,7 +4,7 @@ metadata:
   name: external-dns
   namespace: argocd
 spec:
-  project: GigaSpaces-dev
+  project: default
   destination:
     server: https://kubernetes.default.svc
     namespace: external-dns
