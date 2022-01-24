@@ -11,7 +11,7 @@ spec:
     targetRevision: master
   destination:
     server: https://kubernetes.default.svc
-    namespace: giga-dev
+    namespace: default
   syncPolicy:
     automated:
       prune: false
