@@ -5,8 +5,6 @@ commonAnnotations:
   notifications.argoproj.io/subscribe.slack: debug-infra
 resources:
   - external-dns.yaml
-  - external-secrets.yaml
   - gigaCI.yaml
-  - prometheus.yaml
-  - loki.yaml
+  
   
