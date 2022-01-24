@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: pocoz-umbrella-stack
+  name: GigaCI-umbrella-stack
   namespace: argocd
 spec:
-  project:  GigaSpaces-dev
+  project:  default
   source:
     repoURL: 'git@github.com:Gigaspaces/xap-umbrella-chart.git'
     path: giga-ci-chart
