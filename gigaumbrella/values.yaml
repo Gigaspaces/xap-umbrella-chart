@@ -16,6 +16,8 @@ global:
   om: 
     newman: 
       enabled: false
+    mongodb:
+      enabled: false  
 jenkins:
   clusterZone: "cluster.local"
 

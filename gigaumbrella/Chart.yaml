@@ -18,6 +18,7 @@ dependencies:
   - name: mongodb
     repository: "https://charts.bitnami.com/bitnami"
     version: 10.29.0
+    condition: global.om.mongodb.enabled
   - name: newman-srv
     repository: "s3://xap-test-sultan/newman-chart/"
     version: 0.1.7
