@@ -217,7 +217,7 @@ jenkins:
     agentListenerLoadBalancerIP:
     agentListenerServiceAnnotations: 
       "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout": "300"
-      "external-dns.alpha.kubernetes.io/hostname" : "jenkinsagent.gigaspaces.com"
+      "external-dns.alpha.kubernetes.io/hostname" : "jenkinseksagent.gigaspaces.com"
     # Example of 'LoadBalancer' type of agent listener with annotations securing it
     # agentListenerServiceType: LoadBalancer
     # agentListenerServiceAnnotations:
