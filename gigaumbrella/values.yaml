@@ -137,7 +137,7 @@ jenkins:
     # Jenkins controller service annotations
     serviceAnnotations: 
       "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout": "300"
-      "external-dns.alpha.kubernetes.io/hostname" : "jenkinsmaster.gigaspaces.com"
+      "external-dns.alpha.kubernetes.io/hostname" : "gigajenkins.gigaspaces.com"
       
       # "service.beta.kubernetes.io/aws-load-balancer-extra-security-groups": arn:aws:iam::573366771204:group/OktaSSO-Group
     # Jenkins controller custom labels
