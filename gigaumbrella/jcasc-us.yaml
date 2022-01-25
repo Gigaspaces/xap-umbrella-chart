@@ -17,10 +17,6 @@ jenkins:
                     value: "jenkins-slave"
                   podRetention: "always"
                   serverUrl: "https://0FDD23E58B7AE70C5436EE74E10177F4.gr7.us-east-2.eks.amazonaws.com"
-                  hostAliases:
-                  - ip: "172.31.13.106"
-                    hostnames:
-                    - "newman-server"
                   templates:
                   - containers:
                     - args: "9999999"
