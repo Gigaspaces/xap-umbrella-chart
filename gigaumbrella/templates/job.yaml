@@ -39,7 +39,7 @@ spec:
             chmod 777 /scripts/postStart.sh;
             ls -la /scripts;
             /scripts/postStart.sh;
-            sleep 200
+            
             
       volumes:
         - name: config-volume
