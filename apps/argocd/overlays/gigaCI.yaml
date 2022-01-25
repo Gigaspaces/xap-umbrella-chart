@@ -7,7 +7,7 @@ spec:
   project:  default
   source:
     repoURL: 'git@github.com:Gigaspaces/xap-umbrella-chart.git'
-    path: gigaumbrella
+    path: apps/gigahelm/gigaumbrella
     targetRevision: master
   destination:
     server: 'https://kubernetes.default.svc'
