@@ -480,7 +480,7 @@ jenkins:
                             scope: SYSTEM
                             id: oren
                             username: oren
-                            password: Giga
+                            password: Giga      
                       - basicSSHUserPrivateKey:
                             scope: GLOBAL
                             id: git_credentials_id
