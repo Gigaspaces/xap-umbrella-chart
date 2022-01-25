@@ -4,6 +4,9 @@ metadata:
   name: external-dns
   namespace: argocd
 spec:
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
   project: default
   destination:
     server: https://kubernetes.default.svc
