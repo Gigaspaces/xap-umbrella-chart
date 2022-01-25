@@ -7,8 +7,8 @@ spec:
   project: default
   source:
     repoURL: git@github.com:Gigaspaces/xap-umbrella-chart.git
-    path: argocd/overlays/kustomization.yaml
-    targetRevision: master
+    path: argocd/overlays/
+    targetRevision: main
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
