@@ -11,8 +11,10 @@ spec:
     targetRevision: master
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: pocoz
+    namespace: gigaci
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true
