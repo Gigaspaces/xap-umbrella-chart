@@ -53,7 +53,7 @@ jenkins:
                       \        command:         - sleep         args:         - 99d '''"
                     label: "jenkins-slave"
                     name: "jenkins-slave"
-                    namespace: "gigaci"
+                    namespace: "neptun"
                     nodeUsageMode: "NORMAL"
                     podRetention: "Never"
                     volumes:
