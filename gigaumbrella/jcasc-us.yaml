@@ -67,11 +67,7 @@ jenkins:
                         mountPath: "/data/jenkins/xap-jenkins/m2"
                         optional: false
                         secretName: "mvn-settings-secret"    
-                    yamlMergeStrategy: "override"
-                  - hostAliases:
-                    - ip: "172.31.13.176"
-                      hostnames:
-                      - "newman-server"                      
+                    yamlMergeStrategy: "override"                 
                   - containers:
                     - args: "9999999"
                       command: "sleep"
