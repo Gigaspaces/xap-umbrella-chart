@@ -960,10 +960,10 @@ jenkins:
 
     # controller.hostAliases allows for adding entries to Pod /etc/hosts:
     # https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
-    hostAliases: 
-    - ip: 172.31.13.176
-      hostnames:
-        - newman-server
+    hostAliases: []
+    # - ip: 172.31.13.176
+    #   hostnames:
+    #     - newman-server
     # - ip: 10.0.50.50
     #   hostnames:
     #     - other.local
