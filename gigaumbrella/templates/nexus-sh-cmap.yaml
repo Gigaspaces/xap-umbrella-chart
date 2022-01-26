@@ -127,7 +127,7 @@ data:
     cp /sonatype-nexus-conf/* /scripts/
     echo 'in script'
     set -eu
-    HOST="giga-ci-chart-nexus-repository-manager:8081"
+    HOST="gigaci-nexus-repository-manager:8081"
     until curl --output /dev/null --silent --head --fail http://${HOST}/; do
     printf '.'
     sleep 5
