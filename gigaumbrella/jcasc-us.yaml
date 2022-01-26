@@ -8,8 +8,8 @@ jenkins:
               - kubernetes:
                   containerCap: 10
                   containerCapStr: "10"
-                  jenkinsTunnel: "gigaci-jenkins-agent.gigaci.svc.cluster.local:50000"
-                  jenkinsUrl: "http://gigaci-jenkins.gigaci.svc.cluster.local:8080"
+                  jenkinsTunnel: "gigaci-jenkins-agent.neptun.svc.cluster.local:50000"
+                  jenkinsUrl: "http://gigaci-jenkins.neptun.svc.cluster.local:8080"
                   name: "kubernetes"
                   namespace: "neptun"
                   podLabels:
@@ -46,7 +46,7 @@ jenkins:
                     envVars:
                     - envVar:
                         key: "JENKINS_URL"
-                        value: "http://gigaci-jenkins.gigaci.svc.cluster.local:8080/"
+                        value: "http://gigaci-jenkins.neptun.svc.cluster.local:8080/"
                     id: "76891704-e0dc-44a7-b20f-5c033d2cedc8"
                     inheritFrom: "yaml: '''     apiVersion: v1     kind: Pod     spec:       containers:\
                       \       - name: maven         image: jenkins/inbound-agent:4.3-4-jdk11 \
