@@ -68,6 +68,10 @@ jenkins:
                         optional: false
                         secretName: "mvn-settings-secret"    
                     yamlMergeStrategy: "override"
+                  - hostAliases:
+                    - ip: "172.31.13.176"
+                      hostnames:
+                      - "newman-server"                      
                   - containers:
                     - args: "9999999"
                       command: "sleep"
