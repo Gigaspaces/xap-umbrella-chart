@@ -523,7 +523,6 @@ jenkins:
                     password: "GigaSpaces"
                     name: "Alesia Pavliuchenkova"
                     properties:
-                    - "Overall/Read"
                     - "apiToken"
                     - "mailer"
                     - mailer:
@@ -544,7 +543,6 @@ jenkins:
                     password: "GigaSpaces"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "anton.soroka@gigaspaces.com"
                     - preferredProvider:
@@ -554,7 +552,6 @@ jenkins:
                     password: "GigaSpaces"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "ayelet.morris@gigaspaces.com"
                     - preferredProvider:
@@ -563,7 +560,6 @@ jenkins:
                     name: "Barak Bar Orion"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "barakbo@gigaspaces.com"
                     - preferredProvider:
@@ -572,7 +568,6 @@ jenkins:
                     name: "David Freedman"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "david.freedman@gigaspaces.com"
                     - preferredProvider:
@@ -581,7 +576,6 @@ jenkins:
                     name: "Efrat Kimchi"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "efrat.kimchi@gigaspaces.com"
                     - preferredProvider:
@@ -590,7 +584,6 @@ jenkins:
                     name: "Elad Gur"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "elad.gur@gigaspaces.com"
                     - preferredProvider:
@@ -599,7 +592,6 @@ jenkins:
                     name: "Ester Atzmon"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "ester.atzmon@gigaspaces.com"
                     - preferredProvider:
@@ -607,7 +599,6 @@ jenkins:
                   - id: "evgeny"
                     name: "Evgeny Fisher"
                     properties:
-                    - "apiToken"
                     - "Overall/Read"
                     - mailer:
                         emailAddress: "evgeny.fisher@gigaspaces.com"
@@ -616,7 +607,6 @@ jenkins:
                   - id: "jenkins"
                     name: "jenkins"
                     properties:
-                    - "apiToken"
                     - "Overall/Read"
                     - mailer:
                         emailAddress: "newman@gigaspaces.com"
@@ -625,7 +615,6 @@ jenkins:
                   - id: "mishel"
                     name: "Mishel Liberman"
                     properties:
-                    - "apiToken"
                     - "Overall/Read"
                     - mailer:
                         emailAddress: "mishel.liberman@gigaspaces.com"
@@ -634,7 +623,6 @@ jenkins:
                   - id: "moran"
                     name: "Meron Avigdor"
                     properties:
-                    - "apiToken"
                     - "Overall/Read"
                     - mailer:
                         emailAddress: "meron.vigdor@gigaspaces.com"
@@ -644,7 +632,6 @@ jenkins:
                     name: "Noi Cohen"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "noi.cohen@gigaspaces.com"
                     - preferredProvider:
@@ -653,7 +640,6 @@ jenkins:
                     name: "	Oleksii Vedernikov"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "oleksii.vedernikov@gigaspaces.com"
                     - preferredProvider:
@@ -662,7 +648,6 @@ jenkins:
                     name: "Olha Rymarchuk"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "olha.rymarchuk@gigaspaces.com"
                     - preferredProvider:
@@ -671,7 +656,6 @@ jenkins:
                     name: "Penina Rosenzweig"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "penina.rosenzweig@gigaspaces.com"
                     - preferredProvider:
@@ -680,7 +664,6 @@ jenkins:
                     name: "sagiv Michael"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "sagiv.michael@gigaspaces.com"
                     - preferredProvider:
@@ -689,7 +672,6 @@ jenkins:
                     name: "Tomer Shapira"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "tomer.shapira@gigaspaces.com"
                     - preferredProvider:
@@ -698,7 +680,6 @@ jenkins:
                     name: "Yechiel Feffer"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "yechiel.feffer@gigaspaces.com"
                     - preferredProvider:
@@ -707,7 +688,6 @@ jenkins:
                     name: "yonatan"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "yonatan.becker@gigaspaces.com"
                     - preferredProvider:
@@ -716,7 +696,6 @@ jenkins:
                     name: "Yuval Dori"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "yuval.dori@gigaspaces.com"
                     - preferredProvider:
@@ -725,7 +704,6 @@ jenkins:
                     name: "Yuval Dror"
                     properties:
                     - "apiToken"
-                    - "Overall/Read"
                     - mailer:
                         emailAddress: "yuval.dror@gigaspaces.com"
                     - preferredProvider:
