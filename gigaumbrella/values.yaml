@@ -494,17 +494,20 @@ jenkins:
                 roleBased:
                   roles:
                     global:
-                      - name: "admin"
+                      - assignments:  
+                        - "admin"
+                        name: "admin"
                         description: "Jenkins administrators"
                         permissions:
                           - "Overall/Administer"
-                      - name: "readonly"
+                        
+                        name: "readonly"
                         description: "Read-only users"
                         permissions:
                           - "Overall/Read"
                           - "Job/Read"
-                        assignments:
-                          - "authenticated"
+                      - assignments:
+                        - "authenticated"
                       - name: "R&D-role"
                         pattern: ".*"
                         permissions:
@@ -543,8 +546,7 @@ jenkins:
                   - id: "Alesia"
                     password: "GigaSpaces"
                     name: "Alesia Pavliuchenkova"
-                    permissions:
-                    - "R&D-users"  
+                    properties:  
                       - mailer:
                           emailAddress: "alesia.pavliuchenkova@gigaspaces.com"
                       - preferredProvider:
@@ -552,8 +554,7 @@ jenkins:
                   - id: "evgeny"
                     name: "Evgeny Fisher"
                     password: "GigaSpaces"
-                    permissions:
-                    - "R&D-users"
+                    properties:
                     - mailer:
                         emailAddress: "evgeny.fisher@gigaspaces.com"
                     - preferredProvider:
