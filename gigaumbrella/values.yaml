@@ -508,7 +508,7 @@ jenkins:
                           - "Job/Read"
                       - assignments:
                         - "authenticated"
-                      - name: "R&D-role"
+                        name: "R&D-role"
                         pattern: ".*"
                         permissions:
                         - "Job/Release"
