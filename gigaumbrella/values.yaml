@@ -558,36 +558,36 @@ jenkins:
                     name: "Evgeny Fisher"
                     password: "GigaSpaces"
                     properties:
-                    - mailer:
-                        emailAddress: "evgeny.fisher@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"            
+                      - mailer:
+                          emailAddress: "evgeny.fisher@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"            
                   - id: "Alesia"
                     password: "GigaSpaces"
                     name: "Alesia Pavliuchenkova"
                     properties:
                     - "apiToken"
-                    - mailer:
-                        emailAddress: "alesia.pavliuchenkova@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
+                      - mailer:
+                          emailAddress: "alesia.pavliuchenkova@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
                   - id: "alani"
                     name: "Alan Irom"
                     password: "GigaSpaces"
                     properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "alan.irom@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "alan.irom@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
                   - id: "anton"
                     name: "Anton Soroka"
                     password: "GigaSpaces"
                     properties:
-                    - mailer:
-                        emailAddress: "anton.soroka@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
+                      - mailer:
+                          emailAddress: "anton.soroka@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
                   - id: "ayeletm"
                     name: "Ayelet Morris"
                     password: "GigaSpaces"
@@ -597,16 +597,9 @@ jenkins:
                         emailAddress: "ayelet.morris@gigaspaces.com"
                     - preferredProvider:
                         providerId: "default"
-                  - id: "barak"
-                    name: "Barak Bar Orion"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "barakbo@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
                   - id: "davidf"
                     name: "David Freedman"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
@@ -615,6 +608,7 @@ jenkins:
                         providerId: "default"
                   - id: "efrat"
                     name: "Efrat Kimchi"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
@@ -623,6 +617,7 @@ jenkins:
                         providerId: "default"
                   - id: "elad"
                     name: "Elad Gur"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
@@ -631,6 +626,7 @@ jenkins:
                         providerId: "default"
                   - id: "ester"
                     name: "Ester Atzmon"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
@@ -639,6 +635,7 @@ jenkins:
                         providerId: "default"
                   - id: "evgeny"
                     name: "Evgeny Fisher"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
@@ -647,6 +644,7 @@ jenkins:
                         providerId: "default"
                   - id: "jenkins"
                     name: "jenkins"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
@@ -655,6 +653,7 @@ jenkins:
                         providerId: "default"
                   - id: "mishel"
                     name: "Mishel Liberman"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
@@ -663,6 +662,7 @@ jenkins:
                         providerId: "default"
                   - id: "moran"
                     name: "Meron Avigdor"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
@@ -671,6 +671,7 @@ jenkins:
                         providerId: "default"
                   - id: "noi"
                     name: "Noi Cohen"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
@@ -678,6 +679,7 @@ jenkins:
                     - preferredProvider:
                         providerId: "default"
                   - id: "oleksii"
+                    password: "GigaSpaces"
                     name: "	Oleksii Vedernikov"
                     properties:
                     - "apiToken"
@@ -687,6 +689,7 @@ jenkins:
                         providerId: "default"
                   - id: "olha"
                     name: "Olha Rymarchuk"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
@@ -695,6 +698,7 @@ jenkins:
                         providerId: "default"
                   - id: "	penina"
                     name: "Penina Rosenzweig"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
@@ -703,6 +707,7 @@ jenkins:
                         providerId: "default"
                   - id: "sagiv"
                     name: "sagiv Michael"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
@@ -711,6 +716,7 @@ jenkins:
                         providerId: "default"
                   - id: "tomer"
                     name: "Tomer Shapira"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
@@ -719,6 +725,7 @@ jenkins:
                         providerId: "default"
                   - id: "yechiel"
                     name: "Yechiel Feffer"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
@@ -727,6 +734,7 @@ jenkins:
                         providerId: "default"
                   - id: "yonatan"
                     name: "yonatan"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
@@ -735,6 +743,7 @@ jenkins:
                         providerId: "default"
                   - id: "yuval"
                     name: "Yuval Dori"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
@@ -743,6 +752,7 @@ jenkins:
                         providerId: "default"
                   - id: "yuval"
                     name: "Yuval Dror"
+                    password: "GigaSpaces"
                     properties:
                     - "apiToken"
                     - mailer:
