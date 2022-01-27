@@ -501,9 +501,41 @@ jenkins:
                       - name: "readonly"
                         description: "Read-only users"
                         permissions:
+                          - "Overall/Read"
                           - "Job/Read"
                         assignments:
                           - "authenticated"
+                      - name: "R&D-role"
+                        pattern: ".*"
+                        permissions:
+                        - "Job/Release"
+                        - "Job/Move"
+                        - "Job/Build"
+                        - "Lockable Resources/View"
+                        - "Lockable Resources/Unlock"
+                        - "View/Create"
+                        - "Job/Read"
+                        - "Agent/Create"
+                        - "Job/Delete"
+                        - "Agent/Build"
+                        - "View/Configure"
+                        - "Metrics/HealthCheck"
+                        - "Lockable Resources/Reserve"
+                        - "Metrics/ThreadDump"
+                        - "SCM/Tag"
+                        - "Job/Create"
+                        - "Job/Discover"
+                        - "Agent/Connect"
+                        - "Run/Replay"
+                        - "Run/Delete"
+                        - "Job/Cancel"
+                        - "Run/Update"
+                        - "Job/ConfigureVersions"
+                        - "View/Delete"
+                        - "Job/Configure"
+                        - "Metrics/View"
+                        - "Job/Workspace"
+                        - "View/Read"    
               securityRealm:
                 local:
                   allowsSignup: false
@@ -512,19 +544,16 @@ jenkins:
                     password: "GigaSpaces"
                     name: "Alesia Pavliuchenkova"
                     properties:
-                    - "apiToken"
+                    - "R&D-users"  
                       - mailer:
                           emailAddress: "alesia.pavliuchenkova@gigaspaces.com"
                       - preferredProvider:
                           providerId: "default"
-                    - id: "evgeny"
+                  - id: "evgeny"
                     name: "Evgeny Fisher"
                     password: "GigaSpaces"
-                    assignments:
-                      - "R&D users"
                     properties:
-                    - "Overall/Read"
-                    - "apiToken"
+                    - "R&D-users"
                     - mailer:
                         emailAddress: "evgeny.fisher@gigaspaces.com"
                     - preferredProvider:
