@@ -506,8 +506,7 @@ jenkins:
                         permissions:
                           - "Overall/Read"
                           - "Job/Read"
-
-                        assignments:
+                          assignments:
                           - "authenticated"
                           - "R&D"
               securityRealm:
@@ -524,8 +523,10 @@ jenkins:
                       - preferredProvider:
                           providerId: "default"    
                     - id: "Alesia"
+                      password: "GigaSpaces"
                       name: "Alesia Pavliuchenkova"
                       properties:
+                      - "Overall/Read"
                       - "apiToken"
                       - "mailer"
                       - mailer:
@@ -534,6 +535,7 @@ jenkins:
                           providerId: "default"
                     - id: "alani"
                       name: "Alan Irom"
+                      password: "GigaSpaces"
                       properties:
                       - "apiToken"
                       - mailer:
@@ -542,6 +544,7 @@ jenkins:
                           providerId: "default"
                     - id: "anton"
                       name: "Anton Soroka"
+                      password: "GigaSpaces"
                       properties:
                       - "apiToken"
                       - mailer:
@@ -550,6 +553,7 @@ jenkins:
                           providerId: "default"
                     - id: "ayeletm"
                       name: "Ayelet Morris"
+                      password: "GigaSpaces"
                       properties:
                       - "apiToken"
                       - mailer:
