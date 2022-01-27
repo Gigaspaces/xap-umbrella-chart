@@ -478,6 +478,11 @@ jenkins:
                             username: "Jenkins Admin"
                             password: GigaSpaces
                       - usernamePassword:
+                            id: "alesia"
+                            password: "{AQAAABAAAAAQoTrGZMHlprCFeqevnWZP4JD0ta+1bR9k1yQiqC1JR48=}"
+                            scope: GLOBAL
+                            username: "alesia"
+                      - usernamePassword:
                             scope: SYSTEM
                             id: oren
                             username: oren
@@ -704,8 +709,8 @@ jenkins:
                           emailAddress: "yechiel.feffer@gigaspaces.com"
                       - preferredProvider:
                           providerId: "default"
-                    - id: "	yonatan"
-                      name: "	yonatan"
+                    - id: "yonatan"
+                      name: "yonatan"
                       properties:
                       - "apiToken"
                       - "Overall/Read"

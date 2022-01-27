@@ -60,7 +60,7 @@ jenkins:
                     yaml: |-
                       spec:
                         hostAliases:
-                          - ip: "172.31.13.176"
+                          - ip: "172.31.13.106"
                             hostnames:
                             - "newman-server"
                     volumes:
