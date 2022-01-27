@@ -504,7 +504,6 @@ jenkins:
                       - name: "readonly"
                         description: "Read-only users"
                         permissions:
-                          - "Overall/Read"
                           - "Job/Read"
                           assignments:
                           - "authenticated"
