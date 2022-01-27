@@ -472,23 +472,23 @@ jenkins:
                 domainCredentials:
                   - credentials:
                       - usernamePassword:
-                            scope: GLOBAL
-                            id: "${chart-admin-username}"
-                            username: "Jenkins Admin"
-                            password: "GigaSpaces"
+                          scope: GLOBAL
+                          id: "${chart-admin-username}"
+                          username: "Jenkins Admin"
+                          password: "GigaSpaces"
                       - usernamePassword:
-                            id: "alesia"
-                            password: "GigaSpaces"
-                            scope: GLOBAL
-                            username: "alesia"     
+                          id: "alesia"
+                          password: "GigaSpaces"
+                          scope: GLOBAL
+                          username: "alesia"     
                       - basicSSHUserPrivateKey:
-                            scope: GLOBAL
-                            id: git_credentials_id
-                            username: jenkins
-                            description: "Private key access to xap-premium-GitHub"
-                            privateKeySource:
-                              directEntry:
-                                privateKey: "${git-credentials-id-secret-privatekey}"                    
+                          scope: GLOBAL
+                          id: git_credentials_id
+                          username: jenkins
+                          description: "Private key access to xap-premium-GitHub"
+                          privateKeySource:
+                            directEntry:
+                              privateKey: "${git-credentials-id-secret-privatekey}"                    
             jenkins: 
               authorizationStrategy:        
                 roleBased:
