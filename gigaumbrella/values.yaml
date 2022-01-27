@@ -476,17 +476,12 @@ jenkins:
                             scope: GLOBAL
                             id: "${chart-admin-username}"
                             username: "Jenkins Admin"
-                            password: GigaSpaces
+                            password: "GigaSpaces"
                       - usernamePassword:
                             id: "alesia"
-                            password: "{AQAAABAAAAAQoTrGZMHlprCFeqevnWZP4JD0ta+1bR9k1yQiqC1JR48=}"
+                            password: "GigaSpaces"
                             scope: GLOBAL
-                            username: "alesia"
-                      - usernamePassword:
-                            scope: SYSTEM
-                            id: oren
-                            username: oren
-                            password: Giga      
+                            username: "alesia"     
                       - basicSSHUserPrivateKey:
                             scope: GLOBAL
                             id: git_credentials_id
@@ -496,7 +491,6 @@ jenkins:
                               directEntry:
                                 privateKey: "${git-credentials-id-secret-privatekey}"                    
             jenkins:         
-              authorizationStrategy:
                 roleBased:
                   roles:
                     global:
