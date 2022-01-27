@@ -550,44 +550,44 @@ jenkins:
                     password: "GigaSpaces"
                     name: "Oren Sultan"
                     properties:  
-                      - mailer:
-                          emailAddress: "oren.sultan@gigaspaces.com"
-                      - preferredProvider:
-                          providerId: "default"
+                    - mailer:
+                        emailAddress: "oren.sultan@gigaspaces.com"
+                    - preferredProvider:
+                        providerId: "default"
                   - id: "evgeny"
                     name: "Evgeny Fisher"
                     password: "GigaSpaces"
                     properties:
-                      - mailer:
-                          emailAddress: "evgeny.fisher@gigaspaces.com"
-                      - preferredProvider:
-                          providerId: "default"            
+                    - mailer:
+                        emailAddress: "evgeny.fisher@gigaspaces.com"
+                    - preferredProvider:
+                        providerId: "default"            
                   - id: "Alesia"
                     password: "GigaSpaces"
                     name: "Alesia Pavliuchenkova"
                     properties:
                     - "apiToken"
-                      - mailer:
-                          emailAddress: "alesia.pavliuchenkova@gigaspaces.com"
-                      - preferredProvider:
-                          providerId: "default"
+                    - mailer:
+                        emailAddress: "alesia.pavliuchenkova@gigaspaces.com"
+                    - preferredProvider:
+                        providerId: "default"
                   - id: "alani"
                     name: "Alan Irom"
                     password: "GigaSpaces"
                     properties:
-                      - "apiToken"
-                      - mailer:
-                          emailAddress: "alan.irom@gigaspaces.com"
-                      - preferredProvider:
-                          providerId: "default"
+                    - "apiToken"
+                    - mailer:
+                        emailAddress: "alan.irom@gigaspaces.com"
+                    - preferredProvider:
+                        providerId: "default"
                   - id: "anton"
                     name: "Anton Soroka"
                     password: "GigaSpaces"
                     properties:
-                      - mailer:
-                          emailAddress: "anton.soroka@gigaspaces.com"
-                      - preferredProvider:
-                          providerId: "default"
+                    - mailer:
+                        emailAddress: "anton.soroka@gigaspaces.com"
+                    - preferredProvider:
+                        providerId: "default"
                   - id: "ayeletm"
                     name: "Ayelet Morris"
                     password: "GigaSpaces"
