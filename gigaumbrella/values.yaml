@@ -508,7 +508,6 @@ jenkins:
                           - "Job/Read"
                           assignments:
                           - "authenticated"
-                          - "R&D"
               securityRealm:
                 local:
                   allowsSignup: false
