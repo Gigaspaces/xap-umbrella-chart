@@ -515,8 +515,6 @@ jenkins:
                     - id: "admin"
                       password: "GigaSpaces"
                       name: "Oren Sultan"
-                      - mailer:
-                          emailAddress: "alesia.pavliuchenkova@gigaspaces.com"
                       properties:
                       - "apiToken"
                       - mailer:
@@ -527,186 +525,187 @@ jenkins:
                       name: "Alesia Pavliuchenkova"
                       properties:
                       - "apiToken"
+                      - "mailer"
                       - mailer:
                           emailAddress: "alesia.pavliuchenkova@gigaspaces.com"
                       - preferredProvider:
                           providerId: "default"
-                      - id: "alani"
-                        name: "Alan Irom"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "alan.irom@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "anton"
-                        name: "Anton Soroka"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "anton.soroka@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "ayeletm"
-                        name: "Ayelet Morris"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "ayelet.morris@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "barak"
-                        name: "Barak Bar Orion"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "barakbo@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "davidf"
-                        name: "David Freedman"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "david.freedman@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "efrat"
-                        name: "Efrat Kimchi"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "efrat.kimchi@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "elad"
-                        name: "Elad Gur"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "elad.gur@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "ester"
-                        name: "Ester Atzmon"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "ester.atzmon@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "evgeny"
-                        name: "Evgeny Fisher"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "evgeny.fisher@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "jenkins"
-                        name: "jenkins"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "newman@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "mishel"
-                        name: "Mishel Liberman"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "mishel.liberman@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "moran"
-                        name: "Meron Avigdor"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "meron.vigdor@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "noi"
-                        name: "Noi Cohen"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "noi.cohen@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "oleksii"
-                        name: "	Oleksii Vedernikov"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "oleksii.vedernikov@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "olha"
-                        name: "Olha Rymarchuk"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "olha.rymarchuk@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "	penina"
-                        name: "Penina Rosenzweig"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "penina.rosenzweig@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "sagiv"
-                        name: "sagiv Michael"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "sagiv.michael@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "tomer"
-                        name: "Tomer Shapira"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "tomer.shapira@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "yechiel"
-                        name: "Yechiel Feffer"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "yechiel.feffer@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "	yonatan"
-                        name: "	yonatan"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "yonatan.becker@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "yuval"
-                        name: "Yuval Dori"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "yuval.dori@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"
-                      - id: "yuval"
-                        name: "Yuval Dror"
-                        properties:
-                        - "apiToken"
-                        - mailer:
-                            emailAddress: "yuval.dror@gigaspaces.com"
-                        - preferredProvider:
-                            providerId: "default"            
+                    - id: "alani"
+                      name: "Alan Irom"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "alan.irom@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "anton"
+                      name: "Anton Soroka"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "anton.soroka@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "ayeletm"
+                      name: "Ayelet Morris"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "ayelet.morris@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "barak"
+                      name: "Barak Bar Orion"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "barakbo@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "davidf"
+                      name: "David Freedman"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "david.freedman@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "efrat"
+                      name: "Efrat Kimchi"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "efrat.kimchi@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "elad"
+                      name: "Elad Gur"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "elad.gur@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "ester"
+                      name: "Ester Atzmon"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "ester.atzmon@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "evgeny"
+                      name: "Evgeny Fisher"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "evgeny.fisher@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "jenkins"
+                      name: "jenkins"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "newman@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "mishel"
+                      name: "Mishel Liberman"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "mishel.liberman@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "moran"
+                      name: "Meron Avigdor"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "meron.vigdor@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "noi"
+                      name: "Noi Cohen"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "noi.cohen@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "oleksii"
+                      name: "	Oleksii Vedernikov"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "oleksii.vedernikov@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "olha"
+                      name: "Olha Rymarchuk"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "olha.rymarchuk@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "	penina"
+                      name: "Penina Rosenzweig"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "penina.rosenzweig@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "sagiv"
+                      name: "sagiv Michael"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "sagiv.michael@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "tomer"
+                      name: "Tomer Shapira"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "tomer.shapira@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "yechiel"
+                      name: "Yechiel Feffer"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "yechiel.feffer@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "	yonatan"
+                      name: "	yonatan"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "yonatan.becker@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "yuval"
+                      name: "Yuval Dori"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "yuval.dori@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"
+                    - id: "yuval"
+                      name: "Yuval Dror"
+                      properties:
+                      - "apiToken"
+                      - mailer:
+                          emailAddress: "yuval.dror@gigaspaces.com"
+                      - preferredProvider:
+                          providerId: "default"            
               crumbIssuer:
                 strict:
                   hoursValid: 5
