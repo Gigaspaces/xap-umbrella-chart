@@ -63,7 +63,6 @@ jenkins:
                           - ip: "172.31.13.176"
                             hostnames:
                             - "newman-server"
-                    yamlMergeStrategy: "merge"
                     volumes:
                     - hostPathVolume:
                         hostPath: "/var/run/docker.sock"
@@ -86,9 +85,6 @@ jenkins:
                         periodSeconds: 0
                         successThreshold: 0
                         timeoutSeconds: 0   
-                  - hostAliases: 
-                    - ip: "172.31.13.176"
-                      hostnames:
-                        - "newman-server"
+                  
             
     
