@@ -302,7 +302,7 @@ jenkins:
       - github-organization-folder:1.6
       - handlebars:1.1.1
       - project-inheritance:2.0.0
-      - display-url-api:2.3.4
+      - display-url-api:2.3.5
       - durable-task:493.v195aefbb0ff2
       - workflow-cps-global-lib:2.19
       - javadoc:1.1
@@ -332,7 +332,7 @@ jenkins:
       - uno-choice:2.0
       - jquery:1.11.2-0
       - github:1.25.1
-      - junit:1.29
+      - junit:1.53
       - envinject:1.93.1
       - workflow-scm-step:2.13
       - build-name-setter:1.6.5
