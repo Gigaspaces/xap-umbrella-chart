@@ -489,7 +489,8 @@ jenkins:
                             privateKeySource:
                               directEntry:
                                 privateKey: "${git-credentials-id-secret-privatekey}"                    
-            jenkins:         
+            jenkins: 
+              authorizationStrategy:        
                 roleBased:
                   roles:
                     global:
