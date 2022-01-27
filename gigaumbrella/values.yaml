@@ -315,7 +315,7 @@ jenkins:
       - credentials-binding:1.27
       - parameterized-trigger:2.35.2
       - docker-workflow:1.14
-      - token-macro:2.3
+      - token-macro:2.15
       - s3:0.10.6
       - git:3.7.0
       - apache-httpcomponents-client-4-api:4.5.10-2.0
