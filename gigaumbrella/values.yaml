@@ -543,32 +543,36 @@ jenkins:
                         - "Job/Workspace"
                         - "View/Read"
               securityRealm:
-                binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-                  displayNameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
-                  groupsAttributeName: "Group"
-                  idpMetadataConfiguration:
-                    period: 0
-                    url: "https://gigaspaces.okta.com/app/gigaspaces_gigaspacesjenkinseks_1/exklv5qo2zeqCw1pk1t7/sso/saml"
-                    xml: |-
-                      <?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor entityID="http://www.okta.com/exklv5qo2zeqCw1pk1t7" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"><md:IDPSSODescriptor WantAuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol"><md:KeyDescriptor use="signing"><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:X509Data><ds:X509Certificate>MIIDpDCCAoygAwIBAgIGAV2me5MJMA0GCSqGSIb3DQEBCwUAMIGSMQswCQYDVQQGEwJVUzETMBEG
-                      A1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEU
-                      MBIGA1UECwwLU1NPUHJvdmlkZXIxEzARBgNVBAMMCmdpZ2FzcGFjZXMxHDAaBgkqhkiG9w0BCQEW
-                      DWluZm9Ab2t0YS5jb20wHhcNMTcwODAzMDUwNDAyWhcNMjcwODAzMDUwNTAyWjCBkjELMAkGA1UE
-                      BhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNV
-                      BAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRMwEQYDVQQDDApnaWdhc3BhY2VzMRwwGgYJ
-                      KoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
-                      pl8rAa+clSlAZJ2luOUgL+sr3t8nKwgXcDG1NWAVET33Huj3/Pa59BlxwhxC5CsWjqeMbJPR1JCE
-                      AW3OnMtJh2lie12H58iIMsiliSTrXrnSkf10rHXBY17FvJPdHBxmR2ZGSf9cRszZba9ZPXBnbS2p
-                      6DQAoEvMhIxB9QYobhwKNTQjBX/1Ouj1YtUgcC+HySC5GT1deS+h5NKsYmRZ5VRb1HU+1IHbOhk6
-                      7iS+qSRyW4z9noZHmKEY/0gyzWz+mrs+DgRzBA2nSJPa+qifxxk3xWKd8rqF3IJH9inv4Nx+VImK
-                      masaxNPPjpU0thPB/nAHRPGXf4STDiBx81q23wIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQBbTz4t
-                      I8+NrfrMwg1zNdNSDsOLe/Ji5ez9E8W2m+wqhpa7X2Wfzuk8Lu4beZX8t563lUb8LvU7OaqfqkXW
-                      huyBpMLm1qxWtwx8qXBcUBRVjT98M6UNETUAkEY9M65uMeQw9IIN9Vy/DSlzUKnwimhJVoFju4on
-                      1uqBRlkoSmWkItPBWLCQLxvo7Bnx4bHjRi+nZC9LK4B37twPhqluLLn6iS4EltdwaCYYJ/BA7QSS
-                      3sxSm3olFl3vHjXL4M+WHkls6i701i7FvAvNXc9SHDFjt3GsN7IzkrKSNbk3aGgDS15nETI+Ehui
-                      5teJ4EBJzzmPdP93QB0gLFpHKkGy+5zK</ds:X509Certificate></ds:X509Data></ds:KeyInfo></md:KeyDescriptor><md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://gigaspaces.okta.com/app/gigaspaces_gigaspacesjenkinseks_1/exklv5qo2zeqCw1pk1t7/sso/saml"/><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://gigaspaces.okta.com/app/gigaspaces_gigaspacesjenkinseks_1/exklv5qo2zeqCw1pk1t7/sso/saml"/></md:IDPSSODescriptor></md:EntityDescriptor>
-                  maximumAuthenticationLifetime: 86400
-                  usernameCaseConversion: "none"
+                saml:
+                  advancedConfiguration:
+                    forceAuthn: false
+                    spEntityId: "Jenkins-users"  
+                  binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                    displayNameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+                    groupsAttributeName: "Group"
+                    idpMetadataConfiguration:
+                      period: 0
+                      url: "https://gigaspaces.okta.com/app/gigaspaces_gigaspacesjenkinseks_1/exklv5qo2zeqCw1pk1t7/sso/saml"
+                      xml: |-
+                        <?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor entityID="http://www.okta.com/exklv5qo2zeqCw1pk1t7" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"><md:IDPSSODescriptor WantAuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol"><md:KeyDescriptor use="signing"><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:X509Data><ds:X509Certificate>MIIDpDCCAoygAwIBAgIGAV2me5MJMA0GCSqGSIb3DQEBCwUAMIGSMQswCQYDVQQGEwJVUzETMBEG
+                        A1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEU
+                        MBIGA1UECwwLU1NPUHJvdmlkZXIxEzARBgNVBAMMCmdpZ2FzcGFjZXMxHDAaBgkqhkiG9w0BCQEW
+                        DWluZm9Ab2t0YS5jb20wHhcNMTcwODAzMDUwNDAyWhcNMjcwODAzMDUwNTAyWjCBkjELMAkGA1UE
+                        BhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNV
+                        BAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRMwEQYDVQQDDApnaWdhc3BhY2VzMRwwGgYJ
+                        KoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
+                        pl8rAa+clSlAZJ2luOUgL+sr3t8nKwgXcDG1NWAVET33Huj3/Pa59BlxwhxC5CsWjqeMbJPR1JCE
+                        AW3OnMtJh2lie12H58iIMsiliSTrXrnSkf10rHXBY17FvJPdHBxmR2ZGSf9cRszZba9ZPXBnbS2p
+                        6DQAoEvMhIxB9QYobhwKNTQjBX/1Ouj1YtUgcC+HySC5GT1deS+h5NKsYmRZ5VRb1HU+1IHbOhk6
+                        7iS+qSRyW4z9noZHmKEY/0gyzWz+mrs+DgRzBA2nSJPa+qifxxk3xWKd8rqF3IJH9inv4Nx+VImK
+                        masaxNPPjpU0thPB/nAHRPGXf4STDiBx81q23wIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQBbTz4t
+                        I8+NrfrMwg1zNdNSDsOLe/Ji5ez9E8W2m+wqhpa7X2Wfzuk8Lu4beZX8t563lUb8LvU7OaqfqkXW
+                        huyBpMLm1qxWtwx8qXBcUBRVjT98M6UNETUAkEY9M65uMeQw9IIN9Vy/DSlzUKnwimhJVoFju4on
+                        1uqBRlkoSmWkItPBWLCQLxvo7Bnx4bHjRi+nZC9LK4B37twPhqluLLn6iS4EltdwaCYYJ/BA7QSS
+                        3sxSm3olFl3vHjXL4M+WHkls6i701i7FvAvNXc9SHDFjt3GsN7IzkrKSNbk3aGgDS15nETI+Ehui
+                        5teJ4EBJzzmPdP93QB0gLFpHKkGy+5zK</ds:X509Certificate></ds:X509Data></ds:KeyInfo></md:KeyDescriptor><md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://gigaspaces.okta.com/app/gigaspaces_gigaspacesjenkinseks_1/exklv5qo2zeqCw1pk1t7/sso/saml"/><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://gigaspaces.okta.com/app/gigaspaces_gigaspacesjenkinseks_1/exklv5qo2zeqCw1pk1t7/sso/saml"/></md:IDPSSODescriptor></md:EntityDescriptor>
+                    maximumAuthenticationLifetime: 86400
+                    usernameCaseConversion: "none"
               crumbIssuer:
                 strict:
                   hoursValid: 5
