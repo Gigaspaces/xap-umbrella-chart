@@ -544,222 +544,39 @@ jenkins:
                         - "Job/Workspace"
                         - "View/Read"
               securityRealm:
-                local:
-                  allowsSignup: false
-                  users:
-                  - id: "admin"
-                    password: "GigaSpaces"
-                    name: "Oren Sultan"
-                    properties:  
-                    - mailer:
-                        emailAddress: "oren.sultan@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "evgeny"
-                    name: "Evgeny Fisher"
-                    password: "GigaSpaces"
-                    properties:
-                    - mailer:
-                        emailAddress: "evgeny.fisher@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"            
-                  - id: "Alesia"
-                    password: "GigaSpaces"
-                    name: "Alesia Pavliuchenkova"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "alesia.pavliuchenkova@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "alan"
-                    name: "Alan Irom"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "alan.irom@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "anton"
-                    name: "Anton Soroka"
-                    password: "GigaSpaces"
-                    properties:
-                    - mailer:
-                        emailAddress: "anton.soroka@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "ayeletm"
-                    name: "Ayelet Morris"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "ayelet.morris@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "davidf"
-                    name: "David Freedman"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "david.freedman@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "efrat"
-                    name: "Efrat Kimchi"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "efrat.kimchi@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "elad"
-                    name: "Elad Gur"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "elad.gur@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "ester"
-                    name: "Ester Atzmon"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "ester.atzmon@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "evgeny"
-                    name: "Evgeny Fisher"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "evgeny.fisher@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "jenkins"
-                    name: "jenkins"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "newman@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "mishel"
-                    name: "Mishel Liberman"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "mishel.liberman@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "moran"
-                    name: "Meron Avigdor"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "meron.vigdor@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "noi"
-                    name: "Noi Cohen"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "noi.cohen@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "oleksii"
-                    password: "GigaSpaces"
-                    name: "	Oleksii Vedernikov"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "oleksii.vedernikov@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "olha"
-                    name: "Olha Rymarchuk"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "olha.rymarchuk@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "	penina"
-                    name: "Penina Rosenzweig"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "penina.rosenzweig@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "sagiv"
-                    name: "sagiv Michael"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "sagiv.michael@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "tomer"
-                    name: "Tomer Shapira"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "tomer.shapira@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "yechiel"
-                    name: "Yechiel Feffer"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "yechiel.feffer@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "yonatan"
-                    name: "yonatan"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "yonatan.becker@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "yuval"
-                    name: "Yuval Dori"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "yuval.dori@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"
-                  - id: "yuval"
-                    name: "Yuval Dror"
-                    password: "GigaSpaces"
-                    properties:
-                    - "apiToken"
-                    - mailer:
-                        emailAddress: "yuval.dror@gigaspaces.com"
-                    - preferredProvider:
-                        providerId: "default"     
+                saml:
+                  advancedConfiguration:
+                    forceAuthn: false
+                    spEntityId: "Jenkins-users"
+                  binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                  displayNameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+                  emailAttributeName: "email"
+                  groupsAttributeName: "Group"
+                  idpMetadataConfiguration:
+                    period: 0
+                    url: "https://gigaspaces.okta.com/app/gigaspaces_gigaspacesjenkinseks_1/exklv5qo2zeqCw1pk1t7/sso/saml"
+                    xml: |-
+                      <?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor entityID="http://www.okta.com/exklv5qo2zeqCw1pk1t7" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"><md:IDPSSODescriptor WantAuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol"><md:KeyDescriptor use="signing"><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:X509Data><ds:X509Certificate>MIIDpDCCAoygAwIBAgIGAV2me5MJMA0GCSqGSIb3DQEBCwUAMIGSMQswCQYDVQQGEwJVUzETMBEG
+                      A1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEU
+                      MBIGA1UECwwLU1NPUHJvdmlkZXIxEzARBgNVBAMMCmdpZ2FzcGFjZXMxHDAaBgkqhkiG9w0BCQEW
+                      DWluZm9Ab2t0YS5jb20wHhcNMTcwODAzMDUwNDAyWhcNMjcwODAzMDUwNTAyWjCBkjELMAkGA1UE
+                      BhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNV
+                      BAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRMwEQYDVQQDDApnaWdhc3BhY2VzMRwwGgYJ
+                      KoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
+                      pl8rAa+clSlAZJ2luOUgL+sr3t8nKwgXcDG1NWAVET33Huj3/Pa59BlxwhxC5CsWjqeMbJPR1JCE
+                      AW3OnMtJh2lie12H58iIMsiliSTrXrnSkf10rHXBY17FvJPdHBxmR2ZGSf9cRszZba9ZPXBnbS2p
+                      6DQAoEvMhIxB9QYobhwKNTQjBX/1Ouj1YtUgcC+HySC5GT1deS+h5NKsYmRZ5VRb1HU+1IHbOhk6
+                      7iS+qSRyW4z9noZHmKEY/0gyzWz+mrs+DgRzBA2nSJPa+qifxxk3xWKd8rqF3IJH9inv4Nx+VImK
+                      masaxNPPjpU0thPB/nAHRPGXf4STDiBx81q23wIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQBbTz4t
+                      I8+NrfrMwg1zNdNSDsOLe/Ji5ez9E8W2m+wqhpa7X2Wfzuk8Lu4beZX8t563lUb8LvU7OaqfqkXW
+                      huyBpMLm1qxWtwx8qXBcUBRVjT98M6UNETUAkEY9M65uMeQw9IIN9Vy/DSlzUKnwimhJVoFju4on
+                      1uqBRlkoSmWkItPBWLCQLxvo7Bnx4bHjRi+nZC9LK4B37twPhqluLLn6iS4EltdwaCYYJ/BA7QSS
+                      3sxSm3olFl3vHjXL4M+WHkls6i701i7FvAvNXc9SHDFjt3GsN7IzkrKSNbk3aGgDS15nETI+Ehui
+                      5teJ4EBJzzmPdP93QB0gLFpHKkGy+5zK</ds:X509Certificate></ds:X509Data></ds:KeyInfo></md:KeyDescriptor><md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://gigaspaces.okta.com/app/gigaspaces_gigaspacesjenkinseks_1/exklv5qo2zeqCw1pk1t7/sso/saml"/><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://gigaspaces.okta.com/app/gigaspaces_gigaspacesjenkinseks_1/exklv5qo2zeqCw1pk1t7/sso/saml"/></md:IDPSSODescriptor></md:EntityDescriptor>
+                  logoutUrl: "https://gigaspaces.okta.com/app/UserHome"
+                  maximumAuthenticationLifetime: 86400
+                  usernameAttributeName: "username"
+                  usernameCaseConversion: "none"
               crumbIssuer:
                 strict:
                   hoursValid: 5
