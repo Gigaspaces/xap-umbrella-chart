@@ -372,7 +372,7 @@ jenkins:
       - jaxb:2.3.0.1
       - batch-task:1.19
       - strict-crumb-issuer:2.1.0
-      - saml:2.1.1-275.va_5718591a_999
+      - saml:2.0.9
     # Set to false to download the minimum required version of all dependencies.
     installLatestPlugins: true
 
