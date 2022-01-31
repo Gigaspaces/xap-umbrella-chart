@@ -350,7 +350,7 @@ jenkins:
       - aws-java-sdk:1.10.50
       - dependency-check-jenkins-plugin:3.1.0
       - structs:308.v852b473a2b8c
-      - mailer:1.34
+      - mailer:408.vd726a_1130320
       - http_request:1.8.11
       - build-blocker-plugin:1.7.3
       - pipeline-model-declarative-agent:1.1.1
