@@ -573,11 +573,6 @@ jenkins:
                       5teJ4EBJzzmPdP93QB0gLFpHKkGy+5zK</ds:X509Certificate></ds:X509Data></ds:KeyInfo></md:KeyDescriptor><md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://gigaspaces.okta.com/app/gigaspaces_gigaspacesjenkinseks_1/exklv5qo2zeqCw1pk1t7/sso/saml"/><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://gigaspaces.okta.com/app/gigaspaces_gigaspacesjenkinseks_1/exklv5qo2zeqCw1pk1t7/sso/saml"/></md:IDPSSODescriptor></md:EntityDescriptor>
                     maximumAuthenticationLifetime: 86400
                     usernameCaseConversion: "none"
-              crumbIssuer:
-                strict:
-                  hoursValid: 5
-                  checkSessionMatch: true
-                  xorMasking: false
               agentProtocols:
               - "JNLP4-connect"
               - "Ping"  
