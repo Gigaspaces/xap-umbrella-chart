@@ -318,7 +318,7 @@ jenkins:
       - token-macro:2.15
       - s3:0.10.6
       - git:3.7.0
-      - apache-httpcomponents-client-4-api:4.5.10-2.0
+      - apache-httpcomponents-client-4-api:4.5.13-1.0
       - URLSCM:1.6
       - thinBackup:1.9
       - multiple-scms:0.6
