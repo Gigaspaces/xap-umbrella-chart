@@ -500,7 +500,7 @@ jenkins:
                       password: "GigaSpaces"
                       properties:
                         - mailer:
-                            emailAddress: "oren.sultan@gigaspaces.com "
+                            emailAddress: "oren.sultan@gigaspaces.com"
                         - preferredProvider:
                             providerId: "default"
                         - slack:
