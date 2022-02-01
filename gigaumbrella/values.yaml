@@ -496,6 +496,7 @@ jenkins:
                   roles:
                     global:
                     - assignments:
+                      - "PelegV"
                       - "DavidF"
                       - "YuvalO"
                       - "YuvalD"
