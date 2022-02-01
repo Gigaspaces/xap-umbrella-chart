@@ -375,6 +375,7 @@ jenkins:
       - batch-task:1.19
       - strict-crumb-issuer:2.1.0
       - saml:2.0.9
+      - mock-security-realm:1.6
     # Set to false to download the minimum required version of all dependencies.
     installLatestPlugins: true
 
@@ -503,42 +504,6 @@ jenkins:
                         permissions:
                           - "Overall/Read"
                           - "Job/Read"
-                      - assignments:
-                        - "authenticated"
-                        name: "Group"
-                        pattern: ".*"
-                        permissions:
-                        - "Job/Release"
-                        - "Job/Move"
-                        - "Job/Build"
-                        - "Lockable Resources/View"
-                        - "Lockable Resources/Unlock"
-                        - "View/Create"
-                        - "Agent/Configure"
-                        - "Job/Read"
-                        - "Agent/Create"
-                        - "Job/Delete"
-                        - "Agent/Build"
-                        - "View/Configure"
-                        - "Metrics/HealthCheck"
-                        - "Lockable Resources/Reserve"
-                        - "Metrics/ThreadDump"
-                        - "SCM/Tag"
-                        - "Job/Create"
-                        - "Job/Discover"
-                        - "Agent/Connect"
-                        - "Run/Replay"
-                        - "Run/Delete"
-                        - "Job/Cancel"
-                        - "Overall/Read"
-                        - "Run/Update"
-                        - "Job/ConfigureVersions"
-                        - "Overall/Administer"
-                        - "View/Delete"
-                        - "Job/Configure"
-                        - "Metrics/View"
-                        - "Job/Workspace"
-                        - "View/Read"
               securityRealm:
                 local:
                   allowsSignup: false
