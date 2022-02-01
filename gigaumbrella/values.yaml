@@ -494,7 +494,7 @@ jenkins:
                     global:
                       - assignments:  
                         - "admin"
-                        name: "oren sultan"
+                        name: "admin"
                         description: "Jenkins administrators"
                         permissions:
                           - "Overall/Administer"
