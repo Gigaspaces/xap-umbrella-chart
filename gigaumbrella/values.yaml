@@ -488,24 +488,8 @@ jenkins:
                             directEntry:
                               privateKey: "${git-credentials-id-secret-privatekey}"                    
             jenkins: 
-              authorizationStrategy:        
-                roleBased:
-                  roles:
-                    global:
-                      - assignments:  
-                        - "admin"
-                        name: "admin"
-                        description: "Jenkins administrators"
-                        permissions:
-                          - "Overall/Administer"
-                        name: "readonly"
-                        description: "Read-only users"
-                        permissions:
-                          - "Overall/Read"
-                          - "Job/Read"
+              authorizationStrategy: loggedInUsersCanDoAnything
               securityRealm:
-                local:
-                  authorizationStrategy: loggedInUsersCanDoAnything
                 saml:
                   advancedConfiguration:
                     forceAuthn: false
