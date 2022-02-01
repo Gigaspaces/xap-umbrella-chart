@@ -494,8 +494,7 @@ jenkins:
                   forceAuthn: false
                   spEntityId: "Jenkins-users"
                 binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-                displayNameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
-                emailAttributeName: "Email"
+                displayNameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"                
                 groupsAttributeName: "Group"
                 idpMetadataConfiguration:
                   period: 0
@@ -518,7 +517,6 @@ jenkins:
                     1uqBRlkoSmWkItPBWLCQLxvo7Bnx4bHjRi+nZC9LK4B37twPhqluLLn6iS4EltdwaCYYJ/BA7QSS
                     3sxSm3olFl3vHjXL4M+WHkls6i701i7FvAvNXc9SHDFjt3GsN7IzkrKSNbk3aGgDS15nETI+Ehui
                     5teJ4EBJzzmPdP93QB0gLFpHKkGy+5zK</ds:X509Certificate></ds:X509Data></ds:KeyInfo></md:KeyDescriptor><md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://gigaspaces.okta.com/app/gigaspaces_gigaspacesjenkinseks_1/exklv5qo2zeqCw1pk1t7/sso/saml"/><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://gigaspaces.okta.com/app/gigaspaces_gigaspacesjenkinseks_1/exklv5qo2zeqCw1pk1t7/sso/saml"/></md:IDPSSODescriptor></md:EntityDescriptor>
-                logoutUrl: "https://gigaspaces.okta.com/app/UserHome"
                 maximumAuthenticationLifetime: 86400
                 usernameCaseConversion: "none"
               crumbIssuer:
