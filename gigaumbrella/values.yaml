@@ -490,6 +490,26 @@ jenkins:
             jenkins: 
               authorizationStrategy: loggedInUsersCanDoAnything
               securityRealm:
+                local:
+                  allowsSignup: false
+                  users:
+                    - id: "admin"
+                      password: "GigaSpaces"
+                    - id: "oren.sultan@gigaspaces.com"
+                      name: "oren sultan"
+                      password: "GigaSpaces"
+                      properties:
+                        - mailer:
+                            emailAddress: "oren.sultan@gigaspaces.com "
+                        - preferredProvider:
+                            providerId: "default"
+                        - slack:
+                            userId: "ABCDEFGH"
+                        #- timezone: # pending https://github.com/jenkinsci/jenkins/pull/4557
+                        #    timeZoneName: "Europe/London"
+                        #- sshPublicKey: # pending https://github.com/jenkinsci/ssh-cli-auth-module/pull/16
+                        #    authorizedKeys: |
+                        #      ssh-rsa some-key
                 saml:
                   advancedConfiguration:
                     forceAuthn: false
