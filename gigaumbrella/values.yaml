@@ -126,7 +126,7 @@ jenkins:
     #   runAsNonRoot: true
     #   supplementalGroups: [1000]
     #   # capabilities: {}
-    servicePort: 8080
+    servicePort: 443
     targetPort: 8080
     # For minikube, set this to NodePort, elsewhere use LoadBalancer
     # Use ClusterIP if your setup includes ingress controller
@@ -138,6 +138,8 @@ jenkins:
     serviceAnnotations: 
       "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout": "300"
       "external-dns.alpha.kubernetes.io/hostname" : "gigajenkins.gigaspaces.com"
+      "service.beta.kubernetes.io/aws-load-balancer-ssl-cert" : "arn:aws:acm:us-east-2:573366771204:certificate/1253adbc-6a2d-4c20-8b8d-6ec79cf6c1cc"		
+      "service.beta.kubernetes.io/aws-load-balancer-ssl-ports" : "443"
       
       # "service.beta.kubernetes.io/aws-load-balancer-extra-security-groups": arn:aws:iam::573366771204:group/OktaSSO-Group
     # Jenkins controller custom labels
