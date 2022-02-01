@@ -126,7 +126,7 @@ jenkins:
     #   runAsNonRoot: true
     #   supplementalGroups: [1000]
     #   # capabilities: {}
-    servicePort: 8080
+    servicePort: 443
     targetPort: 8080
     # For minikube, set this to NodePort, elsewhere use LoadBalancer
     # Use ClusterIP if your setup includes ingress controller
