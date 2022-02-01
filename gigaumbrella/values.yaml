@@ -546,7 +546,7 @@ jenkins:
                       - "View/Read"
                     - assignments:
                       - "OrenS"
-                      name: "admin"
+                      name: "RnD"
                       pattern: ".*"
                       permissions:
                       - "Job/Release"
