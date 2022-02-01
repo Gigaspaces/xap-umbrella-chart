@@ -478,12 +478,7 @@ jenkins:
                           scope: GLOBAL
                           id: "${chart-admin-username}"
                           username: "Jenkins Admin"
-                          password: "GigaSpaces"
-                      - usernamePassword:
-                          id: "alesia"
-                          password: "GigaSpaces"
-                          scope: GLOBAL
-                          username: "alesia"     
+                          password: "GigaSpaces"    
                       - basicSSHUserPrivateKey:
                           scope: GLOBAL
                           id: git_credentials_id
@@ -503,7 +498,6 @@ jenkins:
                         description: "Jenkins administrators"
                         permissions:
                           - "Overall/Administer"
-                        
                         name: "readonly"
                         description: "Read-only users"
                         permissions:
@@ -511,7 +505,7 @@ jenkins:
                           - "Job/Read"
                       - assignments:
                         - "authenticated"
-                        name: "R&D-role"
+                        name: "Group"
                         pattern: ".*"
                         permissions:
                         - "Job/Release"
