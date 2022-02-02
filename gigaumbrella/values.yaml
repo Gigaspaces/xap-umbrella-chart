@@ -491,6 +491,11 @@ jenkins:
                             directEntry:
                               privateKey: "${git-credentials-id-secret-privatekey}"                    
             jenkins: 
+              unclassified:
+                mailer:
+                  replyToAddress: rnd_imc@gigaspaces.com
+                    smtpHost: smtp.gmail.com
+                    smtpPort: 4441
               authorizationStrategy: 
                 roleBased:
                   roles:
