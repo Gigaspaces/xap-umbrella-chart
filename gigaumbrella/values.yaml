@@ -494,7 +494,7 @@ jenkins:
               authorizationStrategy: 
                 projectMatrix:
                   permissions:
-                  - "GROUP:Overall/Read:R&D-jenkins
+                  - "GROUP:Overall/Read:R&D-jenkins"
                   - "GROUP:Agent/Build:R&D-jenkins"
                   - "GROUP:Agent/Configure:R&D-jenkins"
                   - "GROUP:Agent/Connect:R&D-jenkins"
