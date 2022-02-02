@@ -518,6 +518,7 @@ jenkins:
                       name: "RnD"
                       pattern: ".*"
                       permissions:
+                      - "Overall/Read"
                       - "Job/Release"
                       - "Job/Build"
                       - "Lockable Resources/View"
