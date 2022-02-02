@@ -492,10 +492,7 @@ jenkins:
                               privateKey: "${git-credentials-id-secret-privatekey}"                    
             jenkins: 
               authorizationStrategy: 
-                projectMatrix:
-                  permissions:
-                  - "GROUP:Overall/Administer:R&D-jenkins"
-                  - "GROUP:Overall/Administer:R&D-jenkins_admins"
+                loggedInUsersCanDoAnything
               securityRealm:
                 saml:
                   advancedConfiguration:
