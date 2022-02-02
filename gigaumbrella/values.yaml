@@ -530,8 +530,7 @@ jenkins:
                   advancedConfiguration:
                     forceAuthn: false
                     spEntityId: "Jenkins-users"
-                  binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-                  usernameAttributeName: "username"                
+                  binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"               
                   groupsAttributeName: "Group"
                   idpMetadataConfiguration:
                     period: 0
