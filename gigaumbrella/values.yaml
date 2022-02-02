@@ -522,7 +522,7 @@ jenkins:
                       3sxSm3olFl3vHjXL4M+WHkls6i701i7FvAvNXc9SHDFjt3GsN7IzkrKSNbk3aGgDS15nETI+Ehui
                       5teJ4EBJzzmPdP93QB0gLFpHKkGy+5zK</ds:X509Certificate></ds:X509Data></ds:KeyInfo></md:KeyDescriptor><md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://gigaspaces.okta.com/app/gigaspaces_jenkinseks_1/exklwgvca26RhGTsU1t7/sso/saml"/><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://gigaspaces.okta.com/app/gigaspaces_jenkinseks_1/exklwgvca26RhGTsU1t7/sso/saml"/></md:IDPSSODescriptor></md:EntityDescriptor>
                   maximumAuthenticationLifetime: 86400
-                  displayNameAttributeName: "DisplayName"
+                  displayNameAttributeName: "username"
                   emailAttributeName: "Email"
                   usernameCaseConversion: "none"
               crumbIssuer:
