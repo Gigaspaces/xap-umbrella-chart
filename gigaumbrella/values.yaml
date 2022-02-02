@@ -492,21 +492,15 @@ jenkins:
                               privateKey: "${git-credentials-id-secret-privatekey}"                    
             jenkins: 
               authorizationStrategy: 
-                projectMatrix:
-                  permissions:
-                    - "USER:Overall/Administer:oren.sultan@gigaspaces.com"
-                    - "GROUP:Overall/Administer:Dev-jenkins"
-                    - "GROUP:Overall/Administer:Dev-jenkins-admins"
-              securityRealm:
+                loggedInUsersCanDoAnything:
                 saml:
                   advancedConfiguration:
                     forceAuthn: false
-                    spEntityId: "Jenkins-users"
+                    spEntityId: "jenkins-users"
                   binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"               
                   groupsAttributeName: "Group"
                   idpMetadataConfiguration:
                     period: 0
-                    url: "https://gigaspaces.okta.com/app/gigaspaces_devjenkins_1/exklwm611fZoR2pSZ1t7/sso/saml"
                     xml: |-
                       <?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor entityID="http://www.okta.com/exklwm611fZoR2pSZ1t7" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"><md:IDPSSODescriptor WantAuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol"><md:KeyDescriptor use="signing"><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:X509Data><ds:X509Certificate>MIIDpDCCAoygAwIBAgIGAV2me5MJMA0GCSqGSIb3DQEBCwUAMIGSMQswCQYDVQQGEwJVUzETMBEG
                       A1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEU
@@ -528,7 +522,7 @@ jenkins:
                   maximumAuthenticationLifetime: 86400
                   displayNameAttributeName: "DisplayName"
                   emailAttributeName: "Email"
-                  usernameCaseConversion: "none"
+                  usernameCaseConversion: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
               crumbIssuer:
                 strict:
                   hoursValid: 5
