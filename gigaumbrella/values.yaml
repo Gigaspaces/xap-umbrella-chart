@@ -492,7 +492,8 @@ jenkins:
                               privateKey: "${git-credentials-id-secret-privatekey}"                    
             jenkins: 
               authorizationStrategy: 
-                loggedInUsersCanDoAnything:
+                loggedInUsersCanDoAnything
+              securityRealm:  
                 saml:
                   advancedConfiguration:
                     forceAuthn: false
