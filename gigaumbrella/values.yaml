@@ -494,36 +494,8 @@ jenkins:
               authorizationStrategy: 
                 projectMatrix:
                   permissions:
-                  - "GROUP:Overall/Read:R&D-jenkins"
-                  - "GROUP:Agent/Build:R&D-jenkins"
-                  - "GROUP:Agent/Configure:R&D-jenkins"
-                  - "GROUP:Agent/Connect:R&D-jenkins"
-                  - "GROUP:Agent/Create:R&D-jenkins"
-                  - "GROUP:Agent/Disconnect:R&D-jenkins"
-                  - "GROUP:Job/Build:R&D-jenkins"
-                  - "GROUP:Job/Cancel:R&D-jenkins"
-                  - "GROUP:Job/Configure:R&D-jenkins"
-                  - "GROUP:Job/ConfigureVersions:R&D-jenkins"
-                  - "GROUP:Job/Create:R&D-jenkins"
-                  - "GROUP:Job/Discover:R&D-jenkins"
-                  - "GROUP:Job/Move:R&D-jenkins"
-                  - "GROUP:Job/Read:R&D-jenkins"
-                  - "GROUP:Job/Release:R&D-jenkins"
-                  - "GROUP:Job/Workspace:R&D-jenkins"
-                  - "GROUP:Lockable Resources/Reserve:R&D-jenkins"
-                  - "GROUP:Lockable Resources/Unlock:R&D-jenkins"
-                  - "GROUP:Lockable Resources/View:R&D-jenkins"
-                  - "GROUP:Metrics/HealthCheck:R&D-jenkins"
-                  - "GROUP:Metrics/ThreadDump:R&D-jenkins"
-                  - "GROUP:Metrics/View:R&D-jenkins"
+                  - "GROUP:Overall/Administer:R&D-jenkins"
                   - "GROUP:Overall/Administer:R&D-jenkins_admins"
-                  - "GROUP:Run/Delete:R&D-jenkins"
-                  - "GROUP:Run/Update:R&D-jenkins"
-                  - "GROUP:SCM/Tag:R&D-jenkins"
-                  - "GROUP:View/Configure:R&D-jenkins"
-                  - "GROUP:View/Create:R&D-jenkins"
-                  - "GROUP:View/Delete:R&D-jenkins"
-                  - "GROUP:View/Read:R&D-jenkins"
               securityRealm:
                 saml:
                   advancedConfiguration:
