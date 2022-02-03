@@ -526,11 +526,6 @@ jenkins:
                   - "GROUP:View/Read:Dev-jenkins"
                   - "USER:Overall/Administer:oren.sultan@gigaspaces.com"
               securityRealm:
-                local:
-                  allowsSignup: false
-                  users:
-                    - id: "admin"
-                      password: "GigaSpaces"
                 saml:
                   advancedConfiguration:
                     forceAuthn: false
