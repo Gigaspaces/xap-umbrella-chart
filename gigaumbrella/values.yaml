@@ -491,19 +491,27 @@ jenkins:
                             directEntry:
                               privateKey: "${git-credentials-id-secret-privatekey}"       
             unclassified:
-              mailer:
+              email-ext:
+                addAccounts:
+                  - address: "foo.bar"
+                    smtpHost: "smtp.gmail.com"
+                    smtpPort: "465"
+                    smtpUsername: "newman@gigaspaces.com"
+                    smtpPassword: "Aaq123456789!"
+                    useSsl: true
+                    advProperties: "avd-properties"
+                charset: "UTF-8"
+                defaultContentType: "text/html"
+                defaultRecipients: "rnd_imc@gigaspaces.com"
+                defaultSubject: "[JENKINS] $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
+                defaultBody: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+                                Check console output at $BUILD_URL to view the results.'''     
                 mailAccount:
                   smtpHost: "smtp.gmail.com"
                   smtpPort: "465"
                   smtpUsername: "rnd_imc@gigaspaces.com"
                   smtpPassword: "Aa123456789!"
                   useSsl: true
-                  charset: "UTF-8"
-                  defaultContentType: "text/html"
-                  defaultRecipients: "rnd_imc@gigaspaces.com"
-                  defaultSubject: "[JENKINS] $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
-                  defaultBody: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
-                                  Check console output at $BUILD_URL to view the results.'''                                 
             jenkins: 
               authorizationStrategy: 
                 projectMatrix:
