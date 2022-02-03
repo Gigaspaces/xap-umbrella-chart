@@ -786,14 +786,6 @@ jenkins:
                                       }   
                                   }
                               }
-                              postBuildPublishers {
-                                  extendedEmail {
-                                      recipientList('me@halfempty.org')
-                                      defaultSubject('Oops')
-                                      defaultContent('Something broken')
-                                      contentType('text/html')
-                                  }
-                              }
                           }
                       }
                   }          
