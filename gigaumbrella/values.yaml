@@ -493,6 +493,15 @@ jenkins:
             jenkins: 
               authorizationStrategy: 
                 loggedInUsersCanDoAnything
+              securityRealm:
+                roleBased:
+                  roles:
+                    global:
+                    - assignments:
+                      - "admin"
+                      name: "oren sultan"
+                      permissions:
+                      - "Overall/Administer"
               crumbIssuer:
                 strict:
                   hoursValid: 5
