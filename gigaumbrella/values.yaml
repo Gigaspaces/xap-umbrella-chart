@@ -473,8 +473,8 @@ jenkins:
     #   command: [ "uname", "-a" ]
       configScripts:
           gigaci-jenkins: |
-            mailer:
-              unclassified:
+            unclassified:
+              mailer:
                 mailAccount:
                   smtpHost: "smtp.gmail.com"
                   smtpPort: "465"
