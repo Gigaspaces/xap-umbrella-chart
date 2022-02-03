@@ -473,20 +473,20 @@ jenkins:
     #   command: [ "uname", "-a" ]
       configScripts:
           gigaci-jenkins: |
-          mailer:
-            unclassified:
-              mailAccount:
-                smtpHost: "smtp.gmail.com"
-                smtpPort: "465"
-                smtpUsername: "rnd_imc@gigaspaces.com"
-                smtpPassword: "Aa123456789!"
-                useSsl: true
-                charset: "UTF-8"
-                defaultContentType: "text/html"
-                defaultRecipients: "rnd_imc@gigaspaces.com"
-                defaultSubject: "[JENKINS] $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
-                defaultBody: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
-                                Check console output at $BUILD_URL to view the results.'''  
+            mailer:
+              unclassified:
+                mailAccount:
+                  smtpHost: "smtp.gmail.com"
+                  smtpPort: "465"
+                  smtpUsername: "rnd_imc@gigaspaces.com"
+                  smtpPassword: "Aa123456789!"
+                  useSsl: true
+                  charset: "UTF-8"
+                  defaultContentType: "text/html"
+                  defaultRecipients: "rnd_imc@gigaspaces.com"
+                  defaultSubject: "[JENKINS] $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
+                  defaultBody: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+                                  Check console output at $BUILD_URL to view the results.'''  
             credentials:
               system:
                 domainCredentials:
