@@ -494,14 +494,11 @@ jenkins:
               authorizationStrategy: 
                 loggedInUsersCanDoAnything
               securityRealm:
-                roleBased:
-                  roles:
-                    global:
-                    - assignments:
-                      - "admin"
-                      name: "oren sultan"
-                      permissions:
-                      - "Overall/Administer"
+                local:
+                  allowsSignup: false
+                  users:
+                    - id: "admin"
+                      password: "GigaSpaces"
               crumbIssuer:
                 strict:
                   hoursValid: 5
