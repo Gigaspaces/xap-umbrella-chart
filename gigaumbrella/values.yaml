@@ -526,13 +526,6 @@ jenkins:
                   - "GROUP:View/Read:Dev-jenkins"
                   - "USER:Overall/Administer:oren.sultan@gigaspaces.com"
               securityRealm:
-                local:
-                  allowsSignup: true
-                  enableCaptcha: false
-                  users:
-                  - id: "${chart-admin-username}"
-                    name: "Jenkins Admin"
-                    password: "GigaSpaces"
                 saml:
                   advancedConfiguration:
                     forceAuthn: false
