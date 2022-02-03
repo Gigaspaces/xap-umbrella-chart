@@ -378,6 +378,7 @@ jenkins:
       - batch-task:1.19
       - strict-crumb-issuer:2.1.0
       - saml:2.0.9
+      - run-condition:1.4
     # Set to false to download the minimum required version of all dependencies.
     installLatestPlugins: true
 
