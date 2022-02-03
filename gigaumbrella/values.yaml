@@ -299,7 +299,7 @@ jenkins:
       - pipeline-build-step:2.7
       - jsch:0.1.55.2
       - authentication-tokens:1.4
-      - flexible-publish:0.15.2
+      - flexible-publish:0.16.1
       - docker-commons:1.15
       - timestamper:1.8.8
       - github-api:1.84
@@ -378,6 +378,7 @@ jenkins:
       - batch-task:1.19
       - strict-crumb-issuer:2.1.0
       - saml:2.0.9
+      - 
     # Set to false to download the minimum required version of all dependencies.
     installLatestPlugins: true
 
@@ -473,6 +474,19 @@ jenkins:
     #   command: [ "uname", "-a" ]
       configScripts:
           gigaci-jenkins: |
+            unclassified:
+              mailAccount:
+                smtpHost: "smtp.gmail.com"
+                smtpPort: "465"
+                smtpUsername: "rnd_imc@gigaspaces.com"
+                smtpPassword: "Aa123456789!"
+                useSsl: true
+                charset: "UTF-8"
+                defaultContentType: "text/html"
+                defaultRecipients: "rnd_imc@gigaspaces.com"
+                defaultSubject: "[JENKINS] $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
+                defaultBody: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+                                Check console output at $BUILD_URL to view the results.'''  
             credentials:
               system:
                 domainCredentials:
@@ -762,6 +776,14 @@ jenkins:
                                           }
                                           scriptPath("build/jenkinsfile")
                                       }   
+                                  }
+                              }
+                              postBuildPublishers {
+                                  extendedEmail {
+                                      recipientList('$DEFAULT_RECIPIENTS')
+                                      defaultSubject('$DEFAULT_SUBJECT')
+                                      defaultContent('${SCRIPT, template="xap-insightedge/16.2/continuous.template"}')
+                                      contentType('$DEFAULT_CONTENT')
                                   }
                               }
                           }
