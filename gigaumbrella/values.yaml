@@ -781,7 +781,7 @@ jenkins:
                       description('Folder containing release /dotnet')
                       folder('xap-insightedge/latest') {
                           description('paste the folowing lines to bat steps :1. "%WORKSPACE%Buildextract-build-name.bat" %JAVA_BUILD_URL% "%WORKSPACE%xap-net-env.properties" 2. ${WORKSPACE}xap-net-env.properties  3. cd "%WORKSPACE%Build" & call BuildAll.bat "%JAVA_BUILD_URL%" "%BRANCH_NAME%" "%DEPLOY_MVN_ARTIFACTS%" "%PUBLISH_TO_NEWMAN%" ')
-                          multiJob('DotNet') {
+                          multiJob('xap-insightedge/latestDotNet') {
                               logRotator{
                                   numToKeep(5)
                                   artifactNumToKeep(1)
