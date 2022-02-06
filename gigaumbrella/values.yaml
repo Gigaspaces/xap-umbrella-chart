@@ -653,7 +653,7 @@ jenkins:
                 - permanent:
                     labelString: 'DotNet-slave'
                     mode: NORMAL
-                    name: 'DotNet'
+                    name: 'DotNetNode'
                     remoteFS: 'c:\jenkins'
                     launcher:
                       jnlp:
@@ -786,6 +786,7 @@ jenkins:
                                   numToKeep(5)
                                   artifactNumToKeep(1)
                               }
+                              label('DotNetNode')
                               parameters{
                                   textParam('BRANCH_NAME', 'master', '[REQUIRED PARAMETER] The name of the branch')
                                   textParam('JAVA_BUILD_URL', '#http://hercules/$version/$branch/$build-name/gigaspaces-xap-enterprise-$build-name.zip', '[REQUIRED PARAMETER] XAP package location')
