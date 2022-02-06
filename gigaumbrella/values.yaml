@@ -784,7 +784,7 @@ jenkins:
                           multiJob('xap-insightedge/latestDotNet') {
                               logRotator{
                                   numToKeep(5)
-                                  artifactNumToKeep(1)
+                                  daysToKeep(1)
                               }
                               label('DotNetNode')
                               parameters{
@@ -794,7 +794,6 @@ jenkins:
                                   booleanParam('DEPLOY_MVN_ARTIFACTS', false,'[REQUIRED PARAMETER] Boolean indicator if to deploy artifacts to s3')
                                   booleanParam('PUBLISH_TO_NEWMAN', true,'[REQUIRED PARAMETER] Boolean indicator if to publish build to Newman')
                               }
-                              blockOn('DotNet')
                               scm{
                                   git {
                                       remote {
