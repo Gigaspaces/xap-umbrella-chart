@@ -303,7 +303,6 @@ jenkins:
       - timestamper:1.17
       - github-api:1.301-378.v9807bd746da5
       - windows-slaves:1.8
-      - github-organization-folder:1.6
       - handlebars:3.0.8
       - project-inheritance:21.04.03
       - display-url-api:2.3.5
@@ -508,7 +507,22 @@ jenkins:
     #   imagePullPolicy: Always
     #   command: [ "uname", "-a" ]
       configScripts:
-          gigaci-jenkins: |            
+          gigaci-jenkins: | 
+            security: 
+              apiToken:
+                creationOfLegacyTokenEnabled: false
+                tokenGenerationOnCreationEnabled: false
+                usageStatisticsEnabled: true
+              copyartifact:
+                mode: PRODUCTION
+              envInject:
+                enableLoadingFromMaster: false
+                enablePermissions: false
+                hideInjectedVars: false
+              globalJobDslSecurityConfiguration:
+                useScriptSecurity: true
+              sSHD:
+                port: -1
             credentials:
               system:
                 domainCredentials:
@@ -619,7 +633,7 @@ jenkins:
               crumbIssuer:
                 strict:
                   hoursValid: 5
-                  checkSessionMatch: false
+                  checkSessionMatch: true
                   xorMasking: false
               agentProtocols:
               - "JNLP4-connect"
