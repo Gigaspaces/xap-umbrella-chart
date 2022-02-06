@@ -249,7 +249,7 @@ jenkins:
 
     # List of plugins to be install during Jenkins controller start
     installPlugins:
-      - kubernetes:1.31.3
+      - kubernetes:1.31.2
       - pipeline-stage-step:291.vf0a8a7aeeb50
       - m2release:0.16.2
       - build-timeout:1.20
