@@ -780,7 +780,7 @@ jenkins:
                   folder('xap-insightedge') {
                       description('Folder containing release /continuous')
                       folder('xap-insightedge/latest') {
-                          description('latest')
+                          description('paste the folowing lines to bat steps :1. "%WORKSPACE%Buildextract-build-name.bat" %JAVA_BUILD_URL% "%WORKSPACE%xap-net-env.properties" 2. ${WORKSPACE}xap-net-env.properties  3. cd "%WORKSPACE%Build" & call BuildAll.bat "%JAVA_BUILD_URL%" "%BRANCH_NAME%" "%DEPLOY_MVN_ARTIFACTS%" "%PUBLISH_TO_NEWMAN%" ')
                           multiJob('DotNet') {
                               logRotator{
                                   numToKeep(5)
@@ -794,51 +794,58 @@ jenkins:
                                   booleanParam('PUBLISH_TO_NEWMAN', true,'[REQUIRED PARAMETER] Boolean indicator if to publish build to Newman')
                               }
                               blockOn('DotNet')
-                              git {
-                                  remote {
-                                                  url('git@github.com:Gigaspaces/xap-dotnet.git')
-                                                  credentials('git_credentials_id')
-                                              }
-                                              branches('*/${BRANCH_NAME}')
+                              scm{
+                                  git {
+                                      remote {
+                                          url('git@github.com:Gigaspaces/xap-dotnet.git')
+                                          credentials('git_credentials_id')
+                                      }
+                                      branch('*/${BRANCH_NAME}')
+                                  }
                               }
                               wrappers {
                                   preBuildCleanup()
                                   timestamps()
                               }
+                              environmentVariables {
+                                  propertiesFile('xap-net-env.properties')
+                              }
                               steps {
-                                  batchFile('cd "%WORKSPACE%\Build" & call BuildAll.bat "%JAVA_BUILD_URL%" "%BRANCH_NAME%" "%DEPLOY_MVN_ARTIFACTS%" "%PUBLISH_TO_NEWMAN%"')
-                                  propertiesFile('${WORKSPACE}/xap-net-env.properties')
-                                  buildName('${GS_BUILD_NAME}')
-                                  batchFile('cd "%WORKSPACE%\Build" & call BuildAll.bat "%JAVA_BUILD_URL%" "%BRANCH_NAME%" "%DEPLOY_MVN_ARTIFACTS%" "%PUBLISH_TO_NEWMAN%"')
+                                  batchFile('echo followdescription')
+                                  batchFile('echo followdescription')
                               }
                               publishers {
                                   flexiblePublish {
                                       conditionalAction {
-                                          aggregationCondition {
+                                          condition {
                                               booleanCondition('${ENV,var="RELEASE"}')
                                           }
-                                          git {
-                                              pushOnlyIfSuccess()
-                                              branch('origin', 'staging')
-                                              forcePush()
-                                              tag('origin', '${GS_BUILD_NAME}') {
-                                                  message('XAP.NET release tag on top ${BRANCH_NAME}')
-                                                  create()
-                                                  update()
+                                          publishers {                                   
+                                              git {
+                                                  pushOnlyIfSuccess()
+                                                  forcePush()
+                                                  tag('origin','GSBUILD') {
+                                                      message('XAP.NET release tag on top ${BRANCH_NAME}')
+                                                      create()
+                                                      update()
+                                                  }
+                                              }
                                           }
                                       }
                                   }
                                   extendedEmail {
                                       recipientList('$DEFAULT_RECIPIENTS')
                                       defaultSubject('$DEFAULT_SUBJECT')
-                                      replyToList($DEFAULT_REPLYTO)
-                                      defaultContent('Something broken')
+                                      replyToList('$DEFAULT_REPLYTO')
+                                      defaultContent('$DEFAULT_CONTENT')
                                       contentType('default')
                                       triggers {
                                           beforeBuild()
                                           stillUnstable {
                                               subject('$DEFAULT_SUBJECT')
                                               content('$DEFAULT_CONTENT')
+                                          }
+                                      }
                                   }
                               }
                           }
