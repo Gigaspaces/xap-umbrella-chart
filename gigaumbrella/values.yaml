@@ -294,7 +294,6 @@ jenkins:
       - translation:1.16
       - custom-tools-plugin:0.8
       - git-client:3.11.0
-      - disk-usage:0.28
       - mail-watcher-plugin:1.16
       - pipeline-build-step:2.15
       - jsch:0.1.55.2
