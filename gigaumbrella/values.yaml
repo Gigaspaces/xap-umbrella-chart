@@ -781,6 +781,74 @@ jenkins:
                       description('Folder containing release /continuous')
                       folder('xap-insightedge/latest') {
                           description('latest')
+                          multiJob('DotNet') {
+                              logRotator{
+                                  numToKeep(5)
+                                  artifactNumToKeep(1)
+                              }
+                              parameters{
+                                  textParam('BRANCH_NAME', 'master', '[REQUIRED PARAMETER] The name of the branch')
+                                  textParam('JAVA_BUILD_URL', '#http://hercules/$version/$branch/$build-name/gigaspaces-xap-enterprise-$build-name.zip', '[REQUIRED PARAMETER] XAP package location')
+                                  booleanParam('RELEASE', false,'[REQUIRED PARAMETER] Boolean indicator if the current job execution was triggered from xap-release job')
+                                  booleanParam('DEPLOY_MVN_ARTIFACTS', false,'[REQUIRED PARAMETER] Boolean indicator if to deploy artifacts to s3')
+                                  booleanParam('PUBLISH_TO_NEWMAN', true,'[REQUIRED PARAMETER] Boolean indicator if to publish build to Newman')
+                              }
+                              blockOn('DotNet')
+                              git {
+                                  remote {
+                                                  url('git@github.com:Gigaspaces/xap-dotnet.git')
+                                                  credentials('git_credentials_id')
+                                              }
+                                              branches('*/${BRANCH_NAME}')
+                              }
+                              wrappers {
+                                  preBuildCleanup()
+                                  timestamps()
+                              }
+                              steps {
+                                  batchFile('cd "%WORKSPACE%\Build" & call BuildAll.bat "%JAVA_BUILD_URL%" "%BRANCH_NAME%" "%DEPLOY_MVN_ARTIFACTS%" "%PUBLISH_TO_NEWMAN%"')
+                                  propertiesFile('${WORKSPACE}/xap-net-env.properties')
+                                  buildName('${GS_BUILD_NAME}')
+                                  batchFile('cd "%WORKSPACE%\Build" & call BuildAll.bat "%JAVA_BUILD_URL%" "%BRANCH_NAME%" "%DEPLOY_MVN_ARTIFACTS%" "%PUBLISH_TO_NEWMAN%"')
+                              }
+                              publishers {
+                                  flexiblePublish {
+                                      conditionalAction {
+                                          aggregationCondition {
+                                              booleanCondition('${ENV,var="RELEASE"}')
+                                          }
+                                          git {
+                                              pushOnlyIfSuccess()
+                                              branch('origin', 'staging')
+                                              forcePush()
+                                              tag('origin', '${GS_BUILD_NAME}') {
+                                                  message('XAP.NET release tag on top ${BRANCH_NAME}')
+                                                  create()
+                                                  update()
+                                          }
+                                      }
+                                  }
+                                  extendedEmail {
+                                      recipientList('$DEFAULT_RECIPIENTS')
+                                      defaultSubject('$DEFAULT_SUBJECT')
+                                      replyToList($DEFAULT_REPLYTO)
+                                      defaultContent('Something broken')
+                                      contentType('default')
+                                      triggers {
+                                          beforeBuild()
+                                          stillUnstable {
+                                              subject('$DEFAULT_SUBJECT')
+                                              content('$DEFAULT_CONTENT')
+                                  }
+                              }
+                          }
+                      }
+                  }   
+              - script: >
+                  folder('xap-insightedge') {
+                      description('Folder containing release /continuous')
+                      folder('xap-insightedge/latest') {
+                          description('latest')
                           pipelineJob('xap-insightedge/latest/release') {
                               parameters{
                                   choiceParam('MODE', [ 'NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
