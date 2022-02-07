@@ -550,13 +550,6 @@ jenkins:
                         
             unclassified:
               email-ext:
-                addAccounts:
-                - address: "newmangigaspaces@gmail.com"
-                  advProperties: "avd-properties"
-                  credentialsId: "mail_password"
-                  smtpHost: "smtp.gmail.com"
-                  smtpPort: "465"
-                  useSsl: true
                 adminRequiredForTemplateTesting: false
                 allowUnregisteredEnabled: false
                 charset: "UTF-8"
@@ -571,7 +564,7 @@ jenkins:
                 defaultTriggerIds:
                 - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
                 mailAccount:
-                  credentialsId: "email_cred"
+                  credentialsId: "mail_password"
                   smtpHost: "smtp.gmail.com"
                   smtpPort: "465"
                   useSsl: true
