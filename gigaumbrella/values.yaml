@@ -454,7 +454,8 @@ jenkins:
     additionalExistingSecrets: 
     - name: git-credentials-id-secret
       keyName: privatekey
-      
+    - name: smtp-secret
+      keyName: password
 
     additionalSecrets: []
     #  - name: nameOfSecret
@@ -539,7 +540,14 @@ jenkins:
                           description: "Private key access to xap-premium-GitHub"
                           privateKeySource:
                             directEntry:
-                              privateKey: "${git-credentials-id-secret-privatekey}"       
+                              privateKey: "${git-credentials-id-secret-privatekey}"   
+                      - usernamePassword:
+                          scope: GLOBAL
+                          id: mail_password
+                          username: "newman@gigaspaces.com"
+                          privateKeySource:
+                            directEntry:
+                              privateKey: "${smtp-secret-password}"
             unclassified:
               mailer:
                 authentication:
@@ -552,9 +560,9 @@ jenkins:
                 useTls: false
               email-ext:
                 addAccounts:
-                - address: "foo.bar"
+                - address: "newman@gigaspaces.com"
                   advProperties: "avd-properties"
-                  credentialsId: "875dae1b-add3-4a70-b363-7c0c179710c7"
+                  credentialsId: "mail_password"
                   smtpHost: "smtp.gmail.com"
                   smtpPort: "465"
                   useSsl: true
@@ -583,7 +591,7 @@ jenkins:
                 mailAccount:
                   smtpHost: "smtp.gmail.com"
                   smtpPort: "465"
-                  smtpUsername: "rnd_imc@gigaspaces.com"
+                  smtpUsername: "newman@gigaspaces.com"
                   smtpPassword: "Aa123456789!"
                   useSsl: true
             jenkins: 
