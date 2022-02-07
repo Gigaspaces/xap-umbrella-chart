@@ -541,21 +541,45 @@ jenkins:
                             directEntry:
                               privateKey: "${git-credentials-id-secret-privatekey}"       
             unclassified:
+              mailer:
+                authentication:
+                  password: "Aa123456789!"
+                  username: "newman@gigaspaces.com"
+                charset: "UTF-8"
+                smtpHost: "smtp.gmail.com"
+                smtpPort: "465"
+                useSsl: false
+                useTls: false
               email-ext:
                 addAccounts:
-                  - address: "foo.bar"
-                    smtpHost: "smtp.gmail.com"
-                    smtpPort: "465"
-                    smtpUsername: "newman@gigaspaces.com"
-                    smtpPassword: "Aaq123456789!"
-                    useSsl: true
-                    advProperties: "avd-properties"
+                - address: "foo.bar"
+                  advProperties: "avd-properties"
+                  credentialsId: "875dae1b-add3-4a70-b363-7c0c179710c7"
+                  smtpHost: "smtp.gmail.com"
+                  smtpPort: "465"
+                  useSsl: true
+                adminRequiredForTemplateTesting: false
+                allowUnregisteredEnabled: false
                 charset: "UTF-8"
+                debugMode: false
+                defaultBody: |-
+                  $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+
+                  Check console output at $BUILD_URL to view the results.
                 defaultContentType: "text/html"
                 defaultRecipients: "rnd_imc@gigaspaces.com"
                 defaultSubject: "[JENKINS] $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
-                defaultBody: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
-                                Check console output at $BUILD_URL to view the results.'''     
+                defaultTriggerIds:
+                - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
+                mailAccount:
+                  credentialsId: "42c8d9a3-50ca-434d-9be1-8d7a9a877b1b"
+                  smtpHost: "smtp.gmail.com"
+                  smtpPort: "465"
+                  useSsl: true
+                maxAttachmentSize: -1
+                maxAttachmentSizeMb: -1
+                precedenceBulk: false
+                watchingEnabled: false
                 mailAccount:
                   smtpHost: "smtp.gmail.com"
                   smtpPort: "465"
