@@ -413,6 +413,7 @@ jenkins:
       - popper-api:1.16.1-2
       - popper2-api:2.11.0-1
       - variant:1.4
+      - emailext-template:1.4
     # Set to false to download the minimum required version of all dependencies.
     installLatestPlugins: true
 
