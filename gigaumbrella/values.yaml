@@ -548,7 +548,7 @@ jenkins:
                 charset: "UTF-8"
                 smtpHost: "smtp.gmail.com"
                 smtpPort: "465"
-                useSsl: false
+                useSsl: true
                 useTls: false
               email-ext:
                 addAccounts:
@@ -572,7 +572,7 @@ jenkins:
                 defaultTriggerIds:
                 - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
                 mailAccount:
-                  credentialsId: "42c8d9a3-50ca-434d-9be1-8d7a9a877b1b"
+                  credentialsId: "email_cred"
                   smtpHost: "smtp.gmail.com"
                   smtpPort: "465"
                   useSsl: true
