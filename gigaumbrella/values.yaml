@@ -549,15 +549,6 @@ jenkins:
                           description: "Username/Password Credentials smtp server"
                         
             unclassified:
-              mailer:
-                authentication:
-                  password: "Aa123456789!@"
-                  username: "newman@gigaspaces.com"
-                charset: "UTF-8"
-                smtpHost: "smtp.gmail.com"
-                smtpPort: "465"
-                useSsl: true
-                useTls: false
               email-ext:
                 addAccounts:
                 - address: "newmangigaspaces@gmail.com"
