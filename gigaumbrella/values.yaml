@@ -1291,9 +1291,9 @@ jenkins:
     - type: ConfigMap
       configMapName: gigaci-jenkins
       mountPath: /var/myapp/myconfigmap
-    # - type: EmptyDir
-    #   mountPath: /var/myapp/myemptydir
-    #   memory: false
+    - type: EmptyDir
+      mountPath: /var/jenkins_home/email-templates
+      memory: false
     # - type: HostPath
     #   hostPath: /var/lib/containers
     #   mountPath: /var/myapp/myhostpath
