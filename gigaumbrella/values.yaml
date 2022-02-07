@@ -544,10 +544,10 @@ jenkins:
                       - usernamePassword:
                           scope: GLOBAL
                           id: mail_password
-                          username: "newman@gigaspaces.com"
-                          privateKeySource:
-                            directEntry:
-                              privateKey: "${smtp-secret-password}"
+                          username: "newmangigaspaces@gmail.com"
+                          password: "${smtp-secret-password}"
+                          description: "Username/Password Credentials smtp server"
+                        
             unclassified:
               mailer:
                 authentication:
