@@ -565,6 +565,7 @@ jenkins:
                 - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
                 mailAccount:
                   credentialsId: "mail_password"
+                  smtpUsername: "newmangigaspaces@gmail.com"
                   smtpHost: "smtp.gmail.com"
                   smtpPort: "465"
                   useSsl: true
@@ -572,12 +573,6 @@ jenkins:
                 maxAttachmentSizeMb: -1
                 precedenceBulk: false
                 watchingEnabled: false
-                mailAccount:
-                  smtpHost: "smtp.gmail.com"
-                  smtpPort: "465"
-                  smtpUsername: "newman@gigaspaces.com"
-                  smtpPassword: "Aa123456789!"
-                  useSsl: true
             jenkins: 
               authorizationStrategy: 
                 projectMatrix:
