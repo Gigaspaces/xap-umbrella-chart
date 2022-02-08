@@ -303,7 +303,6 @@ jenkins:
       - github-api:1.301-378.v9807bd746da5
       - windows-slaves:1.8
       - handlebars:3.0.8
-      - project-inheritance:21.04.03
       - display-url-api:2.3.5
       - durable-task:493.v195aefbb0ff2
       - workflow-cps-global-lib:552.vd9cc05b8a2e1
