@@ -550,6 +550,13 @@ jenkins:
                           description: "Username/Password Credentials smtp server"
                         
             unclassified:
+              globalConfigFiles:
+                configs:
+                  - custom:
+                      id: custom-test
+                      name: DummyCustom1
+                      comment: dummy custom 1
+                      content: dummy content 1
               email-ext:
                 adminRequiredForTemplateTesting: false
                 allowUnregisteredEnabled: false
@@ -1291,12 +1298,6 @@ jenkins:
     - type: ConfigMap
       configMapName: gigaci-jenkins
       mountPath: /var/myapp/myconfigmap
-    - type: ConfigMap
-      configMapName: gigaci-release-mail-template
-      mountPath: /var/jenkins_home/email-templates
-    - type: ConfigMap
-      configMapName: gigaci-continuous-mail-template
-      mountPath: /var/jenkins_home/email-templates
     # - type: HostPath
     #   hostPath: /var/lib/containers
     #   mountPath: /var/myapp/myhostpath
