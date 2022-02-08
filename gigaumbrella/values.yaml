@@ -611,7 +611,7 @@ jenkins:
                       \ { line -> %>\n\t<TR><TD class=\"console\">^${org.apache.commons.lang.StringEscapeUtils.escapeHtml(line)}</TD></TR>\n\
                       <% \t} %>\n</TABLE>\n<BR/>\n<% } %>\n\n</BODY>\n</j:jelly>"
                     id: "2d7eddfb-0314-4414-8c9d-4308fded1f67"
-                    name: "release Jelly Email Template"
+                    name: "release-Jelly"
                 - jellyTemplate:
                     content: "<?jelly escape-by-default='true'?>\n<!DOCTYPE html [\n    <!ENTITY\
                       \ nbsp \"&#38;#38;nbsp&#59;\">\n]>\n<j:jelly xmlns:j=\"jelly:core\" xmlns:st=\"\
@@ -686,7 +686,7 @@ jenkins:
                       \ -> %>\n\t<TR><TD class=\"console\">^${org.apache.commons.lang.StringEscapeUtils.escapeHtml(line)}</TD></TR>\n\
                       <% \t} %>\n</TABLE>\n<BR/>\n<% } %>\n\n</BODY>\n</j:jelly>"
                     id: "5f3c30af-6e70-47fc-9646-ca9af5092ced"
-                    name: " continuous Jelly Email Template"
+                    name: " continuous-Jelly"
               email-ext:
                 adminRequiredForTemplateTesting: false
                 allowUnregisteredEnabled: false
