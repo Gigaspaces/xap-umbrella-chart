@@ -283,7 +283,6 @@ jenkins:
       - m2-repo-reaper:1.0
       - jquery-detached:1.2.1
       - rebuild:1.33
-      - analysis-core:1.93
       - display-upstream-changes:0.3.2
       - pipeline-stage-view:2.21
       - build-token-root:1.9
@@ -325,7 +324,6 @@ jenkins:
       - URLSCM:1.6
       - swarm:3.30
       - thinBackup:1.10
-      - multiple-scms:0.6
       - build-user-vars-plugin:1.8
       - scm-api:595.vd5a_df5eb_0e39
       - plain-credentials:1.8
@@ -366,7 +364,6 @@ jenkins:
       - mailer:408.vd726a_1130320
       - http_request:1.14 
       - build-blocker-plugin:1.7.8
-      - pipeline-model-declarative-agent:1.1.1
       - workflow-job:1145.v7f2433caa07f
       - ansicolor:1.0.1
       - matrix-project:1.20
