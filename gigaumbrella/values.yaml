@@ -548,7 +548,6 @@ jenkins:
                           username: "newmangigaspaces@gmail.com"
                           password: "${smtp-secret-password}"
                           description: "Username/Password Credentials smtp server"
-                        
             unclassified:
               email-ext:
                 adminRequiredForTemplateTesting: false
