@@ -958,12 +958,14 @@ jenkins:
                                   preBuildCleanup()
                                   timestamps()
                               }
-                              environmentVariables {
-                                  propertiesFile('xap-net-env.properties')
-                              }
+                              
+                              
                               steps {
                                   batchFile('echo followdescription')
                                   batchFile('echo followdescription')
+                                  environmentVariables {
+                                      propertiesFile('xap-net-env.properties')
+                                  }
                               }
                               publishers {
                                   flexiblePublish {
@@ -1133,7 +1135,7 @@ jenkins:
                                                   
                                   
                                               }
-                                              branches('master')
+                                              branches('$BRANCH_')
                                               // extensions {
                                               //     cleanBeforeCheckout()
                                               // }
