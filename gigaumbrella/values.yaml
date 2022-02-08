@@ -1432,12 +1432,6 @@ jenkins:
     - type: ConfigMap
       configMapName: gigaci-jenkins
       mountPath: /var/myapp/myconfigmap
-    - type: EmptyDir
-      mountPath: /var/jenkins_home/email-templates
-      memory: false
-    - type: ConfigMap
-      configMapName: gigaci-release-mail-template
-      mountPath: /var/jenkins_home/email-templates  
     # - type: HostPath
     #   hostPath: /var/lib/containers
     #   mountPath: /var/myapp/myhostpath
@@ -1460,11 +1454,13 @@ jenkins:
     # Allowed types are: DynamicPVC, EmptyDir, HostPath, Nfs, PVC
     # Configure the attributes as they appear in the corresponding Java class for that type
     # https://github.com/jenkinsci/kubernetes-plugin/tree/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes/workspace
-    workspaceVolume: {}
-    # - type: DynamicPVC
-    #   configMapName: myconfigmap
-    # - type: EmptyDir
-    #   memory: false
+    workspaceVolume: 
+    - type: EmptyDir
+      mountPath: /var/jenkins_home/email-templates
+      memory: false
+    - type: ConfigMap
+      configMapName: gigaci-release-mail-template
+      mountPath: /var/jenkins_home/email-templates  
     # - type: HostPath
     #   hostPath: /var/lib/containers
     # - type: Nfs
