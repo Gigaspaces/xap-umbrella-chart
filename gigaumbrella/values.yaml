@@ -686,7 +686,7 @@ jenkins:
                       \ -> %>\n\t<TR><TD class=\"console\">^${org.apache.commons.lang.StringEscapeUtils.escapeHtml(line)}</TD></TR>\n\
                       <% \t} %>\n</TABLE>\n<BR/>\n<% } %>\n\n</BODY>\n</j:jelly>"
                     id: "5f3c30af-6e70-47fc-9646-ca9af5092ced"
-                    name: " continuous-Jelly"
+                    name: "continuous-Jelly"
               email-ext:
                 adminRequiredForTemplateTesting: false
                 allowUnregisteredEnabled: false
@@ -1459,7 +1459,7 @@ jenkins:
       mountPath: /var/jenkins_home/email-templates
       memory: false
     - type: ConfigMap
-      configMapName: gigaci-release-mail-template
+      configMapName: gigaci-release-mail-templatew
       mountPath: /var/jenkins_home/email-templates  
     # - type: HostPath
     #   hostPath: /var/lib/containers
