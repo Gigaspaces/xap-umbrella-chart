@@ -704,8 +704,8 @@ jenkins:
                 - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
                 mailAccount:
                   credentialsId: "mail_password"
-                  smtpUsername: "newmangigaspaces@gmail.com"
-                  smtpHost: "smtp.gmail.com"
+                  smtpUsername: "AKIAYK72STYCODIHYDMO"
+                  smtpHost: "email-smtp.us-east-2.amazonaws.com"
                   smtpPort: "465"
                   useSsl: true
                 maxAttachmentSize: -1
