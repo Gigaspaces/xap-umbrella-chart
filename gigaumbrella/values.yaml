@@ -525,6 +525,9 @@ jenkins:
                 useScriptSecurity: true
               sSHD:
                 port: -1
+            location:
+              adminAddress: "newman@gigaspaces.com"
+              url: "https://gigajenkins.gigaspaces.com/"    
             credentials:
               system:
                 domainCredentials:
