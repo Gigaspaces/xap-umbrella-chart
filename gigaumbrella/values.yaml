@@ -95,6 +95,7 @@ jenkins:
     # Set min/max heap here if needed with:
     javaOpts: 
       -Dorg.csanchez.jenkins.plugins.kubernetes.pipeline.ContainerExecDecorator.websocketConnectionTimeout=180
+      -Dmail.smtp.starttls.enable=true
       # -Dhudson.security.csrf.GlobalCrumbIssuerConfiguration.DISABLE_CSRF_PROTECTION=true
     # jenkinsOpts: ""
     # If you are using the ingress definitions provided by this chart via the `controller.ingress` block the configured hostname will be the ingress hostname starting with `https://` or `http://` depending on the `tls` configuration.
