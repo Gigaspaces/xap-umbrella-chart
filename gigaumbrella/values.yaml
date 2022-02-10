@@ -548,7 +548,7 @@ jenkins:
                       - usernamePassword:
                           scope: GLOBAL
                           id: mail_password
-                          username: "newmangigaspaces@gmail.com"
+                          username: "AKIAYK72STYCODIHYDMO"
                           password: "${smtp-secret-password}"
                           description: "Username/Password Credentials smtp server"
             unclassified:
