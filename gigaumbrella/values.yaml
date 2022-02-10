@@ -544,10 +544,10 @@ jenkins:
                               privateKey: "${git-credentials-id-secret-privatekey}"   
                       - usernamePassword:
                           scope: GLOBAL
-                          id: mail_password
+                          id: "aws_ses"
                           username: "AKIAYK72STYCODIHYDMO"
                           password: "${smtp-secret-password}"
-                          description: "Username/Password Credentials smtp server"
+                          description: "mail_sender"
             unclassified:
               location:
                 adminAddress: "newman@gigaspaces.com"
