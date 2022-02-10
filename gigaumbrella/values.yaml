@@ -524,10 +524,7 @@ jenkins:
               globalJobDslSecurityConfiguration:
                 useScriptSecurity: true
               sSHD:
-                port: -1
-            location:
-              adminAddress: "newman@gigaspaces.com"
-              url: "https://gigajenkins.gigaspaces.com/"    
+                port: -1   
             credentials:
               system:
                 domainCredentials:
@@ -552,6 +549,9 @@ jenkins:
                           password: "${smtp-secret-password}"
                           description: "Username/Password Credentials smtp server"
             unclassified:
+              location:
+                adminAddress: "newman@gigaspaces.com"
+                url: "https://gigajenkins.gigaspaces.com/" 
               globalConfigFiles:
                 configs:
                 - jellyTemplate:
