@@ -706,7 +706,7 @@ jenkins:
                 defaultTriggerIds:
                 - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
                 mailAccount:
-                  credentialsId: "mail_password"
+                  credentialsId: "aws_ses"
                   smtpUsername: "AKIAYK72STYCODIHYDMO"
                   smtpHost: "email-smtp.us-east-2.amazonaws.com"
                   smtpPort: "465"
