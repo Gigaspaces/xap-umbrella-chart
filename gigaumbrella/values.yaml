@@ -1139,7 +1139,7 @@ jenkins:
                                                   
                                   
                                               }
-                                              branches('$BRANCH_')
+                                              branches('master')
                                               // extensions {
                                               //     cleanBeforeCheckout()
                                               // }
