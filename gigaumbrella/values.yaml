@@ -457,6 +457,8 @@ jenkins:
       keyName: privatekey
     - name: smtp-secret
       keyName: password
+    - name: docker-hub-cred
+      keyName: password  
 
     additionalSecrets: []
     #  - name: nameOfSecret
@@ -548,6 +550,12 @@ jenkins:
                           username: "AKIAYK72STYCODIHYDMO"
                           password: "${smtp-secret-password}"
                           description: "mail_sender"
+                      - usernamePassword:
+                          description: "gigaops12-dockerhub"
+                          id: "docker-hub-cred"
+                          password: "docker-hub-cred-password"
+                          scope: GLOBAL
+                          username: "gigaops12"
             unclassified:
               location:
                 adminAddress: "newman@gigaspaces.com"
