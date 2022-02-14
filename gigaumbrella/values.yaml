@@ -955,7 +955,7 @@ jenkins:
                                           url('git@github.com:Gigaspaces/xap-dotnet.git')
                                           credentials('git_credentials_id')
                                       }
-                                      branch('*/${BRANCH_NAME}')
+                                      branch("*/${BRANCH_NAME}")
                                   }
                               }
                               wrappers {
@@ -966,9 +966,9 @@ jenkins:
                               
                               steps {
                                   batchFile('echo followdescription')
-                                  batchFile('echo followdescription')
                                   environmentVariables {
                                       propertiesFile('xap-net-env.properties')
+                                  batchFile('echo followdescription')    
                                   }
                               }
                               publishers {
@@ -981,7 +981,7 @@ jenkins:
                                               git {
                                                   pushOnlyIfSuccess()
                                                   forcePush()
-                                                  tag('origin','GSBUILD') {
+                                                  tag('origin','$GS_BUILD') {
                                                       message('XAP.NET release tag on top ${BRANCH_NAME}')
                                                       create()
                                                       update()
@@ -1435,13 +1435,7 @@ jenkins:
     volumes: 
     - type: ConfigMap
       configMapName: gigaci-jenkins
-      mountPath: /var/myapp/myconfigmap
-    - type: ConfigMap
-      configMapName: gigaci-continuous-mail-template
-      mountPath: /var/jenkins_home/email-templates
-    - type: ConfigMap
-      configMapName: gigaci-release-mail-template
-      mountPath: /var/jenkins_home/email-templates    
+      mountPath: /var/myapp/myconfigmap   
     # - type: HostPath
     #   hostPath: /var/lib/containers
     #   mountPath: /var/myapp/myhostpath
