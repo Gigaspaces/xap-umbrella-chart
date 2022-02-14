@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: docker-hub-cred
+  labels:
+    app.kubernetes.io/part-of: jenkins-controller
+    app.kubernetes.io/component: dockerhub-secret
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    che.eclipse.org/automount-workspace-secret: 'true'
+    che.eclipse.org/mount-path: /run/secrets/
+    che.eclipse.org/mount-as: file
+data:
+  password: |
+    b3JlbnNpdG8x
+    
