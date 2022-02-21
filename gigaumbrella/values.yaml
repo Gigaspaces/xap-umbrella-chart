@@ -299,7 +299,7 @@ jenkins:
       - jsch:0.1.55.2
       - authentication-tokens:1.4
       - flexible-publish:0.16.1
-      - docker-commons:1.18
+      - docker-commons:1.19
       - timestamper:1.17
       - github-api:1.301-378.v9807bd746da5
       - windows-slaves:1.8
@@ -411,7 +411,6 @@ jenkins:
       - popper2-api:2.11.0-1
       - variant:1.4
       - emailext-template:1.4
-      - warnings-ng:9.11.0
       - config-file-provider:3.9.0
     
     # Set to false to download the minimum required version of all dependencies.
@@ -454,7 +453,7 @@ jenkins:
     # and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc')
     additionalExistingSecrets: 
     - name: git-credentials-id-secret
-      keyName: privatekey
+      keyName: idrsa
     - name: smtp-secret
       keyName: password
     - name: docker-hub-cred
@@ -973,10 +972,10 @@ jenkins:
                               
                               
                               steps {
-                                  batchFile('echo followdescription')
+                                  batchFile('"%WORKSPACE%\\Build\\extract-build-name.bat" %JAVA_BUILD_URL% "%WORKSPACE%\\xap-net-env.properties"')
                                   environmentVariables {
                                       propertiesFile('xap-net-env.properties')
-                                  batchFile('echo followdescription')    
+                                  batchFile('cd "%WORKSPACE%\\Build" & call BuildAll.bat "%JAVA_BUILD_URL%" "%BRANCH_NAME%" "%DEPLOY_MVN_ARTIFACTS%" "%PUBLISH_TO_NEWMAN%"')    
                                   }
                               }
                               publishers {
