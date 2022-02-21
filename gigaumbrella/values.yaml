@@ -542,7 +542,7 @@ jenkins:
                           description: "Private key access to xap-premium-GitHub"
                           privateKeySource:
                             directEntry:
-                              privateKey: "${git-credentials-id-secret-privatekey}"   
+                              privateKey: "${git-credentials-id-secret-idrsa}"   
                       - usernamePassword:
                           scope: GLOBAL
                           id: "aws_ses"
