@@ -1056,7 +1056,7 @@ jenkins:
                                   booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
                               }
                               triggers {
-                                  cron('* * * 17 *')
+                                  cron('* 17 * * *')
                               } 
                               definition {
                                   cpsScm {
@@ -1065,13 +1065,6 @@ jenkins:
                                               remote {
                                                   url('git@github.com:Gigaspaces/xap-premium.git')
                                                   credentials('git_credentials_id')
-                                              }
-                                              remote {
-                                                  url('git@github.com:Gigaspaces/xap.git')
-                                                  credentials('git_credentials_id')
-                                              }
-                                              remote {
-                                                  url('https://github.com/InsightEdge/insightedge.git')
                                               }
                                               branches('$BRANCH_NAME')
                                           }
@@ -1141,7 +1134,7 @@ jenkins:
                                   4- urgent""")   
                               } 
                               triggers {
-                                  cron('* * * 17 *')
+                                  cron('30 * * * *')
                               } 
                               definition {
                                   cpsScm {
@@ -1150,7 +1143,12 @@ jenkins:
                                               remote {
                                                   url('git@github.com:Gigaspaces/xap-premium.git')
                                                   credentials('git_credentials_id')
-                                                  
+                                              remote {
+                                                  url('git@github.com:Gigaspaces/xap.git')
+                                                  credentials('git_credentials_id')
+                                              }
+                                              remote {
+                                                  url('https://github.com/InsightEdge/insightedge.git')    
                                   
                                               }
                                               branches('master')
