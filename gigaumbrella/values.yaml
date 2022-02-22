@@ -982,7 +982,7 @@ jenkins:
                                   flexiblePublish {
                                       conditionalAction {
                                           condition {
-                                              booleanCondition("\"${ENV,var='RELEASE'}\"")
+                                              booleanCondition("\\"${ENV,var='RELEASE'}\\"")
                                           }
                                           publishers {                                   
                                               git {
