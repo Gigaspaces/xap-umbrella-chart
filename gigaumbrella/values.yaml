@@ -1066,8 +1066,6 @@ jenkins:
                                                   url('git@github.com:Gigaspaces/xap-premium.git')
                                                   credentials('git_credentials_id')
                                               }
-                                              branches('$BRANCH_NAME')
-                                              }
                                               remote {
                                                   url('git@github.com:Gigaspaces/xap.git')
                                                   credentials('git_credentials_id')
@@ -1075,6 +1073,7 @@ jenkins:
                                               remote {
                                                   url('https://github.com/InsightEdge/insightedge.git')
                                               }
+                                              branches('$BRANCH_NAME')
                                           }
                                           scriptPath("build/jenkinsfile")
                                       }   
