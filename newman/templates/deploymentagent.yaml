@@ -1,14 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: newman-agent
+  name: "{{  .Release.Name  }}-newman-agent"
   labels:
     app: newman
 spec:
-  replicas: 1
+  spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
-      app: newman
+      {{- include "newman.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
@@ -39,11 +42,11 @@ spec:
           - name: NEWMAN_AGENT_HOME
             value: /home/xap-agent
           - name: NEWMAN_AGENT_CAPABILITIES
-            value: DOCKER,LINUX,MVN
+            value: DOCKER,LINUX,MVN,PMEM,K8S
           - name: NEWMAN_AGENT_WORKERS
             value: '3'
           - name: NEWMAN_AGENT_GROUPNAME
-            value: DOCKER,Undefined 
+            value: EKS-agents
           - name: NEWMAN_NEWMAN_SRV_SERVICE_HOST
             value: newman-server
           - name: XAP_NEWMAN_AGENT_PORT_443_TCP_ADDR

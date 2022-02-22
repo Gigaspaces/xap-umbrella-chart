@@ -38,6 +38,16 @@ jenkins:
                       resourceRequestCpu: "3"
                       resourceRequestMemory: "10G"
                       workingDir: "/home/jenkins/agent"
+                    - args: "9999999"
+                      command: "sleep"
+                      image: "docker:dind"
+                      livenessProbe:
+                        failureThreshold: 0
+                        initialDelaySeconds: 0
+                        periodSeconds: 0
+                        successThreshold: 0
+                        timeoutSeconds: 0
+                      name: "docker-build"
                     workspaceVolume:
                       dynamicPVC:
                         storageClassName: gp2

@@ -1054,6 +1054,9 @@ jenkins:
                                   booleanParam('JAVA_DOCS',true, 'Create and upload java api docs')
                                   booleanParam('GEN_SMART_ZIPS',true, 'Generate and upload the smart-cache & smart-augmented-transactions zip files')
                                   booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
+                              }
+                              triggers {
+                                  cron('* * * 17 *')
                               } 
                               definition {
                                   cpsScm {
@@ -1062,14 +1065,16 @@ jenkins:
                                               remote {
                                                   url('git@github.com:Gigaspaces/xap-premium.git')
                                                   credentials('git_credentials_id')
-                                                  
-                                  
                                               }
-                                              branches('master')
-                                              // extensions {
-                                              //     cleanBeforeCheckout()
-                                              // }
-                                              
+                                              branches('$BRANCH_NAME')
+                                              }
+                                              remote {
+                                                  url('git@github.com:Gigaspaces/xap.git')
+                                                  credentials('git_credentials_id')
+                                              }
+                                              remote {
+                                                  url('https://github.com/InsightEdge/insightedge.git')
+                                              }
                                           }
                                           scriptPath("build/jenkinsfile")
                                       }   
@@ -1135,6 +1140,9 @@ jenkins:
                                   2- high 
                                   3- release-default    
                                   4- urgent""")   
+                              } 
+                              triggers {
+                                  cron('* * * 17 *')
                               } 
                               definition {
                                   cpsScm {
