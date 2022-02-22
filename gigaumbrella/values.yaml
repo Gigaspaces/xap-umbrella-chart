@@ -1143,6 +1143,7 @@ jenkins:
                                               remote {
                                                   url('git@github.com:Gigaspaces/xap-premium.git')
                                                   credentials('git_credentials_id')
+                                              }    
                                               remote {
                                                   url('git@github.com:Gigaspaces/xap.git')
                                                   credentials('git_credentials_id')
@@ -1152,9 +1153,6 @@ jenkins:
                                   
                                               }
                                               branches('master')
-                                              // extensions {
-                                              //     cleanBeforeCheckout()
-                                              // }
                                               
                                           }
                                           scriptPath("build/jenkinsfile")
