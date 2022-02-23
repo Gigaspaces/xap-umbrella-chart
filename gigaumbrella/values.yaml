@@ -982,14 +982,14 @@ jenkins:
                                   flexiblePublish {
                                       conditionalAction {
                                           condition {
-                                              booleanCondition('${ENV,var="RELEASE"}')
+                                              booleanCondition('ֿֿ$\{ENV,var="RELEASE"}')
                                           }
                                           publishers {                                   
                                               git {
                                                   pushOnlyIfSuccess()
                                                   forcePush()
                                                   tag('origin','$GS_BUILD_NAME') {
-                                                      message('XAP.NET release tag on top ${BRANCH_NAME}')
+                                                      message('XAP.NET release tag on top \${BRANCH_NAME}')
                                                       create()
                                                       update()
                                                   }
