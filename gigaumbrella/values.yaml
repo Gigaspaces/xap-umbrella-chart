@@ -968,7 +968,7 @@ jenkins:
                               wrappers {
                                   preBuildCleanup()
                                   timestamps()
-                                  buildName('\${GS_BUILD_NAME}')
+                                  buildName('${GS_BUILD_NAME}')
                               }
                               
                               
