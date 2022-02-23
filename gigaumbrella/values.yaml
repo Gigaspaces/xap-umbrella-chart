@@ -552,7 +552,7 @@ jenkins:
                       - usernamePassword:
                           description: "gigaops12-dockerhub"
                           id: "docker-hub-cred"
-                          password: "docker-hub-cred-password"
+                          password: "${docker-hub-cred-password}"
                           scope: GLOBAL
                           username: "gigaops12"
             unclassified:
