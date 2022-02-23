@@ -989,7 +989,7 @@ jenkins:
                                                   pushOnlyIfSuccess()
                                                   forcePush()
                                                   tag('origin','$GS_BUILD_NAME') {
-                                                      message('XAP.NET release tag on top /$/{BRANCH_NAME}')
+                                                      message('XAP.NET release tag on top ${BRANCH_NAME}')
                                                       create()
                                                       update()
                                                   }
