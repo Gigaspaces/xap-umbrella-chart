@@ -968,7 +968,6 @@ jenkins:
                               wrappers {
                                   preBuildCleanup()
                                   timestamps()
-                                  buildName('${GS_BUILD_NAME}')
                               }
                               
                               
@@ -989,8 +988,8 @@ jenkins:
                                               git {
                                                   pushOnlyIfSuccess()
                                                   forcePush()
-                                                  tag('origin','${GS_BUILD_NAME}') {
-                                                      message('XAP.NET release tag on top \${BRANCH_NAME}')
+                                                  tag('origin','$GS_BUILD_NAME') {
+                                                      message('XAP.NET release tag on top \$BRANCH_NAME')
                                                       create()
                                                       update()
                                                   }
