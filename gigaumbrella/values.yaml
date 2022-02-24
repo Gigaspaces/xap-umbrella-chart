@@ -412,6 +412,7 @@ jenkins:
       - emailext-template:1.4
       - config-file-provider:3.9.0
       - pipeline-utility-steps:2.12.0
+      - docker-workflow:1.28
     
     # Set to false to download the minimum required version of all dependencies.
     installLatestPlugins: true
