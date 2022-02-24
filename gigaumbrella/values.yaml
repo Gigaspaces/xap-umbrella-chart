@@ -673,8 +673,8 @@ jenkins:
                       \     <%\n         if (publishGsctl == 'true'){\n         %>\n         <TR><TD>Gsctl:</TD><TD><A\
                       \ href=\"https://gigaspaces-releases-eu.s3.amazonaws.com/gsctl-ea/^${buildName}/gsctl.jar\"\
                       >gsctl.jar</A></TD></TR>\n         <% } %>\n</table>\n<% } %>\n<BR/>\n\n\
-                      <BR/>\n\n<!-- CHANGE SET -->\n<% def changeSet = build.changeSet\nif(changeSet\
-                      \ != null && !changeSet.isEmptySet()) {\n\tdef hadChanges = false\n    \
+                      <BR/>\n\n<!-- CHANGE SET -->\n<% def changeSet = build.changeSets\nif(changeSet\
+                      \ != null && !changeSet.isEmpty()) {\n\tdef hadChanges = false\n    \
                       \    def index=0\n        %>\n\t<TABLE width=\"100%\">\n    <TR><TD class=\"\
                       bg1\" colspan=\"2\"><B>CHANGES-TEST</B></TD></TR>\n<% \nchangeSet.changes.each()\
                       \ { cc -> \ndef repoName = cc.key.split(\":\")[1];\nrepoName = repoName.substring(0,\
