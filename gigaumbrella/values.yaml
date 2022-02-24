@@ -405,13 +405,13 @@ jenkins:
       - metrics:4.0.2.8.1
       - momentjs:1.1.1
       - okhttp-api:4.9.3-105.vb96869f8ac3a
-      - permissive-script-security:0.7
       - plugin-util-api:2.13.0
       - popper-api:1.16.1-2
       - popper2-api:2.11.0-1
       - variant:1.4
       - emailext-template:1.4
       - config-file-provider:3.9.0
+      - pipeline-utility-steps:2.12.0
     
     # Set to false to download the minimum required version of all dependencies.
     installLatestPlugins: true
