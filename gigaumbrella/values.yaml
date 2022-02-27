@@ -1168,7 +1168,14 @@ jenkins:
                               }
                           }    
                       }
-                  }        
+                  }
+              - script: >
+                  folder('Managment'){
+                      description('jobs related to jenkins managment')
+                          pipelineJob('Managment/create_mail_templates') {
+                              cps {
+                                  script(readFileFromWorkspace('project-a-workflow.groovy'))
+                              }
     customInitContainers: []
     sidecars:
       configAutoReload:
