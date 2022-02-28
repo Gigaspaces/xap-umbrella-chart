@@ -560,6 +560,10 @@ jenkins:
               location:
                 adminAddress: "newman@gigaspaces.com"
                 url: "https://gigajenkins.gigaspaces.com/" 
+              timestamper:
+                allPipelines: true
+                elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
+                systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
               globalConfigFiles:
                 configs:
                 - jellyTemplate:
