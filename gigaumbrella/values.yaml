@@ -1097,7 +1097,7 @@ jenkins:
                                   stringParam('BRANCH_NAME', 'master')
                                   stringParam('XAP_VERSION', '16.2.0')
                                   stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
-                                  stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
+                                  stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE')
                                   booleanParam('InsightEdge', true)
                                   parameterSeparatorDefinition {
                                     name('1')
