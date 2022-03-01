@@ -1036,7 +1036,7 @@ jenkins:
                                   choiceParam('MODE', [ 'NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
                                   stringParam('BRANCH_NAME', 'master')
                                   stringParam('XAP_VERSION', '16.2.0')
-                                  stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
+                                  stringParam('MILESTONE', 'm16', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
                                   booleanParam('InsightEdge', true)
                                   parameterSeparatorDefinition{
@@ -1096,7 +1096,7 @@ jenkins:
                                   choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
                                   stringParam('BRANCH_NAME', 'master')
                                   stringParam('XAP_VERSION', '16.2.0')
-                                  stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
+                                  stringParam('MILESTONE', 'm16', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE')
                                   booleanParam('InsightEdge', true)
                                   parameterSeparatorDefinition {
@@ -1145,7 +1145,7 @@ jenkins:
                                   4- urgent""")   
                               } 
                               triggers {
-                                  cron('30 * * * *')
+                                  scm('1 * * * *')
                               } 
                               definition {
                                   cpsScm {
