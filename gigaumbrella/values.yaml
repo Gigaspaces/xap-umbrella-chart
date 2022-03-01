@@ -741,6 +741,7 @@ jenkins:
                   - "GROUP:View/Read:Dev-jenkins"  
                   - "USER:Overall/Administer:oren.sultan@gigaspaces.com"
                   - "USER:Overall/Administer:sergey.yavich@gigaspaces.com"
+                  - "USER:Overall/Read:anonymous"
 
               securityRealm:
                 saml:
