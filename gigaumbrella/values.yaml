@@ -1201,9 +1201,6 @@ jenkins:
                                   booleanParam('GEN_SMART_ZIPS',true, 'Generate and upload the smart-cache & smart-augmented-transactions zip files')
                                   booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
                               }
-                              triggers {
-                                  cron('0 17 * * *')
-                              } 
                               definition {
                                   cpsScm {
                                       scm {
@@ -1279,10 +1276,7 @@ jenkins:
                                   2- high 
                                   3- release-default    
                                   4- urgent""")   
-                              } 
-                              triggers {
-                                  scm('H/10 * * * *')
-                              } 
+                              }  
                               definition {
                                   cpsScm {
                                       scm {
