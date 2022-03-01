@@ -1099,8 +1099,8 @@ jenkins:
                                   stringParam('BRANCH_NAME', 'master')
                                   stringParam('XAP_VERSION', '16.2.0')
                                   stringParam('MILESTONE', 'm16', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
-                                  stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE')
-                                  booleanParam('InsightEdge', true)
+                                  stringParam('NEWMAN_TAGS', 'XAP')
+                                  booleanParam('InsightEdge', false)
                                   parameterSeparatorDefinition {
                                     name('1')
                                     separatorStyle('')
@@ -1147,7 +1147,7 @@ jenkins:
                                   4- urgent""")   
                               } 
                               triggers {
-                                  scm('1 * * * *')
+                                  scm('5 * * * *')
                               } 
                               definition {
                                   cpsScm {
