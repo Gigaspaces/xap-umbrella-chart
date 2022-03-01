@@ -1123,7 +1123,7 @@ jenkins:
                                   4- urgent""")   
                               } 
                               triggers {
-                                  scm('*/5 * * * *')
+                                  scm('H/5 * * * *')
                               } 
                               definition {
                                   cpsScm {
