@@ -1225,7 +1225,7 @@ jenkins:
                       description('Folder containing release /continuous')
                       folder('xap-insightedge/branch-on-demand') {
                           description('latest')
-                          pipelineJob('xap-insightedge/latest/continuous') {
+                          pipelineJob('xap-insightedge/branch-on-demand/continuous') {
                               parameters{
                                   choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
                                   stringParam('BRANCH_NAME', 'master')
