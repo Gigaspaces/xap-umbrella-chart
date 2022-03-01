@@ -1150,7 +1150,7 @@ jenkins:
                                                   url('https://github.com/InsightEdge/insightedge.git')    
                                   
                                               }
-                                              branches('master')
+                                              branches('$BRANCH_NAME')
                                               
                                           }
                                           scriptPath("build/jenkinsfile")
