@@ -678,7 +678,7 @@ jenkins:
                       \ { line -> %>\n\t<TR><TD class=\"console\">^${org.apache.commons.lang.StringEscapeUtils.escapeHtml(line)}</TD></TR>\n\
                       <% \t} %>\n</TABLE>\n<BR/>\n<% } %>\n"
                     id: "5f3c30af-6e70-47fc-9646-ca9af5092ced"
-                    name: "continuous-Jelly"
+                    name: "continuous.template"
               email-ext:
                 adminRequiredForTemplateTesting: false
                 allowUnregisteredEnabled: false
@@ -1011,9 +1011,164 @@ jenkins:
                       folder('xap-insightedge/latest') {
                           description('latest')
                           pipelineJob('xap-insightedge/latest/release') {
+                              blockOn(['xap-insightedge/latest/continuous']) {
+                                  blockLevel('GLOBAL')
+                                  scanQueueFor('ALL')
+                              }
                               parameters{
                                   choiceParam('MODE', [ 'NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
-                                  stringParam('BRANCH_NAME', 'master')
+                                  choiceParam('BRANCH_NAME', 'master')
+                                  stringParam('XAP_VERSION', '16.2.0')
+                                  stringParam('MILESTONE', 'm16', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
+                                  stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
+                                  booleanParam('InsightEdge', true)
+                                  parameterSeparatorDefinition{
+                                    name('2')
+                                    separatorStyle('')
+                                    sectionHeader('RELEASE Build parameters')
+                                    sectionHeaderStyle("""
+                                      background-color: #55216e;
+                                      text-align: center;
+                                      padding: 4px;
+                                      color: #c2db1a;
+                                      font-size: 22px;
+                                      font-weight: normal;
+                                      text-transform: uppercase;
+                                      font-family: 'Orienta', sans-serif;
+                                      letter-spacing: 1px;
+                                      font-style: italic;
+                                  """)
+                                  }
+                                  booleanParam('DotNet', false ,'Enable/Disable XAP.NET build')
+                                  booleanParam('PERFORM_FULL_M2_CLEAN', false)
+                                  booleanParam('OVERRIDE_EXISTING_TAG', false, 'Override git tag if exists')
+                                  booleanParam('DEPLOY_MVN_ARTIFACTS', true, 'Deploy build maven artifacts to S3')
+                                  booleanParam('PUBLISH_DOCKER', true, 'Trigger automated docker build in Docker Hub')
+                                  stringParam('GS_PATCH_IDNAME', 'a', "Patch identifier (usually a letter a, b, c).")
+                                  booleanParam('JAVA_DOCS',true, 'Create and upload java api docs')
+                                  booleanParam('GEN_SMART_ZIPS',true, 'Generate and upload the smart-cache & smart-augmented-transactions zip files')
+                                  booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
+                              }
+                              triggers {
+                                  cron('0 17 * * *')
+                              } 
+                              definition {
+                                  cpsScm {
+                                      scm {
+                                          git {
+                                              remote {
+                                                  url('git@github.com:Gigaspaces/xap-premium.git')
+                                                  credentials('git_credentials_id')
+                                              }
+                                              branches('$BRANCH_NAME')
+                                          }
+                                          scriptPath("build/jenkinsfile")
+                                      }   
+                                  }
+                              }
+                          }
+                      }
+                  }          
+              - script: >
+                  folder('xap-insightedge') {
+                      description('Folder containing release /continuous')
+                      folder('xap-insightedge/latest') {
+                          description('latest')
+                          pipelineJob('xap-insightedge/latest/continuous') {
+                              blockOn(['xap-insightedge/latest/continuous']) {
+                                  blockLevel('GLOBAL')
+                                  scanQueueFor('ALL')
+                              }
+                              parameters{
+                                  choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
+                                  choiceParam('BRANCH_NAME', 'master')
+                                  stringParam('XAP_VERSION', '16.2.0')
+                                  stringParam('MILESTONE', 'm16', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
+                                  stringParam('NEWMAN_TAGS', 'XAP')
+                                  booleanParam('InsightEdge', false)
+                                  parameterSeparatorDefinition {
+                                    name('1')
+                                    separatorStyle('')
+                                    sectionHeader('CONTINUOUS Build parameters')
+                                    sectionHeaderStyle("""
+                                      background-color: #55216e;
+                                      text-align: center;
+                                      padding: 4px;
+                                      color: #c2db1a;
+                                      font-size: 22px;
+                                      font-weight: normal;
+                                      text-transform: uppercase;
+                                      font-family: 'Orienta', sans-serif;
+                                      letter-spacing: 1px;
+                                      font-style: italic;
+                                  """)
+                                  }
+                                  choiceParam('ELM_VERSION', ['0.19.0', '0.18.0'])
+                                  stringParam('NEWMAN_SUITES', '',"""comma separated list of suite ids to submit future jobs  
+                                  5c88ea4bb38594355214b205 - manager         
+                                  59f25d19b3859424cac590bf - xap-core         
+                                  59f25af7b3859424cac590b5 - service-grid    
+                                  59f25af5b3859424cac590ad - disconnect
+                                  59f25e0f6d98c14e1daa2008 - web-ui            
+                                  59f25d5ab3859424cac590c1 - rocksdb           
+                                  59f25d5bb3859424cac590c2 - off-heap 
+                                  5a96b14268c479caafb1162f - mx-off-heap  
+                                  59f59592b3859424cac690fa - i9e-sgtest 
+                                  59f25af6b3859424cac590b0 - insightedge-premium  
+                                  59f25af7b3859424cac590b9 - wan  
+                                  5b6c24e7b385941b3b8ce4bf - dev-demote 
+                                  59f25e0f6d98c14e1daa5000 - performance  
+                                  607420ac4cedfd0009ec8b20 - v3driver""") 
+                                  stringParam('NEWMAN_CONFIG_ID', '5b4c9342b3859411ee82c265', """Applicable only when submitting future jobs 
+                                  5b4c9342b3859411ee82c265 - ORACLE_8   
+                                  5b4c9825b3859411ee82c2f3  - ORACLE_9  
+                                  5bf160bb1f31eb789fc0fa65 - OPENJDK_11 
+                                  5bf160bb1f31eb789fc0fb78 - OPENJDK_17""") 
+                                  stringParam('NEWMAN_AGENT_GROUPS', 'imc-srv01,imc-srv02,DotNet,Bynet')
+                                  stringParam('NEWMAN_JOB_PRIORITY', '1', """0- daily-default  
+                                  1- low  
+                                  2- high 
+                                  3- release-default    
+                                  4- urgent""")   
+                              } 
+                              triggers {
+                                  scm('H/10 * * * *')
+                              } 
+                              definition {
+                                  cpsScm {
+                                      scm {
+                                          git {
+                                              remote {
+                                                  url('git@github.com:Gigaspaces/xap-premium.git')
+                                                  credentials('git_credentials_id')
+                                              }    
+                                              remote {
+                                                  url('git@github.com:Gigaspaces/xap.git')
+                                                  credentials('git_credentials_id')
+                                              }
+                                              remote {
+                                                  url('https://github.com/InsightEdge/insightedge.git')    
+                                  
+                                              }
+                                              branches('master')
+                                              
+                                          }
+                                          scriptPath("build/jenkinsfile")
+                                      }
+                                  }
+                              }
+                          }    
+                      }
+                  }
+              - script: >
+                  folder('xap-insightedge') {
+                      description('Folder containing release /continuous')
+                      folder('xap-insightedge/branch-on-demand') {
+                          description('specific branch')
+                          pipelineJob('xap-insightedge/branch-on-demand/release') {
+                              parameters{
+                                  choiceParam('MODE', [ 'NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
+                                  choiceParam('BRANCH_NAME', '')
                                   stringParam('XAP_VERSION', '16.2.0')
                                   stringParam('MILESTONE', 'm16', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
@@ -1073,7 +1228,7 @@ jenkins:
                           pipelineJob('xap-insightedge/latest/continuous') {
                               parameters{
                                   choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
-                                  stringParam('BRANCH_NAME', 'master')
+                                  choiceParam('BRANCH_NAME', '')
                                   stringParam('XAP_VERSION', '16.2.0')
                                   stringParam('MILESTONE', 'm16', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP')
@@ -1124,7 +1279,7 @@ jenkins:
                                   4- urgent""")   
                               } 
                               triggers {
-                                  scm('H/5 * * * *')
+                                  scm('H/10 * * * *')
                               } 
                               definition {
                                   cpsScm {
@@ -1142,7 +1297,7 @@ jenkins:
                                                   url('https://github.com/InsightEdge/insightedge.git')    
                                   
                                               }
-                                              branches('master')
+                                              branches('$BRANCH_NAME')
                                               
                                           }
                                           scriptPath("build/jenkinsfile")
@@ -1151,7 +1306,7 @@ jenkins:
                               }
                           }    
                       }
-                  }
+                  }    
               - script: >
                   folder('Managment'){
                       description('jobs related to jenkins managment')
@@ -1159,6 +1314,7 @@ jenkins:
                               cps {
                                   script(readFileFromWorkspace('project-a-workflow.groovy'))
                               }
+
     customInitContainers: []
     sidecars:
       configAutoReload:
