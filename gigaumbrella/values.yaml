@@ -764,6 +764,8 @@ jenkins:
                   - "GROUP:View/Delete:Dev-jenkins"
                   - "GROUP:View/Read:Dev-jenkins"  
                   - "USER:Overall/Administer:oren.sultan@gigaspaces.com"
+                  - "USER:Overall/Administer:sergey.yavich@gigaspaces.com"
+
               securityRealm:
                 saml:
                   advancedConfiguration:
