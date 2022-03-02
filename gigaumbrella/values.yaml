@@ -1171,7 +1171,7 @@ jenkins:
                           description('specific branch')
                           pipelineJob('xap-insightedge/branch-on-demand/release') {
                               parameters{
-                                  choiceParam('MODE',  'NIGHTLY', 'MILESTONE', 'GA', 'PATCH', 'select build mode')
+                                  choiceParam('MODE',  [ 'NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
                                   booleanParam('OnDemand', true)
                                   stringParam('BRANCH_NAME','master')
                                   stringParam('XAP_VERSION', '16.2.0')
