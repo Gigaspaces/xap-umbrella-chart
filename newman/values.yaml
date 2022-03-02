@@ -17,8 +17,13 @@ image:
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: "1.0.8"
-    repli :
-
+    replica : "1"
+    env:
+      user: root
+      password: root
+      workers: '5'
+      capabilities: DOCKER,LINUX,MVN,PMEM,K8S 
+      group: eks-agents
 imagePullSecrets:
   - name: dockerhubcred
 nameOverride: ""
