@@ -1020,7 +1020,7 @@ jenkins:
                               }
                               parameters{
                                   choiceParam('MODE', [ 'NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
-                                  stringParam('BRANCH_NAME', ['master'])
+                                  stringParam('BRANCH_NAME', 'master')
                                   stringParam('XAP_VERSION', '16.2.0')
                                   stringParam('MILESTONE', 'm16', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
@@ -1085,7 +1085,7 @@ jenkins:
                               }
                               parameters{
                                   choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
-                                  choiceParam('BRANCH_NAME', ['master'])
+                                  stringParam('BRANCH_NAME', 'master')
                                   stringParam('XAP_VERSION', '16.2.0')
                                   stringParam('MILESTONE', 'm16', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP')
@@ -1230,7 +1230,7 @@ jenkins:
                           description('latest')
                           pipelineJob('xap-insightedge/branch-on-demand/continuous') {
                               parameters{
-                                  stringParam('MODE', ['CONTINUOUS'], 'select build mode')
+                                  choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
                                   booleanParam('OnDemand', true)
                                   stringParam('BRANCH_NAME', 'master')
                                   stringParam('XAP_VERSION', '16.2.0')
