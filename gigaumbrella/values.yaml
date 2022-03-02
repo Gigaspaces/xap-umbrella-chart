@@ -1042,7 +1042,7 @@ jenkins:
                                       font-style: italic;
                                   """)
                                   }
-                                  booleanParam('DotNet', false ,'Enable/Disable XAP.NET build')
+                                  booleanParam('DotNet', true ,'Enable/Disable XAP.NET build')
                                   booleanParam('PERFORM_FULL_M2_CLEAN', false)
                                   booleanParam('OVERRIDE_EXISTING_TAG', false, 'Override git tag if exists')
                                   booleanParam('DEPLOY_MVN_ARTIFACTS', true, 'Deploy build maven artifacts to S3')
