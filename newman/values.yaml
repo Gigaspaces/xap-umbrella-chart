@@ -18,10 +18,11 @@ image:
     # Overrides the image tag whose default is the chart appVersion.
     tag: "1.0.8"
     replica : "1"
+    newmanServerHost: "172.31.13.106"
     env:
       user: root
       password: root
-      workers: '5'
+      workers: '3'
       capabilities: DOCKER,LINUX,MVN,PMEM,K8S 
       group: eks-agents
 imagePullSecrets:

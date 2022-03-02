@@ -18,6 +18,10 @@ spec:
         app: newman
     spec:
       {{- with .Values.imagePullSecrets }}
+      hostAliases:
+      - ip: "172.31.13.106"
+        hostnames:
+        - {{ .Values.agent.newmanServerHost }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
