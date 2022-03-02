@@ -3,32 +3,47 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
-
-image:
-
-  registry: docker.io
-  repository: gigaops12/newman
-  pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.0.4"
+global: 
+  om: 
+    server: 
+      enabled: false
+    agent:
+      enabled: true  
+newman:
+  mongodbHost: "mongodb"
+  server:
+    registry: docker.io
+    repository: gigaops12/newman
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "1.0.4"
+    imagePullSecrets:
+    - name: dockerhubcred
+    nameOverride: ""
+    fullnameOverride: ""
+  
   agent:
     registry: docker.io
     repository: gigaops12/newman-agent
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "1.0.8"
-    replica : "1"
-    newmanServerHost: "172.31.13.106"
+    tag: "2.0.8"
+    replicaCount : 5
+    newmanserver: "172.31.13.106"
     env:
-      user: root
-      password: root
-      workers: '3'
-      capabilities: DOCKER,LINUX,MVN,PMEM,K8S 
-      group: eks-agents
-imagePullSecrets:
-  - name: dockerhubcred
-nameOverride: ""
-fullnameOverride: ""
+      user: "root"
+      password: "root"
+      workers: "'3'"
+      capabilities: "LINUX,MVN,PMEM,K8S" 
+      group: "eks-agents"
+    podAnnotations: {}
+
+
+
+    imagePullSecrets:
+    - name: dockerhubcred
+    nameOverride: ""
+    fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -39,18 +54,6 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-podAnnotations: {}
-
-podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
 
 service:
   listener:
@@ -103,6 +106,6 @@ tolerations: []
 
 affinity: {}
 
-newman:
-  mongodbHost: "mongodb"
+
+  
   

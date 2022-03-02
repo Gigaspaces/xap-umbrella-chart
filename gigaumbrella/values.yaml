@@ -1020,7 +1020,7 @@ jenkins:
                               }
                               parameters{
                                   choiceParam('MODE', [ 'NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
-                                  choiceParam('BRANCH_NAME', ['master'])
+                                  stringParam('BRANCH_NAME', ['master'])
                                   stringParam('XAP_VERSION', '16.2.0')
                                   stringParam('MILESTONE', 'm16', 'Milestone label, e.g. m6, rc2. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
@@ -1047,7 +1047,8 @@ jenkins:
                                   booleanParam('OVERRIDE_EXISTING_TAG', false, 'Override git tag if exists')
                                   booleanParam('DEPLOY_MVN_ARTIFACTS', true, 'Deploy build maven artifacts to S3')
                                   booleanParam('PUBLISH_DOCKER', true, 'Trigger automated docker build in Docker Hub')
-                                  stringParam('GS_PATCH_IDNAME', 'a', "Patch identifier (usually a letter a, b, c).")
+                                  stringParam('GS_PATCH_ID', 'a', "Patch identifier (usually a letter a, b, c).")
+                                  stringParam('GS_PATCH_NUMBER', 'a', "Patch number (integer which increases for each release of the same version+patchId).")
                                   booleanParam('JAVA_DOCS',true, 'Create and upload java api docs')
                                   booleanParam('GEN_SMART_ZIPS',true, 'Generate and upload the smart-cache & smart-augmented-transactions zip files')
                                   booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
@@ -1170,7 +1171,7 @@ jenkins:
                           description('specific branch')
                           pipelineJob('xap-insightedge/branch-on-demand/release') {
                               parameters{
-                                  choiceParam('MODE', [ 'NIGHTLY'], 'select build mode')
+                                  choiceParam('MODE',  'NIGHTLY', 'MILESTONE', 'GA', 'PATCH', 'select build mode')
                                   booleanParam('OnDemand', true)
                                   stringParam('BRANCH_NAME','master')
                                   stringParam('XAP_VERSION', '16.2.0')
@@ -1199,7 +1200,8 @@ jenkins:
                                   booleanParam('OVERRIDE_EXISTING_TAG', false, 'Override git tag if exists')
                                   booleanParam('DEPLOY_MVN_ARTIFACTS', true, 'Deploy build maven artifacts to S3')
                                   booleanParam('PUBLISH_DOCKER', true, 'Trigger automated docker build in Docker Hub')
-                                  stringParam('GS_PATCH_IDNAME', 'a', "Patch identifier (usually a letter a, b, c).")
+                                  stringParam('GS_PATCH_ID', 'a', "Patch identifier (usually a letter a, b, c).")
+                                  stringParam('GS_PATCH_NUMBER', 'a', "Patch number (integer which increases for each release of the same version+patchId).")
                                   booleanParam('JAVA_DOCS',true, 'Create and upload java api docs')
                                   booleanParam('GEN_SMART_ZIPS',true, 'Generate and upload the smart-cache & smart-augmented-transactions zip files')
                                   booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
@@ -1228,7 +1230,7 @@ jenkins:
                           description('latest')
                           pipelineJob('xap-insightedge/branch-on-demand/continuous') {
                               parameters{
-                                  choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
+                                  stringParam('MODE', ['CONTINUOUS'], 'select build mode')
                                   booleanParam('OnDemand', true)
                                   stringParam('BRANCH_NAME', 'master')
                                   stringParam('XAP_VERSION', '16.2.0')
@@ -1992,6 +1994,7 @@ newman-srv:
   image:
     agent: 
       tag: "2.0.7"
+  agent:
 mongodb:
   auth:
     enabled: false

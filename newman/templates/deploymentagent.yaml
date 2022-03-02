@@ -1,46 +1,44 @@
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "{{  .Release.Name  }}-newman-agent"
+  name: "{{  .Release.Name  }}-agent"
   labels:
-    app: newman
+    app: newman-agent
 spec:
-  spec:
   {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.newman.agent.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "newman.selectorLabels" . | nindent 6 }}
+      app: newman-agent
   template:
     metadata:
       labels:
-        app: newman
+        app: newman-agent
     spec:
-      {{- with .Values.imagePullSecrets }}
-      hostAliases:
-      - ip: "172.31.13.106"
-        hostnames:
-        - {{ .Values.agent.newmanServerHost }}
+      {{- with .Values.newman.agent.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "newman.serviceAccountName" . }}
       securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.newman.agent.podSecurityContext | nindent 8 }}
       containers:
         - name: newman-agent
           securityContext:  
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.agent.repository }}:{{ .Values.image.agent.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.newman.agent.repository }}:{{ .Values.newman.agent.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.newman.agent.pullPolicy }}
+          
+          
           ports:
           - containerPort: 80
           env:
           - name: NEWMAN_USER
-            value: {{ .Values.agent.env.user }}
+            value: {{ .Values.newman.agent.env.user }}
           - name: NEWMAN_PASSWORD
-            value: {{ .Values.agent.env.password }}
+            value: {{ .Values.newman.agent.env.password }}
           - name: NEWMAN_SERVER_HOST
             value: newman-server
           - name: NEWMAN_SERVER_PORT
@@ -48,11 +46,11 @@ spec:
           - name: NEWMAN_AGENT_HOME
             value: /home/xap-agent
           - name: NEWMAN_AGENT_CAPABILITIES
-            value: {{ .Values.agent.env.capabilities }}
+            value: {{ .Values.newman.agent.env.capabilities }}
           - name: NEWMAN_AGENT_WORKERS
-            value: {{ .Values.agent.env.workers }}
+            value: {{ .Values.newman.agent.env.workers }}
           - name: NEWMAN_AGENT_GROUPNAME
-            value: {{ .Values.agent.env.group }}
+            value: {{ .Values.newman.agent.env.group }}
           - name: NEWMAN_NEWMAN_SRV_SERVICE_HOST
             value: newman-server
           - name: XAP_NEWMAN_AGENT_PORT_443_TCP_ADDR
@@ -61,9 +59,12 @@ spec:
             value: '8443'
           volumeMounts:
             - mountPath: /home/xap-agent
-              name: newman-data
+              name: newman-agent-data
           # command: ['mkdir', '-p', '/home/xap-agent']
+      hostAliases:
+        - ip:  {{ .Values.newman.agent.newmanserver |default "172.31.13.106" }}
+          hostnames:
+            - newman-server
       volumes:
-        - name: newman-data
-          persistentVolumeClaim:
-            claimName: "{{  .Release.Name  }}-data"
+        - emptyDir:
+          name: newman-agent-data
