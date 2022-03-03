@@ -96,6 +96,7 @@ jenkins:
     javaOpts: 
       -Dorg.csanchez.jenkins.plugins.kubernetes.pipeline.ContainerExecDecorator.websocketConnectionTimeout=180
       -Dmail.smtp.starttls.enable=true
+      -Dorg.apache.commons.jelly.tags.fmt.timeZone=GMT/UTC+2
       # -Dhudson.security.csrf.GlobalCrumbIssuerConfiguration.DISABLE_CSRF_PROTECTION=true
     # jenkinsOpts: ""
     # If you are using the ingress definitions provided by this chart via the `controller.ingress` block the configured hostname will be the ingress hostname starting with `https://` or `http://` depending on the `tls` configuration.
@@ -1014,7 +1015,7 @@ jenkins:
                       folder('xap-insightedge/latest') {
                           description('latest')
                           pipelineJob('xap-insightedge/latest/release') {
-                              blockOn(['xap-insightedge/latest/continuous']) {
+                              blockOn(['xap-insightedge/latest/release']) {
                                   blockLevel('GLOBAL')
                                   scanQueueFor('ALL')
                               }

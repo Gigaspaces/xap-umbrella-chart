@@ -27,7 +27,7 @@ newman:
     repository: gigaops12/newman-agent
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "2.0.8"
+    tag: "2.0.12"
     replicaCount : 5
     newmanserver: "172.31.13.106"
     env:
