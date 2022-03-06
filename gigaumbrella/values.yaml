@@ -648,8 +648,7 @@ jenkins:
                       </TABLE>\n\n<%\nif(build.result.toString() == 'SUCCESS') {\n\n   def xapVersion\
                       \ = \"unknown\"\n   def buildName = \"unknown\"\n   def tagName = \"unknown\"\
                       \n   def mavenVersion = \"unknown\"\n\n   try{\n     xapVersion = build.getEnvironment(listener).get(\"\
-                      XAP_VERSION\")\n     buildName = build.getEnvironment(listener).get(\"GS_BUILD_NAME\"\
-                      )\n     tagName = build.getEnvironment(listener).get(\"TAG_NAME\")\n   \
+                      XAP_VERSION\")\n     buildName = build.fullDisplayName\n     tagName = build.getEnvironment(listener).get(\"TAG_NAME\")\n   \
                       \  mavenVersion = build.getEnvironment(listener).get(\"FINAL_MAVEN_VERSION\"\
                       )\n     publishInsightEdge = build.getEnvironment(listener).get(\"InsightEdge\"\
                       )\n     publishGsctl = build.getEnvironment(listener).get(\"PUBLISH_GSCTL\"\
