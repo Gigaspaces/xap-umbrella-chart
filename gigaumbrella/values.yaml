@@ -577,13 +577,13 @@ jenkins:
                       \ color:blue; }\nTD.test_failed { color:red; }\nTD.console { font-family:Courier\
                       \ New; }\n</STYLE>\n<BODY>\n \n\n<% \n   def xapVersion = \"unknown\"\n\
                       \   def buildName = \"unknown\"\n   def tagName = \"unknown\"\n   def mavenVersion\
-                      \ = \"unknown\"\n\n   try{\n     xapVersion = build.getEnvironment(listener).get(\"\
-                      XAP_VERSION\") \n     buildName = build.getEnvironment(listener).get(\"\
-                      GS_BUILD_NAME\")\n     tagName = build.getEnvironment(listener).get(\"TAG_NAME\"\
-                      )\n     mavenVersion = build.getEnvironment(listener).get(\"FINAL_MAVEN_VERSION\"\
-                      )\n     deployArtifacts = build.getEnvironment(listener).get(\"DEPLOY_MVN_ARTIFACTS\"\
-                      )\n     publishGsctl = build.getEnvironment(listener).get(\"PUBLISH_GSCTL\"\
-                      )\n     mode = build.getEnvironment(listener).get(\"MODE\")\n   } catch(all){\
+                      \ = \"unknown\"\n\n   try{\n     xapVersion = build.getEnvironment().get(\"\
+                      XAP_VERSION\") \n     buildName = build.getEnvironment().get(\"\
+                      GS_BUILD_NAME\")\n     tagName = build.getEnvironment().get(\"TAG_NAME\"\
+                      )\n     mavenVersion = build.getEnvironment().get(\"FINAL_MAVEN_VERSION\"\
+                      )\n     deployArtifacts = build.getEnvironment().get(\"DEPLOY_MVN_ARTIFACTS\"\
+                      )\n     publishGsctl = build.getEnvironment().get(\"PUBLISH_GSCTL\"\
+                      )\n     mode = build.getEnvironment().get(\"MODE\")\n   } catch(all){\
                       \ \n   }\n   def xapPackage = \"gigaspaces-xap-enterprise-\" + buildName\
                       \ + \".zip\"\n   def insightedgePackage = \"gigaspaces-insightedge-enterprise-\"\
                       \ + buildName + \".zip\"\n   def smartCachePackage = \"gigaspaces-smart-cache-enterprise-\"\
@@ -634,7 +634,7 @@ jenkins:
                       \ font-size:120% }\nTD.bg2 { color:white; background-color:#4040FF; font-size:110%\
                       \ }\nTD.bg3 { color:white; background-color:#8080FF; }\nTD.test_passed {\
                       \ color:blue; }\nTD.test_failed { color:red; }\nTD.console { font-family:Courier\
-                      \ New; }\n</STYLE>\n<BODY>\n<%\n    def branchName = build.getEnvironment(listener).get(\"\
+                      \ New; }\n</STYLE>\n<BODY>\n<%\n    def branchName = build.getEnvironment().get(\"\
                       BRANCH_NAME\")\n%>\n\n\n\n\n\n<TABLE>\n  <TR><TD align=\"right\"><IMG SRC=\"\
                       https://raw.githubusercontent.com/jenkinsci/jenkins/master/war/src/main/webapp/images/32x32/<%=\
                       \ build.result.toString() == 'SUCCESS' ? \"blue.gif\" : build.result.toString()\
@@ -647,11 +647,11 @@ jenkins:
                       \ <%  } %></TD></TR>\n  <TR><TD>SCM</TD><TD><% project.getSCMs()%></TD></TR>\n\
                       </TABLE>\n\n<%\nif(build.result.toString() == 'SUCCESS') {\n\n   def xapVersion\
                       \ = \"unknown\"\n   def buildName = \"unknown\"\n   def tagName = \"unknown\"\
-                      \n   def mavenVersion = \"unknown\"\n\n   try{\n     xapVersion = build.getEnvironment(listener).get(\"\
-                      XAP_VERSION\")\n     buildName = build.fullDisplayName\n     tagName = build.getEnvironment(listener).get(\"TAG_NAME\")\n   \
-                      \  mavenVersion = build.getEnvironment(listener).get(\"FINAL_MAVEN_VERSION\"\
-                      )\n     publishInsightEdge = build.getEnvironment(listener).get(\"InsightEdge\"\
-                      )\n     publishGsctl = build.getEnvironment(listener).get(\"PUBLISH_GSCTL\"\
+                      \n   def mavenVersion = \"unknown\"\n\n   try{\n     xapVersion = build.getEnvironment().get(\"\
+                      XAP_VERSION\")\n     buildName = build.fullDisplayName\n     tagName = build.getEnvironment().get(\"TAG_NAME\")\n   \
+                      \  mavenVersion = build.getEnvironment().get(\"FINAL_MAVEN_VERSION\"\
+                      )\n     publishInsightEdge = build.getEnvironment().get(\"InsightEdge\"\
+                      )\n     publishGsctl = build.getEnvironment().get(\"PUBLISH_GSCTL\"\
                       )\n   } catch(all){\n   }\n   def xapPackage = \"gigaspaces-xap-enterprise-\"\
                       \ + buildName + \".zip\"\n   def insightedgePackage = \"gigaspaces-insightedge-enterprise-\"\
                       \ + buildName + \".zip\"\n   def smartCachePackage = \"gigaspaces-smart-cache-enterprise-\"\
