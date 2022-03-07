@@ -812,9 +812,9 @@ jenkins:
                           failIfWorkDirIsMissing: false
                           internalDir: 'remoting'
                 - permanent:
-                    labelString: 'DotNetonprem'
+                    labelString: 'DotNet-slave'
                     mode: NORMAL
-                    name: 'DotNetNode'
+                    name: 'DotNetonprem'
                     remoteFS: 'c:\Jenkins'
                     launcher:
                       jnlp:
