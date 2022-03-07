@@ -811,6 +811,17 @@ jenkins:
                           disabled: true
                           failIfWorkDirIsMissing: false
                           internalDir: 'remoting'
+                - permanent:
+                    labelString: 'DotNetonprem'
+                    mode: NORMAL
+                    name: 'DotNetNode'
+                    remoteFS: 'c:\Jenkins'
+                    launcher:
+                      jnlp:
+                        workDirSettings:
+                          disabled: true
+                          failIfWorkDirIsMissing: false
+                          internalDir: 'remoting'
             jobs:
               - script: >
                   folder('Docs'){
