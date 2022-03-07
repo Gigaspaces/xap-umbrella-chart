@@ -953,7 +953,7 @@ jenkins:
                                   numToKeep(5)
                                   daysToKeep(1)
                               }
-                              label('DotNetNode')
+                              label('DotNet-slave')
                               parameters{
                                   textParam('BRANCH_NAME', 'master', '[REQUIRED PARAMETER] The name of the branch')
                                   textParam('JAVA_BUILD_URL', '#http://hercules/$version/$branch/$build-name/gigaspaces-xap-enterprise-$build-name.zip', '[REQUIRED PARAMETER] XAP package location')
