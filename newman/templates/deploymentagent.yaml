@@ -27,7 +27,7 @@ spec:
       containers:
         - name: newman-agent
           securityContext:  
-            {{- toYaml .Values.securityContext | nindent 12 }}
+            privileged: true
           image: "{{ .Values.newman.agent.repository }}:{{ .Values.newman.agent.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.newman.agent.pullPolicy }}
           
