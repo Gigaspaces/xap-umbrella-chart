@@ -772,7 +772,7 @@ jenkins:
                       3sxSm3olFl3vHjXL4M+WHkls6i701i7FvAvNXc9SHDFjt3GsN7IzkrKSNbk3aGgDS15nETI+Ehui
                       5teJ4EBJzzmPdP93QB0gLFpHKkGy+5zK</ds:X509Certificate></ds:X509Data></ds:KeyInfo></md:KeyDescriptor><md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://gigaspaces.okta.com/app/gigaspaces_devjenkins_1/exklwm611fZoR2pSZ1t7/sso/saml"/><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://gigaspaces.okta.com/app/gigaspaces_devjenkins_1/exklwm611fZoR2pSZ1t7/sso/saml"/></md:IDPSSODescriptor></md:EntityDescriptor>
                   logoutUrl: "https://gigaspaces.okta.com/app/UserHome"
-                  maximumAuthenticationLifetime: 86400
+                  maximumAuthenticationLifetime: 259200
                   usernameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
                   usernameCaseConversion: "none"
               crumbIssuer:
