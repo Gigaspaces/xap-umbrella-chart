@@ -60,11 +60,14 @@ spec:
           volumeMounts:
             - mountPath: /home/xap-agent
               name: newman-agent-data
-          # command: ['mkdir', '-p', '/home/xap-agent']
+          
       hostAliases:
         - ip:  {{ .Values.newman.agent.newmanserver |default "172.31.13.106" }}
           hostnames:
             - newman-server
+        - ip:  {{ .Values.newman.agent.storageserver |default "192.168.33.204" }}
+          hostnames:
+            - imc-srv01
       volumes:
         - emptyDir:
           name: newman-agent-data
