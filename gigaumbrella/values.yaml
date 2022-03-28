@@ -955,7 +955,7 @@ jenkins:
                                   textParam('JAVA_BUILD_URL', '#http://hercules/$version/$branch/$build-name/gigaspaces-xap-enterprise-$build-name.zip', '[REQUIRED PARAMETER] XAP package location')
                                   booleanParam('RELEASE', false,'[REQUIRED PARAMETER] Boolean indicator if the current job execution was triggered from xap-release job')
                                   booleanParam('DEPLOY_MVN_ARTIFACTS', false,'[REQUIRED PARAMETER] Boolean indicator if to deploy artifacts to s3')
-                                  booleanParam('PUBLISH_TO_NEWMAN', true,'[REQUIRED PARAMETER] Boolean indicator if to publish build to Newman')
+                                  booleanParam('PUBLISH_TO_NEWMAN', false,'[REQUIRED PARAMETER] Boolean indicator if to publish build to Newman')
                               }
                               scm{
                                   git {
