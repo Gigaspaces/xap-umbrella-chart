@@ -244,6 +244,7 @@ jenkins:
     #   -Dorg.csanchez.jenkins.plugins.kubernetes.pipeline.ContainerExecDecorator.websocketConnectionTimeout=180
     #   -Dcom.sun.management.jmxremote.authenticate=false
     #   -Dcom.sun.management.jmxremote.ssl=false
+    
     # jmxPort: 4000
     # Optionally configure other ports to expose in the controller container
     extraPorts: []
@@ -445,9 +446,10 @@ jenkins:
     #  - "method groovy.json.JsonSlurperClassic parseText java.lang.String"
     #  - "new groovy.json.JsonSlurperClassic"
     # List of groovy init scripts to be executed during Jenkins controller start
-    initScripts: []
-    #  - |
-    #    print 'adding global pipeline libraries, register properties, bootstrap jobs...'
+    initScripts: 
+     - | 
+      System.setProperty('org.apache.commons.jelly.tags.fmt.timeZone', 'Asia/Jerusalem')
+       
 
     # 'name' is a name of an existing secret in same namespace as jenkins,
     # 'keyName' is the name of one of the keys inside current secret.
