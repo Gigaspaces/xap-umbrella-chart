@@ -1294,6 +1294,9 @@ jenkins:
                                   5bf160bb1f31eb789fc0fa65 - OPENJDK_11 
                                   5bf160bb1f31eb789fc0fb78 - OPENJDK_17""") 
                                 
+                              }
+                              publishers {
+                                  buildDescription('', '${BUILD_TIMESTAMP}')
                               }  
                               definition {
                                   cpsScm {
