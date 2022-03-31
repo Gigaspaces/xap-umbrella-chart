@@ -1586,11 +1586,11 @@ jenkins:
     runAsGroup:
     resources:
       requests:
-        cpu: "512m"
-        memory: "512Mi"
+        cpu: "1024m"
+        memory: "1024Mi"
       limits:
-        cpu: "512m"
-        memory: "512Mi"
+        cpu: "2000m"
+        memory: "2048Mi"
     # You may want to change this to true while testing a new image
     alwaysPullImage: false
     # Controls how agent pods are retained after the Jenkins build completes
