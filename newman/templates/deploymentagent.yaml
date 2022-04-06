@@ -1,11 +1,12 @@
 
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: "{{  .Release.Name  }}-agent"
   labels:
     app: newman-agent
 spec:
+  serviceName: newman-agent
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.newman.agent.replicaCount }}
   {{- end }}
@@ -29,9 +30,14 @@ spec:
           securityContext:  
             privileged: true
           image: "{{ .Values.newman.agent.repository }}:{{ .Values.newman.agent.tag | default .Chart.AppVersion }}"
+          resources:
+            requests:
+              memory: "2048Mi"
+              cpu: "500m"
+            limits:
+              memory: "4096Mi"
+              cpu: "1"
           imagePullPolicy: {{ .Values.newman.agent.pullPolicy }}
-          
-          
           ports:
           - containerPort: 80
           env:
@@ -60,7 +66,8 @@ spec:
           volumeMounts:
             - mountPath: /home/xap-agent
               name: newman-agent-data
-          
+            - mountPath: /var/lib/docker
+              name: newman-agent-data
       hostAliases:
         - ip:  {{ .Values.newman.agent.newmanserver |default "172.31.13.106" }}
           hostnames:
@@ -68,6 +75,21 @@ spec:
         - ip:  {{ .Values.newman.agent.storageserver |default "192.168.33.204" }}
           hostnames:
             - imc-srv01
-      volumes:
-        - emptyDir:
-          name: newman-agent-data
+  volumeClaimTemplates:
+    - metadata:
+        name: newman-agent-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 100Gi
+      
+      
+      
+  
+
+
+
+
+
+  
