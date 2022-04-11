@@ -1339,7 +1339,7 @@ jenkins:
                                           branches('master')
                                           
                                       }
-                                      scriptPath("/build/jenkinsfiles/createmailtemplates")
+                                      scriptPath("build/jenkinsfiles/createmailtemplates")
                                   }
                               }
                           }
