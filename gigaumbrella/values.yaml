@@ -1078,7 +1078,7 @@ jenkins:
                                               }
                                               branches('$BRANCH_NAME')
                                           }
-                                          scriptPath("build/jenkinsfile")
+                                          scriptPath("build/jenkinsfiles/jenkinsfile")
                                       }   
                                   }
                               }
@@ -1170,7 +1170,7 @@ jenkins:
                                               branches('$BRANCH_NAME')
                                               
                                           }
-                                          scriptPath("build/jenkinsfile")
+                                          scriptPath("build/jenkinsfiles/jenkinsfile")
                                       }
                                   }
                               }
@@ -1229,7 +1229,7 @@ jenkins:
                                               }
                                               branches('$BRANCH_NAME')
                                           }
-                                          scriptPath("build/jenkinsfile")
+                                          scriptPath("build/jenkinsfiles/jenkinsfile")
                                       }   
                                   }
                               }
@@ -1316,14 +1316,36 @@ jenkins:
                                               branches('$BRANCH_NAME')
                                               
                                           }
-                                          scriptPath("build/jenkinsfile")
+                                          scriptPath("build/jenkinsfiles/jenkinsfile")
                                       }
                                   }
                               }
                           }    
                       }
                   }    
-
+              - script: >
+                  folder('managment') {
+                      description('Folder contains jenkins environment prperations')
+                      pipelineJob('xap-insightedge/branch-on-demand/continuous') {
+                          description('copy content of email templates  managed files and store it in /var/jenkins_home/email-templates/xap-insightedge/16.2 ( mail extantion folder ) run this job once when new dev environment installed')
+                          definition {
+                              cpsScm {
+                                  scm {
+                                      git {
+                                          remote {
+                                              url('git@github.com:Gigaspaces/xap-premium.git')
+                                              credentials('git_credentials_id')
+                                          }    
+                                          branches('master')
+                                          
+                                      }
+                                      scriptPath("/build/jenkinsfiles/s/createmailtemplates")
+                                  }
+                              }
+                          }
+                      }    
+                      
+                  }  
     customInitContainers: []
     sidecars:
       configAutoReload:
