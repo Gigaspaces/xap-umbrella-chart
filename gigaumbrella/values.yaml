@@ -1326,7 +1326,7 @@ jenkins:
               - script: >
                   folder('managment') {
                       description('Folder contains jenkins environment prperations')
-                      pipelineJob('xap-insightedge/branch-on-demand/continuous') {
+                      pipelineJob('managment/create mail templates') {
                           description('copy content of email templates  managed files and store it in /var/jenkins_home/email-templates/xap-insightedge/16.2 ( mail extantion folder ) run this job once when new dev environment installed')
                           definition {
                               cpsScm {
