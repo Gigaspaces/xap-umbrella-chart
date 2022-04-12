@@ -645,7 +645,8 @@ jenkins:
                         \ <%  } %></TD></TR>\n  <TR><TD>SCM</TD><TD><% project.getSCMs()%></TD></TR>\n\
                         </TABLE>\n\n<%\nif(build.result.toString() == 'SUCCESS') {\n\n   def xapVersion\
                         \ = \"unknown\"\n   def buildName = \"unknown\"\n   def tagName = \"unknown\"\
-                        \n   def mavenVersion = \"unknown\"\n\n   try{\n     xapVersion = build.getEnvironment().get(\"\
+                        \n   def mavenVersion = \"unknown\"\n   def publishInsightEdge = \"false\"\
+                        \n   def publishGsctl =\"false\"\n    \n   try{\n     xapVersion = build.getEnvironment().get(\"\
                         XAP_VERSION\")\n     buildName = build.getEnvironment().get(\"\
                         BUILD_DISPLAY_NAME\")\n     tagName = build.getEnvironment().get(\"\
                         BUILD_DISPLAY_NAME\")\n     mavenVersion = build.getEnvironment().get(\"\
