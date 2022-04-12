@@ -581,9 +581,9 @@ jenkins:
                         \ New; }\n</STYLE>\n<BODY>\n \n\n<% \n   def xapVersion = \"unknown\"\n\
                         \   def buildName = \"unknown\"\n   def tagName = \"unknown\"\n   def mavenVersion\
                         \ = \"unknown\"\n\n   try{\n     xapVersion = build.getEnvironment().get(\"\
-                        XAP_VERSION\") \n     buildName = build.getEnvironment().get(\"GS_BUILD_NAME\"\
-                        )\n     tagName = build.getEnvironment().get(\"TAG_NAME\")\n     mavenVersion\
-                        \ = build.getEnvironment().get(\"FINAL_MAVEN_VERSION\")\n     deployArtifacts\
+                        XAP_VERSION\") \n     buildName = build.getEnvironment().get(\"BUILD_DISPLAY_NAME\"\
+                        )\n     tagName = build.getEnvironment().get(\"BUILD_DISPLAY_NAME\")\n     mavenVersion\
+                        \ = build.getEnvironment().get(\"BUILD_DISPLAY_NAME\")\n     deployArtifacts\
                         \ = build.getEnvironment().get(\"DEPLOY_MVN_ARTIFACTS\")\n     publishGsctl\
                         \ = build.getEnvironment().get(\"PUBLISH_GSCTL\")\n     mode = build.getEnvironment().get(\"\
                         MODE\")\n   } catch(all){ \n   }\n   def xapPackage = \"gigaspaces-xap-enterprise-\"\
@@ -646,9 +646,10 @@ jenkins:
                         </TABLE>\n\n<%\nif(build.result.toString() == 'SUCCESS') {\n\n   def xapVersion\
                         \ = \"unknown\"\n   def buildName = \"unknown\"\n   def tagName = \"unknown\"\
                         \n   def mavenVersion = \"unknown\"\n\n   try{\n     xapVersion = build.getEnvironment().get(\"\
-                        XAP_VERSION\")\n     buildName = build.fullDisplayName\n     tagName = build.getEnvironment().get(\"\
-                        TAG_NAME\")\n     mavenVersion = build.getEnvironment().get(\"FINAL_MAVEN_VERSION\"\
-                        )\n     publishInsightEdge = build.getEnvironment().get(\"InsightEdge\"\
+                        XAP_VERSION\")\n     buildName = build.getEnvironment().get(\"\
+                        BUILD_DISPLAY_NAME\")\n     tagName = build.getEnvironment().get(\"\
+                        BUILD_DISPLAY_NAME\")\n     mavenVersion = build.getEnvironment().get(\"\
+                        BUILD_DISPLAY_NAME\")\n     publishInsightEdge = build.getEnvironment().get(\"InsightEdge\"\
                         )\n     publishGsctl = build.getEnvironment().get(\"PUBLISH_GSCTL\")\n \
                         \  } catch(all){\n   }\n   def xapPackage = \"gigaspaces-xap-enterprise-\"\
                         \ + buildName + \".zip\"\n   def insightedgePackage = \"gigaspaces-insightedge-enterprise-\"\
