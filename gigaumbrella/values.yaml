@@ -569,6 +569,14 @@ jenkins:
                 allPipelines: true
                 elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
                 systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
+              gitSCM:
+                addGitTagAction: true
+                allowSecondFetch: false
+                createAccountBasedOnEmail: false
+                disableGitToolChooser: false
+                hideCredentials: true
+                showEntireCommitSummaryInChanges: true
+                useExistingAccountWithSameEmail: false
               globalConfigFiles:
                   configs:
                   - jellyTemplate:
