@@ -726,6 +726,7 @@ jenkins:
                   - "GROUP:Job Config History/DeleteEntry:Dev-jenkins"
                   - "GROUP:Job/Build:Dev-jenkins"
                   - "GROUP:Job/Cancel:Dev-jenkins"
+                  - "GROUP:Job/Delete:Dev-jenkins"
                   - "GROUP:Job/Configure:Dev-jenkins"
                   - "GROUP:Job/Create:Dev-jenkins"
                   - "GROUP:Job/Discover:Dev-jenkins"
@@ -1159,7 +1160,7 @@ jenkins:
                                   4- urgent""")   
                               } 
                               triggers {
-                                  scm('H/10 * * * *')
+                                  scm('H/3 * * * *')
                               } 
                               definition {
                                   cpsScm {
@@ -1169,14 +1170,7 @@ jenkins:
                                                   url('git@github.com:Gigaspaces/xap-premium.git')
                                                   credentials('git_credentials_id')
                                               }    
-                                              remote {
-                                                  url('git@github.com:Gigaspaces/xap.git')
-                                                  credentials('git_credentials_id')
-                                              }
-                                              remote {
-                                                  url('https://github.com/InsightEdge/insightedge.git')    
-                                  
-                                              }
+                                              
                                               branches('$BRANCH_NAME')
                                               
                                           }
