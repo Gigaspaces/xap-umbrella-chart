@@ -1160,7 +1160,7 @@ jenkins:
                                   4- urgent""")   
                               } 
                               triggers {
-                                  scm('H/3 * * * *')
+                                  scm('H/10 * * * *')
                               } 
                               definition {
                                   cpsScm {
@@ -1170,8 +1170,15 @@ jenkins:
                                                   url('git@github.com:Gigaspaces/xap-premium.git')
                                                   credentials('git_credentials_id')
                                               }    
-                                              
-                                              branches('$BRANCH_NAME')
+                                              remote {
+                                                  url('git@github.com:Gigaspaces/xap.git')
+                                                  credentials('git_credentials_id')
+                                              }
+                                              remote {
+                                                  url('https://github.com/InsightEdge/insightedge.git')    
+                                  
+                                              }
+                                              branches('*/$BRANCH_NAME')
                                               
                                           }
                                           scriptPath("build/jenkinsfiles/jenkinsfile")
