@@ -572,7 +572,7 @@ jenkins:
                 elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
                 systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
               gitSCM:
-                addGitTagAction: true
+                addGitTagAction: false
                 allowSecondFetch: false
                 createAccountBasedOnEmail: false
                 disableGitToolChooser: false
