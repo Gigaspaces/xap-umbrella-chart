@@ -1461,18 +1461,18 @@ jenkins:
                           description('env or backwards test ')
                           multiJob('metric/spotinst/Backwards') {
                               parameters{
-                                  parameters{
-                                      stringParam('BRANCH_NAME', 'master')
-                                      stringParam('client_xapUrl', 'http://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.0.0/gigaspaces-xap-enterprise-15.0.0.zip')
-                                      stringParam('agent1_xapUrl', 'https://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.2.0/gigaspaces-xap-enterprise-15.2.0-m9.zip','link to build zip in hercules ')
-                                      stringParam('agent1_licenseKey', 'tryme','License key to be used in the first agent. Leave empty to use the license that is packaged with the product.')
-                                      stringParam('xlsFilename', 'bw.xls')
-                                      stringParam('remote_spaceTotalMembers', '2,1','Ignored in embedded mode')
-                                      stringParam('mail_title', 'Backwards results - spotinst')
-                                      stringParam('xapVersion', '16.0.0','XAP Maven Version to compile with')
-                                      fileParam('pemfile', 'my description')
-                                      choiceParam('PREPARE_FOR', ['NONE', 'BACKWARDS','PERFORMANCE_EMBEDDED','PERFORMANCE_REMOTE','PERFORMANCE_REMOTE_2_1'])
-                                  }
+                              
+                                  stringParam('BRANCH_NAME', 'master')
+                                  stringParam('client_xapUrl', 'http://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.0.0/gigaspaces-xap-enterprise-15.0.0.zip')
+                                  stringParam('agent1_xapUrl', 'https://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.2.0/gigaspaces-xap-enterprise-15.2.0-m9.zip','link to build zip in hercules ')
+                                  stringParam('agent1_licenseKey', 'tryme','License key to be used in the first agent. Leave empty to use the license that is packaged with the product.')
+                                  stringParam('xlsFilename', 'bw.xls')
+                                  stringParam('remote_spaceTotalMembers', '2,1','Ignored in embedded mode')
+                                  stringParam('mail_title', 'Backwards results - spotinst')
+                                  stringParam('xapVersion', '16.0.0','XAP Maven Version to compile with')
+                                  fileParam('pemfile', 'my description')
+                                  choiceParam('PREPARE_FOR', ['NONE', 'BACKWARDS','PERFORMANCE_EMBEDDED','PERFORMANCE_REMOTE','PERFORMANCE_REMOTE_2_1'])
+  
                               }
                               scm{
                                   git {
@@ -1513,6 +1513,7 @@ jenkins:
                                   }
                                   
                               }
+
                           }
                       }
                   }
