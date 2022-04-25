@@ -850,14 +850,14 @@ jenkins:
                               stringParam('BRANCH_NAME', 'master')
                           }
                           scm {
-                            git {
-                                remote {
-                                    name('origin')
-                                    url('https://github.com/Gigaspaces/xap-docs.git')
-                                    credentials('git_credentials_id')
-                                }
-                                branches('*/$BRANCH_NAME')
-                            }
+                              git {
+                                  remote {
+                                      name('origin')
+                                      url('https://github.com/Gigaspaces/xap-docs.git')
+                                      credentials('git_credentials_id')
+                                  }
+                                  branches('*/$BRANCH_NAME')
+                              }
                           }
                           triggers {
                               scm('* * * * *')
@@ -1498,6 +1498,7 @@ jenkins:
                                               status('SUCCESS', 'SUCCESS')
                                           }
                                       }
+                                  }
                                   extendedEmail {
                                       recipientList('$DEFAULT_RECIPIENTS')
                                       replyToList('$DEFAULT_REPLYTO')
