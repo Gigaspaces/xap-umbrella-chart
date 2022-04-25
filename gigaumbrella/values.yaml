@@ -396,7 +396,7 @@ jenkins:
       - echarts-api:5.2.2-2
       - envinject-api:1.8
       - extended-choice-parameter:0.82
-      - font-awesome-api:5.15.4-5
+      - font-awesome-api:6.0.0-1
       - javax-activation-api:1.2.0-2
       - javax-mail-api:1.6.2-5
       - jjwt-api:0.11.2-9.c8b45b8bb173
