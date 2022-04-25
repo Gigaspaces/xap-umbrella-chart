@@ -1365,7 +1365,6 @@ jenkins:
                       folder('Metric/spotinst') {
                           description('env or backwards test ')
                           multiJob('Metric/spotinst/Spotinst-Create-Machines') {
-      
                               parameters{
                                   stringParam('KEY_NAME', 'YOUR KEY NAME')
                                   stringParam('AWS_REGION', 'eu-west-1')
@@ -1396,11 +1395,9 @@ jenkins:
                                   }
 
                               }
-                              
-                              
                               steps {
                                   steps {
-                                      shell(readFileFromWorkspace('jenkins-run.sh'))
+                                      shell('readFileFromWorkspace('jenkins-run.sh')')
                                   }
                               }
                               
@@ -1447,7 +1444,7 @@ jenkins:
                       
                       steps {
                           steps {
-                              shell(readFileFromWorkspace('jenkins-run.sh'))
+                              shell('readFileFromWorkspace('jenkins-run.sh')')
                           }
                       }
                       
@@ -1483,7 +1480,7 @@ jenkins:
                       }
                       steps {
                           steps {
-                              shell(readFileFromWorkspace('xap-premium/tree/master/xap-tests/AdminBackwardsTest/Backward-run.sh'))
+                              shell('readFileFromWorkspace('xap-premium/tree/master/xap-tests/AdminBackwardsTest/Backward-run.sh')')
                           }
                       }
                       publishers {
