@@ -1360,9 +1360,9 @@ jenkins:
                       
                   }
               - script: >
-                  folder('Metric') {
+                  folder('metric') {
                       description('create spots')
-                      folder('Metric/spotinst') {
+                      folder('metric/spotinst') {
                           description('env or backwards test ')
                           multiJob('Metric/spotinst/Spotinst-Create-Machines') {
                               parameters{
