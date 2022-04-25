@@ -1411,22 +1411,22 @@ jenkins:
                           multiJob('metric/spotinst/Spotinst-Delete-Machines') {
 
                               parameters{
-                                  parameters {
-                                      textParam('all_content', """
-                                      key_name: noi-large-cluster
-                                      aws_region: eu-west-1
-                                      vpc_id: vpc-ffec199a
-                                      security_group: sg-095be91b6ef33cc2d
-                                      ami_id: ami-0fad7378adf284ce0
-                                      instance_type: c5.2xlarge
-                                      availability_zone_region: eu-west-1a
-                                      availability_zone_subnet_id: subnet-b545b1c2
-                                      product_type: Linux/UNIX
-                                      spotinst_group_name: noi-large-cluster
-                                      spotinst_instances: 3
-                                      hosts_file: /var/workspaces/Metric/Spotinst/Spotinst-Create-Machines/../Backwards/all_hosts
-                                      java_url: https://s3-eu-west-1.amazonaws.com/xap-test/test-build-newman/javas/jdk-8u45-linux-x64.tar.gzmy default textParam value""", 'default values')
-                                  }
+                              
+                                  textParam('all_content', """
+                                  key_name: noi-large-cluster
+                                  aws_region: eu-west-1
+                                  vpc_id: vpc-ffec199a
+                                  security_group: sg-095be91b6ef33cc2d
+                                  ami_id: ami-0fad7378adf284ce0
+                                  instance_type: c5.2xlarge
+                                  availability_zone_region: eu-west-1a
+                                  availability_zone_subnet_id: subnet-b545b1c2
+                                  product_type: Linux/UNIX
+                                  spotinst_group_name: noi-large-cluster
+                                  spotinst_instances: 3
+                                  hosts_file: /var/workspaces/Metric/Spotinst/Spotinst-Create-Machines/../Backwards/all_hosts
+                                  java_url: https://s3-eu-west-1.amazonaws.com/xap-test/test-build-newman/javas/jdk-8u45-linux-x64.tar.gzmy default textParam value""", 'default values')
+   
                               }
                               scm{
                                   git {
