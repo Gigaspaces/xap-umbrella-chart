@@ -1397,7 +1397,7 @@ jenkins:
                               }
                               steps {
                                   steps {
-                                      shell('readFileFromWorkspace('jenkins-run.sh')')
+                                      shell('1')
                                   }
                               }
                               
@@ -1444,7 +1444,7 @@ jenkins:
                       
                       steps {
                           steps {
-                              shell('readFileFromWorkspace('jenkins-run.sh')')
+                              shell('1')
                           }
                       }
                       
@@ -1480,7 +1480,7 @@ jenkins:
                       }
                       steps {
                           steps {
-                              shell('readFileFromWorkspace('xap-premium/tree/master/xap-tests/AdminBackwardsTest/Backward-run.sh')')
+                              shell('1')
                           }
                       }
                       publishers {
