@@ -1364,7 +1364,7 @@ jenkins:
                       description('create spots')
                       folder('metric/spotinst') {
                           description('env or backwards test ')
-                          multiJob('Metric/spotinst/Spotinst-Create-Machines') {
+                          multiJob('metric/spotinst/Spotinst-Create-Machines') {
                               parameters{
                                   stringParam('KEY_NAME', 'YOUR KEY NAME')
                                   stringParam('AWS_REGION', 'eu-west-1')
@@ -1405,11 +1405,11 @@ jenkins:
                       }
                   }
                 - script: >
-                    folder('Metric') {
+                    folder('metric') {
                         description('create spots')
-                        folder('Metric/spotinst') {
+                        folder('metric/spotinst') {
                             description('env or backwards test ')
-                            multiJob('Metric/spotinst/Spotinst-Delete-Machines') {
+                            multiJob('metric/spotinst/Spotinst-Delete-Machines') {
 
                                 parameters{
                                     parameters {
@@ -1456,11 +1456,11 @@ jenkins:
                         }
                     }
                 - script: >
-                    folder('Metric') {
+                    folder('metric') {
                         description('create spots')
-                        folder('Metric/spotinst') {
+                        folder('metric/spotinst') {
                             description('env or backwards test ')
-                            multiJob('Metric/spotinst/Backwards') {
+                            multiJob('metric/spotinst/Backwards') {
 
                                 parameters{
                                     parameters{
