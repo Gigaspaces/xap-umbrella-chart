@@ -1016,7 +1016,6 @@ jenkins:
                                       }
                                   }
                                   extendedEmail {
-                                      recipientList('$DEFAULT_RECIPIENTS')
                                       defaultSubject('$DEFAULT_SUBJECT')
                                       replyToList('$DEFAULT_REPLYTO')
                                       defaultContent('$DEFAULT_CONTENT')
@@ -1499,20 +1498,20 @@ jenkins:
                                               status('SUCCESS', 'SUCCESS')
                                           }
                                       }
-                                      extendedEmail {
-                                          recipientList('$DEFAULT_RECIPIENTS')
-                                          replyToList('$DEFAULT_REPLYTO')
-                                          defaultContent('$DEFAULT_REPLYTO')
-                                          recipientList('me@halfempty.org')
-                                          defaultSubject('$DEFAULT_SUBJECT ($mail_title)')
-                                          defaultContent("""$DEFAULT_CONTENT
-                                                          <br/>
-                                                          ${mail_title}
-                                                          <br/>
-                                                          See attached file""")
-                                          attachmentPatterns('xap-premium/xap-tests/metric/${xlsFilename}')
-                                      }
+                                  extendedEmail {
+                                      recipientList('$DEFAULT_RECIPIENTS')
+                                      replyToList('$DEFAULT_REPLYTO')
+                                      defaultContent('$DEFAULT_REPLYTO')
+                                      recipientList('me@halfempty.org')
+                                      defaultSubject('$DEFAULT_SUBJECT ($mail_title)')
+                                      defaultContent("""$DEFAULT_CONTENT
+                                                      <br/>
+                                                      ${mail_title}
+                                                      <br/>
+                                                      See attached file""")
+                                      attachmentPatterns('xap-premium/xap-tests/metric/${xlsFilename}')
                                   }
+                                  
                               }
                           }
                       }
