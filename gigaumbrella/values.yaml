@@ -1501,11 +1501,7 @@ jenkins:
                                       defaultContent('$DEFAULT_REPLYTO')
                                       recipientList('me@halfempty.org')
                                       defaultSubject('$DEFAULT_SUBJECT ($mail_title)')
-                                      defaultContent("""$DEFAULT_CONTENT
-                                      <br/>
-                                      ${mail_title}
-                                      <br/>
-                                      See attached file""")
+                
                                       attachmentPatterns('xap-premium/xap-tests/metric/${xlsFilename}')
                                   }
                                   
