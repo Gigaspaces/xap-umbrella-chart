@@ -1021,7 +1021,7 @@ jenkins:
                                   extendedEmail {
                                       defaultSubject('$DEFAULT_SUBJECT')
                                       replyToList('$DEFAULT_REPLYTO')
-                                      defaultContent('$DEFAULT_CONTENT')
+                  
                                       contentType('default')
                                       triggers {
                                           beforeBuild()
