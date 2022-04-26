@@ -147,8 +147,8 @@ jenkins:
       "service.beta.kubernetes.io/aws-load-balancer-ssl-ports" : "443"
       "service.beta.kubernetes.io/aws-load-balancer-proxy-protocol": "*"
       "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "http"
-
-      
+      "service.beta.kubernetes.io/aws-load-balancer-subnets": "subnet-03d8f4ee544e7289a, subnet-0619bb19f66f6fd16"
+      "service.beta.kubernetes.io/aws-load-balancer-scheme" : "internal"
       # "service.beta.kubernetes.io/aws-load-balancer-extra-security-groups": arn:aws:iam::573366771204:group/OktaSSO-Group
     # Jenkins controller custom labels
     statefulSetLabels: {}
@@ -228,6 +228,8 @@ jenkins:
     agentListenerServiceAnnotations: 
       "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout": "300"
       "external-dns.alpha.kubernetes.io/hostname" : "jenkinseksagent.gigaspaces.com"
+      "service.beta.kubernetes.io/aws-load-balancer-subnets": "subnet-03d8f4ee544e7289a, subnet-0619bb19f66f6fd16"
+      "service.beta.kubernetes.io/aws-load-balancer-scheme" : "internal"
     # Example of 'LoadBalancer' type of agent listener with annotations securing it
     # agentListenerServiceType: LoadBalancer
     # agentListenerServiceAnnotations:
@@ -1461,7 +1463,6 @@ jenkins:
                           description('env or backwards test ')
                           multiJob('metric/spotinst/Backwards') {
                               parameters{
-                              
                                   stringParam('BRANCH_NAME', 'master')
                                   stringParam('client_xapUrl', 'http://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.0.0/gigaspaces-xap-enterprise-15.0.0.zip')
                                   stringParam('agent1_xapUrl', 'https://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.2.0/gigaspaces-xap-enterprise-15.2.0-m9.zip','link to build zip in hercules ')
