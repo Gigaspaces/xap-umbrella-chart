@@ -465,6 +465,8 @@ jenkins:
     additionalExistingSecrets: 
     - name: git-credentials-id-secret
       keyName: idrsa
+    - name: git-token
+      keyName: xap-builder-token
     - name: smtp-secret
       keyName: password
     - name: docker-hub-cred
@@ -566,6 +568,12 @@ jenkins:
                           password: "${docker-hub-cred-password}"
                           scope: GLOBAL
                           username: "gigaops12"
+                      - usernamePassword:
+                          description: "git-token"
+                          id: "git-token"
+                          password: "${git-token}"
+                          scope: GLOBAL
+                          username: "xap@builder"
             unclassified:
               location:
                 adminAddress: "newman@gigaspaces.com"
