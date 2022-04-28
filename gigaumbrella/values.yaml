@@ -1174,7 +1174,7 @@ jenkins:
                                           git {
                                               remote {
                                                   url('https://github.com/Gigaspaces/xap-premium.git')
-                                                  credentials('git-token')
+                                                  credentials('git_token')
                                               
           
                                               }
