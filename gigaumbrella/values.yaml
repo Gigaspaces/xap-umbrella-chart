@@ -465,7 +465,7 @@ jenkins:
     additionalExistingSecrets: 
     - name: git-credentials-id-secret
       keyName: idrsa
-    - name: git-token
+    - name: git_token
       keyName: xap-builder-token
     - name: smtp-secret
       keyName: password
