@@ -569,9 +569,9 @@ jenkins:
                           scope: GLOBAL
                           username: "gigaops12"
                       - usernamePassword:
-                          description: "git-token"
-                          id: "git-token"
-                          password: "${git-token}"
+                          description: "git_token"
+                          id: "git_token"
+                          password: "${git_token}"
                           scope: GLOBAL
                           username: "xap-builder"
             unclassified:
