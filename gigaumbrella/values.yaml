@@ -465,8 +465,8 @@ jenkins:
     additionalExistingSecrets: 
     - name: git-credentials-id-secret
       keyName: idrsa
-    - name: git_token
-      keyName: xap-builder-token
+    - name: git-token
+      keyName: xapbuildertoken
     - name: smtp-secret
       keyName: password
     - name: docker-hub-cred
@@ -571,7 +571,7 @@ jenkins:
                       - usernamePassword:
                           description: "git_token"
                           id: "git_token"
-                          password: "${git_token}"
+                          password: "${git-token-xapbuildertoken}"
                           scope: GLOBAL
                           username: "xap-builder"
             unclassified:

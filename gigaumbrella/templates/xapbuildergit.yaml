@@ -11,5 +11,5 @@ metadata:
     che.eclipse.org/mount-path: /run/secrets/
     che.eclipse.org/mount-as: file
 data:
-  xap-builder-token: |
+  xapbuildertoken: |
     Z2hwX3luM3pPTUdDa3phcENZdkFQR2J0TTBJanZZY1dnbzI4dnhRTAo=    
