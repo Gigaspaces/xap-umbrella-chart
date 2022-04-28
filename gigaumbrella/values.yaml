@@ -573,7 +573,7 @@ jenkins:
                           id: "git-token"
                           password: "${git-token}"
                           scope: GLOBAL
-                          username: "xap@builder"
+                          username: "xap-builder"
             unclassified:
               location:
                 adminAddress: "newman@gigaspaces.com"
