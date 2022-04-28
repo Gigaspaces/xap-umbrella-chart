@@ -1082,7 +1082,7 @@ jenkins:
                                       scm {
                                           git {
                                               remote {
-                                                  url('git@github.com:Gigaspaces/xap-premium.git')
+                                                  url('https://github.com/Gigaspaces/xap-premium.git')
                                                   credentials('git_credentials_id')
                                               }
                                               branches('$BRANCH_NAME')
