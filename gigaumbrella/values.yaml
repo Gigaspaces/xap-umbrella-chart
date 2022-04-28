@@ -804,7 +804,7 @@ jenkins:
               - "Ping"  
               nodes:
                 - permanent:
-                    labelString: 'DocsNode'
+                    labelString: 'DocsAgent'
                     mode: NORMAL
                     name: 'DocsNode'
                     remoteFS: 'c:\jenkins'
