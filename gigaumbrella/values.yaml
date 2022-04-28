@@ -926,7 +926,7 @@ jenkins:
                                   git {
                                       remote {
                                           url('git@github.com:Gigaspaces/xap-premium.git')
-                                          credentials('git_credentials_id')
+                                          credentials('git-token')
                                       }
                                       branches('master')
                                       // extensions {
@@ -1091,7 +1091,7 @@ jenkins:
                                           git {
                                               remote {
                                                   url('https://github.com/Gigaspaces/xap-premium.git')
-                                                  credentials('git_credentials_id')
+                                                  credentials('git-token')
                                               }
                                               branches('$BRANCH_NAME')
                                           }
@@ -1174,7 +1174,7 @@ jenkins:
                                           git {
                                               remote {
                                                   url('https://github.com/Gigaspaces/xap-premium.git')
-                                                  credentials('git_credentials_id')
+                                                  credentials('git-token')
                                               }    
                                               remote {
                                                   url('git@github.com:Gigaspaces/xap.git')
