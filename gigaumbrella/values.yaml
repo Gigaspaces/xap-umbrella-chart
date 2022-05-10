@@ -1361,9 +1361,9 @@ jenkins:
               - script: >
                   folder('metric') {
                       description('create spots')
-                      folder('metric/spotinst') {
+                      folder('metric/Spotinst') {
                           description('env or backwards test ')
-                          multiJob('metric/spotinst/Spotinst-Create-Machines') {
+                          multiJob('metric/Spotinst/Spotinst-Create-Machines') {
                               parameters{
                                   stringParam('KEY_NAME', 'YOUR KEY NAME')
                                   stringParam('AWS_REGION', 'eu-west-1')
