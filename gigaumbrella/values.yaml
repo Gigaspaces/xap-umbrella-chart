@@ -1361,9 +1361,9 @@ jenkins:
               - script: >
                   folder('metric') {
                       description('create spots')
-                      folder('metric/Spotinst') {
+                      folder('Metric/Spotinst') {
                           description('env or backwards test ')
-                          multiJob('metric/Spotinst/Spotinst-Create-Machines') {
+                          multiJob('Metric/Spotinst/Spotinst-Create-Machines') {
                               parameters{
                                   stringParam('KEY_NAME', 'YOUR KEY NAME')
                                   stringParam('AWS_REGION', 'eu-west-1')
@@ -1405,11 +1405,11 @@ jenkins:
                       }
                   }
               - script: >
-                  folder('metric') {
+                  folder('Metric') {
                       description('create spots')
-                      folder('metric/spotinst') {
+                      folder('Metric/Spotinst') {
                           description('env or backwards test ')
-                          multiJob('metric/spotinst/Spotinst-Delete-Machines') {
+                          multiJob('metric/Spotinst/Spotinst-Delete-Machines') {
 
                               parameters{
                               
@@ -1456,11 +1456,11 @@ jenkins:
                       }
                   }
               - script: >
-                  folder('metric') {
+                  folder('Metric') {
                       description('create spots')
-                      folder('metric/spotinst') {
+                      folder('Metric/Spotinst') {
                           description('env or backwards test ')
-                          multiJob('metric/spotinst/Backwards') {
+                          multiJob('Metric/Spotinst/Backwards') {
                               parameters{
                                   stringParam('BRANCH_NAME', 'master')
                                   stringParam('client_xapUrl', 'http://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.0.0/gigaspaces-xap-enterprise-15.0.0.zip')
