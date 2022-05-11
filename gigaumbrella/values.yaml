@@ -266,7 +266,7 @@ jenkins:
       - postbuild-task:1.9
       - conditional-buildstep:1.4.1
       - maven-plugin:3.16
-      - workflow-api:1136.v7f5f1759dc16
+      - workflow-api:1143.v2d42f1e9dea_5
       - Parameterized-Remote-Trigger:3.1.5.1
       - github-branch-source:2.11.4
       - workflow-basic-steps:2.24
