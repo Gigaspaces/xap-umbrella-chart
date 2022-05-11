@@ -1363,7 +1363,7 @@ jenkins:
                       description('create spots')
                       folder('Metric/Spotinst') {
                           description('env or backwards test ')
-                          multiJob('Metric/Spotinst/Spotinst-Create-Machines') {
+                          pipelineJob('Metric/Spotinst/Spotinst-Create-Machines') {
                               parameters{
                                   stringParam('KEY_NAME', 'YOUR KEY NAME')
                                   stringParam('AWS_REGION', 'eu-west-1')
@@ -1376,6 +1376,7 @@ jenkins:
                                   stringParam('PRODUCT_TYPE', 'PRODUCT_TYPE')
                                   stringParam('SPOTINST_GROUP_NAME', '1','Must not contain special characters/spaces')
                                   stringParam('SPOTINST_INSTANCES', '1')
+                                  stringParam('TOKEN','11b2b42fc58cadd1d1b396633badc59303')
                                   stringParam('JAVA_URL', 'https://s3-eu-west-1.amazonaws.com/xap-test/test-build-newman/javas/jdk-8u45-linux-x64.tar.gz')
                                   fileParam('pemfile', 'my description')
                                   choiceParam('PREPARE_FOR', ['NONE', 'BACKWARDS','PERFORMANCE_EMBEDDED','PERFORMANCE_REMOTE','PERFORMANCE_REMOTE_2_1'])
@@ -1384,7 +1385,7 @@ jenkins:
                                   git {
                                       remote {
                                           url('https://github.com/giga-dev/spotinst-ansible.git')
-                                          credentials('spot-cred')
+        
                                       }
                                       branch('*/master')
                                   }
@@ -1397,8 +1398,7 @@ jenkins:
                               }
                               steps {
                                   steps {
-                                      shell('1')
-                                  }
+                                      scriptPath("build/jenkinsfiles/SpotinstCreateMachine")                                  }
                               }
                               
                           }
