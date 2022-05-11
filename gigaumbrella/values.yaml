@@ -365,7 +365,7 @@ jenkins:
       - aws-java-sdk-elasticbeanstalk:1.12.148-310.v5e3b_c2681d79
       - aws-java-sdk-iam:1.12.148-310.v5e3b_c2681d79
       - aws-java-sdk-logs:1.12.148-310.v5e3b_c2681d79
-      - aws-java-sdk-minimal:1.12.215-339.vdc07efc5
+      - aws-java-sdk-minimal:1.12.215-339.vdc07efc5320c
       - aws-java-sdk-ssm :1.12.148-310.v5e3b_c2681d79
       - dependency-check-jenkins-plugin:5.1.2
       - structs:308.v852b473a2b8c
