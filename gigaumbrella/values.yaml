@@ -890,7 +890,7 @@ jenkins:
                           label('DocsAgent')
                           logRotator(10, 20)
                           parameters {
-                              choiceParam('destination', ['staging', 'prod'], 'https://docs-staging.gigaspaces.com\n   production: https://docs.gigaspaces.comDetermines\n    staging: https://docs-staging.gigaspaces.com ') 
+                              choiceParam('destination', ['staging', 'production'], 'https://docs-staging.gigaspaces.com\n   production: https://docs.gigaspaces.comDetermines\n    staging: https://docs-staging.gigaspaces.com ') 
                               choiceParam('profile', ['default','full'], "Determines which flare profile should be built (when Destination is 'production', this is ignored and 'full' is used)")
                               choiceParam('sites', ['all','flare','hugo'], "Determines which sites to build (when Destination is 'production', this is ignored and 'all' is used)")
                               stringParam('BRANCH_NAME', 'master')
