@@ -579,8 +579,9 @@ jenkins:
                           password: "${git-token-xapbuildertoken}"
                           scope: GLOBAL
                           username: "xap-builder"
-                      - spotToken:
-                          id: "spot_token"
+                      - string:
+                          id: "spotinst-token"
+                          scope: GLOBAL
                           secret: "${jenkins-spotinst-token}"
             unclassified:
               location:
@@ -1098,8 +1099,8 @@ jenkins:
                                       scm {
                                           git {
                                               remote {
-                                                  url('https://github.com/Gigaspaces/xap-premium.git')
-                                                  credentials('git_token')
+                                                  url('git@github.com:Gigaspaces/xap-premium.git')
+                                                  credentials('git_credentials_id')
                                               }
                                               branches('$BRANCH_NAME')
                                           }
@@ -1182,8 +1183,8 @@ jenkins:
                                       scm {
                                           git {
                                               remote {
-                                                  url('https://github.com/Gigaspaces/xap-premium.git')
-                                                  credentials('git_token')
+                                                  url('git@github.com:Gigaspaces/xap-premium.git')
+                                                  credentials('git_credentials_id')
                                               
           
                                               }
