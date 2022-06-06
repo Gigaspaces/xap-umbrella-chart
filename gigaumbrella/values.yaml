@@ -1434,7 +1434,7 @@ jenkins:
                       description('create spots')
                       folder('Metric/Spotinst/Templates') {
                           description('env or backwards test ')
-                          pipelineJob('Metric/Spotinst/Backwards') {
+                          pipelineJob('Metric/Spotinst/Spotinst-Delete-Machines-template') {
                               properties {
                                   copyArtifactPermissionProperty {
                                     projectNames('Metric/Spotinst/Spotinst-Create-Machines')
