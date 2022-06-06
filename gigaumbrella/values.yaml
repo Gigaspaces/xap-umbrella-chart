@@ -1444,11 +1444,11 @@ jenkins:
                                   }
                                   parameters{
                                       credentialsParam('SPOT') {
-                                            type('org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl')
-                                            required()
-                                            defaultValue('spotinst-token')
-                                            description('spotinst-token')
-                                        }
+                                          type('org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl')
+                                          required()
+                                          defaultValue('spotinst-token')
+                                          description('spotinst-token')
+                                      }
                                       textParam('all_content', 'ALL_CONTENT_HERE')
                                       textParam('PUBLIC', 'PUBLIC_CONTENT')
                                       textParam('PRIVATE', 'PRIVATE_CONTENT')
