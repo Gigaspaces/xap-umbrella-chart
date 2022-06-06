@@ -1392,12 +1392,12 @@ jenkins:
                                       defaultValue('jenkis-api-token')
                                       description('jenkis-api-token')
                                   }
-                                  fileParam('pemfile')
+                                  fileParam('pemfile','change paramtype to stashfile parameter')
                                   stringParam('KEY_NAME', 'noi-large-cluster')
                                   stringParam('AWS_REGION', 'eu-west-1')
                                   stringParam('VPC_ID', 'vpc-ffec199a')
                                   stringParam('SECURITY_GROUP', 'sg-095be91b6ef33cc2d')
-                                  stringParam('AMI_ID', '0fad7378adf284ce0')
+                                  stringParam('AMI_ID', 'ami-0fad7378adf284ce0')
                                   stringParam('INSTANCE_TYPE', 'c5.2xlarge')
                                   stringParam('AVAILABILITY_ZONE_REGION', 'eu-west-1a')
                                   stringParam('AVAILABILITY_ZONE_SUBNET_ID', 'subnet-b545b1c2')
@@ -1429,65 +1429,50 @@ jenkins:
                           }
                       }
                   }
-              # - script: >
-              #     folder('Metric') {
-              #         description('create spots')
-              #         folder('Metric/Spotinst/Templates') {
-              #             description('env or backwards test ')
-              #             multiJob('Metric/Spotinst/Backwards') {
-              #                 parameters{
-              #                     stringParam('BRANCH_NAME', 'master')
-              #                     stringParam('client_xapUrl', 'http://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.0.0/gigaspaces-xap-enterprise-15.0.0.zip')
-              #                     stringParam('agent1_xapUrl', 'https://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.2.0/gigaspaces-xap-enterprise-15.2.0-m9.zip','link to build zip in hercules ')
-              #                     stringParam('agent1_licenseKey', 'tryme','License key to be used in the first agent. Leave empty to use the license that is packaged with the product.')
-              #                     stringParam('xlsFilename', 'bw.xls')
-              #                     stringParam('remote_spaceTotalMembers', '2,1','Ignored in embedded mode')
-              #                     stringParam('mail_title', 'Backwards results - spotinst')
-              #                     stringParam('xapVersion', '16.0.0','XAP Maven Version to compile with')
-              #                     fileParam('pemfile', 'my description')
-              #                     choiceParam('PREPARE_FOR', ['NONE', 'BACKWARDS','PERFORMANCE_EMBEDDED','PERFORMANCE_REMOTE','PERFORMANCE_REMOTE_2_1'])
+              - script: >
+                  folder('Metric') {
+                      description('create spots')
+                      folder('Metric/Spotinst/Templates') {
+                          description('env or backwards test ')
+                          pipelineJob('Metric/Spotinst/Backwards') {
+                              properties {
+                                  copyArtifactPermissionProperty {
+                                    projectNames('Metric/Spotinst/Spotinst-Create-Machines')
+                                  }
+                              }
+                              parameters{
+                                  credentialsParam('SPOT') {
+                                        type('org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl')
+                                        required()
+                                        defaultValue('spotinst-token')
+                                        description('spotinst-token')
+                                    }
+                                  textParam('all_content', 'ALL_CONTENT_HERE')
+                                  textParam('PUBLIC', 'PUBLIC_CONTENT')
+                                  textParam('PRIVATE', 'PRIVATE_CONTENT')
+                                  fileParam('pemfile','change paramtype to stashfile parameter')
+              
   
-              #                 }
-              #                 scm{
-              #                     git {
-              #                         remote {
-              #                             url('git@github.com:GigaSpaces/xap-premium.git')
-              #                             credentials('git_credentials_id')
-              #                         }
-              #                         extensions {                           
-              #                             relativeTargetDirectory('xap-premium')
-              #                         }
-              #                         branch('*/$BRANCH_NAME')
-              #                     }
-              #                 }
-              #                 steps {
-              #                     steps {
-              #                         shell('1')
-              #                     }
-              #                 }
-              #                 publishers {
-              #                     flexiblePublish {
-              #                         conditionalAction {
-              #                             condition {
-              #                                 status('SUCCESS', 'SUCCESS')
-              #                             }
-              #                         }
-              #                     }
-              #                     extendedEmail {
-              #                         recipientList('$DEFAULT_RECIPIENTS')
-              #                         replyToList('$DEFAULT_REPLYTO')
-              #                         defaultContent('$DEFAULT_REPLYTO')
-              #                         recipientList('me@halfempty.org')
-              #                         defaultSubject('$DEFAULT_SUBJECT ($mail_title)')
-                
-              #                         attachmentPatterns('xap-premium/xap-tests/metric/${xlsFilename}')
-              #                     }
-                                  
-              #                 }
-
-              #             }
-              #         }
-              #     }
+                              }
+                              definition {
+                                  cpsScm {
+                                      scm {
+                                          git {
+                                              remote {
+                                                  url('git@github.com:Gigaspaces/xap-premium.git')
+                                                  credentials('git_credentials_id')
+                                              }    
+                                              branches('master')
+                                              
+                                          }
+                                          scriptPath("build/jenkinsfiles/SpotinstDeleteMachines")
+                                      }
+                                  }
+                              }
+                              
+                          }
+                      }
+                  }
     customInitContainers: []
     sidecars:
       configAutoReload:
