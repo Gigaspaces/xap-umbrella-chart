@@ -1397,6 +1397,8 @@ jenkins:
                                   stringParam('AWS_REGION', 'eu-west-1')
                                   stringParam('VPC_ID', 'vpc-ffec199a')
                                   stringParam('SECURITY_GROUP', 'sg-095be91b6ef33cc2d')
+                                  stringParam('AMI_ID', '0fad7378adf284ce0')
+                                  stringParam('INSTANCE_TYPE', 'c5.2xlarge')
                                   stringParam('AVAILABILITY_ZONE_REGION', 'eu-west-1a')
                                   stringParam('AVAILABILITY_ZONE_SUBNET_ID', 'subnet-b545b1c2')
                                   stringParam('PRODUCT_TYPE', 'Linux/UNIX')
