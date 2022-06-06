@@ -1430,46 +1430,49 @@ jenkins:
                       }
                   }
               - script: >
-                  folder('Metric/Spotinst') {
-                      description('create spots')
-                      folder('Metric/Spotinst/Templates') {
-                          description('env or backwards test ')
-                          pipelineJob('Metric/Spotinst/Spotinst-Delete-Machines-template') {
-                              properties {
-                                  copyArtifactPermissionProperty {
-                                    projectNames('Metric/Spotinst/Spotinst-Create-Machines')
-                                  }
-                              }
-                              parameters{
-                                  credentialsParam('SPOT') {
-                                        type('org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl')
-                                        required()
-                                        defaultValue('spotinst-token')
-                                        description('spotinst-token')
-                                    }
-                                  textParam('all_content', 'ALL_CONTENT_HERE')
-                                  textParam('PUBLIC', 'PUBLIC_CONTENT')
-                                  textParam('PRIVATE', 'PRIVATE_CONTENT')
-                                  fileParam('pemfile','change paramtype to stashfile parameter')
-              
-  
-                              }
-                              definition {
-                                  cpsScm {
-                                      scm {
-                                          git {
-                                              remote {
-                                                  url('git@github.com:Gigaspaces/xap-premium.git')
-                                                  credentials('git_credentials_id')
-                                              }    
-                                              branches('master')
-                                              
-                                          }
-                                          scriptPath("build/jenkinsfiles/SpotinstDeleteMachines")
+                  folder('Metric') {
+                      
+                      folder('Metric/Spotinst') {
+                          description('create spots')
+                          folder('Metric/Spotinst/Templates') {
+                              description('env or backwards test ')
+                              pipelineJob('Metric/Spotinst/Spotinst-Delete-Machines-template') {
+                                  properties {
+                                      copyArtifactPermissionProperty {
+                                        projectNames('Metric/Spotinst/Spotinst-Create-Machines')
                                       }
                                   }
+                                  parameters{
+                                      credentialsParam('SPOT') {
+                                            type('org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl')
+                                            required()
+                                            defaultValue('spotinst-token')
+                                            description('spotinst-token')
+                                        }
+                                      textParam('all_content', 'ALL_CONTENT_HERE')
+                                      textParam('PUBLIC', 'PUBLIC_CONTENT')
+                                      textParam('PRIVATE', 'PRIVATE_CONTENT')
+                                      fileParam('pemfile','change paramtype to stashfile parameter')
+                  
+      
+                                  }
+                                  definition {
+                                      cpsScm {
+                                          scm {
+                                              git {
+                                                  remote {
+                                                      url('git@github.com:Gigaspaces/xap-premium.git')
+                                                      credentials('git_credentials_id')
+                                                  }    
+                                                  branches('master')
+                                                  
+                                              }
+                                              scriptPath("build/jenkinsfiles/SpotinstDeleteMachines")
+                                          }
+                                      }
+                                  }
+                                  
                               }
-                              
                           }
                       }
                   }
