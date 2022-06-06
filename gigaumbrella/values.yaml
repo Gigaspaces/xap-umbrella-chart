@@ -1419,7 +1419,7 @@ jenkins:
                                               branches('master')
                                               
                                           }
-                                          scriptPath("build/jenkinsfiles/build/jenkinsfiles/SpotinstCreateMachines")
+                                          scriptPath("build/jenkinsfiles/SpotinstCreateMachines")
                                       }
                                   }
                               }
