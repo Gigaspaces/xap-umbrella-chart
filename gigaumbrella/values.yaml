@@ -1439,7 +1439,7 @@ jenkins:
                               pipelineJob('Metric/Spotinst/Spotinst-Delete-Machines-template') {
                                   properties {
                                       copyArtifactPermissionProperty {
-                                        projectNames('Metric/Spotinst/Spotinst-Create-Machines')
+                                          projectNames('Metric/Spotinst/Spotinst-Create-Machines')
                                       }
                                   }
                                   parameters{
