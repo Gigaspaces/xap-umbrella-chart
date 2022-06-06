@@ -1430,7 +1430,7 @@ jenkins:
                       }
                   }
               - script: >
-                  folder('Metric') {
+                  folder('Metric/Spotinst') {
                       description('create spots')
                       folder('Metric/Spotinst/Templates') {
                           description('env or backwards test ')
