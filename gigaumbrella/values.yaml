@@ -1508,7 +1508,7 @@ jenkins:
                               }
                           }                          
                       }
-                  }
+                  }    
     customInitContainers: []
     sidecars:
       configAutoReload:
