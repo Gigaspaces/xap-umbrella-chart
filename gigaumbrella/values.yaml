@@ -1487,7 +1487,7 @@ jenkins:
                               stringParam('agent1_licenseKey','tryme')
                               stringParam('agent2_xapUrl','https://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.2.0/gigaspaces-xap-enterprise-15.2.0-m9.zip')
                               stringParam('agent2_licenseKey','tryme')
-                              stringParam('branch','master')
+                              
                               stringParam('xlsFilename','bw.xls')
                               stringParam('remote_spaceTotalMembers','2,1','Ignored in embedded mode')
                               stringParam('mail_title','Backwards results - spotinst')
