@@ -1431,11 +1431,10 @@ jenkins:
                   }
               - script: >
                   folder('Metric') {
-                      
                       folder('Metric/Spotinst') {
                           description('create spots')
                           folder('Metric/Spotinst/Templates') {
-                              description('env or backwards test ')
+                              description('env or backwards test')
                               pipelineJob('Metric/Spotinst/Templates/Spotinst-Delete-Machines-template') {
                                   properties {
                                       copyArtifactPermissionProperty {
@@ -1476,40 +1475,40 @@ jenkins:
                           }
                       }
                   }
-              # - script: >
-              #     folder('Metric') {
-              #         pipelineJob('Metric/Backwards') {
-              #             parameters {
-              #                 fileParam('pemfile','***IF YOUSEETHIS***change paramtype to stashfile parameter')
-              #                 stringParam('branch','master')
-              #                 stringParam('client_xapUrl','http://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.0.0/gigaspaces-xap-enterprise-15.0.0.zip')
-              #                 stringParam('agent1_xapUrl','https://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.2.0/gigaspaces-xap-enterprise-15.2.0-m9.zip')
-              #                 stringParam('agent1_licenseKey','tryme')
-              #                 stringParam('agent2_xapUrl','https://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.2.0/gigaspaces-xap-enterprise-15.2.0-m9.zip')
-              #                 stringParam('agent2_licenseKey','tryme')
+              - script: >
+                  folder('Metric') {
+                      pipelineJob('Metric/Backwards') {
+                          parameters {
+                              fileParam('pemfile','***IF YOUSEETHIS***change paramtype to stashfile parameter')
+                              stringParam('branch','master')
+                              stringParam('client_xapUrl','http://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.0.0/gigaspaces-xap-enterprise-15.0.0.zip')
+                              stringParam('agent1_xapUrl','https://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.2.0/gigaspaces-xap-enterprise-15.2.0-m9.zip')
+                              stringParam('agent1_licenseKey','tryme')
+                              stringParam('agent2_xapUrl','https://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.2.0/gigaspaces-xap-enterprise-15.2.0-m9.zip')
+                              stringParam('agent2_licenseKey','tryme')
                               
-              #                 stringParam('xlsFilename','bw.xls')
-              #                 stringParam('remote_spaceTotalMembers','2,1','Ignored in embedded mode')
-              #                 stringParam('mail_title','Backwards results - spotinst')
-              #                 stringParam('xapVersion','16.0.0')
-              #             }
-              #             definition {
-              #                 cpsScm {
-              #                     scm {
-              #                         git {
-              #                             remote {
-              #                                 url('git@github.com:Gigaspaces/xap-premium.git')
-              #                                 credentials('git_credentials_id')
-              #                             }    
-              #                             branches('master')
+                              stringParam('xlsFilename','bw.xls')
+                              stringParam('remote_spaceTotalMembers','2,1')
+                              stringParam('mail_title','Backwards results - spotinst')
+                              stringParam('xapVersion','16.0.0')
+                          }
+                          definition {
+                              cpsScm {
+                                  scm {
+                                      git {
+                                          remote {
+                                              url('git@github.com:Gigaspaces/xap-premium.git')
+                                              credentials('git_credentials_id')
+                                          }    
+                                          branches('master')
                                           
-              #                         }
-              #                         scriptPath("build/jenkinsfiles/Backwards")
-              #                     }
-              #                 }
-              #             }                          
-              #         }
-              #     }
+                                      }
+                                      scriptPath("build/jenkinsfiles/Backwards")
+                                  }
+                              }
+                          }                          
+                      }
+                  }
     customInitContainers: []
     sidecars:
       configAutoReload:
