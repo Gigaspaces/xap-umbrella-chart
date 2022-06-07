@@ -1407,8 +1407,6 @@ jenkins:
                                   stringParam('JAVA_URL', 'https://s3-eu-west-1.amazonaws.com/xap-test/test-build-newman/javas/jdk-8u45-linux-x64.tar.gz')
                                   stringParam('USER', 'oren.sultan@gigaspaces.com')
                                   stringParam('ACCOUNT', 'act-6d78ea8d')
-                                  
-   
                               }
                               definition {
                                   cpsScm {
@@ -1475,40 +1473,7 @@ jenkins:
                           }
                       }
                   }
-              - script: >
-                  folder('Metric') {
-                      pipelineJob('Metric/Backwards') {
-                          parameters {
-                              fileParam('pemfile','***IF YOUSEETHIS***change paramtype to stashfile parameter')
-                              stringParam('branch','master')
-                              stringParam('client_xapUrl','http://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.0.0/gigaspaces-xap-enterprise-15.0.0.zip')
-                              stringParam('agent1_xapUrl','https://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.2.0/gigaspaces-xap-enterprise-15.2.0-m9.zip')
-                              stringParam('agent1_licenseKey','tryme')
-                              stringParam('agent2_xapUrl','https://gigaspaces-releases-eu.s3.amazonaws.com/xap/15.2.0/gigaspaces-xap-enterprise-15.2.0-m9.zip')
-                              stringParam('agent2_licenseKey','tryme')
-                              
-                              stringParam('xlsFilename','bw.xls')
-                              stringParam('remote_spaceTotalMembers','2,1')
-                              stringParam('mail_title','Backwards results - spotinst')
-                              stringParam('xapVersion','16.0.0')
-                          }
-                          definition {
-                              cpsScm {
-                                  scm {
-                                      git {
-                                          remote {
-                                              url('git@github.com:Gigaspaces/xap-premium.git')
-                                              credentials('git_credentials_id')
-                                          }    
-                                          branches('master')
-                                          
-                                      }
-                                      scriptPath("build/jenkinsfiles/Backwards")
-                                  }
-                              }
-                          }                          
-                      }
-                  }    
+                  
     customInitContainers: []
     sidecars:
       configAutoReload:
