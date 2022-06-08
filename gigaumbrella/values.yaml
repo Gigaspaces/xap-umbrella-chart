@@ -147,7 +147,7 @@ jenkins:
       "service.beta.kubernetes.io/aws-load-balancer-ssl-ports" : "443"
       "service.beta.kubernetes.io/aws-load-balancer-proxy-protocol": "*"
       "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "http"
-      "service.beta.kubernetes.io/aws-load-balancer-subnets": "subnet-03d8f4ee544e7289a, subnet-0619bb19f66f6fd16"
+      "service.beta.kubernetes.io/aws-load-balancer-subnets": "subnet-05826f359bde1d517, subnet-03d8f4ee544e7289a, subnet-0619bb19f66f6fd16"
       "service.beta.kubernetes.io/aws-load-balancer-internal" : "true"
       
       # "service.beta.kubernetes.io/aws-load-balancer-extra-security-groups": arn:aws:iam::573366771204:group/OktaSSO-Group
