@@ -12,12 +12,12 @@
 # For FQDN resolving of the controller service. Change this value to match your existing configuration.
 # ref: https://github.com/kubernetes/dns/blob/master/docs/specification.md
 
-global: 
-  om: 
-    newman: 
+global:
+  om:
+    newman:
       enabled: false
     mongodb:
-      enabled: false  
+      enabled: false
 jenkins:
   clusterZone: "cluster.local"
 
@@ -93,13 +93,13 @@ jenkins:
     #   - name: http_proxy
     #     value: "http://192.168.64.1:3128"
     # Set min/max heap here if needed with:
-    javaOpts: 
+    javaOpts:
       -Xms4096m -Xmx4096m
       -Dorg.csanchez.jenkins.plugins.kubernetes.pipeline.ContainerExecDecorator.websocketConnectionTimeout=180
       -Dmail.smtp.starttls.enable=true
       -Dorg.apache.commons.jelly.tags.fmt.timeZone=GMT/UTC+2
       -Duser.timezone=Asia/Jerusalem
-      
+
       # -Dhudson.security.csrf.GlobalCrumbIssuerConfiguration.DISABLE_CSRF_PROTECTION=true
     # jenkinsOpts: ""
     # If you are using the ingress definitions provided by this chart via the `controller.ingress` block the configured hostname will be the ingress hostname starting with `https://` or `http://` depending on the `tls` configuration.
@@ -140,20 +140,20 @@ jenkins:
     # but risks potentially imbalanced traffic spreading.
     serviceExternalTrafficPolicy:
     # Jenkins controller service annotations
-    serviceAnnotations: 
+    serviceAnnotations:
       "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout": "300"
       "external-dns.alpha.kubernetes.io/hostname" : "gigajenkins.gigaspaces.com"
-      "service.beta.kubernetes.io/aws-load-balancer-ssl-cert" : "arn:aws:acm:us-east-2:573366771204:certificate/1253adbc-6a2d-4c20-8b8d-6ec79cf6c1cc"		
+      "service.beta.kubernetes.io/aws-load-balancer-ssl-cert" : "arn:aws:acm:us-east-2:573366771204:certificate/1253adbc-6a2d-4c20-8b8d-6ec79cf6c1cc"
       "service.beta.kubernetes.io/aws-load-balancer-ssl-ports" : "443"
       "service.beta.kubernetes.io/aws-load-balancer-proxy-protocol": "*"
       "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "http"
-      "service.beta.kubernetes.io/aws-load-balancer-subnets": "subnet-05826f359bde1d517, subnet-03d8f4ee544e7289a, subnet-0619bb19f66f6fd16"
-      "service.beta.kubernetes.io/aws-load-balancer-internal" : "true"
-      
+      "service.beta.kubernetes.io/aws-load-balancer-subnets": "subnet-c4c537ad" #"subnet-05826f359bde1d517, subnet-03d8f4ee544e7289a, subnet-0619bb19f66f6fd16"
+      "service.beta.kubernetes.io/aws-load-balancer-internal" : "false" #"true"
+
       # "service.beta.kubernetes.io/aws-load-balancer-extra-security-groups": arn:aws:iam::573366771204:group/OktaSSO-Group
     # Jenkins controller custom labels
     statefulSetLabels: {}
-    #   foo: bar 
+    #   foo: bar
     #   bar: foo
     # Jenkins controller service labels
     serviceLabels: {}
@@ -226,7 +226,7 @@ jenkins:
     # Optionally assign an IP to the LoadBalancer agentListenerService LoadBalancer
     # GKE users: only regional static IPs will work for Service Load balancer.
     agentListenerLoadBalancerIP:
-    agentListenerServiceAnnotations: 
+    agentListenerServiceAnnotations:
       "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout": "300"
       "external-dns.alpha.kubernetes.io/hostname" : "jenkinseksagent.gigaspaces.com"
       "service.beta.kubernetes.io/aws-load-balancer-subnets": "subnet-03d8f4ee544e7289a, subnet-0619bb19f66f6fd16"
@@ -245,11 +245,11 @@ jenkins:
     # loadBalancerIP: 1.2.3.4
     # Optionally configure a JMX port
     # requires additional javaOpts, ie
-    # javaOpts: 
+    # javaOpts:
     #   -Dorg.csanchez.jenkins.plugins.kubernetes.pipeline.ContainerExecDecorator.websocketConnectionTimeout=180
     #   -Dcom.sun.management.jmxremote.authenticate=false
     #   -Dcom.sun.management.jmxremote.ssl=false
-    
+
     # jmxPort: 4000
     # Optionally configure other ports to expose in the controller container
     extraPorts: []
@@ -370,7 +370,7 @@ jenkins:
       - dependency-check-jenkins-plugin:5.1.2
       - structs:308.v852b473a2b8c
       - mailer:408.vd726a_1130320
-      - http_request:1.14 
+      - http_request:1.14
       - build-blocker-plugin:1.7.8
       - workflow-job:1145.v7f2433caa07f
       - ansicolor:1.0.1
@@ -424,8 +424,8 @@ jenkins:
       - description-setter:1.10
       - file-parameters:205.vf6ce13b_e5dee
       - spotinst:2.2.7
-      
-    
+
+
     # Set to false to download the minimum required version of all dependencies.
     installLatestPlugins: true
 
@@ -454,10 +454,10 @@ jenkins:
     #  - "method groovy.json.JsonSlurperClassic parseText java.lang.String"
     #  - "new groovy.json.JsonSlurperClassic"
     # List of groovy init scripts to be executed during Jenkins controller start
-    initScripts: 
-     - | 
+    initScripts:
+     - |
       System.setProperty('org.apache.commons.jelly.tags.fmt.timeZone', 'Asia/Jerusalem')
-       
+
 
     # 'name' is a name of an existing secret in same namespace as jenkins,
     # 'keyName' is the name of one of the keys inside current secret.
@@ -465,7 +465,7 @@ jenkins:
     # an existing secret "secret-credentials" and a key inside it named "github-password" should be used in Jcasc as ${secret-credentials-github-password}
     # 'name' and 'keyName' must be lowercase RFC 1123 label must consist of lower case alphanumeric characters or '-',
     # and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc')
-    additionalExistingSecrets: 
+    additionalExistingSecrets:
     - name: git-credentials-id-secret
       keyName: idrsa
     - name: git-token
@@ -475,8 +475,8 @@ jenkins:
     - name: docker-hub-cred
       keyName: password
     - name: jenkins-spotinst
-      keyName: token  
-    
+      keyName: token
+
     additionalSecrets: []
     #  - name: nameOfSecret
     #    value: secretText
@@ -505,7 +505,7 @@ jenkins:
     JCasC:
       enabled: true
       defaultConfig: false
-      
+
 
       # Ignored if securityRealm is defined in controller.JCasC.configScripts and
       # ignored if controller.enableXmlConfig=true as controller.securityRealm takes precedence
@@ -522,14 +522,14 @@ jenkins:
         loggedInUsersCanDoAnything:
           allowAnonymousRead: true
     # Optionally specify additional init-containers
-    
+
     # - name: custom-init
     #   image: "alpine:3.7"
     #   imagePullPolicy: Always
     #   command: [ "uname", "-a" ]
       configScripts:
-          gigaci-jenkins: | 
-            security: 
+          gigaci-jenkins: |
+            security:
               apiToken:
                 creationOfLegacyTokenEnabled: false
                 tokenGenerationOnCreationEnabled: false
@@ -543,7 +543,7 @@ jenkins:
               globalJobDslSecurityConfiguration:
                 useScriptSecurity: true
               sSHD:
-                port: -1   
+                port: -1
             credentials:
               system:
                 domainCredentials:
@@ -552,7 +552,7 @@ jenkins:
                           scope: GLOBAL
                           id: "${chart-admin-username}"
                           username: "Jenkins Admin"
-                          password: "GigaSpaces"    
+                          password: "GigaSpaces"
                       - basicSSHUserPrivateKey:
                           scope: GLOBAL
                           id: git_credentials_id
@@ -560,7 +560,7 @@ jenkins:
                           description: "Private key access to xap-premium-GitHub"
                           privateKeySource:
                             directEntry:
-                              privateKey: "${git-credentials-id-secret-idrsa}"   
+                              privateKey: "${git-credentials-id-secret-idrsa}"
                       - usernamePassword:
                           scope: GLOBAL
                           id: "aws_ses"
@@ -586,7 +586,7 @@ jenkins:
             unclassified:
               location:
                 adminAddress: "newman@gigaspaces.com"
-                url: "https://gigajenkins.gigaspaces.com/" 
+                url: "https://gigajenkins.gigaspaces.com/"
               timestamper:
                 allPipelines: true
                 elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
@@ -734,10 +734,10 @@ jenkins:
                 maxAttachmentSizeMb: -1
                 precedenceBulk: false
                 watchingEnabled: false
-            jenkins: 
-              #authorizationStrategy:  # first-run 
+            jenkins:
+              #authorizationStrategy:  # first-run
               #  loggedInUsersCanDoAnything
-              authorizationStrategy: 
+              authorizationStrategy:
                 projectMatrix:
                   permissions:
                   - "GROUP:Agent/Build:Dev-jenkins"
@@ -770,7 +770,7 @@ jenkins:
                   - "GROUP:View/Configure:Dev-jenkins"
                   - "GROUP:View/Create:Dev-jenkins"
                   - "GROUP:View/Delete:Dev-jenkins"
-                  - "GROUP:View/Read:Dev-jenkins"  
+                  - "GROUP:View/Read:Dev-jenkins"
                   - "USER:Overall/Administer:oren.sultan@gigaspaces.com"
                   - "USER:Overall/Administer:sergey.yavich@gigaspaces.com"
                   - "USER:Overall/Read:anonymous"
@@ -818,7 +818,7 @@ jenkins:
                   xorMasking: false
               agentProtocols:
               - "JNLP4-connect"
-              - "Ping"  
+              - "Ping"
               nodes:
                 - permanent:
                     labelString: 'DocsAgent'
@@ -887,7 +887,7 @@ jenkins:
                           }
                           steps{
                               batchFile('cd "%WORKSPACE%" & call build-site.bat %Destination%')
-                          }    
+                          }
                       }
                   }
               - script: >
@@ -897,7 +897,7 @@ jenkins:
                           label('DocsAgent')
                           logRotator(10, 20)
                           parameters {
-                              choiceParam('destination', ['staging', 'production'], 'https://docs-staging.gigaspaces.com\n   production: https://docs.gigaspaces.comDetermines\n    staging: https://docs-staging.gigaspaces.com ') 
+                              choiceParam('destination', ['staging', 'production'], 'https://docs-staging.gigaspaces.com\n   production: https://docs.gigaspaces.comDetermines\n    staging: https://docs-staging.gigaspaces.com ')
                               choiceParam('profile', ['default','full'], "Determines which flare profile should be built (when Destination is 'production', this is ignored and 'full' is used)")
                               choiceParam('sites', ['all','flare','hugo'], "Determines which sites to build (when Destination is 'production', this is ignored and 'all' is used)")
                               stringParam('BRANCH_NAME', 'master')
@@ -911,7 +911,7 @@ jenkins:
                                   }
                                   branches('*/$BRANCH_NAME')
                               }
-                          }        
+                          }
                           triggers {
                               scm('* * * * *')
                           }
@@ -1007,14 +1007,14 @@ jenkins:
                                   buildName('$GS_BUILD_NAME')
 
                               }
-                              
-                              
+
+
                               steps {
                                   batchFile('"%WORKSPACE%\\Build\\extract-build-name.bat" %JAVA_BUILD_URL% "%WORKSPACE%\\xap-net-env.properties"')
                                   environmentVariables {
                                       propertiesFile('xap-net-env.properties')
                                   }
-                                  batchFile('cd "%WORKSPACE%\\Build" & call BuildAll.bat "%JAVA_BUILD_URL%" "%BRANCH_NAME%" "%DEPLOY_MVN_ARTIFACTS%" "%PUBLISH_TO_NEWMAN%"')    
+                                  batchFile('cd "%WORKSPACE%\\Build" & call BuildAll.bat "%JAVA_BUILD_URL%" "%BRANCH_NAME%" "%DEPLOY_MVN_ARTIFACTS%" "%PUBLISH_TO_NEWMAN%"')
                               }
                               publishers {
                                   flexiblePublish {
@@ -1022,7 +1022,7 @@ jenkins:
                                           condition {
                                               booleanCondition('\$ֿֿ{ENV,var="RELEASE"}')
                                           }
-                                          publishers {                                   
+                                          publishers {
                                               git {
                                                   pushOnlyIfSuccess()
                                                   forcePush()
@@ -1038,14 +1038,14 @@ jenkins:
                                   extendedEmail {
                                       defaultSubject('$DEFAULT_SUBJECT')
                                       replyToList('$DEFAULT_REPLYTO')
-                  
+
                                       contentType('default')
-                                      
+
                                   }
                               }
                           }
                       }
-                  }   
+                  }
               - script: >
                   folder('xap-insightedge') {
                       description('Folder containing release /continuous')
@@ -1093,7 +1093,7 @@ jenkins:
                               }
                               triggers {
                                   cron('0 17 * * *')
-                              } 
+                              }
                               definition {
                                   cpsScm {
                                       scm {
@@ -1105,12 +1105,12 @@ jenkins:
                                               branches('$BRANCH_NAME')
                                           }
                                           scriptPath("build/jenkinsfiles/jenkinsfile")
-                                      }   
+                                      }
                                   }
                               }
                           }
                       }
-                  }          
+                  }
               - script: >
                   folder('xap-insightedge') {
                       description('Folder containing release /continuous')
@@ -1146,13 +1146,13 @@ jenkins:
                                   """)
                                   }
                                   choiceParam('ELM_VERSION', ['0.19.0', '0.18.0'])
-                                  stringParam('NEWMAN_SUITES', '',"""comma separated list of suite ids to submit future jobs  
-                                  5c88ea4bb38594355214b205 - manager         
-                                  59f25d19b3859424cac590bf - xap-core         
-                                  59f25af7b3859424cac590b5 - service-grid    
+                                  stringParam('NEWMAN_SUITES', '',"""comma separated list of suite ids to submit future jobs
+                                  5c88ea4bb38594355214b205 - manager
+                                  59f25d19b3859424cac590bf - xap-core
+                                  59f25af7b3859424cac590b5 - service-grid
                                   59f25af5b3859424cac590ad - disconnect
-                                  59f25e0f6d98c14e1daa2008 - web-ui            
-                                  59f25d5ab3859424cac590c1 - rocksdb           
+                                  59f25e0f6d98c14e1daa2008 - web-ui
+                                  59f25d5ab3859424cac590c1 - rocksdb
                                   59f25d5bb3859424cac590c2 - off-heap
                                   5a96b14268c479caafb1162f - mx-off-heap
                                   59f59592b3859424cac690fa - i9e-sgtest
@@ -1162,22 +1162,22 @@ jenkins:
                                   59f25e0f6d98c14e1daa5000 - performance
                                   61c2ce874cedfd000c46a91c - performance-dih
                                   607420ac4cedfd0009ec8b20 - v3driver
-                                  612b4e5c4cedfd000acf48a0 - dih (sgtest)""") 
-                                  stringParam('NEWMAN_CONFIG_ID', '5b4c9342b3859411ee82c265', """Applicable only when submitting future jobs 
-                                  5b4c9342b3859411ee82c265 - ORACLE_8   
-                                  5b4c9825b3859411ee82c2f3  - ORACLE_9  
-                                  5bf160bb1f31eb789fc0fa65 - OPENJDK_11 
-                                  5bf160bb1f31eb789fc0fb78 - OPENJDK_17""") 
+                                  612b4e5c4cedfd000acf48a0 - dih (sgtest)""")
+                                  stringParam('NEWMAN_CONFIG_ID', '5b4c9342b3859411ee82c265', """Applicable only when submitting future jobs
+                                  5b4c9342b3859411ee82c265 - ORACLE_8
+                                  5b4c9825b3859411ee82c2f3  - ORACLE_9
+                                  5bf160bb1f31eb789fc0fa65 - OPENJDK_11
+                                  5bf160bb1f31eb789fc0fb78 - OPENJDK_17""")
                                   stringParam('NEWMAN_AGENT_GROUPS', 'imc-srv01,imc-srv02,DotNet,Bynet')
-                                  stringParam('NEWMAN_JOB_PRIORITY', '1', """0- daily-default  
-                                  1- low  
-                                  2- high 
-                                  3- release-default    
-                                  4- urgent""")   
-                              } 
+                                  stringParam('NEWMAN_JOB_PRIORITY', '1', """0- daily-default
+                                  1- low
+                                  2- high
+                                  3- release-default
+                                  4- urgent""")
+                              }
                               triggers {
                                   scm('H/10 * * * *')
-                              } 
+                              }
                               definition {
                                   cpsScm {
                                       scm {
@@ -1185,17 +1185,17 @@ jenkins:
                                               remote {
                                                   url('git@github.com:Gigaspaces/xap-premium.git')
                                                   credentials('git_credentials_id')
-                                              
-          
+
+
                                               }
                                               branches('*/$BRANCH_NAME')
-                                              
+
                                           }
                                           scriptPath("build/jenkinsfiles/jenkinsfile")
                                       }
                                   }
                               }
-                          }    
+                          }
                       }
                   }
               - script: >
@@ -1251,12 +1251,12 @@ jenkins:
                                               branches('$BRANCH_NAME')
                                           }
                                           scriptPath("build/jenkinsfiles/jenkinsfile")
-                                      }   
+                                      }
                                   }
                               }
                           }
                       }
-                  }          
+                  }
               - script: >
                   folder('xap-insightedge') {
                       description('Folder containing release /continuous')
@@ -1289,13 +1289,13 @@ jenkins:
                                   """)
                                   }
                                   choiceParam('ELM_VERSION', ['0.19.0', '0.18.0'])
-                                  stringParam('NEWMAN_SUITES', '',"""comma separated list of suite ids to submit future jobs  
-                                  5c88ea4bb38594355214b205 - manager         
-                                  59f25d19b3859424cac590bf - xap-core         
-                                  59f25af7b3859424cac590b5 - service-grid    
+                                  stringParam('NEWMAN_SUITES', '',"""comma separated list of suite ids to submit future jobs
+                                  5c88ea4bb38594355214b205 - manager
+                                  59f25d19b3859424cac590bf - xap-core
+                                  59f25af7b3859424cac590b5 - service-grid
                                   59f25af5b3859424cac590ad - disconnect
-                                  59f25e0f6d98c14e1daa2008 - web-ui            
-                                  59f25d5ab3859424cac590c1 - rocksdb           
+                                  59f25e0f6d98c14e1daa2008 - web-ui
+                                  59f25d5ab3859424cac590c1 - rocksdb
                                   59f25d5bb3859424cac590c2 - off-heap
                                   5a96b14268c479caafb1162f - mx-off-heap
                                   59f59592b3859424cac690fa - i9e-sgtest
@@ -1304,19 +1304,19 @@ jenkins:
                                   5b6c24e7b385941b3b8ce4bf - dev-demote
                                   59f25e0f6d98c14e1daa5000 - performance
                                   607420ac4cedfd0009ec8b20 - v3driver
-                                  612b4e5c4cedfd000acf48a0 - dih (sgtest)""") 
+                                  612b4e5c4cedfd000acf48a0 - dih (sgtest)""")
                                   stringParam('NEWMAN_AGENT_GROUPS', 'imc-srv01,imc-srv02,DotNet,Bynet')
-                                  stringParam('NEWMAN_JOB_PRIORITY', '1', """0- daily-default  
-                                  1- low  
-                                  2- high 
-                                  3- release-default    
+                                  stringParam('NEWMAN_JOB_PRIORITY', '1', """0- daily-default
+                                  1- low
+                                  2- high
+                                  3- release-default
                                   4- urgent""")
-                                  stringParam('NEWMAN_CONFIG_ID', '5b4c9342b3859411ee82c265', """Applicable only when submitting future jobs 
-                                  5b4c9342b3859411ee82c265 - ORACLE_8   
-                                  5b4c9825b3859411ee82c2f3  - ORACLE_9  
-                                  5bf160bb1f31eb789fc0fa65 - OPENJDK_11 
-                                  5bf160bb1f31eb789fc0fb78 - OPENJDK_17""") 
-                                
+                                  stringParam('NEWMAN_CONFIG_ID', '5b4c9342b3859411ee82c265', """Applicable only when submitting future jobs
+                                  5b4c9342b3859411ee82c265 - ORACLE_8
+                                  5b4c9825b3859411ee82c2f3  - ORACLE_9
+                                  5bf160bb1f31eb789fc0fa65 - OPENJDK_11
+                                  5bf160bb1f31eb789fc0fb78 - OPENJDK_17""")
+
                               }
                               definition {
                                   cpsScm {
@@ -1325,25 +1325,25 @@ jenkins:
                                               remote {
                                                   url('git@github.com:Gigaspaces/xap-premium.git')
                                                   credentials('git_credentials_id')
-                                              }    
+                                              }
                                               remote {
                                                   url('git@github.com:Gigaspaces/xap.git')
                                                   credentials('git_credentials_id')
                                               }
                                               remote {
-                                                  url('https://github.com/InsightEdge/insightedge.git')    
-                                  
+                                                  url('https://github.com/InsightEdge/insightedge.git')
+
                                               }
                                               branches('$BRANCH_NAME')
-                                              
+
                                           }
                                           scriptPath("build/jenkinsfiles/jenkinsfile")
                                       }
                                   }
                               }
-                          }    
+                          }
                       }
-                  }    
+                  }
               - script: >
                   folder('managment') {
                       description('Folder contains jenkins environment prperations')
@@ -1356,18 +1356,18 @@ jenkins:
                                           remote {
                                               url('git@github.com:Gigaspaces/xap-premium.git')
                                               credentials('git_credentials_id')
-                                          }    
+                                          }
                                           branches('master')
-                                          
+
                                       }
                                       scriptPath("build/jenkinsfiles/createmailtemplates")
                                   }
                               }
                           }
-                      }    
-                      
+                      }
+
                   }
-            
+
               - script: >
                   folder('Metric') {
                       description('create spots')
@@ -1415,15 +1415,15 @@ jenkins:
                                               remote {
                                                   url('git@github.com:Gigaspaces/xap-premium.git')
                                                   credentials('git_credentials_id')
-                                              }    
+                                              }
                                               branches('master')
-                                              
+
                                           }
                                           scriptPath("build/jenkinsfiles/SpotinstCreateMachines")
                                       }
                                   }
                               }
-                              
+
                           }
                       }
                   }
@@ -1450,8 +1450,8 @@ jenkins:
                                       textParam('PUBLIC', 'PUBLIC_CONTENT')
                                       textParam('PRIVATE', 'PRIVATE_CONTENT')
                                       fileParam('pemfile','change paramtype to stashfile parameter')
-                  
-      
+
+
                                   }
                                   definition {
                                       cpsScm {
@@ -1460,20 +1460,20 @@ jenkins:
                                                   remote {
                                                       url('git@github.com:Gigaspaces/xap-premium.git')
                                                       credentials('git_credentials_id')
-                                                  }    
+                                                  }
                                                   branches('master')
-                                                  
+
                                               }
                                               scriptPath("build/jenkinsfiles/SpotinstDeleteMachines")
                                           }
                                       }
                                   }
-                                  
+
                               }
                           }
                       }
                   }
-                  
+
     customInitContainers: []
     sidecars:
       configAutoReload:
@@ -1715,7 +1715,7 @@ jenkins:
     enabled: true
     defaultsProviderTemplate: ""
     # URL for connecting to the Jenkins contoller
-    jenkinsUrl: 
+    jenkinsUrl:
     # connect to the specified host and port, instead of connecting directly to the Jenkins controller
     jenkinsTunnel:
     kubernetesConnectTimeout: 5
@@ -1754,10 +1754,10 @@ jenkins:
     # Allowed types are: ConfigMap, EmptyDir, HostPath, Nfs, PVC, Secret
     # Configure the attributes as they appear in the corresponding Java class for that type
     # https://github.com/jenkinsci/kubernetes-plugin/tree/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes
-    volumes: 
+    volumes:
     - type: ConfigMap
       configMapName: gigaci-jenkins
-      mountPath: /var/myapp/myconfigmap   
+      mountPath: /var/myapp/myconfigmap
     # - type: HostPath
     #   hostPath: /var/lib/containers
     #   mountPath: /var/myapp/myhostpath
@@ -1780,13 +1780,13 @@ jenkins:
     # Allowed types are: DynamicPVC, EmptyDir, HostPath, Nfs, PVC
     # Configure the attributes as they appear in the corresponding Java class for that type
     # https://github.com/jenkinsci/kubernetes-plugin/tree/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes/workspace
-    workspaceVolume: 
+    workspaceVolume:
     - type: EmptyDir
       mountPath: /var/jenkins_home/email-templates
       memory: false
     - type: ConfigMap
       configMapName: gigaci-release-mail-template
-      mountPath: /var/jenkins_home/email-templates  
+      mountPath: /var/jenkins_home/email-templates
     # - type: HostPath
     #   hostPath: /var/lib/containers
     # - type: Nfs
@@ -1933,7 +1933,7 @@ jenkins:
     create: true
     # The name of the service account is autogenerated by default
     name: jenkins-aws-eks
-    annotations: 
+    annotations:
       eks.amazonaws.com/role-arn: arn:aws:iam::573366771204:role/giga-eks-role
     imagePullSecretName:
 
@@ -2026,7 +2026,7 @@ nexus-repository-manager:
   nexus:
     readinessProbe:
       initialDelaySeconds: 90
-    
+
     properties:
       override: false
       data:
@@ -2038,10 +2038,10 @@ nexus-repository-manager:
         value: "false"
     securityContext:
       fsGroup: 1001
-    
+
     # Uncomment and modify this to run a command after starting the nexus container.
   deployment:
-  
+
     initContainers:
     - name: fmp-volume-permission
       image: busybox
@@ -2057,12 +2057,12 @@ nexus-repository-manager:
       volumeMounts:
       - mountPath: /nexus-data
         name: nexus-repository-manager-data
-  
-      
-      
+
+
+
     # Uncomment and modify this to run a command after starting the nexus container.
-    
-    
+
+
     # postStart:
     #   command:
     #   - /bin/bash
@@ -2071,7 +2071,7 @@ nexus-repository-manager:
     enabled: true
     mountPath: /etc/secret-volume/
     readOnly: true
-    data: 
+    data:
       password : |
         R2lnYVNwYWNlcw==
 
@@ -2129,8 +2129,8 @@ nexus-repository-manager:
         echo "Error calling Nexus API for http://${HOST}/${service} to add repository from ${jsonFile}"
         fi
         }
-        
-        
+
+
         function setPasswordFromFile() {
         if [ -n "${PASSWORD_FROM_FILE}" ]; then
             echo "Updating PASSWORD variable from password file."
@@ -2154,10 +2154,10 @@ nexus-repository-manager:
             fi
         else
             die "Login to nexus failed. Tried the default password only since no password secret file was provided."
-        fi 
+        fi
 newman-srv:
   image:
-    agent: 
+    agent:
       tag: "2.0.7"
   agent:
 mongodb:
