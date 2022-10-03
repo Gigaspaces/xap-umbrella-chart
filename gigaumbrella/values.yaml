@@ -561,6 +561,14 @@ jenkins:
                           privateKeySource:
                             directEntry:
                               privateKey: "${git-credentials-id-secret-idrsa}"
+                      - basicSSHUserPrivateKey:
+                          scope: GLOBAL
+                          id: xap-builder-ssh
+                          username: xap-builder
+                          description: "Private key access to xap-premium-GitHub"
+                          privateKeySource:
+                            directEntry:
+                              privateKey: "${xap-builder-ssh-secret-idrsa}"
                       - usernamePassword:
                           scope: GLOBAL
                           id: "aws_ses"
@@ -568,11 +576,11 @@ jenkins:
                           password: "${smtp-secret-password}"
                           description: "mail_sender"
                       - usernamePassword:
-                          description: "gigaops12-dockerhub"
+                          description: "xapbuilder-dockerhub"
                           id: "docker-hub-cred"
                           password: "${docker-hub-cred-password}"
                           scope: GLOBAL
-                          username: "gigaops12"
+                          username: "xapbuilder"
                       - usernamePassword:
                           description: "git_token"
                           id: "git_token"
