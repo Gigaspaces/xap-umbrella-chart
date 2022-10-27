@@ -1068,7 +1068,7 @@ jenkins:
                                   choiceParam('MODE',['NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
                                   stringParam('BRANCH_NAME', 'master')
                                   stringParam('XAP_VERSION', '16.2.1')
-                                  stringParam('MILESTONE', 'm4', 'Milestone label, e.g. m6, rc1. Ignored in modes GA and PATCH')
+                                  stringParam('MILESTONE', 'rc3', 'Milestone label, e.g. m6, rc1. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE,DOTNET,NIGHTLY')
                                   booleanParam('InsightEdge', true)
                                   parameterSeparatorDefinition{
@@ -1133,7 +1133,7 @@ jenkins:
                                   choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
                                   stringParam('BRANCH_NAME', 'master')
                                   stringParam('XAP_VERSION', '16.2.1')
-                                  stringParam('MILESTONE', 'm4', 'Milestone label, e.g. m6,rc1. Ignored in modes GA and PATCH')
+                                  stringParam('MILESTONE', 'rc3', 'Milestone label, e.g. m6,rc1. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP')
                                   booleanParam('InsightEdge', false)
                                   parameterSeparatorDefinition {
@@ -1217,7 +1217,7 @@ jenkins:
                                   booleanParam('OnDemand', true)
                                   stringParam('BRANCH_NAME','master')
                                   stringParam('XAP_VERSION', '16.2.1')
-                                  stringParam('MILESTONE', 'm4', 'Milestone label, e.g. m6,rc1. Ignored in modes GA and PATCH')
+                                  stringParam('MILESTONE', 'rc3', 'Milestone label, e.g. m6,rc1. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
                                   booleanParam('InsightEdge', true)
                                   parameterSeparatorDefinition{
@@ -1276,7 +1276,7 @@ jenkins:
                                   booleanParam('OnDemand', true)
                                   stringParam('BRANCH_NAME', 'master')
                                   stringParam('XAP_VERSION', '16.2.1')
-                                  stringParam('MILESTONE', 'm4', 'Milestone label, e.g. m6,rc1. Ignored in modes GA and PATCH')
+                                  stringParam('MILESTONE', 'rc3', 'Milestone label, e.g. m6,rc1. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP')
                                   booleanParam('InsightEdge', false)
                                   parameterSeparatorDefinition {
