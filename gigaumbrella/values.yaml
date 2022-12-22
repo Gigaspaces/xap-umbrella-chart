@@ -934,7 +934,7 @@ jenkins:
               - script: >
                   pipelineJob('Dependency-check') {
                       parameters {
-                          stringParam('GS_VERSION', '16.3.0-m4')
+                          stringParam('GS_VERSION', '16.3.0-m5')
                           stringParam('GS_PRODUCT', 'xap')
                       }
                       definition {
@@ -1068,7 +1068,7 @@ jenkins:
                                   choiceParam('MODE',['NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
                                   stringParam('BRANCH_NAME', 'master')
                                   stringParam('XAP_VERSION', '16.3.0')
-                                  stringParam('MILESTONE', 'm4', 'Milestone label, e.g. m6, rc1. Ignored in modes GA and PATCH')
+                                  stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6, rc1. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE,DOTNET,NIGHTLY')
                                   booleanParam('InsightEdge', true)
                                   parameterSeparatorDefinition{
@@ -1100,7 +1100,7 @@ jenkins:
                                   booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
                               }
                               triggers {
-                                  cron('0 17 * * *')
+                                  cron('0 18 * * *')
                               }
                               definition {
                                   cpsScm {
@@ -1133,7 +1133,7 @@ jenkins:
                                   choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
                                   stringParam('BRANCH_NAME', 'master')
                                   stringParam('XAP_VERSION', '16.3.0')
-                                  stringParam('MILESTONE', 'm4', 'Milestone label, e.g. m6,rc1. Ignored in modes GA and PATCH')
+                                  stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6,rc1. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP')
                                   booleanParam('InsightEdge', false)
                                   parameterSeparatorDefinition {
@@ -1217,7 +1217,7 @@ jenkins:
                                   booleanParam('OnDemand', true)
                                   stringParam('BRANCH_NAME','master')
                                   stringParam('XAP_VERSION', '16.3.0')
-                                  stringParam('MILESTONE', 'm4', 'Milestone label, e.g. m6,rc1. Ignored in modes GA and PATCH')
+                                  stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6,rc1. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
                                   booleanParam('InsightEdge', true)
                                   parameterSeparatorDefinition{
@@ -1276,7 +1276,7 @@ jenkins:
                                   booleanParam('OnDemand', true)
                                   stringParam('BRANCH_NAME', 'master')
                                   stringParam('XAP_VERSION', '16.3.0')
-                                  stringParam('MILESTONE', 'm4', 'Milestone label, e.g. m6,rc1. Ignored in modes GA and PATCH')
+                                  stringParam('MILESTONE', 'm5', 'Milestone label, e.g. m6,rc1. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP')
                                   booleanParam('InsightEdge', false)
                                   parameterSeparatorDefinition {
