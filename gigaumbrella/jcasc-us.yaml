@@ -25,7 +25,7 @@ jenkins:
                       - envVar:
                           key: "WORKSPACE"
                           value: "/home/jenkins/agent/workspace/"
-                      image: "gigaops12/jenkins:1.0.5"
+                      image: "gigaops12/jenkins:1.0.6"
                       livenessProbe:
                         failureThreshold: 0
                         initialDelaySeconds: 0
