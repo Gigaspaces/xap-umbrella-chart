@@ -1726,7 +1726,7 @@ jenkins:
     # URL for connecting to the Jenkins contoller
     jenkinsUrl:
     # connect to the specified host and port, instead of connecting directly to the Jenkins controller
-    jenkinsTunnel:
+    jenkinsTunnel: jenkinsagent.gigaspaces.com:50000
     kubernetesConnectTimeout: 5
     kubernetesReadTimeout: 15
     maxRequestsPerHostStr: "32"
