@@ -798,24 +798,37 @@ jenkins:
                   idpMetadataConfiguration:
                     period: 0
                     xml: |-
-                      <?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor entityID="http://www.okta.com/exklwm611fZoR2pSZ1t7" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"><md:IDPSSODescriptor WantAuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol"><md:KeyDescriptor use="signing"><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:X509Data><ds:X509Certificate>MIIDpDCCAoygAwIBAgIGAV2me5MJMA0GCSqGSIb3DQEBCwUAMIGSMQswCQYDVQQGEwJVUzETMBEG
-                      A1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEU
-                      MBIGA1UECwwLU1NPUHJvdmlkZXIxEzARBgNVBAMMCmdpZ2FzcGFjZXMxHDAaBgkqhkiG9w0BCQEW
-                      DWluZm9Ab2t0YS5jb20wHhcNMTcwODAzMDUwNDAyWhcNMjcwODAzMDUwNTAyWjCBkjELMAkGA1UE
-                      BhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNV
-                      BAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRMwEQYDVQQDDApnaWdhc3BhY2VzMRwwGgYJ
-                      KoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
-                      pl8rAa+clSlAZJ2luOUgL+sr3t8nKwgXcDG1NWAVET33Huj3/Pa59BlxwhxC5CsWjqeMbJPR1JCE
-                      AW3OnMtJh2lie12H58iIMsiliSTrXrnSkf10rHXBY17FvJPdHBxmR2ZGSf9cRszZba9ZPXBnbS2p
-                      6DQAoEvMhIxB9QYobhwKNTQjBX/1Ouj1YtUgcC+HySC5GT1deS+h5NKsYmRZ5VRb1HU+1IHbOhk6
-                      7iS+qSRyW4z9noZHmKEY/0gyzWz+mrs+DgRzBA2nSJPa+qifxxk3xWKd8rqF3IJH9inv4Nx+VImK
-                      masaxNPPjpU0thPB/nAHRPGXf4STDiBx81q23wIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQBbTz4t
-                      I8+NrfrMwg1zNdNSDsOLe/Ji5ez9E8W2m+wqhpa7X2Wfzuk8Lu4beZX8t563lUb8LvU7OaqfqkXW
-                      huyBpMLm1qxWtwx8qXBcUBRVjT98M6UNETUAkEY9M65uMeQw9IIN9Vy/DSlzUKnwimhJVoFju4on
-                      1uqBRlkoSmWkItPBWLCQLxvo7Bnx4bHjRi+nZC9LK4B37twPhqluLLn6iS4EltdwaCYYJ/BA7QSS
-                      3sxSm3olFl3vHjXL4M+WHkls6i701i7FvAvNXc9SHDFjt3GsN7IzkrKSNbk3aGgDS15nETI+Ehui
-                      5teJ4EBJzzmPdP93QB0gLFpHKkGy+5zK</ds:X509Certificate></ds:X509Data></ds:KeyInfo></md:KeyDescriptor><md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://gigaspaces.okta.com/app/gigaspaces_devjenkins_1/exklwm611fZoR2pSZ1t7/sso/saml"/><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://gigaspaces.okta.com/app/gigaspaces_devjenkins_1/exklwm611fZoR2pSZ1t7/sso/saml"/></md:IDPSSODescriptor></md:EntityDescriptor>
-                  logoutUrl: "https://gigaspaces.okta.com/app/UserHome"
+                      <?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="JumpCloud"><md:IDPSSODescriptor WantAuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol"><md:KeyDescriptor use="signing"><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:X509Data><ds:X509Certificate>MIIFgTCCA2mgAwIBAgIVANkn3cI8k6gUSvcLLceoab2c
+                          RP1oMA0GCSqGSIb3DQEBCwUAMHgxCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDTzEQ
+                          MA4GA1UEBxMHQm91bGRlcjETMBEGA1UEChMKR2lnYXNwYWNlczEZMBcGA1UECxMQ
+                          SnVtcENsb3VkU0FNTElkUDEaMBgGA1UEAxMRSnVtcENsb3VkU0FNTFVzZXIwHhcN
+                          MjMwMTIzMTMxOTM4WhcNMjgwMTIzMTMxOTM4WjB4MQswCQYDVQQGEwJVUzELMAkG
+                          A1UECBMCQ08xEDAOBgNVBAcTB0JvdWxkZXIxEzARBgNVBAoTCkdpZ2FzcGFjZXMx
+                          GTAXBgNVBAsTEEp1bXBDbG91ZFNBTUxJZFAxGjAYBgNVBAMTEUp1bXBDbG91ZFNB
+                          TUxVc2VyMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAz7B6Bl+W6jkt
+                          Hums8K2n0qNIDDqO7xpSZi8miioP6jh1eVKkK2+rxE8GDdkDZ/40Mra4ZQmbpOlY
+                          M6yV2/KOGnk+AeisaoMaEG34y9BrI8rnrjTHGoOJ41ntYc2OrnRTrIBkGPSgaff/
+                          JuFkIVCjDJEo6+VlPwExJJnC773ZnbU6VjsoZdFuJfCR+NTC7/gg+UVyQJekZTSD
+                          VksTieHtmSEpfEBJowJJqbbXcghIAE0cgsmCtatV9N2qWPXzDMqA91kRYyBaFfDu
+                          dK+qngP19xah30ZEgXsSquXaz8uNHEv2g5vKLupRcrHapM2Lbeib79ZZ2pC6dj0P
+                          kk4Dhh+piFahA0NFtH8rSF9HxZSiodpViknmN9+ymr2hk6/pLNRE7GwtpvLrArxQ
+                          xRCoisNZDE3EoJTfR0QFh+sYq3j7CclkkJ9hXOxn1f+jTGG/mKhLE7qWKKU0nz3k
+                          okV4IUYrN6+4DeYdGBzxFJi6FhpyL8u+ovI0WKaIUoHBVsXXK9liHdGieJtI/CMb
+                          BPWPDdsSkiVIhAxCQq0PjEwoOoVHDI4jMJJ9hqvAdqE1ncySgJqVS8Ch/gGvFufT
+                          jTkK//AHjNeJGlhTTM19HiQuHxfMEuQML7vEC5UbcHvP6prTMPHCMiBjyEFEp506
+                          1ftiCi8q7Ma8I/oWdU/r6ZPFmTiNkj0CAwEAAaMCMAAwDQYJKoZIhvcNAQELBQAD
+                          ggIBALbK0hTkHmNsEXUiM0Mm6x1bkLuK7uHK9jzBuOobJq5bEouh2jyDyd1NgNUB
+                          jpAqjR9d03ORxQQ1R0ykEmnQ58f+QPRUjes56IjEORvLY9jFT8IBusMXsQ6C8WWf
+                          KODIAJxwNDYqjpSNryhyFNQ+h11rcu/4rxx/2NaR9a1DF+BxcUMusvhCk3FEh9gR
+                          9TREp+myJ7E84tzNUsfkYl0MW4ItxL9FMDd+qQNuq1kpSy3qLE5haetMUdXXfL0B
+                          sJM3dH1X1pjoSgxfw0NljfhF6Y2cq/iR3efw7EHUeAvU2++9/5fRfBJgJDj/BeQp
+                          LySLh9MpNfIubR4rNavUT83Fb6o+YgWGZjmdB4ryViteGpLJ7LqEOoVqnnZ8SxiE
+                          HdvPuOwkBBsykfTUdGXnyytLW42Z8r8+4tV0OpWiS3Ysbm50I2ibMOSwlWGZ63dr
+                          GTSMFALtVdPL9HQ7fnyaIKuSLYA57Ocmrx48K8jEK3yPsa6ML+PVwMs8mBGIt+YG
+                          pVpatr6m6JZrXs8kcS74/ixFv3neud0ogKGcIEGyWgqsIzC+wk0Ul0VOWkhcDQ6m
+                          SXjWsVUYlx7ksiibhsjE9Gb4MfbVqQDvbvGg9es/JdT/QQLL1nWuxWkb04g3dcTv
+                          O9fD5x0jd7apuBzd9BGVSVDh9Hv2ZgMqwgcgVjA0k+xvJStK</ds:X509Certificate></ds:X509Data></ds:KeyInfo></md:KeyDescriptor><md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://sso.jumpcloud.com/saml2/jenkinsrnd"/><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://sso.jumpcloud.com/saml2/jenkinsrnd"/></md:IDPSSODescriptor></md:EntityDescriptor>
+                  logoutUrl: "https://console.jumpcloud.com/"
                   maximumAuthenticationLifetime: 9999999
                   usernameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
                   usernameCaseConversion: "none"
