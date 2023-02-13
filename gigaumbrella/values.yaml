@@ -874,6 +874,7 @@ jenkins:
                           disabled: true
                           failIfWorkDirIsMissing: false
                           internalDir: 'remoting'
+                        tunnel: 'jenkinseksagent.gigaspaces.com:50000'
             jobs:
               - script: >
                   folder('Docs'){
