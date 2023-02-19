@@ -842,7 +842,7 @@ jenkins:
               - "Ping"
               nodes:
                 - permanent:
-                    labelString: 'DocsAgent'
+                    labelString: 'DocsAgent Docs-agent'
                     mode: NORMAL
                     name: 'DocsNode'
                     remoteFS: 'c:\jenkins'
