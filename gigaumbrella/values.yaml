@@ -93,14 +93,9 @@ jenkins:
     #   - name: http_proxy
     #     value: "http://192.168.64.1:3128"
     # Set min/max heap here if needed with:
-    javaOpts:
-      -Xms4096m -Xmx4096m
-      -Dorg.csanchez.jenkins.plugins.kubernetes.pipeline.ContainerExecDecorator.websocketConnectionTimeout=180
-      -Dmail.smtp.starttls.enable=true
-      -Dorg.apache.commons.jelly.tags.fmt.timeZone=GMT/UTC+2
-      -Duser.timezone=Asia/Jerusalem
+    javaOpts: -Xms4096m -Xmx4096m -Dorg.csanchez.jenkins.plugins.kubernetes.pipeline.ContainerExecDecorator.websocketConnectionTimeout=180 -Dmail.smtp.starttls.enable=true -Dorg.apache.commons.jelly.tags.fmt.timeZone=GMT/UTC+2 -Duser.timezone=Asia/Jerusalem
 
-      # -Dhudson.security.csrf.GlobalCrumbIssuerConfiguration.DISABLE_CSRF_PROTECTION=true
+    # -Dhudson.security.csrf.GlobalCrumbIssuerConfiguration.DISABLE_CSRF_PROTECTION=true
     # jenkinsOpts: ""
     # If you are using the ingress definitions provided by this chart via the `controller.ingress` block the configured hostname will be the ingress hostname starting with `https://` or `http://` depending on the `tls` configuration.
     # The Protocol can be overwritten by specifying `controller.jenkinsUrlProtocol`.
@@ -142,13 +137,13 @@ jenkins:
     # Jenkins controller service annotations
     serviceAnnotations:
       "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout": "300"
-      "external-dns.alpha.kubernetes.io/hostname" : "gigajenkins.gigaspaces.com"
-      "service.beta.kubernetes.io/aws-load-balancer-ssl-cert" : "arn:aws:acm:us-east-2:573366771204:certificate/1253adbc-6a2d-4c20-8b8d-6ec79cf6c1cc"
-      "service.beta.kubernetes.io/aws-load-balancer-ssl-ports" : "443"
+      "external-dns.alpha.kubernetes.io/hostname": "gigajenkins.gigaspaces.com"
+      "service.beta.kubernetes.io/aws-load-balancer-ssl-cert": "arn:aws:acm:us-east-2:573366771204:certificate/1253adbc-6a2d-4c20-8b8d-6ec79cf6c1cc"
+      "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "443"
       "service.beta.kubernetes.io/aws-load-balancer-proxy-protocol": "*"
       "service.beta.kubernetes.io/aws-load-balancer-backend-protocol": "http"
       "service.beta.kubernetes.io/aws-load-balancer-subnets": "subnet-05826f359bde1d517, subnet-03d8f4ee544e7289a, subnet-0619bb19f66f6fd16"
-      "service.beta.kubernetes.io/aws-load-balancer-internal" : "true"
+      "service.beta.kubernetes.io/aws-load-balancer-internal": "true"
 
       # "service.beta.kubernetes.io/aws-load-balancer-extra-security-groups": arn:aws:iam::573366771204:group/OktaSSO-Group
     # Jenkins controller custom labels
@@ -210,8 +205,8 @@ jenkins:
     agentListenerHostPort:
     agentListenerNodePort:
     disabledAgentProtocols:
-      - JNLP-connect
-      - JNLP2-connect
+    - JNLP-connect
+    - JNLP2-connect
     csrf:
       defaultCrumbIssuer:
         enabled: false
@@ -228,9 +223,9 @@ jenkins:
     agentListenerLoadBalancerIP:
     agentListenerServiceAnnotations:
       "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout": "300"
-      "external-dns.alpha.kubernetes.io/hostname" : "jenkinseksagent.gigaspaces.com"
+      "external-dns.alpha.kubernetes.io/hostname": "jenkinseksagent.gigaspaces.com"
       "service.beta.kubernetes.io/aws-load-balancer-subnets": "subnet-03d8f4ee544e7289a, subnet-0619bb19f66f6fd16"
-      "service.beta.kubernetes.io/aws-load-balancer-internal" : "true"
+      "service.beta.kubernetes.io/aws-load-balancer-internal": "true"
     # Example of 'LoadBalancer' type of agent listener with annotations securing it
     # agentListenerServiceType: LoadBalancer
     # agentListenerServiceAnnotations:
@@ -258,172 +253,172 @@ jenkins:
 
     # List of plugins to be install during Jenkins controller start
     installPlugins:
-      - kubernetes:1.31.2
-      - pipeline-stage-step:291.vf0a8a7aeeb50
-      - m2release:0.16.2
-      - build-timeout:1.20
-      - ssh-credentials:1.19
-      - postbuild-task:1.9
-      - conditional-buildstep:1.4.1
-      - maven-plugin:3.16
-      - workflow-api:1143.v2d42f1e9dea_5
-      - Parameterized-Remote-Trigger:3.1.5.1
-      - github-branch-source:2.11.4
-      - workflow-basic-steps:2.24
-      - antisamy-markup-formatter:2.7
-      - ace-editor:1.1
-      - role-strategy:3.2.0
-      - cvs:2.19
-      - next-build-number:1.7
-      - branch-api:2.7.0
-      - pipeline-rest-api:2.21
-      - pipeline-milestone-step:1.3.2
-      - slack:602.v0da_f7458945d
-      - caffeine-api:2.9.2-29.v717aac953ff3
-      - workflow-cps:2648.va9433432b33c
-      - snakeyaml-api:1.29.1
-      - mapdb-api:1.0.9.0
-      - ssh-slaves:1.33.0
-      - sshd:3.1.0
-      - workflow-durable-task-step:1121.va_65b_d2701486
-      - cloudbees-folder:6.17
-      - pipeline-model-api:1.9.3
-      - workflow-aggregator:2.6
-      - m2-repo-reaper:1.0
-      - jquery-detached:1.2.1
-      - rebuild:1.33
-      - display-upstream-changes:0.3.2
-      - pipeline-stage-view:2.21
-      - build-token-root:1.9
-      - matrix-auth:3.0.1
-      - extended-choice-parameter:0.75
-      - pam-auth:1.7
-      - workflow-step-api:625.vd896b_f445a_f8
-      - translation:1.16
-      - custom-tools-plugin:0.8
-      - git-client:3.11.0
-      - mail-watcher-plugin:1.16
-      - pipeline-build-step:2.15
-      - jsch:0.1.55.2
-      - authentication-tokens:1.4
-      - flexible-publish:0.16.1
-      - docker-commons:1.19
-      - timestamper:1.17
-      - github-api:1.301-378.v9807bd746da5
-      - windows-slaves:1.8
-      - handlebars:3.0.8
-      - display-url-api:2.3.5
-      - durable-task:493.v195aefbb0ff2
-      - workflow-cps-global-lib:552.vd9cc05b8a2e1
-      - javadoc:1.6
-      - subversion:2.15.1
-      - pipeline-graph-analysis:188.v3a01e7973f2c
-      - pipeline-model-extensions:1.9.3
-      - pipeline-model-definition:1.9.3
-      - ws-cleanup:0.40
-      - pipeline-input-step:446.vf27b_0b_83500e
-      - external-monitor-job:191.v363d0d1efdf8
-      - credentials-binding:1.27.1
-      - parameterized-trigger:2.43
-      - token-macro:267.vcdaea6462991
-      - s3:0.12.1
-      - git:4.10.3
-      - apache-httpcomponents-client-4-api:4.5.13-1.0
-      - URLSCM:1.6
-      - swarm:3.30
-      - thinBackup:1.10
-      - build-user-vars-plugin:1.8
-      - scm-api:595.vd5a_df5eb_0e39
-      - plain-credentials:1.8
-      - pipeline-github-lib:36.v4c01db_ca_ed16
-      - copyartifact:1.46.2
-      - pipeline-stage-tags-metadata:1.9.3
-      - blame-upstream-commiters:1.2
-      - uno-choice:2.5.7
-      - jquery:1.12.4-1
-      - github:1.34.1
-      - envinject:2.4.0
-      - workflow-scm-step:2.13
-      - build-name-setter:2.2.0
-      - workflow-support:813.vb_d7c3d2984a_0
-      - git-server:1.10
-      - workflow-multibranch:706.vd43c65dec013
-      - bouncycastle-api:2.25
-      - global-variable-string-parameter:1.2
-      - script-security:1131.v8b_b_5eda_c328e
-      - jenkins-multijob-plugin:1.36
-      - jobConfigHistory:2.31-rc1107.2354f08725a_8
-      - ant:1.13
-      - credentials:1074.v60e6c29b_b_44b_
-      - momentjs:1.1.1
-      - resource-disposer:0.17
-      - aws-java-sdk:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-cloudformation:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-ec2:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-ecr:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-ecs:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-elasticbeanstalk:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-iam:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-logs:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-minimal:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-ssm :1.12.287-357.vf82d85a_6eefd
-      - dependency-check-jenkins-plugin:5.1.2
-      - structs:308.v852b473a2b8c
-      - mailer:408.vd726a_1130320
-      - http_request:1.14
-      - build-blocker-plugin:1.7.8
-      - workflow-job:1145.v7f2433caa07f
-      - ansicolor:1.0.1
-      - matrix-project:1.20
-      - authorize-project:1.4.0
-      - email-ext:2.87
-      - jackson2-api:2.13.1-246.va8a9f3eaf46a
-      - git-parameter:0.9.15
-      - configuration-as-code:1.55.1
-      - matrix-auth:3.0
-      - job-dsl:1.78.3
-      - trilead-api:1.0.13
-      - parameter-separator:1.3
-      - command-launcher:1.6
-      - jdk-tool:1.5
-      - jaxb:2.3.0.1
-      - strict-crumb-issuer:2.1.0
-      - saml:2.1.1-275.va_5718591a_999
-      - run-condition:1.5
-      - bootstrap5-api:5.1.3-4
-      - bouncycastle-api:2.25
-      - build-publisher:1.22
-      - built-on-column:1.1
-      - checks-api:1.7.2
-      - compact-columns:1.13
-      - echarts-api:5.2.2-2
-      - envinject-api:1.8
-      - extended-choice-parameter:0.82
-      - font-awesome-api:6.0.0-1
-      - javax-activation-api:1.2.0-2
-      - javax-mail-api:1.6.2-5
-      - jjwt-api:0.11.2-9.c8b45b8bb173
-      - jnr-posix-api:3.1.7-1
-      - jquery3-api:3.6.0-2
-      - kubernetes-client-api:5.11.2-182.v0f1cf4c5904e
-      - kubernetes-credentials:0.9.0
-      - ldap:2.7
-      - lockable-resources:2.13
-      - junit:1.54
-      - metrics:4.0.2.8.1
-      - momentjs:1.1.1
-      - okhttp-api:4.9.3-105.vb96869f8ac3a
-      - plugin-util-api:2.13.0
-      - popper-api:1.16.1-2
-      - popper2-api:2.11.0-1
-      - variant:1.4
-      - emailext-template:1.4
-      - config-file-provider:3.9.0
-      - pipeline-utility-steps:2.12.0
-      - docker-workflow:1.28
-      - description-setter:1.10
-      - file-parameters:205.vf6ce13b_e5dee
-      - spotinst:2.2.7
+    - kubernetes:1.31.2
+    - pipeline-stage-step:291.vf0a8a7aeeb50
+    - m2release:0.16.2
+    - build-timeout:1.20
+    - ssh-credentials:1.19
+    - postbuild-task:1.9
+    - conditional-buildstep:1.4.1
+    - maven-plugin:3.16
+    - workflow-api:1143.v2d42f1e9dea_5
+    - Parameterized-Remote-Trigger:3.1.5.1
+    - github-branch-source:2.11.4
+    - workflow-basic-steps:2.24
+    - antisamy-markup-formatter:2.7
+    - ace-editor:1.1
+    - role-strategy:3.2.0
+    - cvs:2.19
+    - next-build-number:1.7
+    - branch-api:2.7.0
+    - pipeline-rest-api:2.21
+    - pipeline-milestone-step:1.3.2
+    - slack:602.v0da_f7458945d
+    - caffeine-api:2.9.2-29.v717aac953ff3
+    - workflow-cps:2648.va9433432b33c
+    - snakeyaml-api:1.29.1
+    - mapdb-api:1.0.9.0
+    - ssh-slaves:1.33.0
+    - sshd:3.1.0
+    - workflow-durable-task-step:1121.va_65b_d2701486
+    - cloudbees-folder:6.17
+    - pipeline-model-api:1.9.3
+    - workflow-aggregator:2.6
+    - m2-repo-reaper:1.0
+    - jquery-detached:1.2.1
+    - rebuild:1.33
+    - display-upstream-changes:0.3.2
+    - pipeline-stage-view:2.21
+    - build-token-root:1.9
+    - matrix-auth:3.0.1
+    - extended-choice-parameter:0.75
+    - pam-auth:1.7
+    - workflow-step-api:625.vd896b_f445a_f8
+    - translation:1.16
+    - custom-tools-plugin:0.8
+    - git-client:3.11.0
+    - mail-watcher-plugin:1.16
+    - pipeline-build-step:2.15
+    - jsch:0.1.55.2
+    - authentication-tokens:1.4
+    - flexible-publish:0.16.1
+    - docker-commons:1.19
+    - timestamper:1.17
+    - github-api:1.301-378.v9807bd746da5
+    - windows-slaves:1.8
+    - handlebars:3.0.8
+    - display-url-api:2.3.5
+    - durable-task:493.v195aefbb0ff2
+    - workflow-cps-global-lib:552.vd9cc05b8a2e1
+    - javadoc:1.6
+    - subversion:2.15.1
+    - pipeline-graph-analysis:188.v3a01e7973f2c
+    - pipeline-model-extensions:1.9.3
+    - pipeline-model-definition:1.9.3
+    - ws-cleanup:0.40
+    - pipeline-input-step:446.vf27b_0b_83500e
+    - external-monitor-job:191.v363d0d1efdf8
+    - credentials-binding:1.27.1
+    - parameterized-trigger:2.43
+    - token-macro:267.vcdaea6462991
+    - s3:0.12.1
+    - git:4.10.3
+    - apache-httpcomponents-client-4-api:4.5.13-1.0
+    - URLSCM:1.6
+    - swarm:3.30
+    - thinBackup:1.10
+    - build-user-vars-plugin:1.8
+    - scm-api:595.vd5a_df5eb_0e39
+    - plain-credentials:1.8
+    - pipeline-github-lib:36.v4c01db_ca_ed16
+    - copyartifact:1.46.2
+    - pipeline-stage-tags-metadata:1.9.3
+    - blame-upstream-commiters:1.2
+    - uno-choice:2.5.7
+    - jquery:1.12.4-1
+    - github:1.34.1
+    - envinject:2.4.0
+    - workflow-scm-step:2.13
+    - build-name-setter:2.2.0
+    - workflow-support:813.vb_d7c3d2984a_0
+    - git-server:1.10
+    - workflow-multibranch:706.vd43c65dec013
+    - bouncycastle-api:2.25
+    - global-variable-string-parameter:1.2
+    - script-security:1131.v8b_b_5eda_c328e
+    - jenkins-multijob-plugin:1.36
+    - jobConfigHistory:2.31-rc1107.2354f08725a_8
+    - ant:1.13
+    - credentials:1074.v60e6c29b_b_44b_
+    - momentjs:1.1.1
+    - resource-disposer:0.17
+    - aws-java-sdk:1.12.287-357.vf82d85a_6eefd
+    - aws-java-sdk-cloudformation:1.12.287-357.vf82d85a_6eefd
+    - aws-java-sdk-ec2:1.12.287-357.vf82d85a_6eefd
+    - aws-java-sdk-ecr:1.12.287-357.vf82d85a_6eefd
+    - aws-java-sdk-ecs:1.12.287-357.vf82d85a_6eefd
+    - aws-java-sdk-elasticbeanstalk:1.12.287-357.vf82d85a_6eefd
+    - aws-java-sdk-iam:1.12.287-357.vf82d85a_6eefd
+    - aws-java-sdk-logs:1.12.287-357.vf82d85a_6eefd
+    - aws-java-sdk-minimal:1.12.287-357.vf82d85a_6eefd
+    - aws-java-sdk-ssm :1.12.287-357.vf82d85a_6eefd
+    - dependency-check-jenkins-plugin:5.1.2
+    - structs:308.v852b473a2b8c
+    - mailer:408.vd726a_1130320
+    - http_request:1.14
+    - build-blocker-plugin:1.7.8
+    - workflow-job:1145.v7f2433caa07f
+    - ansicolor:1.0.1
+    - matrix-project:1.20
+    - authorize-project:1.4.0
+    - email-ext:2.87
+    - jackson2-api:2.13.1-246.va8a9f3eaf46a
+    - git-parameter:0.9.15
+    - configuration-as-code:1.55.1
+    - matrix-auth:3.0
+    - job-dsl:1.78.3
+    - trilead-api:1.0.13
+    - parameter-separator:1.3
+    - command-launcher:1.6
+    - jdk-tool:1.5
+    - jaxb:2.3.0.1
+    - strict-crumb-issuer:2.1.0
+    - saml:2.1.1-275.va_5718591a_999
+    - run-condition:1.5
+    - bootstrap5-api:5.1.3-4
+    - bouncycastle-api:2.25
+    - build-publisher:1.22
+    - built-on-column:1.1
+    - checks-api:1.7.2
+    - compact-columns:1.13
+    - echarts-api:5.2.2-2
+    - envinject-api:1.8
+    - extended-choice-parameter:0.82
+    - font-awesome-api:6.0.0-1
+    - javax-activation-api:1.2.0-2
+    - javax-mail-api:1.6.2-5
+    - jjwt-api:0.11.2-9.c8b45b8bb173
+    - jnr-posix-api:3.1.7-1
+    - jquery3-api:3.6.0-2
+    - kubernetes-client-api:5.11.2-182.v0f1cf4c5904e
+    - kubernetes-credentials:0.9.0
+    - ldap:2.7
+    - lockable-resources:2.13
+    - junit:1.54
+    - metrics:4.0.2.8.1
+    - momentjs:1.1.1
+    - okhttp-api:4.9.3-105.vb96869f8ac3a
+    - plugin-util-api:2.13.0
+    - popper-api:1.16.1-2
+    - popper2-api:2.11.0-1
+    - variant:1.4
+    - emailext-template:1.4
+    - config-file-provider:3.9.0
+    - pipeline-utility-steps:2.12.0
+    - docker-workflow:1.28
+    - description-setter:1.10
+    - file-parameters:205.vf6ce13b_e5dee
+    - spotinst:2.2.7
 
 
     # Set to false to download the minimum required version of all dependencies.
@@ -455,7 +450,7 @@ jenkins:
     #  - "new groovy.json.JsonSlurperClassic"
     # List of groovy init scripts to be executed during Jenkins controller start
     initScripts:
-     - |
+    - |
       System.setProperty('org.apache.commons.jelly.tags.fmt.timeZone', 'Asia/Jerusalem')
 
 
@@ -521,981 +516,981 @@ jenkins:
       authorizationStrategy: |
         loggedInUsersCanDoAnything:
           allowAnonymousRead: true
-    # Optionally specify additional init-containers
+      # Optionally specify additional init-containers
 
-    # - name: custom-init
-    #   image: "alpine:3.7"
-    #   imagePullPolicy: Always
-    #   command: [ "uname", "-a" ]
+      # - name: custom-init
+      #   image: "alpine:3.7"
+      #   imagePullPolicy: Always
+      #   command: [ "uname", "-a" ]
       configScripts:
-          gigaci-jenkins: |
-            security:
-              apiToken:
-                creationOfLegacyTokenEnabled: false
-                tokenGenerationOnCreationEnabled: false
-                usageStatisticsEnabled: true
-              copyartifact:
-                mode: PRODUCTION
-              envInject:
-                enableLoadingFromMaster: false
-                enablePermissions: false
-                hideInjectedVars: false
-              globalJobDslSecurityConfiguration:
-                useScriptSecurity: true
-              sSHD:
-                port: -1
-            credentials:
-              system:
-                domainCredentials:
-                  - credentials:
-                      - usernamePassword:
-                          scope: GLOBAL
-                          id: "${chart-admin-username}"
-                          username: "Jenkins Admin"
-                          password: "GigaSpaces"
-                      - basicSSHUserPrivateKey:
-                          scope: GLOBAL
-                          id: git_credentials_id
-                          username: jenkins
-                          description: "Private key access to xap-premium-GitHub"
-                          privateKeySource:
-                            directEntry:
-                              privateKey: "${git-credentials-id-secret-idrsa}"
-                      - basicSSHUserPrivateKey:
-                          scope: GLOBAL
-                          id: xap-builder-ssh
-                          username: xap-builder
-                          description: "Private key access to xap-premium-GitHub"
-                          privateKeySource:
-                            directEntry:
-                              privateKey: "${xap-builder-ssh-secret-idrsa}"
-                      - usernamePassword:
-                          scope: GLOBAL
-                          id: "aws_ses"
-                          username: "AKIAYK72STYCODIHYDMO"
-                          password: "${smtp-secret-password}"
-                          description: "mail_sender"
-                      - usernamePassword:
-                          description: "xapbuilder-dockerhub"
-                          id: "docker-hub-cred"
-                          password: "${docker-hub-cred-password}"
-                          scope: GLOBAL
-                          username: "xapbuilder"
-                      - usernamePassword:
-                          description: "git_token"
-                          id: "git_token"
-                          password: "${git-token-xapbuildertoken}"
-                          scope: GLOBAL
-                          username: "xap-builder"
-                      - string:
-                          id: "spotinst-token"
-                          scope: GLOBAL
-                          secret: "${jenkins-spotinst-token}"
-            unclassified:
-              location:
-                adminAddress: "newman@gigaspaces.com"
-                url: "https://gigajenkins.gigaspaces.com/"
-              timestamper:
-                allPipelines: true
-                elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
-                systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
-              gitSCM:
-                addGitTagAction: false
-                allowSecondFetch: false
-                createAccountBasedOnEmail: false
-                disableGitToolChooser: false
-                hideCredentials: true
-                showEntireCommitSummaryInChanges: true
-                useExistingAccountWithSameEmail: false
-              globalConfigFiles:
-                  configs:
-                  - jellyTemplate:
-                      content: "\n<STYLE>\nBODY, TABLE, TD, TH, P {\n  font-family:Verdana,Helvetica,sans\
-                        \ serif;\n  font-size:11px;\n  color:black;\n}\nh1 { color:black; }\nh2\
-                        \ { color:black; }\nh3 { color:black; }\nTD.bg1 { color:white; background-color:#0000C0;\
-                        \ font-size:120% }\nTD.bg2 { color:white; background-color:#4040FF; font-size:110%\
-                        \ }\nTD.bg3 { color:white; background-color:#8080FF; }\nTD.test_passed {\
-                        \ color:blue; }\nTD.test_failed { color:red; }\nTD.console { font-family:Courier\
-                        \ New; }\n</STYLE>\n<BODY>\n \n\n<% \n   def xapVersion = \"unknown\"\n\
-                        \   def buildName = \"unknown\"\n   def tagName = \"unknown\"\n   def mavenVersion\
-                        \ = \"unknown\"\n\n   try{\n     xapVersion = build.getEnvironment().get(\"\
-                        XAP_VERSION\") \n     buildName = build.getEnvironment().get(\"BUILD_DISPLAY_NAME\"\
-                        )\n     tagName = build.getEnvironment().get(\"BUILD_DISPLAY_NAME\")\n     mavenVersion\
-                        \ = build.getEnvironment().get(\"BUILD_DISPLAY_NAME\")\n     deployArtifacts\
-                        \ = build.getEnvironment().get(\"DEPLOY_MVN_ARTIFACTS\")\n     publishGsctl\
-                        \ = build.getEnvironment().get(\"PUBLISH_GSCTL\")\n     mode = build.getEnvironment().get(\"\
-                        MODE\")\n   } catch(all){ \n   }\n   def xapPackage = \"gigaspaces-xap-enterprise-\"\
-                        \ + buildName + \".zip\"\n   def insightedgePackage = \"gigaspaces-insightedge-enterprise-\"\
-                        \ + buildName + \".zip\"\n   def smartCachePackage = \"gigaspaces-smart-cache-enterprise-\"\
-                        \ + buildName + \".zip\"\n   def smartDihPackage = \"gigaspaces-smart-dih-enterprise-\"\
-                        \ + buildName + \".zip\"\n   def xapNetPackage = \"gigaspaces-xap.net-\"\
-                        \ + buildName + \".msi\"\n   def smartCacheNetPackage = \"gigaspaces-smart-cache.net-enterprise-\"\
-                        \ + buildName + \".msi\"\n   def xapUrlPrefix = \"https://gigaspaces-releases-eu.s3.amazonaws.com/xap/^${xapVersion}\"\
-                        \n   def insightedgeUrlPrefix = \"https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/^${xapVersion}\"\
-                        \n%>\n\n<TABLE>\n  <TR><TD align=\"right\"><IMG SRC=\"https://raw.githubusercontent.com/jenkinsci/jenkins/master/war/src/main/webapp/images/32x32/<%=\
-                        \ build.result.toString() == 'SUCCESS' ? \"blue.gif\" : build.result.toString()\
-                        \ == 'FAILURE' ? 'red.gif' : 'yellow.gif' %>\" />\n  </TD><TD valign=\"\
-                        center\"><B style=\"font-size: 200%;\">BUILD ^${build.result}</B></TD></TR>\n\
-                        \  <TR><TD>URL</TD><TD><A href=\"^${rooturl}^${build.url}\">^${rooturl}^${build.url}</A></TD></TR>\n\
-                        \  <TR><TD>Project:</TD><TD>^${project.name}</TD></TR>\n  <TR><TD>Date:</TD><TD>^${it.timestampString}</TD></TR>\n\
-                        \  <TR><TD>Duration:</TD><TD>^${build.durationString}</TD></TR>\n  <TR><TD>Cause:</TD><TD><%\
-                        \ build.causes.each() { cause -> %> ^${cause.shortDescription} <%  } %></TD></TR>\n\
-                        \n<% if(build.result.toString() == 'SUCCESS') { %>\n  <TR><TD>Maven version:</TD><TD>^${mavenVersion}</TD></TR>\
-                        \ \n  <TR><TD>Git tag:</TD><TD>^${tagName} (<A href=\"https://github.com/xap/xap/tree/^${tagName}\"\
-                        >xap</A>, <A href=\"https://github.com/Gigaspaces/xap-premium/tree/^${tagName}\"\
-                        >xap-premium</A>, <A href=\"https://github.com/Gigaspaces/xap-dotnet/tree/^${tagName}\"\
-                        >xap-dotnet</A>, <A href=\"https://github.com/InsightEdge/insightedge/tree/^${tagName}\"\
-                        >insightedge</A>)</TD></TR>\n<% \n  \tif (deployArtifacts == 'true'){\n\
-                        %>\n\t<TR><TD>XAP:</TD><TD><A href=\"^${xapUrlPrefix}/^${xapPackage}\">^${xapPackage}</A></TD></TR>\n\
-                        \t<TR><TD>Smart Cache:</TD><TD><A href=\"^${insightedgeUrlPrefix}/^${smartCachePackage}\"\
-                        >^${smartCachePackage}</A></TD></TR>\n\t<TR><TD>Smart DIH:</TD><TD><A href=\"\
-                        ^${insightedgeUrlPrefix}/^${smartDihPackage}\">^${smartDihPackage}</A></TD></TR>\n\
-                        \  \t<TR><TD>InsightEdge:</TD><TD><A href=\"^${insightedgeUrlPrefix}/^${insightedgePackage}\"\
-                        >^${insightedgePackage}</A></TD></TR>\n    <TR><TD>XAP.NET:</TD><TD><A href=\"\
-                        ^${xapUrlPrefix}/^${xapNetPackage}\">^${xapNetPackage}</A><TD></TR>\n  \
-                        \  <TR><TD>Smart Cache.NET:</TD><TD><A href=\"^${insightedgeUrlPrefix}/^${smartCacheNetPackage}\"\
-                        >^${smartCacheNetPackage}</A><TD></TR>\n<%\n           \n            \n\
-                        \         }\n\n   }\n%>\n</TABLE>\n<BR/>\n\n\n\n<!-- CONSOLE OUTPUT -->\n\
-                        <% if(build.result==hudson.model.Result.FAILURE) { %>\n<TABLE width=\"100%\"\
-                        \ cellpadding=\"0\" cellspacing=\"0\">\n<TR><TD class=\"bg1\"><B>CONSOLE\
-                        \ OUTPUT</B></TD></TR>\n<% \tbuild.getLog(100).each() { line -> %>\n\t<TR><TD\
-                        \ class=\"console\">^${org.apache.commons.lang.StringEscapeUtils.escapeHtml(line)}</TD></TR>\n\
-                        <% \t} %>\n</TABLE>\n<BR/>\n<% } %>\n\n</BODY>\n"
-                      id: "2d7eddfb-0314-4414-8c9d-4308fded1f67"
-                      name: "release.template"
-                  - jellyTemplate:
-                      content: "\n<STYLE>\nBODY, TABLE, TD, TH, P {\n  font-family:Verdana,Helvetica,sans\
-                        \ serif;\n  font-size:11px;\n  color:black;\n}\nh1 { color:black; }\nh2\
-                        \ { color:black; }\nh3 { color:black; }\nTD.bg1 { color:white; background-color:#0000C0;\
-                        \ font-size:120% }\nTD.bg2 { color:white; background-color:#4040FF; font-size:110%\
-                        \ }\nTD.bg3 { color:white; background-color:#8080FF; }\nTD.test_passed {\
-                        \ color:blue; }\nTD.test_failed { color:red; }\nTD.console { font-family:Courier\
-                        \ New; }\n</STYLE>\n<BODY>\n<%\n    def branchName = build.getEnvironment().get(\"\
-                        BRANCH_NAME\")\n%>\n\n\n\n\n\n<TABLE>\n  <TR><TD align=\"right\"><IMG SRC=\"\
-                        https://raw.githubusercontent.com/jenkinsci/jenkins/master/war/src/main/webapp/images/32x32/<%=\
-                        \ build.result.toString() == 'SUCCESS' ? \"blue.gif\" : build.result.toString()\
-                        \ == 'FAILURE' ? 'red.gif' : 'yellow.gif' %>\" />\n  </TD><TD valign=\"\
-                        center\"><B style=\"font-size: 200%;\">BUILD ^${build.result}</B></TD></TR>\n\
-                        \  <TR><TD>URL</TD><TD><A href=\"^${rooturl}^${build.url}\">^${rooturl}^${build.url}</A></TD></TR>\n\
-                        \  <TR><TD>Project:</TD><TD>^${project.name}</TD></TR>\n  <TR><TD>Branch:</TD><TD>^${branchName}</TD></TR>\n\
-                        \  <TR><TD>Date:</TD><TD>^${it.timestampString}</TD></TR>\n  <TR><TD>Duration:</TD><TD>^${build.durationString}</TD></TR>\n\
-                        \  <TR><TD>Cause:</TD><TD><% build.causes.each() { cause -> %> ^${cause.shortDescription}\
-                        \ <%  } %></TD></TR>\n  <TR><TD>SCM</TD><TD><% project.getSCMs()%></TD></TR>\n\
-                        </TABLE>\n\n<%\nif(build.result.toString() == 'SUCCESS') {\n\n   def xapVersion\
-                        \ = \"unknown\"\n   def buildName = \"unknown\"\n   def tagName = \"unknown\"\
-                        \n   def mavenVersion = \"unknown\"\n   def publishInsightEdge = \"false\"\
-                        \n   def publishGsctl =\"false\"\n    \n   try{\n     xapVersion = build.getEnvironment().get(\"\
-                        XAP_VERSION\")\n     buildName = build.getEnvironment().get(\"\
-                        BUILD_DISPLAY_NAME\")\n     tagName = build.getEnvironment().get(\"\
-                        BUILD_DISPLAY_NAME\")\n     mavenVersion = build.getEnvironment().get(\"\
-                        BUILD_DISPLAY_NAME\")\n     publishInsightEdge = build.getEnvironment().get(\"InsightEdge\"\
-                        )\n     publishGsctl = build.getEnvironment().get(\"PUBLISH_GSCTL\")\n \
-                        \  } catch(all){\n   }\n   def xapPackage = \"gigaspaces-xap-enterprise-\"\
-                        \ + buildName + \".zip\"\n   def insightedgePackage = \"gigaspaces-insightedge-enterprise-\"\
-                        \ + buildName + \".zip\"\n   def smartCachePackage = \"gigaspaces-smart-cache-enterprise-\"\
-                        \ + buildName + \".zip\"\n   def smartDihPackage = \"gigaspaces-smart-dih-enterprise-\"\
-                        \ + buildName + \".zip\"\n   def smartAugmentedTransactionsPackage = \"\
-                        gigaspaces-smart-augmented-transactions-enterprise-\" + buildName + \".zip\"\
-                        \n\n   def xapUrlPrefix = \"https://gigaspaces-releases-eu.s3.amazonaws.com/xap/^${xapVersion}\"\
-                        \n   def insightedgeUrlPrefix = \"https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/^${xapVersion}\"\
-                        \n%>\n<hr/>\n<h3>Links:</h3>\n<table>\n        <TR><TD>XAP:</TD><TD><A href=\"\
-                        ^${xapUrlPrefix}/^${xapPackage}\">^${xapPackage}</A></TD></TR>\n       \
-                        \ <TR><TD>Smart Cache:</TD><TD><A href=\"^${insightedgeUrlPrefix}/^${smartCachePackage}\"\
-                        >^${smartCachePackage}</A></TD></TR>\n        <TR><TD>Smart DIH:</TD><TD><A\
-                        \ href=\"^${insightedgeUrlPrefix}/^${smartDihPackage}\">^${smartDihPackage}</A></TD></TR>\n\
-                        \t\t<%\n         if (publishInsightEdge == 'true'){\n        %>\n      \
-                        \  <TR><TD>InsightEdge:</TD><TD><A href=\"^${insightedgeUrlPrefix}/^${insightedgePackage}\"\
-                        >^${insightedgePackage}</A></TD></TR>\n        <TR><TD>Smart Augmented Transactions:</TD><TD><A\
-                        \ href=\"^${insightedgeUrlPrefix}/^${smartAugmentedTransactionsPackage}\"\
-                        >^${smartAugmentedTransactionsPackage}</A></TD></TR>\n\t\t<% } %>\n    \
-                        \     <%\n         if (publishGsctl == 'true'){\n         %>\n         <TR><TD>Gsctl:</TD><TD><A\
-                        \ href=\"https://gigaspaces-releases-eu.s3.amazonaws.com/gsctl-ea/^${buildName}/gsctl.jar\"\
-                        >gsctl.jar</A></TD></TR>\n         <% } %>\n</table>\n<% } %>\n<BR/>\n\n\
-                        <BR/>\n\n<!-- CONSOLE OUTPUT -->\n<% if(build.result==hudson.model.Result.FAILURE)\
-                        \ { %>\n<TABLE width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n<TR><TD\
-                        \ class=\"bg1\"><B>CONSOLE OUTPUT</B></TD></TR>\n<% \tbuild.getLog(100).each()\
-                        \ { line -> %>\n\t<TR><TD class=\"console\">^${org.apache.commons.lang.StringEscapeUtils.escapeHtml(line)}</TD></TR>\n\
-                        <% \t} %>\n</TABLE>\n<BR/>\n<% } %>\n"
-                      id: "5f3c30af-6e70-47fc-9646-ca9af5092ced"
-                      name: "continuous.template"
-              email-ext:
-                adminRequiredForTemplateTesting: false
-                allowUnregisteredEnabled: false
-                charset: "UTF-8"
-                debugMode: false
-                defaultBody: |-
-                  $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+        gigaci-jenkins: |
+          security:
+            apiToken:
+              creationOfLegacyTokenEnabled: false
+              tokenGenerationOnCreationEnabled: false
+              usageStatisticsEnabled: true
+            copyartifact:
+              mode: PRODUCTION
+            envInject:
+              enableLoadingFromMaster: false
+              enablePermissions: false
+              hideInjectedVars: false
+            globalJobDslSecurityConfiguration:
+              useScriptSecurity: true
+            sSHD:
+              port: -1
+          credentials:
+            system:
+              domainCredentials:
+                - credentials:
+                    - usernamePassword:
+                        scope: GLOBAL
+                        id: "${chart-admin-username}"
+                        username: "Jenkins Admin"
+                        password: "GigaSpaces"
+                    - basicSSHUserPrivateKey:
+                        scope: GLOBAL
+                        id: git_credentials_id
+                        username: jenkins
+                        description: "Private key access to xap-premium-GitHub"
+                        privateKeySource:
+                          directEntry:
+                            privateKey: "${git-credentials-id-secret-idrsa}"
+                    - basicSSHUserPrivateKey:
+                        scope: GLOBAL
+                        id: xap-builder-ssh
+                        username: xap-builder
+                        description: "Private key access to xap-premium-GitHub"
+                        privateKeySource:
+                          directEntry:
+                            privateKey: "${xap-builder-ssh-secret-idrsa}"
+                    - usernamePassword:
+                        scope: GLOBAL
+                        id: "aws_ses"
+                        username: "AKIAYK72STYCODIHYDMO"
+                        password: "${smtp-secret-password}"
+                        description: "mail_sender"
+                    - usernamePassword:
+                        description: "xapbuilder-dockerhub"
+                        id: "docker-hub-cred"
+                        password: "${docker-hub-cred-password}"
+                        scope: GLOBAL
+                        username: "xapbuilder"
+                    - usernamePassword:
+                        description: "git_token"
+                        id: "git_token"
+                        password: "${git-token-xapbuildertoken}"
+                        scope: GLOBAL
+                        username: "xap-builder"
+                    - string:
+                        id: "spotinst-token"
+                        scope: GLOBAL
+                        secret: "${jenkins-spotinst-token}"
+          unclassified:
+            location:
+              adminAddress: "newman@gigaspaces.com"
+              url: "https://gigajenkins.gigaspaces.com/"
+            timestamper:
+              allPipelines: true
+              elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
+              systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
+            gitSCM:
+              addGitTagAction: false
+              allowSecondFetch: false
+              createAccountBasedOnEmail: false
+              disableGitToolChooser: false
+              hideCredentials: true
+              showEntireCommitSummaryInChanges: true
+              useExistingAccountWithSameEmail: false
+            globalConfigFiles:
+                configs:
+                - jellyTemplate:
+                    content: "\n<STYLE>\nBODY, TABLE, TD, TH, P {\n  font-family:Verdana,Helvetica,sans\
+                      \ serif;\n  font-size:11px;\n  color:black;\n}\nh1 { color:black; }\nh2\
+                      \ { color:black; }\nh3 { color:black; }\nTD.bg1 { color:white; background-color:#0000C0;\
+                      \ font-size:120% }\nTD.bg2 { color:white; background-color:#4040FF; font-size:110%\
+                      \ }\nTD.bg3 { color:white; background-color:#8080FF; }\nTD.test_passed {\
+                      \ color:blue; }\nTD.test_failed { color:red; }\nTD.console { font-family:Courier\
+                      \ New; }\n</STYLE>\n<BODY>\n \n\n<% \n   def xapVersion = \"unknown\"\n\
+                      \   def buildName = \"unknown\"\n   def tagName = \"unknown\"\n   def mavenVersion\
+                      \ = \"unknown\"\n\n   try{\n     xapVersion = build.getEnvironment().get(\"\
+                      XAP_VERSION\") \n     buildName = build.getEnvironment().get(\"BUILD_DISPLAY_NAME\"\
+                      )\n     tagName = build.getEnvironment().get(\"BUILD_DISPLAY_NAME\")\n     mavenVersion\
+                      \ = build.getEnvironment().get(\"BUILD_DISPLAY_NAME\")\n     deployArtifacts\
+                      \ = build.getEnvironment().get(\"DEPLOY_MVN_ARTIFACTS\")\n     publishGsctl\
+                      \ = build.getEnvironment().get(\"PUBLISH_GSCTL\")\n     mode = build.getEnvironment().get(\"\
+                      MODE\")\n   } catch(all){ \n   }\n   def xapPackage = \"gigaspaces-xap-enterprise-\"\
+                      \ + buildName + \".zip\"\n   def insightedgePackage = \"gigaspaces-insightedge-enterprise-\"\
+                      \ + buildName + \".zip\"\n   def smartCachePackage = \"gigaspaces-smart-cache-enterprise-\"\
+                      \ + buildName + \".zip\"\n   def smartDihPackage = \"gigaspaces-smart-dih-enterprise-\"\
+                      \ + buildName + \".zip\"\n   def xapNetPackage = \"gigaspaces-xap.net-\"\
+                      \ + buildName + \".msi\"\n   def smartCacheNetPackage = \"gigaspaces-smart-cache.net-enterprise-\"\
+                      \ + buildName + \".msi\"\n   def xapUrlPrefix = \"https://gigaspaces-releases-eu.s3.amazonaws.com/xap/^${xapVersion}\"\
+                      \n   def insightedgeUrlPrefix = \"https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/^${xapVersion}\"\
+                      \n%>\n\n<TABLE>\n  <TR><TD align=\"right\"><IMG SRC=\"https://raw.githubusercontent.com/jenkinsci/jenkins/master/war/src/main/webapp/images/32x32/<%=\
+                      \ build.result.toString() == 'SUCCESS' ? \"blue.gif\" : build.result.toString()\
+                      \ == 'FAILURE' ? 'red.gif' : 'yellow.gif' %>\" />\n  </TD><TD valign=\"\
+                      center\"><B style=\"font-size: 200%;\">BUILD ^${build.result}</B></TD></TR>\n\
+                      \  <TR><TD>URL</TD><TD><A href=\"^${rooturl}^${build.url}\">^${rooturl}^${build.url}</A></TD></TR>\n\
+                      \  <TR><TD>Project:</TD><TD>^${project.name}</TD></TR>\n  <TR><TD>Date:</TD><TD>^${it.timestampString}</TD></TR>\n\
+                      \  <TR><TD>Duration:</TD><TD>^${build.durationString}</TD></TR>\n  <TR><TD>Cause:</TD><TD><%\
+                      \ build.causes.each() { cause -> %> ^${cause.shortDescription} <%  } %></TD></TR>\n\
+                      \n<% if(build.result.toString() == 'SUCCESS') { %>\n  <TR><TD>Maven version:</TD><TD>^${mavenVersion}</TD></TR>\
+                      \ \n  <TR><TD>Git tag:</TD><TD>^${tagName} (<A href=\"https://github.com/xap/xap/tree/^${tagName}\"\
+                      >xap</A>, <A href=\"https://github.com/Gigaspaces/xap-premium/tree/^${tagName}\"\
+                      >xap-premium</A>, <A href=\"https://github.com/Gigaspaces/xap-dotnet/tree/^${tagName}\"\
+                      >xap-dotnet</A>, <A href=\"https://github.com/InsightEdge/insightedge/tree/^${tagName}\"\
+                      >insightedge</A>)</TD></TR>\n<% \n  \tif (deployArtifacts == 'true'){\n\
+                      %>\n\t<TR><TD>XAP:</TD><TD><A href=\"^${xapUrlPrefix}/^${xapPackage}\">^${xapPackage}</A></TD></TR>\n\
+                      \t<TR><TD>Smart Cache:</TD><TD><A href=\"^${insightedgeUrlPrefix}/^${smartCachePackage}\"\
+                      >^${smartCachePackage}</A></TD></TR>\n\t<TR><TD>Smart DIH:</TD><TD><A href=\"\
+                      ^${insightedgeUrlPrefix}/^${smartDihPackage}\">^${smartDihPackage}</A></TD></TR>\n\
+                      \  \t<TR><TD>InsightEdge:</TD><TD><A href=\"^${insightedgeUrlPrefix}/^${insightedgePackage}\"\
+                      >^${insightedgePackage}</A></TD></TR>\n    <TR><TD>XAP.NET:</TD><TD><A href=\"\
+                      ^${xapUrlPrefix}/^${xapNetPackage}\">^${xapNetPackage}</A><TD></TR>\n  \
+                      \  <TR><TD>Smart Cache.NET:</TD><TD><A href=\"^${insightedgeUrlPrefix}/^${smartCacheNetPackage}\"\
+                      >^${smartCacheNetPackage}</A><TD></TR>\n<%\n           \n            \n\
+                      \         }\n\n   }\n%>\n</TABLE>\n<BR/>\n\n\n\n<!-- CONSOLE OUTPUT -->\n\
+                      <% if(build.result==hudson.model.Result.FAILURE) { %>\n<TABLE width=\"100%\"\
+                      \ cellpadding=\"0\" cellspacing=\"0\">\n<TR><TD class=\"bg1\"><B>CONSOLE\
+                      \ OUTPUT</B></TD></TR>\n<% \tbuild.getLog(100).each() { line -> %>\n\t<TR><TD\
+                      \ class=\"console\">^${org.apache.commons.lang.StringEscapeUtils.escapeHtml(line)}</TD></TR>\n\
+                      <% \t} %>\n</TABLE>\n<BR/>\n<% } %>\n\n</BODY>\n"
+                    id: "2d7eddfb-0314-4414-8c9d-4308fded1f67"
+                    name: "release.template"
+                - jellyTemplate:
+                    content: "\n<STYLE>\nBODY, TABLE, TD, TH, P {\n  font-family:Verdana,Helvetica,sans\
+                      \ serif;\n  font-size:11px;\n  color:black;\n}\nh1 { color:black; }\nh2\
+                      \ { color:black; }\nh3 { color:black; }\nTD.bg1 { color:white; background-color:#0000C0;\
+                      \ font-size:120% }\nTD.bg2 { color:white; background-color:#4040FF; font-size:110%\
+                      \ }\nTD.bg3 { color:white; background-color:#8080FF; }\nTD.test_passed {\
+                      \ color:blue; }\nTD.test_failed { color:red; }\nTD.console { font-family:Courier\
+                      \ New; }\n</STYLE>\n<BODY>\n<%\n    def branchName = build.getEnvironment().get(\"\
+                      BRANCH_NAME\")\n%>\n\n\n\n\n\n<TABLE>\n  <TR><TD align=\"right\"><IMG SRC=\"\
+                      https://raw.githubusercontent.com/jenkinsci/jenkins/master/war/src/main/webapp/images/32x32/<%=\
+                      \ build.result.toString() == 'SUCCESS' ? \"blue.gif\" : build.result.toString()\
+                      \ == 'FAILURE' ? 'red.gif' : 'yellow.gif' %>\" />\n  </TD><TD valign=\"\
+                      center\"><B style=\"font-size: 200%;\">BUILD ^${build.result}</B></TD></TR>\n\
+                      \  <TR><TD>URL</TD><TD><A href=\"^${rooturl}^${build.url}\">^${rooturl}^${build.url}</A></TD></TR>\n\
+                      \  <TR><TD>Project:</TD><TD>^${project.name}</TD></TR>\n  <TR><TD>Branch:</TD><TD>^${branchName}</TD></TR>\n\
+                      \  <TR><TD>Date:</TD><TD>^${it.timestampString}</TD></TR>\n  <TR><TD>Duration:</TD><TD>^${build.durationString}</TD></TR>\n\
+                      \  <TR><TD>Cause:</TD><TD><% build.causes.each() { cause -> %> ^${cause.shortDescription}\
+                      \ <%  } %></TD></TR>\n  <TR><TD>SCM</TD><TD><% project.getSCMs()%></TD></TR>\n\
+                      </TABLE>\n\n<%\nif(build.result.toString() == 'SUCCESS') {\n\n   def xapVersion\
+                      \ = \"unknown\"\n   def buildName = \"unknown\"\n   def tagName = \"unknown\"\
+                      \n   def mavenVersion = \"unknown\"\n   def publishInsightEdge = \"false\"\
+                      \n   def publishGsctl =\"false\"\n    \n   try{\n     xapVersion = build.getEnvironment().get(\"\
+                      XAP_VERSION\")\n     buildName = build.getEnvironment().get(\"\
+                      BUILD_DISPLAY_NAME\")\n     tagName = build.getEnvironment().get(\"\
+                      BUILD_DISPLAY_NAME\")\n     mavenVersion = build.getEnvironment().get(\"\
+                      BUILD_DISPLAY_NAME\")\n     publishInsightEdge = build.getEnvironment().get(\"InsightEdge\"\
+                      )\n     publishGsctl = build.getEnvironment().get(\"PUBLISH_GSCTL\")\n \
+                      \  } catch(all){\n   }\n   def xapPackage = \"gigaspaces-xap-enterprise-\"\
+                      \ + buildName + \".zip\"\n   def insightedgePackage = \"gigaspaces-insightedge-enterprise-\"\
+                      \ + buildName + \".zip\"\n   def smartCachePackage = \"gigaspaces-smart-cache-enterprise-\"\
+                      \ + buildName + \".zip\"\n   def smartDihPackage = \"gigaspaces-smart-dih-enterprise-\"\
+                      \ + buildName + \".zip\"\n   def smartAugmentedTransactionsPackage = \"\
+                      gigaspaces-smart-augmented-transactions-enterprise-\" + buildName + \".zip\"\
+                      \n\n   def xapUrlPrefix = \"https://gigaspaces-releases-eu.s3.amazonaws.com/xap/^${xapVersion}\"\
+                      \n   def insightedgeUrlPrefix = \"https://gigaspaces-releases-eu.s3.amazonaws.com/insightedge/^${xapVersion}\"\
+                      \n%>\n<hr/>\n<h3>Links:</h3>\n<table>\n        <TR><TD>XAP:</TD><TD><A href=\"\
+                      ^${xapUrlPrefix}/^${xapPackage}\">^${xapPackage}</A></TD></TR>\n       \
+                      \ <TR><TD>Smart Cache:</TD><TD><A href=\"^${insightedgeUrlPrefix}/^${smartCachePackage}\"\
+                      >^${smartCachePackage}</A></TD></TR>\n        <TR><TD>Smart DIH:</TD><TD><A\
+                      \ href=\"^${insightedgeUrlPrefix}/^${smartDihPackage}\">^${smartDihPackage}</A></TD></TR>\n\
+                      \t\t<%\n         if (publishInsightEdge == 'true'){\n        %>\n      \
+                      \  <TR><TD>InsightEdge:</TD><TD><A href=\"^${insightedgeUrlPrefix}/^${insightedgePackage}\"\
+                      >^${insightedgePackage}</A></TD></TR>\n        <TR><TD>Smart Augmented Transactions:</TD><TD><A\
+                      \ href=\"^${insightedgeUrlPrefix}/^${smartAugmentedTransactionsPackage}\"\
+                      >^${smartAugmentedTransactionsPackage}</A></TD></TR>\n\t\t<% } %>\n    \
+                      \     <%\n         if (publishGsctl == 'true'){\n         %>\n         <TR><TD>Gsctl:</TD><TD><A\
+                      \ href=\"https://gigaspaces-releases-eu.s3.amazonaws.com/gsctl-ea/^${buildName}/gsctl.jar\"\
+                      >gsctl.jar</A></TD></TR>\n         <% } %>\n</table>\n<% } %>\n<BR/>\n\n\
+                      <BR/>\n\n<!-- CONSOLE OUTPUT -->\n<% if(build.result==hudson.model.Result.FAILURE)\
+                      \ { %>\n<TABLE width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n<TR><TD\
+                      \ class=\"bg1\"><B>CONSOLE OUTPUT</B></TD></TR>\n<% \tbuild.getLog(100).each()\
+                      \ { line -> %>\n\t<TR><TD class=\"console\">^${org.apache.commons.lang.StringEscapeUtils.escapeHtml(line)}</TD></TR>\n\
+                      <% \t} %>\n</TABLE>\n<BR/>\n<% } %>\n"
+                    id: "5f3c30af-6e70-47fc-9646-ca9af5092ced"
+                    name: "continuous.template"
+            email-ext:
+              adminRequiredForTemplateTesting: false
+              allowUnregisteredEnabled: false
+              charset: "UTF-8"
+              debugMode: false
+              defaultBody: |-
+                $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
 
-                  Check console output at $BUILD_URL to view the results.
-                defaultContentType: "text/html"
-                defaultRecipients: "rnd_imc@gigaspaces.com"
-                defaultSubject: "[JENKINS] $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
-                defaultTriggerIds:
-                - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
-                mailAccount:
-                  credentialsId: "aws_ses"
-                  smtpUsername: "AKIAYK72STYCODIHYDMO"
-                  smtpHost: "email-smtp.us-east-2.amazonaws.com"
-                  smtpPort: "465"
-                  useSsl: true
-                maxAttachmentSize: -1
-                maxAttachmentSizeMb: -1
-                precedenceBulk: false
-                watchingEnabled: false
-            jenkins:
-              #authorizationStrategy:  # first-run
-              #  loggedInUsersCanDoAnything
-              authorizationStrategy:
-                projectMatrix:
-                  permissions:
-                  - "GROUP:Agent/Build:Dev-jenkins"
-                  - "GROUP:Agent/Configure:Dev-jenkins"
-                  - "GROUP:Agent/Connect:Dev-jenkins"
-                  - "GROUP:Agent/Create:Dev-jenkins"
-                  - "GROUP:Agent/Disconnect:Dev-jenkins"
-                  - "GROUP:Job Config History/DeleteEntry:Dev-jenkins"
-                  - "GROUP:Job/Build:Dev-jenkins"
-                  - "GROUP:Job/Cancel:Dev-jenkins"
-                  - "GROUP:Job/Delete:Dev-jenkins"
-                  - "GROUP:Job/Configure:Dev-jenkins"
-                  - "GROUP:Job/Create:Dev-jenkins"
-                  - "GROUP:Job/Discover:Dev-jenkins"
-                  - "GROUP:Job/Move:Dev-jenkins"
-                  - "GROUP:Job/Read:Dev-jenkins"
-                  - "GROUP:Job/Release:Dev-jenkins"
-                  - "GROUP:Job/Workspace:Dev-jenkins"
-                  - "GROUP:Lockable Resources/Reserve:Dev-jenkins"
-                  - "GROUP:Lockable Resources/Unlock:Dev-jenkins"
-                  - "GROUP:Lockable Resources/View:Dev-jenkins"
-                  - "GROUP:Metrics/HealthCheck:Dev-jenkins"
-                  - "GROUP:Metrics/ThreadDump:Dev-jenkins"
-                  - "GROUP:Metrics/View:Dev-jenkins"
-                  - "GROUP:Overall/Administer:Dev-jenkins-admins"
-                  - "GROUP:Overall/Read:Dev-jenkins"
-                  - "GROUP:Run/Delete:Dev-jenkins"
-                  - "GROUP:Run/Update:Dev-jenkins"
-                  - "GROUP:SCM/Tag:Dev-jenkins"
-                  - "GROUP:View/Configure:Dev-jenkins"
-                  - "GROUP:View/Create:Dev-jenkins"
-                  - "GROUP:View/Delete:Dev-jenkins"
-                  - "GROUP:View/Read:Dev-jenkins"
-                  - "USER:Overall/Administer:oren.sultan@gigaspaces.com"
-                  - "USER:Overall/Administer:sergey.yavich@gigaspaces.com"
-                  - "USER:Overall/Read:anonymous"
-                  - "USER:Job/Read:anonymous"
-                  - "USER:View/Read:anonymous"
-
-
-              securityRealm:
-                saml:
-                  advancedConfiguration:
-                    forceAuthn: false
-                    spEntityId: "jenkins-users"
-                  binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-                  displayNameAttributeName: "DisplayName"
-                  emailAttributeName: "Email"
-                  groupsAttributeName: "Group"
-                  idpMetadataConfiguration:
-                    period: 0
-                    xml: |-
-                      <?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="JumpCloud"><md:IDPSSODescriptor WantAuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol"><md:KeyDescriptor use="signing"><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:X509Data><ds:X509Certificate>MIIFgTCCA2mgAwIBAgIVANkn3cI8k6gUSvcLLceoab2c
-                          RP1oMA0GCSqGSIb3DQEBCwUAMHgxCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDTzEQ
-                          MA4GA1UEBxMHQm91bGRlcjETMBEGA1UEChMKR2lnYXNwYWNlczEZMBcGA1UECxMQ
-                          SnVtcENsb3VkU0FNTElkUDEaMBgGA1UEAxMRSnVtcENsb3VkU0FNTFVzZXIwHhcN
-                          MjMwMTIzMTMxOTM4WhcNMjgwMTIzMTMxOTM4WjB4MQswCQYDVQQGEwJVUzELMAkG
-                          A1UECBMCQ08xEDAOBgNVBAcTB0JvdWxkZXIxEzARBgNVBAoTCkdpZ2FzcGFjZXMx
-                          GTAXBgNVBAsTEEp1bXBDbG91ZFNBTUxJZFAxGjAYBgNVBAMTEUp1bXBDbG91ZFNB
-                          TUxVc2VyMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAz7B6Bl+W6jkt
-                          Hums8K2n0qNIDDqO7xpSZi8miioP6jh1eVKkK2+rxE8GDdkDZ/40Mra4ZQmbpOlY
-                          M6yV2/KOGnk+AeisaoMaEG34y9BrI8rnrjTHGoOJ41ntYc2OrnRTrIBkGPSgaff/
-                          JuFkIVCjDJEo6+VlPwExJJnC773ZnbU6VjsoZdFuJfCR+NTC7/gg+UVyQJekZTSD
-                          VksTieHtmSEpfEBJowJJqbbXcghIAE0cgsmCtatV9N2qWPXzDMqA91kRYyBaFfDu
-                          dK+qngP19xah30ZEgXsSquXaz8uNHEv2g5vKLupRcrHapM2Lbeib79ZZ2pC6dj0P
-                          kk4Dhh+piFahA0NFtH8rSF9HxZSiodpViknmN9+ymr2hk6/pLNRE7GwtpvLrArxQ
-                          xRCoisNZDE3EoJTfR0QFh+sYq3j7CclkkJ9hXOxn1f+jTGG/mKhLE7qWKKU0nz3k
-                          okV4IUYrN6+4DeYdGBzxFJi6FhpyL8u+ovI0WKaIUoHBVsXXK9liHdGieJtI/CMb
-                          BPWPDdsSkiVIhAxCQq0PjEwoOoVHDI4jMJJ9hqvAdqE1ncySgJqVS8Ch/gGvFufT
-                          jTkK//AHjNeJGlhTTM19HiQuHxfMEuQML7vEC5UbcHvP6prTMPHCMiBjyEFEp506
-                          1ftiCi8q7Ma8I/oWdU/r6ZPFmTiNkj0CAwEAAaMCMAAwDQYJKoZIhvcNAQELBQAD
-                          ggIBALbK0hTkHmNsEXUiM0Mm6x1bkLuK7uHK9jzBuOobJq5bEouh2jyDyd1NgNUB
-                          jpAqjR9d03ORxQQ1R0ykEmnQ58f+QPRUjes56IjEORvLY9jFT8IBusMXsQ6C8WWf
-                          KODIAJxwNDYqjpSNryhyFNQ+h11rcu/4rxx/2NaR9a1DF+BxcUMusvhCk3FEh9gR
-                          9TREp+myJ7E84tzNUsfkYl0MW4ItxL9FMDd+qQNuq1kpSy3qLE5haetMUdXXfL0B
-                          sJM3dH1X1pjoSgxfw0NljfhF6Y2cq/iR3efw7EHUeAvU2++9/5fRfBJgJDj/BeQp
-                          LySLh9MpNfIubR4rNavUT83Fb6o+YgWGZjmdB4ryViteGpLJ7LqEOoVqnnZ8SxiE
-                          HdvPuOwkBBsykfTUdGXnyytLW42Z8r8+4tV0OpWiS3Ysbm50I2ibMOSwlWGZ63dr
-                          GTSMFALtVdPL9HQ7fnyaIKuSLYA57Ocmrx48K8jEK3yPsa6ML+PVwMs8mBGIt+YG
-                          pVpatr6m6JZrXs8kcS74/ixFv3neud0ogKGcIEGyWgqsIzC+wk0Ul0VOWkhcDQ6m
-                          SXjWsVUYlx7ksiibhsjE9Gb4MfbVqQDvbvGg9es/JdT/QQLL1nWuxWkb04g3dcTv
-                          O9fD5x0jd7apuBzd9BGVSVDh9Hv2ZgMqwgcgVjA0k+xvJStK</ds:X509Certificate></ds:X509Data></ds:KeyInfo></md:KeyDescriptor><md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://sso.jumpcloud.com/saml2/jenkinsrnd"/><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://sso.jumpcloud.com/saml2/jenkinsrnd"/></md:IDPSSODescriptor></md:EntityDescriptor>
-                  logoutUrl: "https://console.jumpcloud.com/"
-                  maximumAuthenticationLifetime: 9999999
-                  usernameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
-                  usernameCaseConversion: "none"
-              crumbIssuer:
-                strict:
-                  hoursValid: 5
-                  checkSessionMatch: true
-                  xorMasking: false
-              agentProtocols:
-              - "JNLP4-connect"
-              - "Ping"
-              nodes:
-                - permanent:
-                    labelString: 'DocsAgent Docs-agent'
-                    mode: NORMAL
-                    name: 'DocsNode'
-                    remoteFS: 'c:\jenkins'
-                    launcher:
-                      jnlp:
-                        workDirSettings:
-                          disabled: true
-                          failIfWorkDirIsMissing: false
-                          internalDir: 'remoting'
-                - permanent:
-                    labelString: 'DotNet-slave'
-                    mode: NORMAL
-                    name: 'DotNetNode'
-                    remoteFS: 'c:\jenkins'
-                    launcher:
-                      jnlp:
-                        workDirSettings:
-                          disabled: true
-                          failIfWorkDirIsMissing: false
-                          internalDir: 'remoting'
-                - permanent:
-                    labelString: 'DotNet-slave'
-                    mode: NORMAL
-                    name: 'DotNetonprem'
-                    remoteFS: 'c:\Jenkins'
-                    launcher:
-                      jnlp:
-                        workDirSettings:
-                          disabled: true
-                          failIfWorkDirIsMissing: false
-                          internalDir: 'remoting'
-                        tunnel: 'jenkinseksagent.gigaspaces.com:50000'
-            jobs:
-              - script: >
-                  folder('Docs'){
-                      description('Folder containing all Docs jobs')
-                      job('Docs/Docs-newwebsite') {
-                          label('Docs-agent')
-                          logRotator(5, 10)
-                          parameters {
-                              choiceParam('destination', ['staging', 'prod'], '''
-                              Determines the publish destination
-                              * staging: https://docs-staging.gigaspaces.com
-                              * production: https://docs.gigaspaces.com''')
-                              choiceParam('profile', ['default','full'], "Determines which flare profile should be built (when Destination is 'production', this is ignored and 'full' is used)")
-                              choiceParam('sites', ['all','flare','hugo'], "Determines which sites to build (when Destination is 'production', this is ignored and 'all' is used)")
-                              stringParam('BRANCH_NAME', 'master')
-                          }
-                          scm {
-                              git {
-                                  remote {
-                                      name('origin')
-                                      url('https://github.com/Gigaspaces/xap-docs.git')
-                                      credentials('git_credentials_id')
-                                  }
-                                  branches('*/$BRANCH_NAME')
-                              }
-                          }
-                          triggers {
-                              scm('* * * * *')
-                          }
-                          wrappers {
-                              timestamps()
-                          }
-                          steps{
-                              batchFile('cd "%WORKSPACE%" & call build-site.bat %Destination%')
-                          }
-                      }
-                  }
-              - script: >
-                  folder('Docs'){
-                      description('Folder containing all Docs jobs')
-                      job('Docs/Docs-build'){
-                          label('DocsAgent')
-                          logRotator(10, 20)
-                          parameters {
-                              choiceParam('destination', ['staging', 'production'], 'https://docs-staging.gigaspaces.com\n   production: https://docs.gigaspaces.comDetermines\n    staging: https://docs-staging.gigaspaces.com ')
-                              choiceParam('profile', ['default','full'], "Determines which flare profile should be built (when Destination is 'production', this is ignored and 'full' is used)")
-                              choiceParam('sites', ['all','flare','hugo'], "Determines which sites to build (when Destination is 'production', this is ignored and 'all' is used)")
-                              stringParam('BRANCH_NAME', 'master')
-                          }
-                          scm {
-                              git {
-                                  remote {
-                                      name('origin')
-                                      url('https://github.com/Gigaspaces/xap-docs.git')
-                                      credentials('git_credentials_id')
-                                  }
-                                  branches('*/$BRANCH_NAME')
-                              }
-                          }
-                          triggers {
-                              scm('* * * * *')
-                          }
-                          wrappers {
-                              timestamps()
-                          }
-                          steps{
-                              batchFile('cd "%WORKSPACE%" & call build-site.bat %Destination% %Profile% %Sites%')
-                          }
-                      }
-                  }
-              - script: >
-                  pipelineJob('Dependency-check') {
-                      parameters {
-                          stringParam('GS_VERSION', '16.3.0-m9')
-                          stringParam('GS_PRODUCT', 'xap')
-                      }
-                      definition {
-                          cpsScm {
-                              scm {
-                                  git {
-                                      remote {
-                                          url('git@github.com:Gigaspaces/xap-premium.git')
-                                          credentials('git-token')
-                                      }
-                                      branches('master')
-                                      // extensions {
-                                      //     cleanBeforeCheckout()
-                                      // }
-                                  }
-                                  scriptPath("build/jenkinsfiles/jenkinsdependency")
-                              }
-                          }
-                      }
-                  }
-              - script: >
-                  folder('xap-insightedge') {
-                      description('folder')
-                      pipelineJob('xap-insightedge/escrow') {
-                          parameters {
-                              stringParam('BRANCH_NAME', 'master')
-                              stringParam('XAP_VERSION', '16.0.2')
-                          }
-                          definition {
-                              cpsScm {
-                                  scm {
-                                      git {
-                                          remote {
-                                              url('git@github.com:Gigaspaces/xap-premium.git')
-                                              credentials('git_credentials_id')
-                                          }
-                                          branches('master')
-                                          // extensions {
-                                          //     cleanBeforeCheckout()
-                                          // }
-                                      }
-                                      scriptPath("build/escrowjob")
-                                  }
-                              }
-                          }
-                      }
-                  }
-              - script: >
-                  folder('xap-insightedge') {
-                      description('Folder containing release /dotnet')
-                      folder('xap-insightedge/latest') {
-                          description('paste the folowing lines to bat steps :1. "%WORKSPACE%Buildextract-build-name.bat" %JAVA_BUILD_URL% "%WORKSPACE%xap-net-env.properties" 2. ${WORKSPACE}xap-net-env.properties  3. cd "%WORKSPACE%Build" & call BuildAll.bat "%JAVA_BUILD_URL%" "%BRANCH_NAME%" "%DEPLOY_MVN_ARTIFACTS%" "%PUBLISH_TO_NEWMAN%" ')
-                          multiJob('xap-insightedge/latest/DotNet') {
-                              logRotator{
-                                  numToKeep(5)
-                                  daysToKeep(1)
-                              }
-                              label('DotNet-slave')
-                              parameters{
-                                  textParam('BRANCH_NAME', 'master', '[REQUIRED PARAMETER] The name of the branch')
-                                  textParam('JAVA_BUILD_URL', '#http://hercules/$version/$branch/$build-name/gigaspaces-xap-enterprise-$build-name.zip', '[REQUIRED PARAMETER] XAP package location')
-                                  textParam('S3_BUILD_BUCKET', 'gigaspaces-releases-eu', 'Name of S3 bucket to upload the packages')
-                                  booleanParam('RELEASE', true,'[REQUIRED PARAMETER] Boolean indicator if the current job execution was triggered from xap-release job')
-                                  booleanParam('DEPLOY_MVN_ARTIFACTS', true,'[REQUIRED PARAMETER] Boolean indicator if to deploy artifacts to s3')
-                                  booleanParam('PUBLISH_TO_NEWMAN', true,'[REQUIRED PARAMETER] Boolean indicator if to publish build to Newman')
-                              }
-                              scm{
-                                  git {
-                                      remote {
-                                          url('git@github.com:Gigaspaces/xap-dotnet.git')
-                                          credentials('git_credentials_id')
-                                      }
-                                      branch('*/$BRANCH_NAME')
-                                  }
-                              }
-                              wrappers {
-                                  preBuildCleanup()
-                                  timestamps()
-                                  buildName('$GS_BUILD_NAME')
-
-                              }
+                Check console output at $BUILD_URL to view the results.
+              defaultContentType: "text/html"
+              defaultRecipients: "rnd_imc@gigaspaces.com"
+              defaultSubject: "[JENKINS] $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
+              defaultTriggerIds:
+              - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
+              mailAccount:
+                credentialsId: "aws_ses"
+                smtpUsername: "AKIAYK72STYCODIHYDMO"
+                smtpHost: "email-smtp.us-east-2.amazonaws.com"
+                smtpPort: "465"
+                useSsl: true
+              maxAttachmentSize: -1
+              maxAttachmentSizeMb: -1
+              precedenceBulk: false
+              watchingEnabled: false
+          jenkins:
+            #authorizationStrategy:  # first-run
+            #  loggedInUsersCanDoAnything
+            authorizationStrategy:
+              projectMatrix:
+                permissions:
+                - "GROUP:Agent/Build:Dev-jenkins"
+                - "GROUP:Agent/Configure:Dev-jenkins"
+                - "GROUP:Agent/Connect:Dev-jenkins"
+                - "GROUP:Agent/Create:Dev-jenkins"
+                - "GROUP:Agent/Disconnect:Dev-jenkins"
+                - "GROUP:Job Config History/DeleteEntry:Dev-jenkins"
+                - "GROUP:Job/Build:Dev-jenkins"
+                - "GROUP:Job/Cancel:Dev-jenkins"
+                - "GROUP:Job/Delete:Dev-jenkins"
+                - "GROUP:Job/Configure:Dev-jenkins"
+                - "GROUP:Job/Create:Dev-jenkins"
+                - "GROUP:Job/Discover:Dev-jenkins"
+                - "GROUP:Job/Move:Dev-jenkins"
+                - "GROUP:Job/Read:Dev-jenkins"
+                - "GROUP:Job/Release:Dev-jenkins"
+                - "GROUP:Job/Workspace:Dev-jenkins"
+                - "GROUP:Lockable Resources/Reserve:Dev-jenkins"
+                - "GROUP:Lockable Resources/Unlock:Dev-jenkins"
+                - "GROUP:Lockable Resources/View:Dev-jenkins"
+                - "GROUP:Metrics/HealthCheck:Dev-jenkins"
+                - "GROUP:Metrics/ThreadDump:Dev-jenkins"
+                - "GROUP:Metrics/View:Dev-jenkins"
+                - "GROUP:Overall/Administer:Dev-jenkins-admins"
+                - "GROUP:Overall/Read:Dev-jenkins"
+                - "GROUP:Run/Delete:Dev-jenkins"
+                - "GROUP:Run/Update:Dev-jenkins"
+                - "GROUP:SCM/Tag:Dev-jenkins"
+                - "GROUP:View/Configure:Dev-jenkins"
+                - "GROUP:View/Create:Dev-jenkins"
+                - "GROUP:View/Delete:Dev-jenkins"
+                - "GROUP:View/Read:Dev-jenkins"
+                - "USER:Overall/Administer:oren.sultan@gigaspaces.com"
+                - "USER:Overall/Administer:sergey.yavich@gigaspaces.com"
+                - "USER:Overall/Read:anonymous"
+                - "USER:Job/Read:anonymous"
+                - "USER:View/Read:anonymous"
 
 
-                              steps {
-                                  batchFile('"%WORKSPACE%\\Build\\extract-build-name.bat" %JAVA_BUILD_URL% "%WORKSPACE%\\xap-net-env.properties"')
-                                  environmentVariables {
-                                      propertiesFile('xap-net-env.properties')
-                                  }
-                                  batchFile('cd "%WORKSPACE%\\Build" & call BuildAll.bat "%JAVA_BUILD_URL%" "%BRANCH_NAME%" "%DEPLOY_MVN_ARTIFACTS%" "%PUBLISH_TO_NEWMAN%"')
-                              }
-                              publishers {
-                                  flexiblePublish {
-                                      conditionalAction {
-                                          condition {
-                                              booleanCondition('\$ֿֿ{ENV,var="RELEASE"}')
-                                          }
-                                          publishers {
-                                              git {
-                                                  pushOnlyIfSuccess()
-                                                  forcePush()
-                                                  tag('origin','$GS_BUILD_NAME') {
-                                                      message('XAP.NET release tag on top \$BRANCH_NAME')
-                                                      create()
-                                                      update()
-                                                  }
-                                              }
-                                          }
-                                      }
-                                  }
-                                  extendedEmail {
-                                      defaultSubject('$DEFAULT_SUBJECT')
-                                      replyToList('$DEFAULT_REPLYTO')
-
-                                      contentType('default')
-
-                                  }
-                              }
-                          }
-                      }
-                  }
-              - script: >
-                  folder('xap-insightedge') {
-                      description('Folder containing release /continuous')
-                      folder('xap-insightedge/latest') {
-                          description('latest')
-                          pipelineJob('xap-insightedge/latest/release') {
-                              blockOn(['xap-insightedge/latest/release']) {
-                                  blockLevel('GLOBAL')
-                                  scanQueueFor('ALL')
-                              }
-                              parameters{
-                                  choiceParam('MODE',['NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
-                                  stringParam('BRANCH_NAME', 'master')
-                                  stringParam('XAP_VERSION', '16.3.0')
-                                  stringParam('MILESTONE', 'm9', 'Milestone label, e.g. m9, rc1. Ignored in modes GA and PATCH')
-                                  stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE,DOTNET,NIGHTLY')
-                                  booleanParam('InsightEdge', true)
-                                  parameterSeparatorDefinition{
-                                    name('2')
-                                    separatorStyle('')
-                                    sectionHeader('RELEASE Build parameters')
-                                    sectionHeaderStyle("""
-                                      background-color: #55216e;
-                                      text-align: center;
-                                      padding: 4px;
-                                      color: #c2db1a;
-                                      font-size: 22px;
-                                      font-weight: normal;
-                                      text-transform: uppercase;
-                                      font-family: 'Orienta', sans-serif;
-                                      letter-spacing: 1px;
-                                      font-style: italic;
-                                  """)
-                                  }
-                                  booleanParam('DotNet', true ,'Enable/Disable XAP.NET build')
-                                  booleanParam('PERFORM_FULL_M2_CLEAN', false)
-                                  booleanParam('OVERRIDE_EXISTING_TAG', false, 'Override git tag if exists')
-                                  booleanParam('DEPLOY_MVN_ARTIFACTS', true, 'Deploy build maven artifacts to S3')
-                                  booleanParam('PUBLISH_DOCKER', true, 'Trigger automated docker build in Docker Hub')
-                                  stringParam('GS_PATCH_ID', null, "Patch identifier (usually a letter a, b, c).")
-                                  stringParam('GS_PATCH_NUMBER', null, "Patch number (integer which increases for each release of the same version+patchId).")
-                                  booleanParam('JAVA_DOCS',true, 'Create and upload java api docs')
-                                  booleanParam('GEN_SMART_ZIPS',true, 'Generate and upload the smart-cache & smart-augmented-transactions zip files')
-                                  booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
-                              }
-                              triggers {
-                                  cron('0 18 * * *')
-                              }
-                              definition {
-                                  cpsScm {
-                                      scm {
-                                          git {
-                                              remote {
-                                                  url('git@github.com:Gigaspaces/xap-premium.git')
-                                                  credentials('git_credentials_id')
-                                              }
-                                              branches('$BRANCH_NAME')
-                                          }
-                                          scriptPath("build/jenkinsfiles/jenkinsfile")
-                                      }
-                                  }
-                              }
-                          }
-                      }
-                  }
-              - script: >
-                  folder('xap-insightedge') {
-                      description('Folder containing release /continuous')
-                      folder('xap-insightedge/latest') {
-                          description('latest')
-                          pipelineJob('xap-insightedge/latest/continuous') {
-                              blockOn(['xap-insightedge/latest/continuous']) {
-                                  blockLevel('GLOBAL')
-                                  scanQueueFor('ALL')
-                              }
-                              parameters{
-                                  choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
-                                  stringParam('BRANCH_NAME', 'master')
-                                  stringParam('XAP_VERSION', '16.3.0')
-                                  stringParam('MILESTONE', 'm9', 'Milestone label, e.g. m9,rc1. Ignored in modes GA and PATCH')
-                                  stringParam('NEWMAN_TAGS', 'XAP')
-                                  booleanParam('InsightEdge', false)
-                                  parameterSeparatorDefinition {
-                                    name('1')
-                                    separatorStyle('')
-                                    sectionHeader('CONTINUOUS Build parameters')
-                                    sectionHeaderStyle("""
-                                      background-color: #55216e;
-                                      text-align: center;
-                                      padding: 4px;
-                                      color: #c2db1a;
-                                      font-size: 22px;
-                                      font-weight: normal;
-                                      text-transform: uppercase;
-                                      font-family: 'Orienta', sans-serif;
-                                      letter-spacing: 1px;
-                                      font-style: italic;
-                                  """)
-                                  }
-                                  choiceParam('ELM_VERSION', ['0.19.0', '0.18.0'])
-                                  stringParam('NEWMAN_SUITES', '',"""comma separated list of suite ids to submit future jobs
-                                  5c88ea4bb38594355214b205 - manager
-                                  59f25d19b3859424cac590bf - xap-core
-                                  59f25af7b3859424cac590b5 - service-grid
-                                  59f25af5b3859424cac590ad - disconnect
-                                  59f25e0f6d98c14e1daa2008 - web-ui
-                                  59f25d5ab3859424cac590c1 - rocksdb
-                                  59f25d5bb3859424cac590c2 - off-heap
-                                  5a96b14268c479caafb1162f - mx-off-heap
-                                  59f59592b3859424cac690fa - i9e-sgtest
-                                  59f25af6b3859424cac590b0 - insightedge-premium
-                                  59f25af7b3859424cac590b9 - wan
-                                  5b6c24e7b385941b3b8ce4bf - dev-demote
-                                  59f25e0f6d98c14e1daa5000 - performance
-                                  61c2ce874cedfd000c46a91c - performance-dih
-                                  607420ac4cedfd0009ec8b20 - v3driver
-                                  612b4e5c4cedfd000acf48a0 - dih (sgtest)""")
-                                  stringParam('NEWMAN_CONFIG_ID', '5b4c9342b3859411ee82c265', """Applicable only when submitting future jobs
-                                  5b4c9342b3859411ee82c265 - ORACLE_8
-                                  5b4c9825b3859411ee82c2f3  - ORACLE_9
-                                  5bf160bb1f31eb789fc0fa65 - OPENJDK_11
-                                  5bf160bb1f31eb789fc0fb78 - OPENJDK_17""")
-                                  stringParam('NEWMAN_AGENT_GROUPS', 'imc-srv01,imc-srv02,DotNet,Bynet')
-                                  stringParam('NEWMAN_JOB_PRIORITY', '1', """0- daily-default
-                                  1- low
-                                  2- high
-                                  3- release-default
-                                  4- urgent""")
-                              }
-                              triggers {
-                                  scm('H/10 * * * *')
-                              }
-                              definition {
-                                  cpsScm {
-                                      scm {
-                                          git {
-                                              remote {
-                                                  url('git@github.com:Gigaspaces/xap-premium.git')
-                                                  credentials('git_credentials_id')
-
-
-                                              }
-                                              branches('*/$BRANCH_NAME')
-
-                                          }
-                                          scriptPath("build/jenkinsfiles/jenkinsfile")
-                                      }
-                                  }
-                              }
-                          }
-                      }
-                  }
-              - script: >
-                  folder('xap-insightedge') {
-                      description('Folder containing release /continuous')
-                      folder('xap-insightedge/branch-on-demand') {
-                          description('specific branch')
-                          pipelineJob('xap-insightedge/branch-on-demand/release') {
-                              parameters{
-                                  choiceParam('MODE',['NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
-                                  booleanParam('OnDemand', true)
-                                  stringParam('BRANCH_NAME','master')
-                                  stringParam('XAP_VERSION', '16.3.0')
-                                  stringParam('MILESTONE', 'm9', 'Milestone label, e.g. m9,rc1. Ignored in modes GA and PATCH')
-                                  stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
-                                  booleanParam('InsightEdge', true)
-                                  parameterSeparatorDefinition{
-                                    name('2')
-                                    separatorStyle('')
-                                    sectionHeader('RELEASE Build parameters')
-                                    sectionHeaderStyle("""
-                                      background-color: #55216e;
-                                      text-align: center;
-                                      padding: 4px;
-                                      color: #c2db1a;
-                                      font-size: 22px;
-                                      font-weight: normal;
-                                      text-transform: uppercase;
-                                      font-family: 'Orienta', sans-serif;
-                                      letter-spacing: 1px;
-                                      font-style: italic;
-                                  """)
-                                  }
-                                  booleanParam('DotNet', false ,'Enable/Disable XAP.NET build')
-                                  booleanParam('PERFORM_FULL_M2_CLEAN', false)
-                                  booleanParam('OVERRIDE_EXISTING_TAG', false, 'Override git tag if exists')
-                                  booleanParam('DEPLOY_MVN_ARTIFACTS', true, 'Deploy build maven artifacts to S3')
-                                  booleanParam('PUBLISH_DOCKER', true, 'Trigger automated docker build in Docker Hub')
-                                  stringParam('GS_PATCH_ID',null , "Patch identifier (usually a letter a, b, c).")
-                                  stringParam('GS_PATCH_NUMBER', null, "Patch number (integer which increases for each release of the same version+patchId).")
-                                  booleanParam('JAVA_DOCS',true, 'Create and upload java api docs')
-                                  booleanParam('GEN_SMART_ZIPS',true, 'Generate and upload the smart-cache & smart-augmented-transactions zip files')
-                                  booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
-                              }
-                              definition {
-                                  cpsScm {
-                                      scm {
-                                          git {
-                                              remote {
-                                                  url('git@github.com:Gigaspaces/xap-premium.git')
-                                                  credentials('git_credentials_id')
-                                              }
-                                              branches('$BRANCH_NAME')
-                                          }
-                                          scriptPath("build/jenkinsfiles/jenkinsfile")
-                                      }
-                                  }
-                              }
-                          }
-                      }
-                  }
-              - script: >
-                  folder('xap-insightedge') {
-                      description('Folder containing release /continuous')
-                      folder('xap-insightedge/branch-on-demand') {
-                          description('latest')
-                          pipelineJob('xap-insightedge/branch-on-demand/continuous') {
-                              parameters{
-                                  choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
-                                  booleanParam('OnDemand', true)
-                                  stringParam('BRANCH_NAME', 'master')
-                                  stringParam('XAP_VERSION', '16.3.0')
-                                  stringParam('MILESTONE', 'm9', 'Milestone label, e.g. m9,rc1. Ignored in modes GA and PATCH')
-                                  stringParam('NEWMAN_TAGS', 'XAP')
-                                  booleanParam('InsightEdge', false)
-                                  parameterSeparatorDefinition {
-                                    name('1')
-                                    separatorStyle('')
-                                    sectionHeader('CONTINUOUS Build parameters')
-                                    sectionHeaderStyle("""
-                                      background-color: #55216e;
-                                      text-align: center;
-                                      padding: 4px;
-                                      color: #c2db1a;
-                                      font-size: 22px;
-                                      font-weight: normal;
-                                      text-transform: uppercase;
-                                      font-family: 'Orienta', sans-serif;
-                                      letter-spacing: 1px;
-                                      font-style: italic;
-                                  """)
-                                  }
-                                  choiceParam('ELM_VERSION', ['0.19.0', '0.18.0'])
-                                  stringParam('NEWMAN_SUITES', '',"""comma separated list of suite ids to submit future jobs
-                                  5c88ea4bb38594355214b205 - manager
-                                  59f25d19b3859424cac590bf - xap-core
-                                  59f25af7b3859424cac590b5 - service-grid
-                                  59f25af5b3859424cac590ad - disconnect
-                                  59f25e0f6d98c14e1daa2008 - web-ui
-                                  59f25d5ab3859424cac590c1 - rocksdb
-                                  59f25d5bb3859424cac590c2 - off-heap
-                                  5a96b14268c479caafb1162f - mx-off-heap
-                                  59f59592b3859424cac690fa - i9e-sgtest
-                                  59f25af6b3859424cac590b0 - insightedge-premium
-                                  59f25af7b3859424cac590b9 - wan
-                                  5b6c24e7b385941b3b8ce4bf - dev-demote
-                                  59f25e0f6d98c14e1daa5000 - performance
-                                  607420ac4cedfd0009ec8b20 - v3driver
-                                  612b4e5c4cedfd000acf48a0 - dih (sgtest)""")
-                                  stringParam('NEWMAN_AGENT_GROUPS', 'imc-srv01,imc-srv02,DotNet,Bynet')
-                                  stringParam('NEWMAN_JOB_PRIORITY', '1', """0- daily-default
-                                  1- low
-                                  2- high
-                                  3- release-default
-                                  4- urgent""")
-                                  stringParam('NEWMAN_CONFIG_ID', '5b4c9342b3859411ee82c265', """Applicable only when submitting future jobs
-                                  5b4c9342b3859411ee82c265 - ORACLE_8
-                                  5b4c9825b3859411ee82c2f3  - ORACLE_9
-                                  5bf160bb1f31eb789fc0fa65 - OPENJDK_11
-                                  5bf160bb1f31eb789fc0fb78 - OPENJDK_17""")
-
-                              }
-                              definition {
-                                  cpsScm {
-                                      scm {
-                                          git {
-                                              remote {
-                                                  url('git@github.com:Gigaspaces/xap-premium.git')
-                                                  credentials('git_credentials_id')
-                                              }
-                                              remote {
-                                                  url('git@github.com:Gigaspaces/xap.git')
-                                                  credentials('git_credentials_id')
-                                              }
-                                              remote {
-                                                  url('https://github.com/InsightEdge/insightedge.git')
-
-                                              }
-                                              branches('$BRANCH_NAME')
-
-                                          }
-                                          scriptPath("build/jenkinsfiles/jenkinsfile")
-                                      }
-                                  }
-                              }
-                          }
-                      }
-                  }
-              - script: >
-                  folder('managment') {
-                      description('Folder contains jenkins environment prperations')
-                      pipelineJob('managment/create mail templates') {
-                          description('copy content of email templates  managed files and store it in /var/jenkins_home/email-templates/xap-insightedge/16.2 ( mail extantion folder ) run this job once when new dev environment installed')
-                          definition {
-                              cpsScm {
-                                  scm {
-                                      git {
-                                          remote {
-                                              url('git@github.com:Gigaspaces/xap-premium.git')
-                                              credentials('git_credentials_id')
-                                          }
-                                          branches('master')
-
-                                      }
-                                      scriptPath("build/jenkinsfiles/createmailtemplates")
-                                  }
-                              }
-                          }
-                      }
-
-                  }
-
-              - script: >
-                  folder('Metric') {
-                      description('create spots')
-                      folder('Metric/Spotinst') {
-                          description('env or backwards test ')
-                          pipelineJob('Metric/Spotinst/Spotinst-Create-Machines') {
-                              properties {
-                                copyArtifactPermissionProperty {
-                                  projectNames('Metric/Spotinst/Spotinst-Delete-noi-large-cluster')
+            securityRealm:
+              saml:
+                advancedConfiguration:
+                  forceAuthn: false
+                  spEntityId: "jenkins-users"
+                binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+                displayNameAttributeName: "DisplayName"
+                emailAttributeName: "Email"
+                groupsAttributeName: "Group"
+                idpMetadataConfiguration:
+                  period: 0
+                  xml: |-
+                    <?xml version="1.0" encoding="UTF-8"?><md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="JumpCloud"><md:IDPSSODescriptor WantAuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol"><md:KeyDescriptor use="signing"><ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:X509Data><ds:X509Certificate>MIIFgTCCA2mgAwIBAgIVANkn3cI8k6gUSvcLLceoab2c
+                        RP1oMA0GCSqGSIb3DQEBCwUAMHgxCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDTzEQ
+                        MA4GA1UEBxMHQm91bGRlcjETMBEGA1UEChMKR2lnYXNwYWNlczEZMBcGA1UECxMQ
+                        SnVtcENsb3VkU0FNTElkUDEaMBgGA1UEAxMRSnVtcENsb3VkU0FNTFVzZXIwHhcN
+                        MjMwMTIzMTMxOTM4WhcNMjgwMTIzMTMxOTM4WjB4MQswCQYDVQQGEwJVUzELMAkG
+                        A1UECBMCQ08xEDAOBgNVBAcTB0JvdWxkZXIxEzARBgNVBAoTCkdpZ2FzcGFjZXMx
+                        GTAXBgNVBAsTEEp1bXBDbG91ZFNBTUxJZFAxGjAYBgNVBAMTEUp1bXBDbG91ZFNB
+                        TUxVc2VyMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAz7B6Bl+W6jkt
+                        Hums8K2n0qNIDDqO7xpSZi8miioP6jh1eVKkK2+rxE8GDdkDZ/40Mra4ZQmbpOlY
+                        M6yV2/KOGnk+AeisaoMaEG34y9BrI8rnrjTHGoOJ41ntYc2OrnRTrIBkGPSgaff/
+                        JuFkIVCjDJEo6+VlPwExJJnC773ZnbU6VjsoZdFuJfCR+NTC7/gg+UVyQJekZTSD
+                        VksTieHtmSEpfEBJowJJqbbXcghIAE0cgsmCtatV9N2qWPXzDMqA91kRYyBaFfDu
+                        dK+qngP19xah30ZEgXsSquXaz8uNHEv2g5vKLupRcrHapM2Lbeib79ZZ2pC6dj0P
+                        kk4Dhh+piFahA0NFtH8rSF9HxZSiodpViknmN9+ymr2hk6/pLNRE7GwtpvLrArxQ
+                        xRCoisNZDE3EoJTfR0QFh+sYq3j7CclkkJ9hXOxn1f+jTGG/mKhLE7qWKKU0nz3k
+                        okV4IUYrN6+4DeYdGBzxFJi6FhpyL8u+ovI0WKaIUoHBVsXXK9liHdGieJtI/CMb
+                        BPWPDdsSkiVIhAxCQq0PjEwoOoVHDI4jMJJ9hqvAdqE1ncySgJqVS8Ch/gGvFufT
+                        jTkK//AHjNeJGlhTTM19HiQuHxfMEuQML7vEC5UbcHvP6prTMPHCMiBjyEFEp506
+                        1ftiCi8q7Ma8I/oWdU/r6ZPFmTiNkj0CAwEAAaMCMAAwDQYJKoZIhvcNAQELBQAD
+                        ggIBALbK0hTkHmNsEXUiM0Mm6x1bkLuK7uHK9jzBuOobJq5bEouh2jyDyd1NgNUB
+                        jpAqjR9d03ORxQQ1R0ykEmnQ58f+QPRUjes56IjEORvLY9jFT8IBusMXsQ6C8WWf
+                        KODIAJxwNDYqjpSNryhyFNQ+h11rcu/4rxx/2NaR9a1DF+BxcUMusvhCk3FEh9gR
+                        9TREp+myJ7E84tzNUsfkYl0MW4ItxL9FMDd+qQNuq1kpSy3qLE5haetMUdXXfL0B
+                        sJM3dH1X1pjoSgxfw0NljfhF6Y2cq/iR3efw7EHUeAvU2++9/5fRfBJgJDj/BeQp
+                        LySLh9MpNfIubR4rNavUT83Fb6o+YgWGZjmdB4ryViteGpLJ7LqEOoVqnnZ8SxiE
+                        HdvPuOwkBBsykfTUdGXnyytLW42Z8r8+4tV0OpWiS3Ysbm50I2ibMOSwlWGZ63dr
+                        GTSMFALtVdPL9HQ7fnyaIKuSLYA57Ocmrx48K8jEK3yPsa6ML+PVwMs8mBGIt+YG
+                        pVpatr6m6JZrXs8kcS74/ixFv3neud0ogKGcIEGyWgqsIzC+wk0Ul0VOWkhcDQ6m
+                        SXjWsVUYlx7ksiibhsjE9Gb4MfbVqQDvbvGg9es/JdT/QQLL1nWuxWkb04g3dcTv
+                        O9fD5x0jd7apuBzd9BGVSVDh9Hv2ZgMqwgcgVjA0k+xvJStK</ds:X509Certificate></ds:X509Data></ds:KeyInfo></md:KeyDescriptor><md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://sso.jumpcloud.com/saml2/jenkinsrnd"/><md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://sso.jumpcloud.com/saml2/jenkinsrnd"/></md:IDPSSODescriptor></md:EntityDescriptor>
+                logoutUrl: "https://console.jumpcloud.com/"
+                maximumAuthenticationLifetime: 9999999
+                usernameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+                usernameCaseConversion: "none"
+            crumbIssuer:
+              strict:
+                hoursValid: 5
+                checkSessionMatch: true
+                xorMasking: false
+            agentProtocols:
+            - "JNLP4-connect"
+            - "Ping"
+            nodes:
+              - permanent:
+                  labelString: 'DocsAgent Docs-agent'
+                  mode: NORMAL
+                  name: 'DocsNode'
+                  remoteFS: 'c:\jenkins'
+                  launcher:
+                    jnlp:
+                      workDirSettings:
+                        disabled: true
+                        failIfWorkDirIsMissing: false
+                        internalDir: 'remoting'
+              - permanent:
+                  labelString: 'DotNet-slave'
+                  mode: NORMAL
+                  name: 'DotNetNode'
+                  remoteFS: 'c:\jenkins'
+                  launcher:
+                    jnlp:
+                      workDirSettings:
+                        disabled: true
+                        failIfWorkDirIsMissing: false
+                        internalDir: 'remoting'
+              - permanent:
+                  labelString: 'DotNet-slave'
+                  mode: NORMAL
+                  name: 'DotNetonprem'
+                  remoteFS: 'c:\Jenkins'
+                  launcher:
+                    jnlp:
+                      workDirSettings:
+                        disabled: true
+                        failIfWorkDirIsMissing: false
+                        internalDir: 'remoting'
+                      tunnel: 'jenkinseksagent.gigaspaces.com:50000'
+          jobs:
+            - script: >
+                folder('Docs'){
+                    description('Folder containing all Docs jobs')
+                    job('Docs/Docs-newwebsite') {
+                        label('Docs-agent')
+                        logRotator(5, 10)
+                        parameters {
+                            choiceParam('destination', ['staging', 'prod'], '''
+                            Determines the publish destination
+                            * staging: https://docs-staging.gigaspaces.com
+                            * production: https://docs.gigaspaces.com''')
+                            choiceParam('profile', ['default','full'], "Determines which flare profile should be built (when Destination is 'production', this is ignored and 'full' is used)")
+                            choiceParam('sites', ['all','flare','hugo'], "Determines which sites to build (when Destination is 'production', this is ignored and 'all' is used)")
+                            stringParam('BRANCH_NAME', 'master')
+                        }
+                        scm {
+                            git {
+                                remote {
+                                    name('origin')
+                                    url('https://github.com/Gigaspaces/xap-docs.git')
+                                    credentials('git_credentials_id')
                                 }
+                                branches('*/$BRANCH_NAME')
+                            }
+                        }
+                        triggers {
+                            scm('* * * * *')
+                        }
+                        wrappers {
+                            timestamps()
+                        }
+                        steps{
+                            batchFile('cd "%WORKSPACE%" & call build-site.bat %Destination%')
+                        }
+                    }
+                }
+            - script: >
+                folder('Docs'){
+                    description('Folder containing all Docs jobs')
+                    job('Docs/Docs-build'){
+                        label('DocsAgent')
+                        logRotator(10, 20)
+                        parameters {
+                            choiceParam('destination', ['staging', 'production'], 'https://docs-staging.gigaspaces.com\n   production: https://docs.gigaspaces.comDetermines\n    staging: https://docs-staging.gigaspaces.com ')
+                            choiceParam('profile', ['default','full'], "Determines which flare profile should be built (when Destination is 'production', this is ignored and 'full' is used)")
+                            choiceParam('sites', ['all','flare','hugo'], "Determines which sites to build (when Destination is 'production', this is ignored and 'all' is used)")
+                            stringParam('BRANCH_NAME', 'master')
+                        }
+                        scm {
+                            git {
+                                remote {
+                                    name('origin')
+                                    url('https://github.com/Gigaspaces/xap-docs.git')
+                                    credentials('git_credentials_id')
+                                }
+                                branches('*/$BRANCH_NAME')
+                            }
+                        }
+                        triggers {
+                            scm('* * * * *')
+                        }
+                        wrappers {
+                            timestamps()
+                        }
+                        steps{
+                            batchFile('cd "%WORKSPACE%" & call build-site.bat %Destination% %Profile% %Sites%')
+                        }
+                    }
+                }
+            - script: >
+                pipelineJob('Dependency-check') {
+                    parameters {
+                        stringParam('GS_VERSION', '16.3.0-m10')
+                        stringParam('GS_PRODUCT', 'xap')
+                    }
+                    definition {
+                        cpsScm {
+                            scm {
+                                git {
+                                    remote {
+                                        url('git@github.com:Gigaspaces/xap-premium.git')
+                                        credentials('git-token')
+                                    }
+                                    branches('master')
+                                    // extensions {
+                                    //     cleanBeforeCheckout()
+                                    // }
+                                }
+                                scriptPath("build/jenkinsfiles/jenkinsdependency")
+                            }
+                        }
+                    }
+                }
+            - script: >
+                folder('xap-insightedge') {
+                    description('folder')
+                    pipelineJob('xap-insightedge/escrow') {
+                        parameters {
+                            stringParam('BRANCH_NAME', 'master')
+                            stringParam('XAP_VERSION', '16.0.2')
+                        }
+                        definition {
+                            cpsScm {
+                                scm {
+                                    git {
+                                        remote {
+                                            url('git@github.com:Gigaspaces/xap-premium.git')
+                                            credentials('git_credentials_id')
+                                        }
+                                        branches('master')
+                                        // extensions {
+                                        //     cleanBeforeCheckout()
+                                        // }
+                                    }
+                                    scriptPath("build/escrowjob")
+                                }
+                            }
+                        }
+                    }
+                }
+            - script: >
+                folder('xap-insightedge') {
+                    description('Folder containing release /dotnet')
+                    folder('xap-insightedge/latest') {
+                        description('paste the folowing lines to bat steps :1. "%WORKSPACE%Buildextract-build-name.bat" %JAVA_BUILD_URL% "%WORKSPACE%xap-net-env.properties" 2. ${WORKSPACE}xap-net-env.properties  3. cd "%WORKSPACE%Build" & call BuildAll.bat "%JAVA_BUILD_URL%" "%BRANCH_NAME%" "%DEPLOY_MVN_ARTIFACTS%" "%PUBLISH_TO_NEWMAN%" ')
+                        multiJob('xap-insightedge/latest/DotNet') {
+                            logRotator{
+                                numToKeep(5)
+                                daysToKeep(1)
+                            }
+                            label('DotNet-slave')
+                            parameters{
+                                textParam('BRANCH_NAME', 'master', '[REQUIRED PARAMETER] The name of the branch')
+                                textParam('JAVA_BUILD_URL', '#http://hercules/$version/$branch/$build-name/gigaspaces-xap-enterprise-$build-name.zip', '[REQUIRED PARAMETER] XAP package location')
+                                textParam('S3_BUILD_BUCKET', 'gigaspaces-releases-eu', 'Name of S3 bucket to upload the packages')
+                                booleanParam('RELEASE', true,'[REQUIRED PARAMETER] Boolean indicator if the current job execution was triggered from xap-release job')
+                                booleanParam('DEPLOY_MVN_ARTIFACTS', true,'[REQUIRED PARAMETER] Boolean indicator if to deploy artifacts to s3')
+                                booleanParam('PUBLISH_TO_NEWMAN', true,'[REQUIRED PARAMETER] Boolean indicator if to publish build to Newman')
+                            }
+                            scm{
+                                git {
+                                    remote {
+                                        url('git@github.com:Gigaspaces/xap-dotnet.git')
+                                        credentials('git_credentials_id')
+                                    }
+                                    branch('*/$BRANCH_NAME')
+                                }
+                            }
+                            wrappers {
+                                preBuildCleanup()
+                                timestamps()
+                                buildName('$GS_BUILD_NAME')
+
+                            }
+
+
+                            steps {
+                                batchFile('"%WORKSPACE%\\Build\\extract-build-name.bat" %JAVA_BUILD_URL% "%WORKSPACE%\\xap-net-env.properties"')
+                                environmentVariables {
+                                    propertiesFile('xap-net-env.properties')
+                                }
+                                batchFile('cd "%WORKSPACE%\\Build" & call BuildAll.bat "%JAVA_BUILD_URL%" "%BRANCH_NAME%" "%DEPLOY_MVN_ARTIFACTS%" "%PUBLISH_TO_NEWMAN%"')
+                            }
+                            publishers {
+                                flexiblePublish {
+                                    conditionalAction {
+                                        condition {
+                                            booleanCondition('\$ֿֿ{ENV,var="RELEASE"}')
+                                        }
+                                        publishers {
+                                            git {
+                                                pushOnlyIfSuccess()
+                                                forcePush()
+                                                tag('origin','$GS_BUILD_NAME') {
+                                                    message('XAP.NET release tag on top \$BRANCH_NAME')
+                                                    create()
+                                                    update()
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                extendedEmail {
+                                    defaultSubject('$DEFAULT_SUBJECT')
+                                    replyToList('$DEFAULT_REPLYTO')
+
+                                    contentType('default')
+
+                                }
+                            }
+                        }
+                    }
+                }
+            - script: >
+                folder('xap-insightedge') {
+                    description('Folder containing release /continuous')
+                    folder('xap-insightedge/latest') {
+                        description('latest')
+                        pipelineJob('xap-insightedge/latest/release') {
+                            blockOn(['xap-insightedge/latest/release']) {
+                                blockLevel('GLOBAL')
+                                scanQueueFor('ALL')
+                            }
+                            parameters{
+                                choiceParam('MODE',['NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
+                                stringParam('BRANCH_NAME', 'master')
+                                stringParam('XAP_VERSION', '16.3.0')
+                                stringParam('MILESTONE', 'm10', 'Milestone label, e.g. m10, rc1. Ignored in modes GA and PATCH')
+                                stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE,DOTNET,NIGHTLY')
+                                booleanParam('InsightEdge', true)
+                                parameterSeparatorDefinition{
+                                  name('2')
+                                  separatorStyle('')
+                                  sectionHeader('RELEASE Build parameters')
+                                  sectionHeaderStyle("""
+                                    background-color: #55216e;
+                                    text-align: center;
+                                    padding: 4px;
+                                    color: #c2db1a;
+                                    font-size: 22px;
+                                    font-weight: normal;
+                                    text-transform: uppercase;
+                                    font-family: 'Orienta', sans-serif;
+                                    letter-spacing: 1px;
+                                    font-style: italic;
+                                """)
+                                }
+                                booleanParam('DotNet', true ,'Enable/Disable XAP.NET build')
+                                booleanParam('PERFORM_FULL_M2_CLEAN', false)
+                                booleanParam('OVERRIDE_EXISTING_TAG', false, 'Override git tag if exists')
+                                booleanParam('DEPLOY_MVN_ARTIFACTS', true, 'Deploy build maven artifacts to S3')
+                                booleanParam('PUBLISH_DOCKER', true, 'Trigger automated docker build in Docker Hub')
+                                stringParam('GS_PATCH_ID', null, "Patch identifier (usually a letter a, b, c).")
+                                stringParam('GS_PATCH_NUMBER', null, "Patch number (integer which increases for each release of the same version+patchId).")
+                                booleanParam('JAVA_DOCS',true, 'Create and upload java api docs')
+                                booleanParam('GEN_SMART_ZIPS',true, 'Generate and upload the smart-cache & smart-augmented-transactions zip files')
+                                booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
+                            }
+                            triggers {
+                                cron('0 18 * * *')
+                            }
+                            definition {
+                                cpsScm {
+                                    scm {
+                                        git {
+                                            remote {
+                                                url('git@github.com:Gigaspaces/xap-premium.git')
+                                                credentials('git_credentials_id')
+                                            }
+                                            branches('$BRANCH_NAME')
+                                        }
+                                        scriptPath("build/jenkinsfiles/jenkinsfile")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            - script: >
+                folder('xap-insightedge') {
+                    description('Folder containing release /continuous')
+                    folder('xap-insightedge/latest') {
+                        description('latest')
+                        pipelineJob('xap-insightedge/latest/continuous') {
+                            blockOn(['xap-insightedge/latest/continuous']) {
+                                blockLevel('GLOBAL')
+                                scanQueueFor('ALL')
+                            }
+                            parameters{
+                                choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
+                                stringParam('BRANCH_NAME', 'master')
+                                stringParam('XAP_VERSION', '16.3.0')
+                                stringParam('MILESTONE', 'm10', 'Milestone label, e.g. m10,rc1. Ignored in modes GA and PATCH')
+                                stringParam('NEWMAN_TAGS', 'XAP')
+                                booleanParam('InsightEdge', false)
+                                parameterSeparatorDefinition {
+                                  name('1')
+                                  separatorStyle('')
+                                  sectionHeader('CONTINUOUS Build parameters')
+                                  sectionHeaderStyle("""
+                                    background-color: #55216e;
+                                    text-align: center;
+                                    padding: 4px;
+                                    color: #c2db1a;
+                                    font-size: 22px;
+                                    font-weight: normal;
+                                    text-transform: uppercase;
+                                    font-family: 'Orienta', sans-serif;
+                                    letter-spacing: 1px;
+                                    font-style: italic;
+                                """)
+                                }
+                                choiceParam('ELM_VERSION', ['0.19.0', '0.18.0'])
+                                stringParam('NEWMAN_SUITES', '',"""comma separated list of suite ids to submit future jobs
+                                5c88ea4bb38594355214b205 - manager
+                                59f25d19b3859424cac590bf - xap-core
+                                59f25af7b3859424cac590b5 - service-grid
+                                59f25af5b3859424cac590ad - disconnect
+                                59f25e0f6d98c14e1daa2008 - web-ui
+                                59f25d5ab3859424cac590c1 - rocksdb
+                                59f25d5bb3859424cac590c2 - off-heap
+                                5a96b14268c479caafb1162f - mx-off-heap
+                                59f59592b3859424cac690fa - i9e-sgtest
+                                59f25af6b3859424cac590b0 - insightedge-premium
+                                59f25af7b3859424cac590b9 - wan
+                                5b6c24e7b385941b3b8ce4bf - dev-demote
+                                59f25e0f6d98c14e1daa5000 - performance
+                                61c2ce874cedfd000c46a91c - performance-dih
+                                607420ac4cedfd0009ec8b20 - v3driver
+                                612b4e5c4cedfd000acf48a0 - dih (sgtest)""")
+                                stringParam('NEWMAN_CONFIG_ID', '5b4c9342b3859411ee82c265', """Applicable only when submitting future jobs
+                                5b4c9342b3859411ee82c265 - ORACLE_8
+                                5b4c9825b3859411ee82c2f3  - ORACLE_9
+                                5bf160bb1f31eb789fc0fa65 - OPENJDK_11
+                                5bf160bb1f31eb789fc0fb78 - OPENJDK_17""")
+                                stringParam('NEWMAN_AGENT_GROUPS', 'imc-srv01,imc-srv02,DotNet,Bynet')
+                                stringParam('NEWMAN_JOB_PRIORITY', '1', """0- daily-default
+                                1- low
+                                2- high
+                                3- release-default
+                                4- urgent""")
+                            }
+                            triggers {
+                                scm('H/10 * * * *')
+                            }
+                            definition {
+                                cpsScm {
+                                    scm {
+                                        git {
+                                            remote {
+                                                url('git@github.com:Gigaspaces/xap-premium.git')
+                                                credentials('git_credentials_id')
+
+
+                                            }
+                                            branches('*/$BRANCH_NAME')
+
+                                        }
+                                        scriptPath("build/jenkinsfiles/jenkinsfile")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            - script: >
+                folder('xap-insightedge') {
+                    description('Folder containing release /continuous')
+                    folder('xap-insightedge/branch-on-demand') {
+                        description('specific branch')
+                        pipelineJob('xap-insightedge/branch-on-demand/release') {
+                            parameters{
+                                choiceParam('MODE',['NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
+                                booleanParam('OnDemand', true)
+                                stringParam('BRANCH_NAME','master')
+                                stringParam('XAP_VERSION', '16.3.0')
+                                stringParam('MILESTONE', 'm10', 'Milestone label, e.g. m10,rc1. Ignored in modes GA and PATCH')
+                                stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
+                                booleanParam('InsightEdge', true)
+                                parameterSeparatorDefinition{
+                                  name('2')
+                                  separatorStyle('')
+                                  sectionHeader('RELEASE Build parameters')
+                                  sectionHeaderStyle("""
+                                    background-color: #55216e;
+                                    text-align: center;
+                                    padding: 4px;
+                                    color: #c2db1a;
+                                    font-size: 22px;
+                                    font-weight: normal;
+                                    text-transform: uppercase;
+                                    font-family: 'Orienta', sans-serif;
+                                    letter-spacing: 1px;
+                                    font-style: italic;
+                                """)
+                                }
+                                booleanParam('DotNet', false ,'Enable/Disable XAP.NET build')
+                                booleanParam('PERFORM_FULL_M2_CLEAN', false)
+                                booleanParam('OVERRIDE_EXISTING_TAG', false, 'Override git tag if exists')
+                                booleanParam('DEPLOY_MVN_ARTIFACTS', true, 'Deploy build maven artifacts to S3')
+                                booleanParam('PUBLISH_DOCKER', true, 'Trigger automated docker build in Docker Hub')
+                                stringParam('GS_PATCH_ID',null , "Patch identifier (usually a letter a, b, c).")
+                                stringParam('GS_PATCH_NUMBER', null, "Patch number (integer which increases for each release of the same version+patchId).")
+                                booleanParam('JAVA_DOCS',true, 'Create and upload java api docs')
+                                booleanParam('GEN_SMART_ZIPS',true, 'Generate and upload the smart-cache & smart-augmented-transactions zip files')
+                                booleanParam('DEPLOY_ZIP_PACKAGES',true, 'Upload GS zips to s3 – do not uncheck this unless you know what you’re doing!')
+                            }
+                            definition {
+                                cpsScm {
+                                    scm {
+                                        git {
+                                            remote {
+                                                url('git@github.com:Gigaspaces/xap-premium.git')
+                                                credentials('git_credentials_id')
+                                            }
+                                            branches('$BRANCH_NAME')
+                                        }
+                                        scriptPath("build/jenkinsfiles/jenkinsfile")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            - script: >
+                folder('xap-insightedge') {
+                    description('Folder containing release /continuous')
+                    folder('xap-insightedge/branch-on-demand') {
+                        description('latest')
+                        pipelineJob('xap-insightedge/branch-on-demand/continuous') {
+                            parameters{
+                                choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
+                                booleanParam('OnDemand', true)
+                                stringParam('BRANCH_NAME', 'master')
+                                stringParam('XAP_VERSION', '16.3.0')
+                                stringParam('MILESTONE', 'm10', 'Milestone label, e.g. m10,rc1. Ignored in modes GA and PATCH')
+                                stringParam('NEWMAN_TAGS', 'XAP')
+                                booleanParam('InsightEdge', false)
+                                parameterSeparatorDefinition {
+                                  name('1')
+                                  separatorStyle('')
+                                  sectionHeader('CONTINUOUS Build parameters')
+                                  sectionHeaderStyle("""
+                                    background-color: #55216e;
+                                    text-align: center;
+                                    padding: 4px;
+                                    color: #c2db1a;
+                                    font-size: 22px;
+                                    font-weight: normal;
+                                    text-transform: uppercase;
+                                    font-family: 'Orienta', sans-serif;
+                                    letter-spacing: 1px;
+                                    font-style: italic;
+                                """)
+                                }
+                                choiceParam('ELM_VERSION', ['0.19.0', '0.18.0'])
+                                stringParam('NEWMAN_SUITES', '',"""comma separated list of suite ids to submit future jobs
+                                5c88ea4bb38594355214b205 - manager
+                                59f25d19b3859424cac590bf - xap-core
+                                59f25af7b3859424cac590b5 - service-grid
+                                59f25af5b3859424cac590ad - disconnect
+                                59f25e0f6d98c14e1daa2008 - web-ui
+                                59f25d5ab3859424cac590c1 - rocksdb
+                                59f25d5bb3859424cac590c2 - off-heap
+                                5a96b14268c479caafb1162f - mx-off-heap
+                                59f59592b3859424cac690fa - i9e-sgtest
+                                59f25af6b3859424cac590b0 - insightedge-premium
+                                59f25af7b3859424cac590b9 - wan
+                                5b6c24e7b385941b3b8ce4bf - dev-demote
+                                59f25e0f6d98c14e1daa5000 - performance
+                                607420ac4cedfd0009ec8b20 - v3driver
+                                612b4e5c4cedfd000acf48a0 - dih (sgtest)""")
+                                stringParam('NEWMAN_AGENT_GROUPS', 'imc-srv01,imc-srv02,DotNet,Bynet')
+                                stringParam('NEWMAN_JOB_PRIORITY', '1', """0- daily-default
+                                1- low
+                                2- high
+                                3- release-default
+                                4- urgent""")
+                                stringParam('NEWMAN_CONFIG_ID', '5b4c9342b3859411ee82c265', """Applicable only when submitting future jobs
+                                5b4c9342b3859411ee82c265 - ORACLE_8
+                                5b4c9825b3859411ee82c2f3  - ORACLE_9
+                                5bf160bb1f31eb789fc0fa65 - OPENJDK_11
+                                5bf160bb1f31eb789fc0fb78 - OPENJDK_17""")
+
+                            }
+                            definition {
+                                cpsScm {
+                                    scm {
+                                        git {
+                                            remote {
+                                                url('git@github.com:Gigaspaces/xap-premium.git')
+                                                credentials('git_credentials_id')
+                                            }
+                                            remote {
+                                                url('git@github.com:Gigaspaces/xap.git')
+                                                credentials('git_credentials_id')
+                                            }
+                                            remote {
+                                                url('https://github.com/InsightEdge/insightedge.git')
+
+                                            }
+                                            branches('$BRANCH_NAME')
+
+                                        }
+                                        scriptPath("build/jenkinsfiles/jenkinsfile")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            - script: >
+                folder('managment') {
+                    description('Folder contains jenkins environment prperations')
+                    pipelineJob('managment/create mail templates') {
+                        description('copy content of email templates  managed files and store it in /var/jenkins_home/email-templates/xap-insightedge/16.2 ( mail extantion folder ) run this job once when new dev environment installed')
+                        definition {
+                            cpsScm {
+                                scm {
+                                    git {
+                                        remote {
+                                            url('git@github.com:Gigaspaces/xap-premium.git')
+                                            credentials('git_credentials_id')
+                                        }
+                                        branches('master')
+
+                                    }
+                                    scriptPath("build/jenkinsfiles/createmailtemplates")
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+            - script: >
+                folder('Metric') {
+                    description('create spots')
+                    folder('Metric/Spotinst') {
+                        description('env or backwards test ')
+                        pipelineJob('Metric/Spotinst/Spotinst-Create-Machines') {
+                            properties {
+                              copyArtifactPermissionProperty {
+                                projectNames('Metric/Spotinst/Spotinst-Delete-noi-large-cluster')
                               }
-                              parameters{
-                                  credentialsParam('SPOT') {
-                                      type('org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl')
-                                      required()
-                                      defaultValue('spotinst-token')
-                                      description('spotinst-token')
-                                  }
-                                  credentialsParam('JENKINS_API_TOKEN') {
-                                      type('org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl')
-                                      required()
-                                      defaultValue('jenkis-api-token')
-                                      description('jenkis-api-token')
-                                  }
-                                  fileParam('pemfile','change paramtype to stashfile parameter')
-                                  stringParam('KEY_NAME', 'noi-large-cluster')
-                                  stringParam('AWS_REGION', 'eu-west-1')
-                                  stringParam('VPC_ID', 'vpc-ffec199a')
-                                  stringParam('SECURITY_GROUP', 'sg-095be91b6ef33cc2d')
-                                  stringParam('AMI_ID', 'ami-0fad7378adf284ce0')
-                                  stringParam('INSTANCE_TYPE', 'c5.2xlarge')
-                                  stringParam('AVAILABILITY_ZONE_REGION', 'eu-west-1a')
-                                  stringParam('AVAILABILITY_ZONE_SUBNET_ID', 'subnet-b545b1c2')
-                                  stringParam('PRODUCT_TYPE', 'Linux/UNIX')
-                                  stringParam('SPOTINST_GROUP_NAME', 'noi-large-cluster')
-                                  stringParam('SPOTINST_INSTANCES', '3')
-                                  stringParam('JAVA_URL', 'https://s3-eu-west-1.amazonaws.com/xap-test/test-build-newman/javas/jdk-8u45-linux-x64.tar.gz')
-                                  stringParam('USER', 'oren.sultan@gigaspaces.com')
-                                  stringParam('ACCOUNT', 'act-6d78ea8d')
-                              }
-                              definition {
-                                  cpsScm {
-                                      scm {
-                                          git {
-                                              remote {
-                                                  url('git@github.com:Gigaspaces/xap-premium.git')
-                                                  credentials('git_credentials_id')
-                                              }
-                                              branches('master')
+                            }
+                            parameters{
+                                credentialsParam('SPOT') {
+                                    type('org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl')
+                                    required()
+                                    defaultValue('spotinst-token')
+                                    description('spotinst-token')
+                                }
+                                credentialsParam('JENKINS_API_TOKEN') {
+                                    type('org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl')
+                                    required()
+                                    defaultValue('jenkis-api-token')
+                                    description('jenkis-api-token')
+                                }
+                                fileParam('pemfile','change paramtype to stashfile parameter')
+                                stringParam('KEY_NAME', 'noi-large-cluster')
+                                stringParam('AWS_REGION', 'eu-west-1')
+                                stringParam('VPC_ID', 'vpc-ffec199a')
+                                stringParam('SECURITY_GROUP', 'sg-095be91b6ef33cc2d')
+                                stringParam('AMI_ID', 'ami-0fad7378adf284ce0')
+                                stringParam('INSTANCE_TYPE', 'c5.2xlarge')
+                                stringParam('AVAILABILITY_ZONE_REGION', 'eu-west-1a')
+                                stringParam('AVAILABILITY_ZONE_SUBNET_ID', 'subnet-b545b1c2')
+                                stringParam('PRODUCT_TYPE', 'Linux/UNIX')
+                                stringParam('SPOTINST_GROUP_NAME', 'noi-large-cluster')
+                                stringParam('SPOTINST_INSTANCES', '3')
+                                stringParam('JAVA_URL', 'https://s3-eu-west-1.amazonaws.com/xap-test/test-build-newman/javas/jdk-8u45-linux-x64.tar.gz')
+                                stringParam('USER', 'oren.sultan@gigaspaces.com')
+                                stringParam('ACCOUNT', 'act-6d78ea8d')
+                            }
+                            definition {
+                                cpsScm {
+                                    scm {
+                                        git {
+                                            remote {
+                                                url('git@github.com:Gigaspaces/xap-premium.git')
+                                                credentials('git_credentials_id')
+                                            }
+                                            branches('master')
 
-                                          }
-                                          scriptPath("build/jenkinsfiles/SpotinstCreateMachines")
-                                      }
-                                  }
-                              }
+                                        }
+                                        scriptPath("build/jenkinsfiles/SpotinstCreateMachines")
+                                    }
+                                }
+                            }
 
-                          }
-                      }
-                  }
-              - script: >
-                  folder('Metric') {
-                      folder('Metric/Spotinst') {
-                          description('create spots')
-                          folder('Metric/Spotinst/Templates') {
-                              description('env or backwards test')
-                              pipelineJob('Metric/Spotinst/Templates/Spotinst-Delete-Machines-template') {
-                                  properties {
-                                      copyArtifactPermissionProperty {
-                                          projectNames('Metric/Spotinst/Spotinst-Create-Machines')
-                                      }
-                                  }
-                                  parameters {
-                                      credentialsParam('SPOT') {
-                                          type('org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl')
-                                          required()
-                                          defaultValue('spotinst-token')
-                                          description('spotinst-token')
-                                      }
-                                      textParam('all_content', 'ALL_CONTENT_HERE')
-                                      textParam('PUBLIC', 'PUBLIC_CONTENT')
-                                      textParam('PRIVATE', 'PRIVATE_CONTENT')
-                                      fileParam('pemfile','change paramtype to stashfile parameter')
+                        }
+                    }
+                }
+            - script: >
+                folder('Metric') {
+                    folder('Metric/Spotinst') {
+                        description('create spots')
+                        folder('Metric/Spotinst/Templates') {
+                            description('env or backwards test')
+                            pipelineJob('Metric/Spotinst/Templates/Spotinst-Delete-Machines-template') {
+                                properties {
+                                    copyArtifactPermissionProperty {
+                                        projectNames('Metric/Spotinst/Spotinst-Create-Machines')
+                                    }
+                                }
+                                parameters {
+                                    credentialsParam('SPOT') {
+                                        type('org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl')
+                                        required()
+                                        defaultValue('spotinst-token')
+                                        description('spotinst-token')
+                                    }
+                                    textParam('all_content', 'ALL_CONTENT_HERE')
+                                    textParam('PUBLIC', 'PUBLIC_CONTENT')
+                                    textParam('PRIVATE', 'PRIVATE_CONTENT')
+                                    fileParam('pemfile','change paramtype to stashfile parameter')
 
 
-                                  }
-                                  definition {
-                                      cpsScm {
-                                          scm {
-                                              git {
-                                                  remote {
-                                                      url('git@github.com:Gigaspaces/xap-premium.git')
-                                                      credentials('git_credentials_id')
-                                                  }
-                                                  branches('master')
+                                }
+                                definition {
+                                    cpsScm {
+                                        scm {
+                                            git {
+                                                remote {
+                                                    url('git@github.com:Gigaspaces/xap-premium.git')
+                                                    credentials('git_credentials_id')
+                                                }
+                                                branches('master')
 
-                                              }
-                                              scriptPath("build/jenkinsfiles/SpotinstDeleteMachines")
-                                          }
-                                      }
-                                  }
+                                            }
+                                            scriptPath("build/jenkinsfiles/SpotinstDeleteMachines")
+                                        }
+                                    }
+                                }
 
-                              }
-                          }
-                      }
-                  }
+                            }
+                        }
+                    }
+                }
 
     customInitContainers: []
     sidecars:
@@ -1507,12 +1502,12 @@ jenkins:
         image: kiwigrid/k8s-sidecar:1.14.2
         imagePullPolicy: IfNotPresent
         resources: {}
-          #   limits:
-          #     cpu: 100m
-          #     memory: 100Mi
-          #   requests:
-          #     cpu: 50m
-          #     memory: 50Mi
+        #   limits:
+        #     cpu: 100m
+        #     memory: 100Mi
+        #   requests:
+        #     cpu: 50m
+        #     memory: 50Mi
         # How many connection-related errors to retry on
         reqRetryConnect: 10
         # env:
@@ -1693,46 +1688,46 @@ jenkins:
       password: "password"
       # Convert keystore.jks files content to base64 ( cat keystore.jks | base64 ) and put the output here
       jenkinsKeyStoreBase64Encoded: |
-          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
+        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
 
   agent:
     enabled: true
@@ -1941,7 +1936,7 @@ jenkins:
       allowed: true
       podLabels: {}
       namespaceLabels: {}
-        # project: myproject
+      # project: myproject
     externalAgents: {}
     #   ipCIDR: 172.17.0.0/16
     #   except:
@@ -2003,13 +1998,13 @@ jenkins:
     ## Example for using an existing secret
     # jenkinsaws:
     ## Use this key for AWS access key ID
-      # awsaccesskey: jenkins_aws_access_key
+    # awsaccesskey: jenkins_aws_access_key
     ## Use this key for AWS secret access key
-      # awssecretkey: jenkins_aws_secret_key
+    # awssecretkey: jenkins_aws_secret_key
     # Add additional environment variables
     # jenkinsgcp:
     ## Use this key for GCP credentials
-      # gcpcredentials: credentials.json
+    # gcpcredentials: credentials.json
     env: []
     # Example environment variable required for AWS credentials chain
     # - name: "AWS_REGION"
@@ -2041,9 +2036,9 @@ jenkins:
   awsSecurityGroupPolicies:
     enabled: false
     policies:
-      - name: ""
-        securityGroupIds: []
-        podSelector: {}
+    - name: ""
+      securityGroupIds: []
+      podSelector: {}
 
 nexus-repository-manager:
   nexus:
@@ -2055,10 +2050,10 @@ nexus-repository-manager:
       data:
         nexus.scripts.allowCreation: true
     env:
-      - name: install4jAddVmParams
-        value: "-Xms1200M -Xmx1200M -XX:MaxDirectMemorySize=2G -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
-      - name: NEXUS_SECURITY_RANDOMPASSWORD
-        value: "false"
+    - name: install4jAddVmParams
+      value: "-Xms1200M -Xmx1200M -XX:MaxDirectMemorySize=2G -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+    - name: NEXUS_SECURITY_RANDOMPASSWORD
+      value: "false"
     securityContext:
       fsGroup: 1001
 
@@ -2069,14 +2064,14 @@ nexus-repository-manager:
     - name: fmp-volume-permission
       image: busybox
       imagePullPolicy: IfNotPresent
-      command: ['chown','-R', '200', '/nexus-data']
+      command: ['chown', '-R', '200', '/nexus-data']
       volumeMounts:
       - mountPath: /nexus-data
         name: nexus-repository-manager-data
     - name: run-script
       image: busybox
       imagePullPolicy: IfNotPresent
-      command: ['chown','-R', '200', '/nexus-data']
+      command: ['chown', '-R', '200', '/nexus-data']
       volumeMounts:
       - mountPath: /nexus-data
         name: nexus-repository-manager-data
@@ -2095,7 +2090,7 @@ nexus-repository-manager:
     mountPath: /etc/secret-volume/
     readOnly: true
     data:
-      password : |
+      password: |
         R2lnYVNwYWNlcw==
 
   service:
@@ -2107,14 +2102,14 @@ nexus-repository-manager:
 
   resources:
     requests:
-        ## Based on https://support.sonatype.com/hc/en-us/articles/115006448847#mem
-        ## and https://twitter.com/analytically/status/894592422382063616:
-        ##   Xms == Xmx
-        ##   Xmx <= 4G
-        ##   MaxDirectMemory >= 2G
-        ##   Xmx + MaxDirectMemory <= RAM * 2/3 (hence the request for 4800Mi)
-        ##   MaxRAMFraction=1 is not being set as it would allow the heap
-        ##     to use all the available memory.
+      ## Based on https://support.sonatype.com/hc/en-us/articles/115006448847#mem
+      ## and https://twitter.com/analytically/status/894592422382063616:
+      ##   Xms == Xmx
+      ##   Xmx <= 4G
+      ##   MaxDirectMemory >= 2G
+      ##   Xmx + MaxDirectMemory <= RAM * 2/3 (hence the request for 4800Mi)
+      ##   MaxRAMFraction=1 is not being set as it would allow the heap
+      ##     to use all the available memory.
       cpu: 1Gi
       memory: 4800Mi
 
