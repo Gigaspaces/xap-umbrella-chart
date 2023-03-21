@@ -901,9 +901,6 @@ jenkins:
                                   branches('*/$BRANCH_NAME')
                               }
                           }
-                          triggers {
-                              scm('* * * * *')
-                          }
                           wrappers {
                               timestamps()
                           }
@@ -933,9 +930,6 @@ jenkins:
                                   }
                                   branches('*/$BRANCH_NAME')
                               }
-                          }
-                          triggers {
-                              scm('* * * * *')
                           }
                           wrappers {
                               timestamps()
