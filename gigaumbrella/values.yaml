@@ -94,7 +94,7 @@ jenkins:
     #     value: "http://192.168.64.1:3128"
     # Set min/max heap here if needed with:
     javaOpts:
-      -Xms4096m -Xmx4096m
+      -Xms6144m -Xmx6144m
       -Dorg.csanchez.jenkins.plugins.kubernetes.pipeline.ContainerExecDecorator.websocketConnectionTimeout=180
       -Dmail.smtp.starttls.enable=true
       -Dorg.apache.commons.jelly.tags.fmt.timeZone=GMT/UTC+2
