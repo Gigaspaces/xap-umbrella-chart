@@ -14,7 +14,7 @@ type: application
 dependencies:
   - name: jenkins
     repository: "https://charts.jenkins.io"
-    version: 4.2.20
+    version: 4.3.22
   - name: mongodb
     repository: "https://charts.bitnami.com/bitnami"
     version: 10.29.0
