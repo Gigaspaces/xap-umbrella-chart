@@ -328,7 +328,7 @@ jenkins:
       - token-macro:267.vcdaea6462991
       - s3:0.12.1
       - git:4.10.3
-      - apache-httpcomponents-client-4-api:4.5.13-1.0
+      - apache-httpcomponents-client-4-api:4.5.14-150.v7a_b_9d17134a_5
       - URLSCM:1.6
       - swarm:3.30
       - thinBackup:1.10
@@ -377,7 +377,7 @@ jenkins:
       - matrix-project:1.20
       - authorize-project:1.4.0
       - email-ext:2.87
-      - jackson2-api:2.13.1-246.va8a9f3eaf46a
+      - jackson2-api:2.14.2-319.v37853346a_229
       - git-parameter:0.9.15
       - configuration-as-code:1.55.1
       - job-dsl:1.78.3
@@ -399,7 +399,7 @@ jenkins:
       - envinject-api:1.8
       - extended-choice-parameter:0.82
       - font-awesome-api:6.0.0-1
-      - javax-activation-api:1.2.0-2
+      - javax-activation-api:latest
       - javax-mail-api:1.6.2-5
       - jjwt-api:0.11.2-9.c8b45b8bb173
       - jnr-posix-api:3.1.7-1
