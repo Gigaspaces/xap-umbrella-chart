@@ -357,16 +357,16 @@ jenkins:
       - credentials:1074.v60e6c29b_b_44b_
       - momentjs:1.1.1
       - resource-disposer:0.17
-      - aws-java-sdk:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-cloudformation:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-ec2:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-ecr:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-ecs:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-elasticbeanstalk:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-iam:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-logs:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-minimal:1.12.287-357.vf82d85a_6eefd
-      - aws-java-sdk-ssm :1.12.287-357.vf82d85a_6eefd
+      - aws-java-sdk:1.12.447-382.vda_68e2007233
+      - aws-java-sdk-cloudformation:1.12.447-382.vda_68e2007233
+      - aws-java-sdk-ec2:1.12.447-382.vda_68e2007233
+      - aws-java-sdk-ecr:1.12.447-382.vda_68e2007233
+      - aws-java-sdk-ecs:1.12.447-382.vda_68e2007233
+      - aws-java-sdk-elasticbeanstalk:1.12.447-382.vda_68e2007233
+      - aws-java-sdk-iam:1.12.447-382.vda_68e2007233
+      - aws-java-sdk-logs:1.12.447-382.vda_68e2007233
+      - aws-java-sdk-minimal:1.12.447-382.vda_68e2007233
+      - aws-java-sdk-ssm :1.12.447-382.vda_68e2007233
       - dependency-check-jenkins-plugin:5.1.2
       - structs:308.v852b473a2b8c
       - mailer:408.vd726a_1130320
@@ -380,7 +380,6 @@ jenkins:
       - jackson2-api:2.13.1-246.va8a9f3eaf46a
       - git-parameter:0.9.15
       - configuration-as-code:1.55.1
-      - matrix-auth:3.0
       - job-dsl:1.78.3
       - trilead-api:1.0.13
       - parameter-separator:1.3
