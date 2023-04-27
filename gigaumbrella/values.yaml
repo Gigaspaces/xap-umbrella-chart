@@ -941,7 +941,7 @@ jenkins:
               - script: >
                   pipelineJob('Dependency-check') {
                       parameters {
-                          stringParam('GS_VERSION', '16.3.0-m13')
+                          stringParam('GS_VERSION', '16.4.0-m0')
                           stringParam('GS_PRODUCT', 'xap')
                       }
                       definition {
@@ -1075,8 +1075,8 @@ jenkins:
                               parameters{
                                   choiceParam('MODE',['NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
                                   stringParam('BRANCH_NAME', 'master')
-                                  stringParam('XAP_VERSION', '16.3.0')
-                                  stringParam('MILESTONE', 'm13', 'Milestone label, e.g. m9, rc1. Ignored in modes GA and PATCH')
+                                  stringParam('XAP_VERSION', '16.4.0')
+                                  stringParam('MILESTONE', 'm0', 'Milestone label, e.g. m9, rc1. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE,DOTNET,NIGHTLY')
                                   booleanParam('InsightEdge', true)
                                   parameterSeparatorDefinition{
@@ -1140,8 +1140,8 @@ jenkins:
                               parameters{
                                   choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
                                   stringParam('BRANCH_NAME', 'master')
-                                  stringParam('XAP_VERSION', '16.3.0')
-                                  stringParam('MILESTONE', 'm13', 'Milestone label, e.g. m9,rc1. Ignored in modes GA and PATCH')
+                                  stringParam('XAP_VERSION', '16.4.0')
+                                  stringParam('MILESTONE', 'm0', 'Milestone label, e.g. m9,rc1. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP')
                                   booleanParam('InsightEdge', false)
                                   parameterSeparatorDefinition {
@@ -1224,8 +1224,8 @@ jenkins:
                                   choiceParam('MODE',['NIGHTLY', 'MILESTONE', 'GA', 'PATCH'], 'select build mode')
                                   booleanParam('OnDemand', true)
                                   stringParam('BRANCH_NAME','master')
-                                  stringParam('XAP_VERSION', '16.3.0')
-                                  stringParam('MILESTONE', 'm13', 'Milestone label, e.g. m9,rc1. Ignored in modes GA and PATCH')
+                                  stringParam('XAP_VERSION', '16.4.0')
+                                  stringParam('MILESTONE', 'm0', 'Milestone label, e.g. m9,rc1. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP,INSIGHTEDGE,RELEASE')
                                   booleanParam('InsightEdge', true)
                                   parameterSeparatorDefinition{
@@ -1283,8 +1283,8 @@ jenkins:
                                   choiceParam('MODE', ['CONTINUOUS'], 'select build mode')
                                   booleanParam('OnDemand', true)
                                   stringParam('BRANCH_NAME', 'master')
-                                  stringParam('XAP_VERSION', '16.3.0')
-                                  stringParam('MILESTONE', 'm13', 'Milestone label, e.g. m9,rc1. Ignored in modes GA and PATCH')
+                                  stringParam('XAP_VERSION', '16.4.0')
+                                  stringParam('MILESTONE', 'm0', 'Milestone label, e.g. m9,rc1. Ignored in modes GA and PATCH')
                                   stringParam('NEWMAN_TAGS', 'XAP')
                                   booleanParam('InsightEdge', false)
                                   parameterSeparatorDefinition {
