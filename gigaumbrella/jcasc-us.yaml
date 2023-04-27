@@ -86,10 +86,6 @@ jenkins:
                         mountPath: "/data/jenkins/xap-jenkins/m2"
                         optional: false
                         secretName: "mvn-settings-secret"
-                    - secretVolume:
-                        mountPath: "/home/jenkins/.sshsultan"
-                        optional: false
-                        secretName: "git-credentials-id-secret"   
                     yamlMergeStrategy: "override"                 
                   - containers:
                     - args: "9999999"
