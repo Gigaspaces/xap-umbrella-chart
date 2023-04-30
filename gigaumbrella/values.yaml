@@ -851,6 +851,7 @@ jenkins:
                           disabled: true
                           failIfWorkDirIsMissing: false
                           internalDir: 'remoting'
+                        tunnel: 'jenkinsagent.gigaspaces.com:50000'
                 - permanent:
                     labelString: 'DotNet-slave'
                     mode: NORMAL
@@ -873,7 +874,7 @@ jenkins:
                           disabled: true
                           failIfWorkDirIsMissing: false
                           internalDir: 'remoting'
-                        tunnel: 'jenkinseksagent.gigaspaces.com:50000'
+                        tunnel: 'jenkinsagent.gigaspaces.com:50000'
             jobs:
               - script: >
                   folder('Docs'){
