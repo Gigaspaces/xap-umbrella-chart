@@ -855,17 +855,6 @@ jenkins:
                 - permanent:
                     labelString: 'DotNet-slave'
                     mode: NORMAL
-                    name: 'DotNetNode'
-                    remoteFS: 'c:\jenkins'
-                    launcher:
-                      jnlp:
-                        workDirSettings:
-                          disabled: true
-                          failIfWorkDirIsMissing: false
-                          internalDir: 'remoting'
-                - permanent:
-                    labelString: 'DotNet-slave'
-                    mode: NORMAL
                     name: 'DotNetonprem'
                     remoteFS: 'c:\Jenkins'
                     launcher:
