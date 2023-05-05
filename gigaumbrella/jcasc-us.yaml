@@ -34,9 +34,9 @@ jenkins:
                         timeoutSeconds: 0
                       name: "xap"
                       resourceLimitCpu: "4"
-                      resourceLimitMemory: "10G"
+                      resourceLimitMemory: "14G"
                       resourceRequestCpu: "3"
-                      resourceRequestMemory: "10G"
+                      resourceRequestMemory: "14G"
                       workingDir: "/home/jenkins/agent"
                     - args: "9999999"
                       command: "sleep"
