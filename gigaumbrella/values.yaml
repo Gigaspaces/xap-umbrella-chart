@@ -76,15 +76,15 @@ jenkins:
         memory: "4096Mi"
       limits:
         cpu: "2000m"
-        memory: "8192Mi"
+        memory: "10240Mi"
     # Overrides the init container default values
-    # initContainerResources:
-    #   requests:
-    #     cpu: "50m"
-    #     memory: "256Mi"
-    #   limits:
-    #     cpu: "2000m"
-    #     memory: "4096Mi"
+    initContainerResources:
+      requests:
+        cpu: "200m"
+        memory: "512Mi"
+      limits:
+        cpu: "2000m"
+        memory: "4096Mi"
     # Environment variables that get added to the init container (useful for e.g. http_proxy)
     # initContainerEnv:
     #   - name: http_proxy
@@ -94,7 +94,7 @@ jenkins:
     #     value: "http://192.168.64.1:3128"
     # Set min/max heap here if needed with:
     javaOpts:
-      -Xms6144m -Xmx6144m
+      -Xms8192m -Xmx8192m
       -Dorg.csanchez.jenkins.plugins.kubernetes.pipeline.ContainerExecDecorator.websocketConnectionTimeout=180
       -Dmail.smtp.starttls.enable=true
       -Dorg.apache.commons.jelly.tags.fmt.timeZone=GMT/UTC+2
@@ -1473,13 +1473,13 @@ jenkins:
         enabled: true
         image: kiwigrid/k8s-sidecar:1.14.2
         imagePullPolicy: IfNotPresent
-        resources: 
-          limits:
-            cpu: 512m
-            memory: 1024Mi
-          requests:
-            cpu: 50m
-            memory: 50Mi
+        resources: {}
+          #   limits:
+          #     cpu: 100m
+          #     memory: 100Mi
+          #   requests:
+          #     cpu: 50m
+          #     memory: 50Mi
         # How many connection-related errors to retry on
         reqRetryConnect: 10
         # env:
@@ -1713,7 +1713,7 @@ jenkins:
     maxRequestsPerHostStr: "32"
     namespace:
     image: "jenkins/inbound-agent"
-    tag: "4.3-4-jdk11"
+    tag: "4.11-1"
     workingDir: "/home/jenkins/agent"
     nodeUsageMode: "NORMAL"
     customJenkinsLabels: []
@@ -1811,18 +1811,11 @@ jenkins:
     # Raw yaml template for the Pod. For example this allows usage of toleration for agent pods.
     # https://github.com/jenkinsci/kubernetes-plugin#using-yaml-to-define-pod-templates
     # https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
-    #yamlTemplate: ""
-    yamlTemplate: |-
-      apiVersion: v1
-      kind: Pod
-      spec:
-        resources: 
-          limits:
-            cpu: 512m
-            memory: 1024Mi
-          requests:
-            cpu: 200m
-            memory: 512Mi
+    yamlTemplate: ""
+    # yamlTemplate: |-
+    #   apiVersion: v1
+    #   kind: Pod
+    #   spec:
     #     tolerations:
     #     - key: "key"
     #       operator: "Equal"
