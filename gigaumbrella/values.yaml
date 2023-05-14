@@ -1713,7 +1713,7 @@ jenkins:
     maxRequestsPerHostStr: "32"
     namespace:
     image: "jenkins/inbound-agent"
-    tag: "4.11-1"
+    tag: "4.3-4-jdk11"
     workingDir: "/home/jenkins/agent"
     nodeUsageMode: "NORMAL"
     customJenkinsLabels: []
@@ -1811,11 +1811,18 @@ jenkins:
     # Raw yaml template for the Pod. For example this allows usage of toleration for agent pods.
     # https://github.com/jenkinsci/kubernetes-plugin#using-yaml-to-define-pod-templates
     # https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
-    yamlTemplate: ""
-    # yamlTemplate: |-
-    #   apiVersion: v1
-    #   kind: Pod
-    #   spec:
+    #yamlTemplate: ""
+    yamlTemplate: |-
+      apiVersion: v1
+      kind: Pod
+      spec:
+        resources: 
+          limits:
+            cpu: 512m
+            memory: 1024Mi
+          requests:
+            cpu: 50m
+            memory: 50Mi
     #     tolerations:
     #     - key: "key"
     #       operator: "Equal"
