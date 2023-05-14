@@ -1473,13 +1473,13 @@ jenkins:
         enabled: true
         image: kiwigrid/k8s-sidecar:1.14.2
         imagePullPolicy: IfNotPresent
-        resources: {}
-          #   limits:
-          #     cpu: 100m
-          #     memory: 100Mi
-          #   requests:
-          #     cpu: 50m
-          #     memory: 50Mi
+        resources: 
+           limits:
+            cpu: 512m
+            memory: 1024Mi
+            requests:
+              cpu: 50m
+              memory: 50Mi
         # How many connection-related errors to retry on
         reqRetryConnect: 10
         # env:

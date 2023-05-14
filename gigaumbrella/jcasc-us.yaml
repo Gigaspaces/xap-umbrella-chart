@@ -34,9 +34,9 @@ jenkins:
                         timeoutSeconds: 0
                       name: "xap"
                       resourceLimitCpu: "4"
-                      resourceLimitMemory: "14G"
+                      resourceLimitMemory: "12G"
                       resourceRequestCpu: "3"
-                      resourceRequestMemory: "14G"
+                      resourceRequestMemory: "12G"
                       workingDir: "/home/jenkins/agent"
                     - args: "9999999"
                       command: "sleep"
@@ -51,7 +51,7 @@ jenkins:
                     workspaceVolume:
                       dynamicPVC:
                         storageClassName: gp2
-                        requestsSize: 14G
+                        requestsSize: 12G
                         accessModes: ReadWriteOnce
                     envVars:
                     - envVar:
