@@ -138,7 +138,7 @@ jenkins:
     serviceType: LoadBalancer
     # Use Local to preserve the client source IP and avoids a second hop for LoadBalancer and Nodeport type services,
     # but risks potentially imbalanced traffic spreading.
-    serviceExternalTrafficPolicy:
+    serviceExternalTrafficPolicy: Local
     # Jenkins controller service annotations
     serviceAnnotations:
       "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout": "300"
