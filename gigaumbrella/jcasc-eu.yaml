@@ -49,7 +49,7 @@ jenkins:
                         value: "http://gigaci-jenkins.neptun.svc.cluster.local:8080/"
                     id: "76891704-e0dc-44a7-b20f-5c033d2cedc8"
                     inheritFrom: "yaml: '''     apiVersion: v1     kind: Pod     spec:       containers:\
-                      \       - name: maven         image: jenkins/inbound-agent:4.3-4-jdk11 \
+                      \       - name: maven         image: jenkins/inbound-agent:latest-jdk11 \
                       \        command:         - sleep         args:         - 99d '''"
                     label: "jenkins-slave"
                     name: "jenkins-slave"
