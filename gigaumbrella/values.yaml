@@ -575,6 +575,12 @@ jenkins:
                           password: "${smtp-secret-password}"
                           description: "mail_sender"
                       - usernamePassword:
+                          scope: GLOBAL
+                          id: "aws_s3_secret"
+                          username: "AKIAYK72STYCC2OLHZRL"
+                          password: "${aws_s3_secret}"
+                          description: "s3 uploader"
+                      - usernamePassword:
                           description: "xapbuilder-dockerhub"
                           id: "docker-hub-cred"
                           password: "${docker-hub-cred-password}"
