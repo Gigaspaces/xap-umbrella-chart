@@ -574,11 +574,11 @@ jenkins:
                           username: "AKIAYK72STYCODIHYDMO"
                           password: "${smtp-secret-password}"
                           description: "mail_sender"
-                      - usernamePassword:
+                      - aws:
                           scope: GLOBAL
                           id: "aws_s3_secret"
-                          username: "AKIAYK72STYCC2OLHZRL"
-                          password: "${aws_s3_secret}"
+                          accessKey: "AKIAYK72STYCC2OLHZRL"
+                          secretKey: "${aws_s3_secret}"
                           description: "s3 uploader"
                       - usernamePassword:
                           description: "xapbuilder-dockerhub"
