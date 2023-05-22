@@ -467,7 +467,7 @@ jenkins:
     additionalExistingSecrets:
     - name: git-credentials-id-secret
       keyName: idrsa
-    - name: xap-buildeer-ssh-secret
+    - name: xap-builder-ssh-secret
       keyName: idrsa
     - name: aws-s3-secret-key
       keyName: password
