@@ -467,10 +467,10 @@ jenkins:
     additionalExistingSecrets:
     - name: git-credentials-id-secret
       keyName: idrsa
-    - name: xap-builder-ssh-secret
+    - name: xap-buildeer-ssh-secret
       keyName: idrsa
-    - name: aws-s3-secret
-      keyName: secretkey
+    - name: aws-s3-secret-key
+      keyName: password
     - name: git-token
       keyName: xapbuildertoken
     - name: smtp-secret
@@ -582,7 +582,7 @@ jenkins:
                           scope: GLOBAL
                           id: "aws-s3-secret"
                           accessKey: "AKIAYK72STYCC2OLHZRL"
-                          secretKey: "${aws-s3-secret-secretkey}"
+                          secretKey: "${aws-s3-secret-key-password}"
                           description: "s3 uploader"
                       - usernamePassword:
                           description: "xapbuilder-dockerhub"
