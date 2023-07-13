@@ -358,16 +358,16 @@ jenkins:
       - credentials:1074.v60e6c29b_b_44b_
       - momentjs:1.1.1
       - resource-disposer:0.17
-      - aws-java-sdk:1.12.447-382.vda_68e2007233
-      - aws-java-sdk-cloudformation:1.12.447-382.vda_68e2007233
-      - aws-java-sdk-ec2:1.12.447-382.vda_68e2007233
-      - aws-java-sdk-ecr:1.12.447-382.vda_68e2007233
-      - aws-java-sdk-ecs:1.12.447-382.vda_68e2007233
-      - aws-java-sdk-elasticbeanstalk:1.12.447-382.vda_68e2007233
-      - aws-java-sdk-iam:1.12.447-382.vda_68e2007233
-      - aws-java-sdk-logs:1.12.447-382.vda_68e2007233
-      - aws-java-sdk-minimal:1.12.447-382.vda_68e2007233
-      - aws-java-sdk-ssm :1.12.447-382.vda_68e2007233
+      - aws-java-sdk
+      - aws-java-sdk-cloudformation
+      - aws-java-sdk-ec2
+      - aws-java-sdk-ecr
+      - aws-java-sdk-ecs
+      - aws-java-sdk-elasticbeanstalk
+      - aws-java-sdk-iam
+      - aws-java-sdk-logs
+      - aws-java-sdk-minimal
+      - aws-java-sdk-ssm 
       - dependency-check-jenkins-plugin:5.1.2
       - structs:308.v852b473a2b8c
       - mailer:408.vd726a_1130320
