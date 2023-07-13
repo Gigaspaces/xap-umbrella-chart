@@ -282,7 +282,7 @@ jenkins:
       - slack:602.v0da_f7458945d
       - caffeine-api:2.9.2-29.v717aac953ff3
       - workflow-cps:2648.va9433432b33c
-      - snakeyaml-api:1.29.1
+      - snakeyaml-api
       - mapdb-api:1.0.9.0
       - ssh-slaves:1.33.0
       - sshd:3.1.0
@@ -378,7 +378,7 @@ jenkins:
       - matrix-project:1.20
       - authorize-project:1.4.0
       - email-ext:2.87
-      - jackson2-api:2.14.2-319.v37853346a_229
+      - jackson2-api
       - git-parameter:0.9.15
       - configuration-as-code:1.55.1
       - job-dsl:1.78.3
