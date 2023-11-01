@@ -1731,6 +1731,12 @@ jenkins:
     privileged: false
     runAsUser:
     runAsGroup:
+    resourceLimitCpu: "2"
+    resourceLimitMemory: "2048Mi"
+    resourceRequestCpu: "1"
+    resourceRequestMemory: "1024Mi"
+    resourceLimitEphemeralStorage: "6Gi"
+    resourceRequestEphemeralStorage: "3Gi"
     resources:
       requests:
         cpu: "1024m"
