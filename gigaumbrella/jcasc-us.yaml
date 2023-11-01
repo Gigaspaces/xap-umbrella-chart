@@ -33,15 +33,12 @@ jenkins:
                         successThreshold: 0
                         timeoutSeconds: 0
                       name: "xap"
-                      resources:
-                        requests:
-                          memory: "12G"
-                          cpu: "3"
-                          ephemeral-storage: "2Gi"
-                        limits:
-                          cpu: "4"
-                          memory: "12G"
-                          ephemeral-storage: "4Gi"
+                      resourceLimitCpu: "4"
+                      resourceLimitMemory: "12G"
+                      resourceRequestCpu: "3"
+                      resourceRequestMemory: "12G"
+                      resourceLimitEphemeralStorage: "4Gi"
+                      resourceRequestEphemeralStorage: "2Gi"
                       workingDir: "/home/jenkins/agent"
                     - args: "9999999"
                       command: "sleep"
