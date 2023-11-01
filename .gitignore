@@ -1,3 +1,4 @@
 helm3
 argocd-rsa
 argocd-rsa.pub
+.DS_Store
