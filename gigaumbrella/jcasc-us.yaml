@@ -33,14 +33,14 @@ jenkins:
                         successThreshold: 0
                         timeoutSeconds: 0
                       name: "xap"
-                      resourceLimitCpu: "4"
-                      resourceLimitMemory: "12G"
-                      resourceRequestCpu: "3"
-                      resourceRequestMemory: "12G"
                       resources:
                         requests:
+                          memory: "12G"
+                          cpu: "3"
                           ephemeral-storage: "2Gi"
                         limits:
+                          cpu: "4"
+                          memory: "12G"
                           ephemeral-storage: "4Gi"
                       workingDir: "/home/jenkins/agent"
                     - args: "9999999"
