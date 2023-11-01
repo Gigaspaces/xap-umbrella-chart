@@ -37,6 +37,11 @@ jenkins:
                       resourceLimitMemory: "12G"
                       resourceRequestCpu: "3"
                       resourceRequestMemory: "12G"
+                      resources:
+                        requests:
+                          ephemeral-storage: "2Gi"
+                        limits:
+                          ephemeral-storage: "4Gi"
                       workingDir: "/home/jenkins/agent"
                     - args: "9999999"
                       command: "sleep"
@@ -95,11 +100,6 @@ jenkins:
                     - args: "9999999"
                       command: "sleep"
                       image: "mcr.microsoft.com/dotnet/core/sdk:2.1"
-                      resources:
-                        requests:
-                          ephemeral-storage: "2Gi"
-                        limits:
-                          ephemeral-storage: "4Gi"
                       livenessProbe:
                         failureThreshold: 0
                         initialDelaySeconds: 0
