@@ -97,6 +97,8 @@ jenkins:
                     - args: "9999999"
                       command: "sleep"
                       image: "mcr.microsoft.com/dotnet/core/sdk:2.1"
+                      resourceLimitEphemeralStorage: "6Gi"
+                      resourceRequestEphemeralStorage: "3Gi"
                       livenessProbe:
                         failureThreshold: 0
                         initialDelaySeconds: 0
